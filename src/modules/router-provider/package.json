@@ -1,0 +1,8 @@
+{
+  "name": "router-provider",
+  "version": "1.0.0",
+  "author": {
+    "name": "Fi1osof"
+  },
+  "main": "src/index.js"
+}

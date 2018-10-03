@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Fi1osof"
+  },
+  "bugs": {
+    "url": "https://github.com/MODX-Club/react-cms/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "For personal use. Not production.",
+  "homepage": "https://github.com/MODX-Club/react-cms#readme",
+  "license": "ISC",
+  "main": "src/index.js",
+  "name": "react-cms",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MODX-Club/react-cms.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.5.7"
+}
