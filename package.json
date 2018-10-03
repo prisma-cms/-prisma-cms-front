@@ -93,11 +93,27 @@
   },
   "author": "Fi1osof",
   "license": "MIT",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prisma-cms/front.git"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "keywords": [
+    "prisma",
+    "cms",
+    "frontend"
+  ],
+  "bugs": {
+    "url": "https://github.com/prisma-cms/front/issues"
+  },
+  "homepage": "https://github.com/prisma-cms/front#readme"
 }
