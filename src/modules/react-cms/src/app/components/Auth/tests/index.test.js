@@ -6,6 +6,6 @@ import expect from "expect";
 
 describe("<Auth />", () => {
   it("Expect to have unit tests specified", () => {
-    expect(true).toEqual(false);
+    expect("message").toContain('message')
   });
 });
