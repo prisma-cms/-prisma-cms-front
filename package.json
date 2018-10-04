@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.1.6-beta",
+  "version": "1.1.8-beta",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -88,6 +88,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.26.0",
+    "babel-runtime": "6.26.0",
     "enzyme": "^3.6.0",
     "nwb": "0.23.x",
     "prettier-eslint-cli": "4.7.0",
