@@ -1,3 +1,7 @@
+1.2.2-beta
+====================================
+- Change source from es to lib
+
 1.2.1-beta
 ====================================
 - Upgrade apollo-cms

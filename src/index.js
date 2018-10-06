@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom'
 
 import PropTypes from "prop-types";
 
-import ApolloCMS from 'apollo-cms/es/App';
+import ApolloCMS from 'apollo-cms/lib/App';
 
 import App from './components/App';
 

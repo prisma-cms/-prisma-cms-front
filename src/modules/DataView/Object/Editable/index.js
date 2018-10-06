@@ -1,3 +1,3 @@
 
 
-module.exports = require('apollo-cms/es/DataView/Object/Editable');
+module.exports = require('apollo-cms/lib/DataView/Object/Editable');

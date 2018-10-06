@@ -7,7 +7,7 @@ import Grid from 'material-ui/Grid';
 import {
   styles,
   TableView,
-} from 'apollo-cms/es/DataView/List/Table';
+} from 'apollo-cms/lib/DataView/List/Table';
 
 // import {Link} from 'react-router-dom';
 
