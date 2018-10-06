@@ -1,3 +1,11 @@
+1.2.1-beta
+====================================
+- Upgrade apollo-cms
+  
+1.2.0-beta
+====================================
+- Remove apollo-cms from modules
+
 1.1.9-beta
 ====================================
 - Fix dependencies

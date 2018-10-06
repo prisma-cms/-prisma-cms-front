@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Grid from 'material-ui/Grid';
 
-import EditableView from '../../../../apollo-cms/src/DataView/Object/Editable';
+import EditableView from 'apollo-cms/es/DataView/Object/Editable';
 
 
 import UserAvatar from './Avatar';
