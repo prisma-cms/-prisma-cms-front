@@ -1,3 +1,8 @@
+
+const {
+  fetch,
+} = global;
+
 const { ApolloLink, Observable } = require('apollo-link')
 const {
   selectURI,

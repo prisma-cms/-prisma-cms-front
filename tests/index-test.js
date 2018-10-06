@@ -1,9 +1,11 @@
-import expect from 'expect'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '../es/';
+// import PrismaCms from "@prisma-cms/front";
 
-import message from 'src/index'
-
-describe('Module template', () => {
-  it('displays a welcome message', () => {
-    expect(message).toContain('Welcome to @prisma-cms/front')
-  })
-})
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App
+  />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});

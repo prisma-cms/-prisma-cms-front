@@ -1,6 +1,6 @@
 import _regeneratorRuntime from 'babel-runtime/regenerator';
 
-var _class, _temp;
+var _class, _temp, _initialiseProps;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -33,13 +33,16 @@ import { createUploadLink } from '../external/apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink, from } from 'apollo-link';
 import { onError } from 'apollo-link-error';
-// import { createHttpLink } from "apollo-link-http";
+import { createHttpLink } from "apollo-link-http";
 
 import { WebSocketLink } from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 
 import Renderer from './Renderer';
+import { HttpLink } from 'apollo-boost/lib/bundle.umd';
+
+var localStorage = global.localStorage;
 
 var authMiddleware = new ApolloLink(function (operation, forward) {
   // eslint-disable-line react/prefer-stateless-function
@@ -49,7 +52,7 @@ var authMiddleware = new ApolloLink(function (operation, forward) {
         headers = _ref$headers === undefined ? {} : _ref$headers;
     return {
       headers: _extends({}, headers, {
-        Authorization: localStorage.getItem('token') || null
+        Authorization: localStorage && localStorage.getItem('token') || null
       })
     };
   });
@@ -65,87 +68,7 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 
-    _this.onAuthSuccess = function (data) {
-      var token = data.token,
-          user = data.user;
-
-
-      token && localStorage.setItem("token", 'Bearer ' + token);
-
-      _this.setState({
-        user: user
-      });
-    };
-
-    _this.logout = function () {
-
-      localStorage.setItem("token", '');
-
-      _this.setState({
-        user: null
-      });
-    };
-
-    _this.onError = function (response) {
-
-      // console.log("onError response", response);
-
-      var networkError = response.networkError,
-          graphQLErrors = response.graphQLErrors;
-
-
-      if (networkError && networkError.statusCode === 401) {
-        ;
-      }
-
-      // console.log("onError networkError", networkError);
-      // console.log("onError graphQLErrors", graphQLErrors);
-
-      graphQLErrors && graphQLErrors.map(function (n) {
-        var _ref2 = n || {},
-            message = _ref2.message;
-
-        var _this$state$errors = _this.state.errors,
-            errors = _this$state$errors === undefined ? [] : _this$state$errors;
-
-
-        if (message) {
-
-          var error = {
-            message: message
-          };
-
-          errors.push(error);
-
-          setTimeout(function () {
-            var errors = _this.state.errors;
-
-
-            var index = errors && errors.indexOf(error);
-
-            if (index !== -1) {
-
-              errors.splice(index, 1);
-
-              _this.setState({
-                errors: errors
-              });
-            }
-          }, 3000);
-        }
-
-        if (errors && errors.length) {
-
-          _this.setState({
-            errors: errors
-          });
-        }
-
-        return n;
-      });
-
-      return graphQLErrors;
-    };
+    _initialiseProps.call(_this);
 
     var endpoint = _this.props.endpoint;
 
@@ -177,7 +100,7 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
     });
 
     // const httpLink = createHttpLink({ 
-    //   uri: `${protocol}://${endpoint}/`,
+    //   uri: endpoint,
     // });
 
     wsLink = new WebSocketLink({
@@ -210,7 +133,7 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
 
     var client = new ApolloClient({
       link: from([authMiddleware, link]),
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache().restore(global.__APOLLO_STATE__),
       connectToDevTools: true
     });
 
@@ -224,6 +147,8 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
 
 
   ApolloCmsApp.prototype.getChildContext = function getChildContext() {
+    var _this2 = this;
+
     var _state = this.state,
         token = _state.token,
         user = _state.user,
@@ -234,8 +159,12 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
       token: token,
       user: user,
       onAuthSuccess: this.onAuthSuccess,
+      loadApiData: function loadApiData() {
+        return _this2.loadApiData();
+      },
       logout: this.logout,
-      errors: errors
+      errors: errors,
+      localStorage: localStorage
     };
 
     return context;
@@ -247,8 +176,8 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
   };
 
   ApolloCmsApp.prototype.loadApiData = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
-      var apiQuery, client, result, _ref4, data;
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
+      var apiQuery, client, result, _ref3, data;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -277,7 +206,7 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
 
             case 6:
               result = _context.sent;
-              _ref4 = result || {}, data = _ref4.data;
+              _ref3 = result || {}, data = _ref3.data;
 
 
               if (data) {
@@ -295,7 +224,7 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
     }));
 
     function loadApiData() {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     }
 
     return loadApiData;
@@ -323,10 +252,116 @@ var ApolloCmsApp = (_temp = _class = function (_React$Component) {
   apiQuery: '{\n      user:me{\n        id\n        username\n      }\n    }'
 }, _class.childContextTypes = {
   onAuthSuccess: PropTypes.func,
+  loadApiData: PropTypes.func,
   logout: PropTypes.func,
   token: PropTypes.string,
   user: PropTypes.object,
-  errors: PropTypes.array
+  errors: PropTypes.array,
+  localStorage: PropTypes.object
+}, _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this.onAuthSuccess = function (data) {
+    var token = data.token,
+        user = data.user;
+
+
+    token && localStorage.setItem("token", 'Bearer ' + token);
+
+    _this3.setState({
+      user: user
+    }, _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
+      var client;
+      return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              client = _this3.state.client;
+              _context2.next = 3;
+              return client.resetStore();
+
+            case 3:
+
+              _this3.forceUpdate();
+
+            case 4:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this3);
+    })));
+  };
+
+  this.logout = function () {
+
+    localStorage.setItem("token", '');
+
+    _this3.setState({
+      user: null
+    });
+  };
+
+  this.onError = function (response) {
+
+    // console.log("onError response", response);
+
+    var networkError = response.networkError,
+        graphQLErrors = response.graphQLErrors;
+
+
+    if (networkError && networkError.statusCode === 401) {
+      ;
+    }
+
+    // console.log("onError networkError", networkError);
+    // console.log("onError graphQLErrors", graphQLErrors);
+
+    graphQLErrors && graphQLErrors.map(function (n) {
+      var _ref5 = n || {},
+          message = _ref5.message;
+
+      var _state$errors = _this3.state.errors,
+          errors = _state$errors === undefined ? [] : _state$errors;
+
+
+      if (message) {
+
+        var error = {
+          message: message
+        };
+
+        errors.push(error);
+
+        setTimeout(function () {
+          var errors = _this3.state.errors;
+
+
+          var index = errors && errors.indexOf(error);
+
+          if (index !== -1) {
+
+            errors.splice(index, 1);
+
+            _this3.setState({
+              errors: errors
+            });
+          }
+        }, 3000);
+      }
+
+      if (errors && errors.length) {
+
+        _this3.setState({
+          errors: errors
+        });
+      }
+
+      return n;
+    });
+
+    return graphQLErrors;
+  };
 }, _temp);
 export { ApolloCmsApp as default };
 ApolloCmsApp.propTypes = process.env.NODE_ENV !== "production" ? {

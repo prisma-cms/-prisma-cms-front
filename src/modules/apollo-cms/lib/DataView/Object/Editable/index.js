@@ -7,13 +7,19 @@ var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _class, _temp;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _propTypes = require('prop-types');
 
@@ -31,6 +37,10 @@ var _IconButton = require('material-ui/IconButton');
 
 var _IconButton2 = _interopRequireDefault(_IconButton);
 
+var _Button = require('material-ui/Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
 var _ModeEdit = require('material-ui-icons/ModeEdit');
 
 var _ModeEdit2 = _interopRequireDefault(_ModeEdit);
@@ -43,6 +53,10 @@ var _Save = require('material-ui-icons/Save');
 
 var _Save2 = _interopRequireDefault(_Save);
 
+var _Snackbar = require('material-ui/Snackbar');
+
+var _Snackbar2 = _interopRequireDefault(_Snackbar);
+
 var _ = require('../');
 
 var _2 = _interopRequireDefault(_);
@@ -50,6 +64,8 @@ var _2 = _interopRequireDefault(_);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -64,7 +80,13 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var propTypes = _objectWithoutProperties(_2.default.propTypes, []);
 
 Object.assign(propTypes, {
-  mutate: _propTypes2.default.func.isRequired
+  mutate: _propTypes2.default.func.isRequired,
+  _dirty: _propTypes2.default.object,
+  errorDelay: _propTypes2.default.number.isRequired
+});
+
+var defaultProps = Object.assign(_extends({}, _2.default.defaultProps), {
+  errorDelay: 10000
 });
 
 var EditableView = (_temp = _class = function (_View) {
@@ -75,14 +97,98 @@ var EditableView = (_temp = _class = function (_View) {
 
     var _this = _possibleConstructorReturn(this, _View.call(this, props));
 
+    _objectDestructuringEmpty(props);
+
     _this.state = {
       inEditMode: false,
-      _dirty: null,
       notifications: []
     };
 
     return _this;
   }
+
+  EditableView.prototype.componentWillMount = function componentWillMount() {
+    var _props$_dirty = this.props._dirty,
+        _dirty = _props$_dirty === undefined ? null : _props$_dirty;
+
+    // this.state = {
+    //   ...this.state,
+    //   _dirty: _dirty || this.getCache(),
+    // };
+
+    Object.assign(this.state, {
+      _dirty: _dirty || this.getCache()
+    });
+
+    return _View.prototype.componentWillMount ? _View.prototype.componentWillMount.call(this) : true;
+  };
+
+  EditableView.prototype.getCacheKey = function getCacheKey() {
+    var id = this.props.id;
+
+
+    return id ? 'item_' + id : null;
+  };
+
+  EditableView.prototype.setCache = function setCache(data) {
+
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    var cacheData = void 0;
+
+    var key = this.getCacheKey();
+
+    if (key) {
+      try {
+
+        if (cacheData) {
+          cacheData = JSON.stringify(cacheData);
+          window.localStorage.setItem(key, cacheData);
+        }
+      } catch (error) {}
+    }
+  };
+
+  EditableView.prototype.getCache = function getCache() {
+
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    var cacheData = void 0;
+
+    var key = this.getCacheKey();
+
+    if (key) {
+      try {
+
+        cacheData = window.localStorage.getItem(key);
+
+        if (cacheData) {
+          cacheData = JSON.parse(cacheData);
+        }
+      } catch (error) {}
+    }
+
+    // console.log("getCacheKey", cacheData);
+
+    return cacheData;
+  };
+
+  EditableView.prototype.clearCache = function clearCache() {
+
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    var key = this.getCacheKey();
+
+    if (key) {
+      window.localStorage.removeItem(key);
+    }
+  };
 
   EditableView.prototype.startEdit = function startEdit() {
 
@@ -93,6 +199,8 @@ var EditableView = (_temp = _class = function (_View) {
 
   EditableView.prototype.resetEdit = function resetEdit() {
 
+    this.clearCache();
+
     this.setState({
       inEditMode: false,
       _dirty: null
@@ -100,46 +208,124 @@ var EditableView = (_temp = _class = function (_View) {
   };
 
   EditableView.prototype.save = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
       var _this2 = this;
 
-      var _dirty, result;
+      var _dirty, client, result;
 
-      return _regenerator2.default.wrap(function _callee$(_context) {
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               _dirty = this.state._dirty;
+              client = this.context.client;
 
               // const result = await saveObject(_dirty);
 
               // console.log("EditView result", result);
 
 
-              _context.next = 3;
-              return this.saveObject(_dirty).then(function (r) {
+              _context2.next = 4;
+              return this.saveObject(_dirty).then(function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(result) {
+                  var _ref3, resultData, _ref4, response, _ref5, success, message, _ref5$errors, errors, other, newState, onSave;
 
-                _this2.setState({
-                  _dirty: null,
-                  inEditMode: false,
-                  errors: null
-                });
+                  return _regenerator2.default.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          if (!(result instanceof Error)) {
+                            _context.next = 3;
+                            break;
+                          }
 
-                return r;
-              }).catch(function (e) {
+                          _context.next = 19;
+                          break;
+
+                        case 3:
+                          _ref3 = result || {}, resultData = _ref3.data;
+                          _ref4 = resultData || {}, response = _ref4.response;
+
+                          // console.log("result", result);
+                          // console.log("resultData", resultData);
+
+                          _ref5 = response || {}, success = _ref5.success, message = _ref5.message, _ref5$errors = _ref5.errors, errors = _ref5$errors === undefined ? null : _ref5$errors, other = _objectWithoutProperties(_ref5, ['success', 'message', 'errors']);
+                          newState = {
+                            errors: errors
+                          };
+
+
+                          if (success === undefined) {
+
+                            success = true;
+                          }
+
+                          if (success) {
+                            _context.next = 12;
+                            break;
+                          }
+
+                          _this2.addError(message || "Request error");
+
+                          // errors && errors.map(error => {
+                          //   this.addError(error);
+                          // });
+
+                          _context.next = 18;
+                          break;
+
+                        case 12:
+
+                          Object.assign(newState, {
+                            _dirty: null,
+                            inEditMode: false
+                          });
+
+                          onSave = _this2.props.onSave;
+
+
+                          if (onSave) {
+                            onSave(result);
+                          }
+
+                          _this2.clearCache();
+
+                          _context.next = 18;
+                          return client.resetStore();
+
+                        case 18:
+
+                          _this2.setState(newState);
+
+                        case 19:
+                          return _context.abrupt('return', result);
+
+                        case 20:
+                        case 'end':
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee, _this2);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }()).catch(function (e) {
                 console.error(e);
+                return e;
               });
 
-            case 3:
-              result = _context.sent;
-              return _context.abrupt('return', result);
+            case 4:
+              result = _context2.sent;
+              return _context2.abrupt('return', result);
 
-            case 5:
+            case 6:
             case 'end':
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, this);
+      }, _callee2, this);
     }));
 
     function save() {
@@ -150,11 +336,11 @@ var EditableView = (_temp = _class = function (_View) {
   }();
 
   EditableView.prototype.saveObject = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2(data) {
-      var mutate, mutation;
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3(data) {
+      var mutate, mutation, result;
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
 
               // const {
@@ -171,7 +357,7 @@ var EditableView = (_temp = _class = function (_View) {
               mutate = this.props.mutate;
 
               if (mutate) {
-                _context2.next = 3;
+                _context3.next = 3;
                 break;
               }
 
@@ -179,18 +365,29 @@ var EditableView = (_temp = _class = function (_View) {
 
             case 3:
               mutation = this.getMutation(data);
-              return _context2.abrupt('return', mutate(mutation));
+              _context3.next = 6;
+              return mutate(mutation).then(function (r) {
+                return r;
+              }).catch(function (e) {
 
-            case 5:
+                // throw (e);
+                return e;
+              });
+
+            case 6:
+              result = _context3.sent;
+              return _context3.abrupt('return', result);
+
+            case 8:
             case 'end':
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, this);
+      }, _callee3, this);
     }));
 
-    function saveObject(_x) {
-      return _ref2.apply(this, arguments);
+    function saveObject(_x2) {
+      return _ref6.apply(this, arguments);
     }
 
     return saveObject;
@@ -212,8 +409,10 @@ var EditableView = (_temp = _class = function (_View) {
     var id = object.id;
 
 
+    var where = id ? { id: id } : undefined;
+
     return {
-      id: id,
+      where: where,
       data: data
     };
   };
@@ -240,6 +439,8 @@ var EditableView = (_temp = _class = function (_View) {
         value = _event$target.value;
 
 
+    console.log("onChange", name, value);
+
     this.updateObject((_updateObject = {}, _updateObject[name] = value, _updateObject));
   };
 
@@ -247,17 +448,64 @@ var EditableView = (_temp = _class = function (_View) {
     var _state$_dirty = this.state._dirty,
         _dirty = _state$_dirty === undefined ? {} : _state$_dirty;
 
+    var newData = Object.assign(_extends({}, _dirty), data);
+
+    var key = this.getCacheKey();
+
+    if (key && newData) {
+
+      window.localStorage.setItem(this.getCacheKey(), JSON.stringify(newData));
+    }
+
     this.setState({
-      _dirty: Object.assign(_extends({}, _dirty), data)
+      _dirty: newData
     });
   };
+
+  // getEditor(props) {
+
+  //   const {
+  //     Editor,
+  //     name,
+  //     ...other
+  //   } = props;
+
+
+  //   const object = this.getObjectWithMutations();
+
+
+  //   if (!object) {
+  //     return null;
+  //   }
+
+  //   const value = object[name] || "";
+
+  //   // console.log("Editor", Editor, props);
+
+  //   // return null;
+
+  //   return Editor ? <Editor
+  //     onChange={event => {
+  //       this.onChange(event);
+  //     }}
+  //     name={name}
+  //     value={value}
+  //     style={{
+  //       width: "100%",
+  //     }}
+  //     {...other}
+  //   /> : null;
+
+  // }
 
   EditableView.prototype.getEditor = function getEditor(props) {
     var _this3 = this;
 
     var Editor = props.Editor,
         name = props.name,
-        other = _objectWithoutProperties(props, ['Editor', 'name']);
+        helperText = props.helperText,
+        _onFocus = props.onFocus,
+        other = _objectWithoutProperties(props, ['Editor', 'name', 'helperText', 'onFocus']);
 
     var object = this.getObjectWithMutations();
 
@@ -267,9 +515,12 @@ var EditableView = (_temp = _class = function (_View) {
 
     var value = object[name] || "";
 
-    // console.log("Editor", Editor, props);
+    var errors = this.state.errors;
 
-    // return null;
+
+    var error = errors ? errors.find(function (n) {
+      return n.key === name;
+    }) : "";
 
     return Editor ? _react2.default.createElement(Editor, _extends({
       onChange: function onChange(event) {
@@ -279,6 +530,22 @@ var EditableView = (_temp = _class = function (_View) {
       value: value,
       style: {
         width: "100%"
+      },
+      error: error ? true : false,
+      helperText: error && error.message || helperText,
+      onFocus: function onFocus(event) {
+
+        if (error) {
+          var index = errors.indexOf(error);
+          if (index !== -1) {
+            errors.splice(index, 1);
+            _this3.setState({
+              errors: errors
+            });
+          }
+        }
+
+        return _onFocus ? _onFocus(event) : null;
       }
     }, other)) : null;
   };
@@ -287,8 +554,9 @@ var EditableView = (_temp = _class = function (_View) {
     var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 
-    props = Object.assign({
-      Editor: _TextField2.default
+    props = _extends({
+      Editor: _TextField2.default,
+      autoComplete: "off"
     }, props);
 
     return this.getEditor(props);
@@ -392,7 +660,7 @@ var EditableView = (_temp = _class = function (_View) {
     return _react2.default.createElement(
       _Typography2.default,
       {
-        type: 'title'
+        variant: 'title'
       },
       this.getTitle(),
       this.getButtons()
@@ -415,6 +683,19 @@ var EditableView = (_temp = _class = function (_View) {
 
   EditableView.prototype.addError = function addError(error) {
     var _this5 = this;
+
+    var errorDelay = this.props.errorDelay;
+
+
+    if ((typeof error === 'undefined' ? 'undefined' : _typeof(error)) !== "object") {
+      error = {
+        message: error
+      };
+    }
+
+    Object.assign(error, {
+      _id: new Date().getTime()
+    });
 
     var _state$notifications = this.state.notifications,
         notifications = _state$notifications === undefined ? [] : _state$notifications;
@@ -439,36 +720,150 @@ var EditableView = (_temp = _class = function (_View) {
           });
         }
       }
-    }, 5000);
+    }, errorDelay);
 
     this.setState({
       notifications: notifications
     });
   };
 
+  EditableView.prototype.closeError = function closeError(error) {
+
+    // let {
+    //   errors,
+    // } = this.state;
+
+    Object.assign(error, {
+      open: false
+    });
+
+    console.log("click event 2", error, this.state.notifications);
+
+    this.forceUpdate();
+  };
+
+  EditableView.prototype.onCloseError = function onCloseError(error) {
+    var notifications = this.state.notifications;
+
+
+    if (!notifications) {
+      return;
+    }
+
+    var index = notifications.indexOf(error);
+
+    if (index !== -1) {
+      notifications.splice(index, 1);
+
+      this.setState({
+        notifications: notifications
+      });
+    }
+  };
+
   EditableView.prototype.renderErrors = function renderErrors() {
+    var _this6 = this;
+
+    var errorDelay = this.props.errorDelay;
     var notifications = this.state.notifications;
 
 
     if (notifications && notifications.length) {
 
-      return _react2.default.createElement(
-        'div',
+      // return <div>
+      //   {notifications.map(({
+      //     message,
+      //   }, index) => {
+
+      //     return <p
+      //       key={index}
+      //       style={{
+      //         color: 'red',
+      //       }}
+      //     >
+
+      //       {message}
+
+      //     </p>
+
+      //   })}
+      // </div>
+
+      return _reactDom2.default.createPortal(_react2.default.createElement(
+        _react.Fragment
+        // style={{
+        //   minHeight: 200,
+        //   overflow: "hidden",
+        //   position: "relative",
+        // }}
+        ,
         null,
         notifications.map(function (error, index) {
+          var _id = error._id,
+              message = error.message,
+              _error$open = error.open,
+              open = _error$open === undefined ? true : _error$open;
 
-          return _react2.default.createElement(
-            'p',
-            {
-              key: index,
-              style: {
-                color: 'red'
-              }
+
+          return _react2.default.createElement(_Snackbar2.default, {
+            key: _id,
+            open: open,
+            autoHideDuration: errorDelay
+            // onClose={event => this.onCloseError(error)}
+            , SnackbarContentProps: {
+              // 'aria-describedby': 'snackbar-fab-message-id',
+              // className: classes.snackbarContent,
             },
-            error
-          );
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "center"
+            },
+            message: _react2.default.createElement(
+              'span',
+              null,
+              message
+            ),
+            action: _react2.default.createElement(
+              _react.Fragment,
+              null,
+              _react2.default.createElement(
+                _Button2.default,
+                {
+                  color: 'primary',
+                  variant: 'raised',
+                  size: 'small',
+                  onClick: function onClick(event) {
+                    // console.log("click event", event.target);
+                    event.stopPropagation();
+                    _this6.closeError(error);
+                  }
+                },
+                '\u041E\u0442\u043C\u0435\u043D\u0430'
+              )
+            )
+            // style={{
+            //   position: "absolute",
+            //   width: "100%",
+            //   height: "100%",
+            //   margin: 0,
+            //   padding: 0,
+            //   // bottom: 0,
+            // }}
+            // className={classes.snackbar}
+          });
+
+          // return <p
+          //   key={index}
+          //   style={{
+          //     color: 'red',
+          //   }}
+          // >
+
+          //   {message}
+
+          // </p>
         })
-      );
+      ), window.document.body);
     } else {
       return null;
     }
@@ -479,41 +874,50 @@ var EditableView = (_temp = _class = function (_View) {
     var object = data.object;
 
 
+    var output = void 0;
+
     if (!object) {
-      return this.renderEmpty();
-    }
-
-    // const draftObject = this.getObjectWithMutations();
-
-
-    var inEditMode = this.isInEditMode();
-
-    // let defaultView;
-    // let editView;
-
-    // const isDirty = this.isDirty();
-
-
-    var content = void 0;
-
-    if (inEditMode) {
-
-      content = this.renderEditableView();
+      output = this.renderEmpty();
     } else {
 
-      content = this.renderDefaultView();
+      // const draftObject = this.getObjectWithMutations();
+
+
+      var inEditMode = this.isInEditMode();
+
+      // let defaultView;
+      // let editView;
+
+      // const isDirty = this.isDirty();
+
+
+      var content = void 0;
+
+      if (inEditMode) {
+
+        content = this.renderEditableView();
+      } else {
+
+        content = this.renderDefaultView();
+      }
+
+      output = _react2.default.createElement(
+        _react.Fragment,
+        null,
+        this.renderHeader(),
+        content
+      );
     }
 
     return _react2.default.createElement(
-      'div',
+      _react.Fragment,
       null,
-      this.renderHeader(),
-      this.renderErrors(),
-      content
+      output,
+      this.renderErrors()
     );
   };
 
   return EditableView;
-}(_2.default), _class.propTypes = propTypes, _temp);
+}(_2.default), _class.propTypes = propTypes, _class.defaultProps = defaultProps, _temp);
 exports.default = EditableView;
 module.exports = exports['default'];

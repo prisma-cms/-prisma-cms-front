@@ -63,12 +63,12 @@ var ObjectView = (_temp = _class = function (_React$Component) {
 
   return ObjectView;
 }(_react2.default.Component), _class.contextTypes = {
-  user: _propTypes2.default.object
+  user: _propTypes2.default.object,
+  client: _propTypes2.default.object.isRequired
 }, _temp);
 exports.default = ObjectView;
 ObjectView.propTypes = process.env.NODE_ENV !== "production" ? {
   data: _propTypes2.default.object.isRequired
-  // object: PropTypes.object.isRequired,
   // saveObject: PropTypes.func,
   // mutate: PropTypes.func.isRequired,
   // refetch: PropTypes.func.isRequired,
