@@ -74,6 +74,7 @@ export default class App extends React.Component {
   static propTypes = {
     Renderer: PropTypes.func.isRequired,
     themeOptions: PropTypes.object.isRequired,
+    queryFragments: PropTypes.object.isRequired,
   }
 
 
@@ -89,6 +90,8 @@ export default class App extends React.Component {
   static childContextTypes = {
     muiTheme: PropTypes.object,
     updateTheme: PropTypes.func,
+    getQuery: PropTypes.func,
+    getQueryFragment: PropTypes.func,
   }
 
 
@@ -121,6 +124,8 @@ export default class App extends React.Component {
     return {
       muiTheme: theme,
       updateTheme: themeOptions => this.updateTheme(themeOptions),
+      getQuery: operation => this.getQuery(operation),
+      getQueryFragment: fragmentName => this.getQueryFragment(fragmentName),
     }
   }
 
@@ -156,6 +161,27 @@ export default class App extends React.Component {
 
   }
 
+
+  getQuery(operation){
+
+  }
+
+
+  getQueryFragment(fragmentName){
+
+    const {
+      queryFragments: {
+        [fragmentName]: fragment,
+      },
+    } = this.props;
+
+    if(!fragment){
+      throw new Error(`Can not get query fragment "${fragmentName}"`);
+    }
+
+    return fragment;
+
+  }
 
 
   componentWillMount() {

@@ -1,3 +1,7 @@
+1.3.0-beta
+====================================
+- Added App::getQueryFragment
+
 1.2.3-beta
 ====================================
 - Upgrade apollo-cms

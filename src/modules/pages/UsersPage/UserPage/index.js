@@ -7,15 +7,16 @@ import { graphql, compose } from 'react-apollo';
 import UserView from './View';
 
 import {
-  user,
+  // user,
   updateUserProcessor,
 } from '../../../query';
 
 import Page from '../../layout';
+import gql from 'graphql-tag';
 
 export class UserPage extends Page {
 
-  
+
   static propTypes = {
     ...Page.propTypes,
     match: PropTypes.object.isRequired,
@@ -40,7 +41,7 @@ export class UserPage extends Page {
     } = this.props;
 
 
-    if(!user){
+    if (!user) {
       return false;
     }
 
@@ -56,10 +57,10 @@ export class UserPage extends Page {
         },
       },
     })
-    .then(r => r)
-    .catch(e => {
-      console.error(e);
-    });
+      .then(r => r)
+      .catch(e => {
+        console.error(e);
+      });
 
     console.log("updateUser result", result);
 
@@ -70,7 +71,7 @@ export class UserPage extends Page {
 
   render() {
 
-    
+
     const {
       user: currentUser,
     } = this.context;
@@ -84,7 +85,7 @@ export class UserPage extends Page {
     //   return null;
     // }
 
-    return super.render(<UserView 
+    return super.render(<UserView
       // object={user}
       // data={data}
       // saveObject={this.saveUser}
@@ -94,15 +95,52 @@ export class UserPage extends Page {
 }
 
 
+export default class UserPageConnector extends Component {
 
+  static contextTypes = {
+    getQueryFragment: PropTypes.func.isRequired,
+  }
 
-export default compose(
-  graphql(user, {
-    // name: 'user', 
-  }),
-  graphql(updateUserProcessor, {
-    // name: 'updateUser', 
-  }),
+  shouldComponentUpdate() {
+    return false;
+  }
 
-)(UserPage);
+  render() {
 
+    const {
+      getQueryFragment,
+    } = this.context;
+    
+    const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+    const user = gql`
+      query user(
+        $where:UserWhereUniqueInput!
+      ){ 
+        object:user(
+          where:$where
+        ){
+          ...UserNoNesting
+        } 
+      }
+
+      ${UserNoNestingFragment}
+    `;
+
+    const Query = compose(
+      graphql(user, {
+        // name: 'user', 
+      }),
+      graphql(updateUserProcessor, {
+        // name: 'updateUser', 
+      }),
+    
+    )(UserPage);
+
+    return <Query 
+      {...this.props}
+    />;
+
+  }
+
+}
