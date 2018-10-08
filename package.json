@@ -2,7 +2,7 @@
   "name": "@prisma-cms/front",
   "version": "1.2.3-beta",
   "description": "",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "module": "es/index.js",
   "files": [
     "src",
@@ -38,6 +38,7 @@
     "prettier-dry-run": "prettier-eslint \"src/**/*.+(js|jsx)\" -l debug"
   },
   "dependencies": {
+    "@material-ui/icons": "^3.0.1",
     "@types/react": "^16.1.0",
     "apollo-boost": "^0.1.16",
     "apollo-cache-inmemory": "^1.2.10",

@@ -3,8 +3,6 @@
 
 import './styles/less/styles.css';
 
-// import 'babel-polyfill';
-
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -15,6 +13,7 @@ import ApolloCMS from 'apollo-cms/lib/App';
 
 import App from './components/App';
 
+import Renderer from "./components/App/Renderer";
 
 import {
   BrowserRouter as Router,
@@ -27,8 +26,7 @@ const {
   host,
 } = window.location;
 
-
-export default class PrismaCmsApp extends Component {
+class PrismaCmsApp extends Component {
 
   static propTypes = {
     App: PropTypes.func.isRequired,
@@ -70,11 +68,10 @@ export default class PrismaCmsApp extends Component {
   }
 }
 
+export {
+  App,
+  Renderer,
+  PrismaCmsApp,
+}
 
-
-// ReactDOM.render(
-
-//   <PrismaCmsApp /> 
-//   ,
-//   document.getElementById('root'),
-// )
+export default PrismaCmsApp
