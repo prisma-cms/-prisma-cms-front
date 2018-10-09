@@ -26,6 +26,7 @@ export default class TestApp extends Component {
   static defaultProps = {
     // Renderer,
     queryFragments,
+    lang: "ru",
   }
 
   render() {
