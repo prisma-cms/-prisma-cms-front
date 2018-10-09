@@ -298,6 +298,17 @@ export default class UserPageView extends EditableView {
             xs={12}
           >
             {this.getTextField({
+              name: "email",
+              label: "Email",
+              helperText: "Type email",
+            })}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            {this.getTextField({
               name: "password",
               label: "Password",
               type: "password",

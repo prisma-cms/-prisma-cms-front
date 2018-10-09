@@ -1,3 +1,7 @@
+1.4.1-beta
+====================================
+- Added edit profile email
+
 1.4.0-beta
 ====================================
 - Added schema fragments
