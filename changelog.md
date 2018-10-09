@@ -3,6 +3,7 @@
 - Added lang context
 - Translate Auth
 - Path other App props into Renderer
+- Added @prisma-cms/component
 
 1.3.2-beta
 ====================================
