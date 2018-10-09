@@ -1,9 +1,9 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.3.5-beta",
+  "version": "1.4.0-beta",
   "description": "",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "lib/App.js",
+  "module": "es/App.js",
   "files": [
     "src",
     "ssr",

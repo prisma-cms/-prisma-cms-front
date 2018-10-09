@@ -226,10 +226,10 @@ export const createUserProcessor = gql`
 
 export const resetPassword = gql`
   mutation resetPassword(
-    $username: String!
+    $where: UserWhereUniqueInput!
   ){ 
     response: resetPassword(
-      username: $username
+      where: $where
     )
   }
  

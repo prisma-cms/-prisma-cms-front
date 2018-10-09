@@ -1246,13 +1246,15 @@ export class Auth extends CustomComponent {
 
 
     const {
-      login: username,
+      id: userId,
     } = this.state;
 
     await this.mutate({
       mutation: resetPassword,
       variables: {
-        username,
+        where: {
+          id: userId,
+        },
       },
     })
       .then(r => {

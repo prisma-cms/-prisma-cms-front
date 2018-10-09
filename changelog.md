@@ -1,3 +1,13 @@
+1.4.0-beta
+====================================
+- Added schema fragments
+- Move main app in App.js
+- Update package.json main
+- Update tests
+- Fix reset password
+- Fix UserPage
+- Add proxy images rewrite rule
+
 1.3.5-beta
 ====================================
 - Fix window.location error

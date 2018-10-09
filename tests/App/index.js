@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 
-import PrismaCmsApp from '../../src/'
+import PrismaCmsApp from '../../src/App'
 
 
 export const userFragment = `
