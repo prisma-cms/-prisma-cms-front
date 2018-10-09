@@ -75,6 +75,7 @@ export default class App extends React.Component {
     Renderer: PropTypes.func.isRequired,
     themeOptions: PropTypes.object.isRequired,
     queryFragments: PropTypes.object.isRequired,
+    lang: PropTypes.string.isRequired,
   }
 
 
@@ -84,6 +85,7 @@ export default class App extends React.Component {
       direction: 'ltr',
       paletteType: 'light',
     },
+    lang: null,
   }
 
 
@@ -92,6 +94,7 @@ export default class App extends React.Component {
     updateTheme: PropTypes.func,
     getQuery: PropTypes.func,
     getQueryFragment: PropTypes.func,
+    lang: PropTypes.string,
   }
 
 
@@ -101,6 +104,7 @@ export default class App extends React.Component {
 
     let {
       themeOptions,
+      lang,
     } = props;
 
     this.state = {
@@ -108,10 +112,22 @@ export default class App extends React.Component {
       themeOptions,
     }
 
+    if(!lang){
+
+      const {
+        navigator,
+      } = global;
+
+      lang = navigator && navigator.language || "";
+
+    }
+
+    lang = lang && lang.substr(0, 2) || "";
+
     Object.assign(this.state, {
       theme: this.getTheme(),
+      lang,
     });
-
 
   }
 
@@ -119,6 +135,7 @@ export default class App extends React.Component {
 
     const {
       theme,
+      lang,
     } = this.state;
 
     return {
@@ -126,6 +143,7 @@ export default class App extends React.Component {
       updateTheme: themeOptions => this.updateTheme(themeOptions),
       getQuery: operation => this.getQuery(operation),
       getQueryFragment: fragmentName => this.getQueryFragment(fragmentName),
+      lang,
     }
   }
 
@@ -204,6 +222,7 @@ export default class App extends React.Component {
 
     let {
       Renderer,
+      ...other
     } = this.props;
 
     const {
@@ -218,6 +237,7 @@ export default class App extends React.Component {
 
         <UriProvider>
           <Renderer
+            {...other}
           />
         </UriProvider>
       </MuiThemeProvider>

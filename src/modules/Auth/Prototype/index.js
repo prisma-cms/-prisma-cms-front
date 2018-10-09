@@ -88,13 +88,29 @@ let lexicon = {
 }
 
 
-class ProfileDialogAuthStepFindUser extends Component {
+class ProfileDialogAuthStepFindUser extends CustomComponent {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
+  
+  static defaultProps = {
+    ...CustomComponent.defaultProps,
+    locales: {
+      en: {
+        values: {
+          "cancel": "cancel",
+          "signup": "signup",
+          "next": "next",
+          "username": "Username",
+        }
+      },
+      "ru": {
+        values: {
+          "cancel": "отмена",
+          "signup": "Регистрация",
+          "next": "Далее",
+          "username": "Логин",
+        }
+      },
+    },
   }
 
   render() {
@@ -107,6 +123,13 @@ class ProfileDialogAuthStepFindUser extends Component {
       classes,
     } = this.props;
 
+
+    const cancel = this.lexicon("cancel");
+    const signup = this.lexicon("signup");
+    const next = this.lexicon("next");
+    const username = this.lexicon("username");
+
+
     if (this.props.showRegForm === true) {
 
       actions.push(
@@ -114,7 +137,7 @@ class ProfileDialogAuthStepFindUser extends Component {
           key="signup"
           onClick={scope.setStep.bind(scope, 3)}
         >
-          {lexicon.signup}
+          {signup}
         </Button>
       );
     }
@@ -122,7 +145,7 @@ class ProfileDialogAuthStepFindUser extends Component {
     actions.push(<Button
       key="cancel"
       onClick={scope.modalClose.bind(scope)}>
-      {lexicon.cancel}
+      {cancel}
     </Button>);
 
     actions.push(<Button
@@ -131,7 +154,7 @@ class ProfileDialogAuthStepFindUser extends Component {
       color="primary"
       type="submit"
     >
-      {lexicon.next}
+      {next}
     </Button>);
 
     var error = (this.props.errors && this.props.errors.login && this.props.errors.login.errorText ? this.props.errors.login.errorText : '');
@@ -167,7 +190,7 @@ class ProfileDialogAuthStepFindUser extends Component {
             <div style={loginSubheaderStyle} />
 
             <TextField
-              label={lexicon.loginName + (error != '' ? ' (' + error + ')' : '')}
+              label={username + (error != '' ? ' (' + error + ')' : '')}
               key="login"
               name="login"
               error={error != ''}
@@ -191,9 +214,33 @@ class ProfileDialogAuthStepFindUser extends Component {
       </Dialog>
     );
   }
+
 }
 
-class ProfileDialogAuthStepAuth extends Component {
+class ProfileDialogAuthStepAuth extends CustomComponent {
+
+
+  static defaultProps = {
+    ...CustomComponent.defaultProps,
+    locales: {
+      en: {
+        values: {
+          "back": "back",
+          "signin": "signin",
+          "new password": "new password",
+          "Password": "Password",
+        }
+      },
+      "ru": {
+        values: {
+          "back": "назад",
+          "signin": "Вход",
+          "new password": "Новый пароль",
+          "Password": "Пароль",
+        }
+      },
+    },
+  }
 
 
   render() {
@@ -208,16 +255,10 @@ class ProfileDialogAuthStepAuth extends Component {
 
     var actions = [];
 
-    // actions.push();
-
-
-    // if(
-    //   this.props.errors
-    //   && this.props.errors.login_error
-    //   && this.props.errors.login_error != ""
-    // ){
-
-    // }
+    const signin = this.lexicon("signin");
+    const back = this.lexicon("back");
+    const newPassword = this.lexicon("new password");
+    const Password = this.lexicon("Password");
 
     var content;
 
@@ -254,14 +295,14 @@ class ProfileDialogAuthStepAuth extends Component {
           disabled={this.props.password_send_in_progress == true ? true : false}
           onClick={scope.sendNewPassword.bind(scope)}
         >
-          Новый пароль
+          {newPassword}
         </Button>);
       }
 
       actions.push(<Button
         key="prev"
         onClick={scope.setStep.bind(scope, 1)}
-      >{lexicon.prev}</Button>);
+      >{back}</Button>);
 
       actions.push(<Button
         key="signin"
@@ -269,7 +310,7 @@ class ProfileDialogAuthStepAuth extends Component {
         // onClick={scope.loginSubmit.bind(scope)}
         type="submit"
       >
-        {lexicon.signin}
+        {signin}
       </Button>);
 
       if (this.props.is_forgot) {
@@ -286,7 +327,7 @@ class ProfileDialogAuthStepAuth extends Component {
       var error = this.props.errors && this.props.errors.login_error ? this.props.errors.login_error : '';
 
       content = <TextField
-        label={lexicon.passwordName + (error != "" ? ' (' + error + ')' : "")}
+        label={Password + (error != "" ? ' (' + error + ')' : "")}
         key="password"
         type="password"
         name="password"
@@ -343,9 +384,38 @@ class ProfileDialogAuthStepAuth extends Component {
   }
 }
 
-class ProfileDialogAuthStepRegister extends Component {
+class ProfileDialogAuthStepRegister extends CustomComponent {
 
-  state = {}
+  // state = {}
+
+  static defaultProps = {
+    ...CustomComponent.defaultProps,
+
+    locales: {
+      en: {
+        values: {
+          "New account": "New account",
+          "cancel": "cancel",
+          "signin": "signin",
+          "signup": "signup",
+          "username": "Username",
+          "email": "Email",
+          "passwordName": "Password",
+        }
+      },
+      "ru": {
+        values: {
+          "New account": "Регистрация",
+          "cancel": "отмена",
+          "signin": "вход",
+          "signup": "Регистрация",
+          "username": "Логин",
+          "email": "Емейл",
+          "passwordName": "Пароль",
+        }
+      },
+    },
+  }
 
   onEnter() {
     this.props.registerSubmit();
@@ -382,19 +452,31 @@ class ProfileDialogAuthStepRegister extends Component {
       password,
     } = scope.state;
 
+
+    const registerTitle = this.lexicon("New account");
+    const cancel = this.lexicon("cancel");
+    const signin = this.lexicon("signin");
+    const signup = this.lexicon("signup");
+    const loginName = this.lexicon("username");
+    const emailName = this.lexicon("email");
+    const passwordName = this.lexicon("passwordName");
+
+    // console.log("registerTitle", registerTitle, this.state.lexicon);
+
+
     var actions = [
       <Button
         key="cancel"
         onClick={scope.modalClose.bind(scope)}
       >
-        {lexicon.cancel}
+        {cancel}
       </Button>,
 
       <Button
         key="next"
         onClick={scope.setStep.bind(scope, 1)}
       >
-        {lexicon.signin}
+        {signin}
       </Button>,
 
       <Button
@@ -403,11 +485,13 @@ class ProfileDialogAuthStepRegister extends Component {
         // onClick={this.props.registerSubmit}
         type="submit"
       >
-        {lexicon.signup}
+        {signup}
       </Button>
     ];
 
+    
     const passwordError = errors && errors.password;
+  
 
     return (
       <Dialog
@@ -427,11 +511,11 @@ class ProfileDialogAuthStepRegister extends Component {
             }}
           >
 
-            <div style={loginSubheaderStyle}>{lexicon.registerTitle}</div>
+            <div style={loginSubheaderStyle}>{registerTitle}</div>
 
             <TextField
               key="username"
-              label={lexicon.loginName}
+              label={loginName}
               error={this.props.errors && this.props.errors.username ? true : false}
               helperText={this.props.errors && this.props.errors.username || ""}
               name="username"
@@ -457,7 +541,7 @@ class ProfileDialogAuthStepRegister extends Component {
 
             <TextField
               key="email"
-              label={lexicon.emailName}
+              label={emailName}
               error={this.props.errors && this.props.errors.email ? true : false}
               helperText={this.props.errors && this.props.errors.email || ""}
               type="email"
@@ -479,7 +563,7 @@ class ProfileDialogAuthStepRegister extends Component {
 
             <TextField
               key="password"
-              label={lexicon.passwordName}
+              label={passwordName}
               error={passwordError ? true : false}
               helperText={passwordError || ""}
               type="password"
@@ -607,6 +691,7 @@ export class Auth extends CustomComponent {
     super(props);
 
     this.state = {
+      ...this.state,
       wait_for_response: false,
       errors: {},
       actions: [],

@@ -1,3 +1,9 @@
+1.3.3-beta
+====================================
+- Added lang context
+- Translate Auth
+- Path other App props into Renderer
+
 1.3.2-beta
 ====================================
 - Fix main script

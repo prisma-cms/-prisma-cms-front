@@ -1,367 +1,372 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 
-import Snackbar from '../../Snackbar';
+import PrismaCmsComponent from "@prisma-cms/component";
 
-import URI from 'urijs';
+export default PrismaCmsComponent;
 
-export default class CustomComponent extends React.Component {
+// import React, { Fragment } from 'react'
+// import PropTypes from 'prop-types'
 
-  // static propTypes = {
-  //   prop: PropTypes
-  // }
+// import Snackbar from '../../Snackbar';
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-    client: PropTypes.object.isRequired,
-    loadApiData: PropTypes.func.isRequired,
-    user: PropTypes.object,
-  }
+// import URI from 'urijs';
 
+// export default class CustomComponent extends React.Component {
 
-  state = {}
+//   // static propTypes = {
+//   //   prop: PropTypes
+//   // }
 
+//   static contextTypes = {
+//     router: PropTypes.object.isRequired,
+//     client: PropTypes.object.isRequired,
+//     loadApiData: PropTypes.func.isRequired,
+//     user: PropTypes.object,
+//   }
 
-  addError(error) {
 
-    error = error || "Request error";
+//   state = {}
 
-    this.setState({
-      error,
-    }, () => {
-      setTimeout(() => {
 
-        // Проверка не очень надежная, так как строки не учитывают инстанс,
-        // но это лучше, чем ничего.
-        if (error === this.state.error) {
-          this.setState({
-            error: null,
-          });
-        }
+//   addError(error) {
 
-      }, 5000);
-    });
-  }
+//     error = error || "Request error";
 
+//     this.setState({
+//       error,
+//     }, () => {
+//       setTimeout(() => {
 
-  query(params) {
+//         // Проверка не очень надежная, так как строки не учитывают инстанс,
+//         // но это лучше, чем ничего.
+//         if (error === this.state.error) {
+//           this.setState({
+//             error: null,
+//           });
+//         }
 
-    return this.request("query", params);
+//       }, 5000);
+//     });
+//   }
 
-  }
 
+//   query(params) {
 
-  mutate(params) {
+//     return this.request("query", params);
 
-    return this.request("mutate", params);
+//   }
 
-  }
 
-  async request(method, params) {
+//   mutate(params) {
 
-    this.setState({
-      loading: true,
-    });
+//     return this.request("mutate", params);
 
-    const {
-      client,
-    } = this.context;
+//   }
 
-    const result = await client[method](params)
-      .catch(error => {
-        // console.error(error);
+//   async request(method, params) {
 
-        return error;
-      });
+//     this.setState({
+//       loading: true,
+//     });
 
+//     const {
+//       client,
+//     } = this.context;
 
-    // console.log("Component request result", result);
+//     const result = await client[method](params)
+//       .catch(error => {
+//         // console.error(error);
 
+//         return error;
+//       });
 
-    this.setState({
-      loading: false,
-    });
 
+//     // console.log("Component request result", result);
 
-    let error;
-    let errors;
 
-    if (result instanceof Error) {
-      error = result.message;
-      // throw(result);
-    }
-    else {
-      const {
-        // data: resultData,
-        response,
-      } = result.data || {};
+//     this.setState({
+//       loading: false,
+//     });
 
-      // const {
-      //   response,
-      // } = resultData || {};
 
-      // console.log("result", result);
+//     let error;
+//     let errors;
 
-      let {
-        success,
-        message,
-        errors: responseErrors,
-        ...other
-      } = response || {};
+//     if (result instanceof Error) {
+//       error = result.message;
+//       // throw(result);
+//     }
+//     else {
+//       const {
+//         // data: resultData,
+//         response,
+//       } = result.data || {};
 
-      errors = responseErrors;
+//       // const {
+//       //   response,
+//       // } = resultData || {};
 
-      if (success !== undefined) {
+//       // console.log("result", result);
 
-        // success = true;
+//       let {
+//         success,
+//         message,
+//         errors: responseErrors,
+//         ...other
+//       } = response || {};
 
-        if (!success) {
+//       errors = responseErrors;
 
-          error = message || "Request error";
+//       if (success !== undefined) {
 
-          // errors && errors.map(error => {
-          //   this.addError(error);
-          // });
+//         // success = true;
 
-          // console.log("error 2", error);
-        }
-      }
+//         if (!success) {
 
-      // console.log("success", success);
+//           error = message || "Request error";
 
-    }
+//           // errors && errors.map(error => {
+//           //   this.addError(error);
+//           // });
 
-    // console.log("error", error);
+//           // console.log("error 2", error);
+//         }
+//       }
 
-    this.setState({
-      errors,
-    });
+//       // console.log("success", success);
 
-    if (error) {
-      this.addError(error);
-      throw (result);
-    }
-    else {
-      this.setState({
-        error: null,
-      });
-    }
+//     }
 
-    return result;
+//     // console.log("error", error);
 
-  }
+//     this.setState({
+//       errors,
+//     });
 
-  reloadApiData() {
+//     if (error) {
+//       this.addError(error);
+//       throw (result);
+//     }
+//     else {
+//       this.setState({
+//         error: null,
+//       });
+//     }
 
-    const {
-      loadApiData,
-    } = this.context;
+//     return result;
 
-    return loadApiData();
+//   }
 
-  }
+//   reloadApiData() {
 
+//     const {
+//       loadApiData,
+//     } = this.context;
 
-  renderField(field) {
+//     return loadApiData();
 
-    if (!field) {
-      return null;
-    }
+//   }
 
 
-    let {
-      errors,
-    } = this.state;
+//   renderField(field) {
 
-    const {
-      type: Type,
-      props: {
-        name,
-        helperText,
-        onFocus,
-      },
-    } = field;
+//     if (!field) {
+//       return null;
+//     }
 
-    // console.log("field", field);
 
+//     let {
+//       errors,
+//     } = this.state;
 
-    const error = errors ? errors.find(n => n.key === name) : null;
+//     const {
+//       type: Type,
+//       props: {
+//         name,
+//         helperText,
+//         onFocus,
+//       },
+//     } = field;
 
-    return <Type
-      {...field.props}
-      error={error ? true : false}
-      helperText={error && error.message ? error.message : helperText}
-      onFocus={event => {
+//     // console.log("field", field);
 
-        if (errors && error) {
-          const index = errors.indexOf(error);
-          errors.splice(index, 1);
-          this.forceUpdate();
-        }
 
-        return onFocus ? onFocus(event) : null;
-      }}
-    />
+//     const error = errors ? errors.find(n => n.key === name) : null;
 
-  }
+//     return <Type
+//       {...field.props}
+//       error={error ? true : false}
+//       helperText={error && error.message ? error.message : helperText}
+//       onFocus={event => {
 
+//         if (errors && error) {
+//           const index = errors.indexOf(error);
+//           errors.splice(index, 1);
+//           this.forceUpdate();
+//         }
 
-  getHistory() {
-    const {
-      router: {
-        history,
-      },
-    } = this.context;
+//         return onFocus ? onFocus(event) : null;
+//       }}
+//     />
 
-    return history;
-  }
+//   }
 
-  getLocation() {
 
-    const {
-      location,
-    } = this.getHistory();
+//   getHistory() {
+//     const {
+//       router: {
+//         history,
+//       },
+//     } = this.context;
 
-    return location;
-  }
+//     return history;
+//   }
 
-  getLocationUri() {
+//   getLocation() {
 
-    const {
-      pathname,
-      search,
-    } = this.getLocation();
+//     const {
+//       location,
+//     } = this.getHistory();
 
-    return new URI(`${pathname}${search}`);
+//     return location;
+//   }
 
-  }
+//   getLocationUri() {
 
-  getLocationQuery(field) {
+//     const {
+//       pathname,
+//       search,
+//     } = this.getLocation();
 
-    return this.getLocationUri().query(true)[field];
-  }
+//     return new URI(`${pathname}${search}`);
 
+//   }
 
-  onFilterFieldChange(event){
+//   getLocationQuery(field) {
 
-    const {
-      name,
-      value,
-    } = event.target;
+//     return this.getLocationUri().query(true)[field];
+//   }
 
 
-    this.setFilters({
-      [name]: value ? value : undefined,
-    });
+//   onFilterFieldChange(event){
 
-  }
+//     const {
+//       name,
+//       value,
+//     } = event.target;
 
 
-  setFilters(data){
+//     this.setFilters({
+//       [name]: value ? value : undefined,
+//     });
 
-    let uri = this.getLocationUri();
-    let query = uri.query(true);
+//   }
 
-    Object.assign(query, {
-      ...data,
-      page: undefined,
-    });
 
-    uri.query(query);
+//   setFilters(data){
 
-    const history = this.getHistory();
+//     let uri = this.getLocationUri();
+//     let query = uri.query(true);
 
+//     Object.assign(query, {
+//       ...data,
+//       page: undefined,
+//     });
 
-    console.log("uri.toString()", uri.toString());
+//     uri.query(query);
 
-    history.push(uri.toString());
+//     const history = this.getHistory();
 
-    // console.log("newUrl", newUrl);
 
-  }
+//     console.log("uri.toString()", uri.toString());
 
+//     history.push(uri.toString());
 
-  /**
-   * Простая проверка выставлены ли фильтры или нет
-   */
-  hasFilters(){
+//     // console.log("newUrl", newUrl);
 
-    // const {
-    //   search,
-    // } = this.getLocation();
+//   }
 
-    // let {
-    //   page,
-    //   ...query
-    // } = this.getLocationUri().query(true);
 
-    const filters = this.getFilters();
+//   /**
+//    * Простая проверка выставлены ли фильтры или нет
+//    */
+//   hasFilters(){
 
-    // console.log("hasFilters search", Object.keys(filters).length);
+//     // const {
+//     //   search,
+//     // } = this.getLocation();
 
-    return Object.keys(filters).length > 0 ? true : false;
-  }
+//     // let {
+//     //   page,
+//     //   ...query
+//     // } = this.getLocationUri().query(true);
 
+//     const filters = this.getFilters();
 
-  /**
-   * Получаем фильтры из адресной строки
-   */
-  getFilters(){
+//     // console.log("hasFilters search", Object.keys(filters).length);
 
-    let {
-      page,
-      ...filters
-    } = this.getLocationUri().query(true);
+//     return Object.keys(filters).length > 0 ? true : false;
+//   }
 
-    // console.log("hasFilters search", Object.keys(query).length);
 
-    return filters;
-  }
+//   /**
+//    * Получаем фильтры из адресной строки
+//    */
+//   getFilters(){
 
-  addFilterCondition(where, key, value){
-    return Object.assign(where, {
-      [key]: value,
-    });
-  }
+//     let {
+//       page,
+//       ...filters
+//     } = this.getLocationUri().query(true);
 
+//     // console.log("hasFilters search", Object.keys(query).length);
 
-  cleanFilters(){
+//     return filters;
+//   }
 
-    const {
-      search,
-      pathname,
-    } = this.getLocation();
+//   addFilterCondition(where, key, value){
+//     return Object.assign(where, {
+//       [key]: value,
+//     });
+//   }
 
-    const history = this.getHistory();
 
-    history.push(pathname);
+//   cleanFilters(){
 
-  }
+//     const {
+//       search,
+//       pathname,
+//     } = this.getLocation();
 
+//     const history = this.getHistory();
 
-  render(content) {
+//     history.push(pathname);
 
-    const {
-      error,
-    } = this.state;
+//   }
 
-    return (
-      <Fragment>
 
-        {content}
+//   render(content) {
 
+//     const {
+//       error,
+//     } = this.state;
 
-        <Snackbar
-          opened={error ? true : false}
-          message={error || ""}
-          close={() => {
-            this.setState({
-              error: null,
-            })
-          }}
-        />
+//     return (
+//       <Fragment>
 
-      </Fragment>
-    )
-  }
-}
+//         {content}
+
+
+//         <Snackbar
+//           opened={error ? true : false}
+//           message={error || ""}
+//           close={() => {
+//             this.setState({
+//               error: null,
+//             })
+//           }}
+//         />
+
+//       </Fragment>
+//     )
+//   }
+// }
