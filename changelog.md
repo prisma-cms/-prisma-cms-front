@@ -1,3 +1,8 @@
+1.3.5-beta
+====================================
+- Fix window.location error
+- Added @prisma-cms/connector
+
 1.3.4-beta
 ====================================
 - Upgrade @prisma-cms/component

@@ -13,6 +13,7 @@ import {
 
 import Page from '../../layout';
 import gql from 'graphql-tag';
+import PrismaCmsConnector from '@prisma-cms/connector';
 
 export class UserPage extends Page {
 
@@ -95,22 +96,14 @@ export class UserPage extends Page {
 }
 
 
-export default class UserPageConnector extends Component {
+export default class UserPageConnector extends PrismaCmsConnector {
 
-  static contextTypes = {
-    getQueryFragment: PropTypes.func.isRequired,
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  render() {
+  prepareQuery() {
 
     const {
       getQueryFragment,
     } = this.context;
-    
+
     const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
 
     const user = gql`
@@ -127,20 +120,65 @@ export default class UserPageConnector extends Component {
       ${UserNoNestingFragment}
     `;
 
-    const Query = compose(
+    return compose(
       graphql(user, {
         // name: 'user', 
       }),
       graphql(updateUserProcessor, {
         // name: 'updateUser', 
       }),
-    
-    )(UserPage);
-
-    return <Query 
-      {...this.props}
-    />;
-
+    )(UserPage)
   }
 
 }
+
+
+// export class UserPageConnectorDDD extends Component {
+
+//   static contextTypes = {
+//     getQueryFragment: PropTypes.func.isRequired,
+//   }
+
+//   shouldComponentUpdate() {
+//     return false;
+//   }
+
+//   render() {
+
+//     const {
+//       getQueryFragment,
+//     } = this.context;
+
+//     const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+//     const user = gql`
+//       query user(
+//         $where:UserWhereUniqueInput!
+//       ){ 
+//         object:user(
+//           where:$where
+//         ){
+//           ...UserNoNesting
+//         } 
+//       }
+
+//       ${UserNoNestingFragment}
+//     `;
+
+//     const Query = compose(
+//       graphql(user, {
+//         // name: 'user', 
+//       }),
+//       graphql(updateUserProcessor, {
+//         // name: 'updateUser', 
+//       }),
+
+//     )(UserPage);
+
+//     return <Query
+//       {...this.props}
+//     />;
+
+//   }
+
+// }

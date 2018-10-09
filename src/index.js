@@ -24,7 +24,7 @@ const {
   protocol,
   // hostname,
   host,
-} = window.location;
+} = global.location || {};
 
 class PrismaCmsApp extends Component {
 
