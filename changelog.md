@@ -1,3 +1,8 @@
+1.3.4-beta
+====================================
+- Upgrade @prisma-cms/component
+- Switch main src to lib
+
 1.3.3-beta
 ====================================
 - Added lang context
