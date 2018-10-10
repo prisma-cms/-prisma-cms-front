@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 
 import Avatar from '../../Avatar';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
+
+import Typography from 'material-ui/Typography';
 
 const styles = {
   root: {
@@ -20,20 +22,6 @@ const styles = {
     alignItems: 'center',
     textDecoration: "none",
   },
-  // avatar: {
-  //   margin: 10,
-  // },
-  // smallAvatar: {
-  //   width: 30,
-  //   height: 30,
-  // },
-  // bigAvatar: {
-  //   width: 120,
-  //   height: 120,
-  // },
-  // editable: {
-  //   cursor: 'pointer',
-  // },
 };
 
 
@@ -62,12 +50,12 @@ export class UserLink extends Component {
       secondary,
       ...other
     } = this.props;
-    
-    
-    if(!user){
+
+
+    if (!user) {
       return null;
     }
-    
+
     const {
       id,
       username,
@@ -101,7 +89,7 @@ export class UserLink extends Component {
               user={user}
               size="small"
             />
-            
+
           </Link> || null}
 
         </Grid>
@@ -118,8 +106,12 @@ export class UserLink extends Component {
             {...other}
           >
 
-            {name}
-            
+            <Typography
+              component="span"
+            >
+              {name}
+            </Typography>
+
           </Link>
 
           {secondary}

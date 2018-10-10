@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Grid from '../../../../modules/ui/Grid';
 
 import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 import { Link } from 'react-router-dom';
 
@@ -77,9 +78,12 @@ export default class MainMenu extends Component {
         >
           <Link
             to="/"
-            href="/"
           >
-            Main page
+            <Typography
+              component="span"
+            >
+              Main page
+            </Typography>
           </Link>
         </Grid>
  
@@ -91,9 +95,12 @@ export default class MainMenu extends Component {
         >
           <Link
             to="/users"
-            href="/users"
           >
-            Users
+            <Typography
+              component="span"
+            >
+              Users
+            </Typography>
           </Link>
         </Grid> 
 

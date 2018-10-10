@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.4.3-beta",
+  "version": "1.4.4-beta",
   "description": "",
   "main": "lib/App.js",
   "module": "es/App.js",
