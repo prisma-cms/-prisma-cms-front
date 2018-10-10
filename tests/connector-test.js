@@ -80,7 +80,7 @@ describe('@prisma-cms/connector', () => {
       }}
     />, node, () => {
 
-      console.log("@prisma-cms/connector result node", node.innerHTML);
+      // console.log("@prisma-cms/connector result node", node.innerHTML);
       // console.log("getQueryFragment result node.textContent", node.textContent);
 
       expect(node.textContent).toContain("OK")

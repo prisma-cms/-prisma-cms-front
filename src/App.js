@@ -12,6 +12,8 @@ import App from './components/App';
 
 import Renderer from "./components/App/Renderer";
 
+import PageNotFount from "./modules/pages/404";
+
 import {
   BrowserRouter as Router,
 } from 'react-router-dom'
@@ -69,6 +71,7 @@ export {
   App,
   Renderer,
   PrismaCmsApp,
+  PageNotFount,
 }
 
 export default PrismaCmsApp

@@ -1,3 +1,8 @@
+1.4.3-beta
+====================================
+- Added PageNotFound
+- Added PageNotFound tests
+
 1.4.2-beta
 ====================================
 - Fix get Renderer
