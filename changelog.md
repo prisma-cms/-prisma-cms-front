@@ -1,3 +1,8 @@
+1.4.2-beta
+====================================
+- Fix get Renderer
+- Add test check Renderer::getRouters()
+
 1.4.1-beta
 ====================================
 - Added edit profile email

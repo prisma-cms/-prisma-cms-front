@@ -47,11 +47,13 @@ export class Renderer extends Component {
   static propTypes = {
     PageNotFound: PropTypes.func.isRequired,
     AdminRenderer: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
     PageNotFound,
     AdminRenderer,
+    classes: {},
   };
 
   static contextTypes = {
@@ -306,4 +308,6 @@ export class Renderer extends Component {
   }
 }
 
-export default withStyles(styles)(Renderer);
+export default Renderer;
+
+// export default withStyles(styles)(Renderer);
