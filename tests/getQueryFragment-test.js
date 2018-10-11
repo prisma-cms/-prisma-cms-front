@@ -65,7 +65,7 @@ describe('getQueryFragment', () => {
       // console.log("getQueryFragment result node", node.innerHTML);
       // console.log("getQueryFragment result node.textContent", node.textContent);
 
-      expect(node.textContent).toContain(fragment)
+      expect(node.textContent).toBe(fragment)
       return true;
     })
   })

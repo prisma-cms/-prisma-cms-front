@@ -83,7 +83,7 @@ describe('@prisma-cms/connector', () => {
       // console.log("@prisma-cms/connector result node", node.innerHTML);
       // console.log("getQueryFragment result node.textContent", node.textContent);
 
-      expect(node.textContent).toContain("OK")
+      expect(node.textContent).toBe("OK")
     })
   });
  

@@ -12,7 +12,7 @@ module.exports = {
       // "react-hmre"
     ],
     "plugins": [
-      "transform-runtime",
+      // "transform-runtime",
       "transform-class-properties"
     ]
   }

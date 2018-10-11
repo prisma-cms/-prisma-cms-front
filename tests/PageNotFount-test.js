@@ -64,8 +64,8 @@ describe('@prisma-cms/connector', () => {
       // console.log("title", title);
       // console.log("status", status);
 
-      expect("404").toContain(status.toString());
-      expect("Page not found").toContain(title.toString(title));
+      expect("404").toBe(status.toString());
+      expect("Page not found").toBe(title.toString(title));
 
       // return true;
     })
@@ -89,8 +89,8 @@ describe('@prisma-cms/connector', () => {
       // console.log("title", title);
       // console.log("status", status);
 
-      expect("404").toContain(status.toString());
-      expect(customTitle).toContain(title);
+      expect("404").toBe(status.toString());
+      expect(customTitle).toBe(title);
 
       // return true;
     })

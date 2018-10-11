@@ -57,7 +57,7 @@ describe('Override routers', () => {
 
       console.log("Override routers result node", node.innerHTML);
 
-      expect(node.textContent).toContain("OK")
+      expect(node.textContent).toBe("OK")
     })
   })
 })
