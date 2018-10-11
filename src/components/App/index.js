@@ -83,6 +83,7 @@ export default class App extends React.Component {
     Renderer,
     themeOptions: {
       direction: 'ltr',
+      // paletteType: 'dark',
       paletteType: 'light',
     },
     lang: null,

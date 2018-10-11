@@ -3,21 +3,46 @@ import PropTypes from 'prop-types'
 
 import Grid from '../../../../modules/ui/Grid';
 
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 import { Link } from 'react-router-dom';
 
 import UserItem from './User';
+import { withStyles } from 'material-ui/styles';
 
 // import Modal from './AuthModal';
 
+const styles = theme => {
 
-export default class MainMenu extends Component {
 
-  // static propTypes = {
-  //   // prop: PropTypes
-  // }
+  const {
+    palette: {
+      type: paletteType,
+    },
+  } = theme;
+
+
+  return {
+    root: {
+
+      // Fix contrast 
+      "& a, & button": {
+        "&, & *": {
+          color: paletteType === "light" ? "#fff" : undefined,
+        },
+      },
+    },
+  }
+}
+
+export class MainMenu extends Component {
+
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  }
 
 
   static contextTypes = {
@@ -61,113 +86,123 @@ export default class MainMenu extends Component {
     } = this.state;
 
     const {
+      classes,
+    } = this.props;
+
+    const {
       id: userId,
       sudo,
     } = user || {}
 
     return (
-      <Grid
-        container
-        spacing={16}
-        alignItems="center"
-        className="MainMenu-root"
+
+      <AppBar
+        position="relative"
+        className={classes.root}
       >
 
         <Grid
-          item
+          container
+          spacing={16}
+          alignItems="center"
+          className="MainMenu-root"
         >
-          <Link
-            to="/"
-          >
-            <Typography
-              component="span"
-            >
-              Main page
-            </Typography>
-          </Link>
-        </Grid>
- 
 
-        {/* 
+          <Grid
+            item
+          >
+            <Link
+              to="/"
+            >
+              <Typography
+                component="span"
+              >
+                Main page
+            </Typography>
+            </Link>
+          </Grid>
+
+
+          {/* 
         */}
-        <Grid
-          item
-        >
-          <Link
-            to="/users"
+          <Grid
+            item
           >
-            <Typography
-              component="span"
+            <Link
+              to="/users"
             >
-              Users
+              <Typography
+                component="span"
+              >
+                Users
             </Typography>
-          </Link>
-        </Grid> 
+            </Link>
+          </Grid>
 
-        
-        <Grid
-          item
-          xs
-        >
-        </Grid>
 
-        {user
-          ?
-          [
+          <Grid
+            item
+            xs
+          >
+          </Grid>
+
+          {user
+            ?
+            [
+              <Grid
+                key="user"
+                item
+              >
+                <UserItem
+                  key={userId}
+                  user={user}
+                />
+              </Grid>,
+              <Grid
+                key="logout"
+                item
+              >
+                <Button
+                  onClick={() => this.logout()}
+                >
+                  Signout
+              </Button>
+
+              </Grid>
+            ]
+            :
             <Grid
-              key="user"
-              item
-            >
-              <UserItem
-                key={userId}
-                user={user}
-              />
-            </Grid>,
-            <Grid
-              key="logout"
+              key="login"
               item
             >
               <Button
-                onClick={() => this.logout()}
+                onClick={e => {
+                  // this.setState({
+                  //   opened: true,
+                  // });
+                  const {
+                    openLoginForm,
+                  } = this.context;
+                  openLoginForm();
+                }}
               >
-                Signout
+                <Typography
+                  component="span"
+                >
+                  Signin
+              </Typography>
               </Button>
 
             </Grid>
-          ]
-          :
-          <Grid
-            key="login"
-            item
-          >
-            <Button
-              onClick={e => {
-                // this.setState({
-                //   opened: true,
-                // });
-                const {
-                  openLoginForm,
-                } = this.context;
-                openLoginForm();
-              }}
-            >
-              Signin
-          </Button>
+          }
 
-          </Grid>
-        }
 
-        {/* <Modal 
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={opened}
-          onClose={this.handleClose}
-        >
-  
-  
-        </Modal> */}
+        </Grid>
 
-      </Grid>
+      </AppBar>
+
     )
   }
 }
+
+export default withStyles(styles)(MainMenu);
