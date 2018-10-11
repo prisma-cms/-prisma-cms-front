@@ -9,14 +9,14 @@ import Avatar from '../../../../../ui/Avatar';
 
 import NoPhoto from 'material-ui-icons/PersonOutline';
 
-class FileInput extends Component{
+class FileInput extends Component {
 
 
   static propTypes = {
     user: PropTypes.object.isRequired,
   }
 
-  render(){
+  render() {
 
     const {
       // onChange,
@@ -33,7 +33,7 @@ class FileInput extends Component{
 
       const {
         input,
-      } = this.refs;
+      } = this;
 
       console.log('input', input);
 
@@ -43,46 +43,31 @@ class FileInput extends Component{
 
     return <div>
 
-      {/* <Button
-        onClick={event => {
 
-          const {
-            input,
-          } = this.refs;
-
-          console.log('input', input);
-
-          input.click();
-
-        }}
-        >
-        Выбрать файл
-      </Button> */}
-
-
-
-      {image ? <Avatar 
+      {image ? <Avatar
         user={user}
         size="big"
         onClick={onClick}
         editable={editable}
-        />
-        :
-        <NoPhoto 
-        onClick={onClick}
-        style={{
-          fontSize: "7rem",
-          color: "#ddd",
-          border: "1px solid #ddd",
-          borderRadius: "50%",
-          cursor: "pointer",
-        }}
       />
+        :
+        <NoPhoto
+          onClick={onClick}
+          style={{
+            fontSize: "7rem",
+            color: "#ddd",
+            border: "1px solid #ddd",
+            borderRadius: "50%",
+            cursor: "pointer",
+          }}
+        />
       }
 
-      <input 
+      <input
         type="file"
-        ref="input"
+        ref={input => {
+          this.input = input;
+        }}
         style={{
           display: "none",
         }}
@@ -105,7 +90,7 @@ export default class UserProfileAvatar extends Component {
   }
 
 
-  constructor(props){
+  constructor(props) {
 
     super(props);
 
@@ -116,7 +101,7 @@ export default class UserProfileAvatar extends Component {
   }
 
 
-  onUpload(r){
+  onUpload(r) {
     console.log("onUpload result", r);
 
     const {
@@ -148,7 +133,7 @@ export default class UserProfileAvatar extends Component {
       editable,
     } = this.props;
 
-    if(!user){
+    if (!user) {
       return null;
     }
 
@@ -160,9 +145,9 @@ export default class UserProfileAvatar extends Component {
     return (
       <div>
 
-        
 
-        <SingleUploaderInput 
+
+        <SingleUploaderInput
           onUpload={result => this.onUpload(result)}
           FileInput={FileInput}
           editable={editable}
