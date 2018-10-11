@@ -33,7 +33,7 @@ class AdminMenu extends Component {
     router: PropTypes.object.isRequired,
   }
 
-  goTo(path){
+  goTo(path) {
 
     const {
       router: {
@@ -51,31 +51,41 @@ class AdminMenu extends Component {
 
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem
+            button
+            onClick={event => this.goTo("/orders")}
+          >
             <ListItemIcon>
               <OrdersIcon />
             </ListItemIcon>
             <ListItemText primary="Заказы" />
           </ListItem>
-          <ListItem button>
+
+          <ListItem
+            button
+            onClick={event => this.goTo("/products")}
+          >
             <ListItemIcon>
               <ShopIcon />
             </ListItemIcon>
             <ListItemText primary="Товары" />
           </ListItem>
-          <ListItem button>
+
+          {/* <ListItem button>
             <ListItemIcon>
               <CategoriesIcon />
             </ListItemIcon>
             <ListItemText primary="Категории" />
-          </ListItem>
-          <ListItem button>
+          </ListItem> */}
+
+          {/* <ListItem button>
             <ListItemIcon>
               <ResourcesIcon />
             </ListItemIcon>
             <ListItemText primary="Ресурсы" />
-          </ListItem>
-          <ListItem 
+          </ListItem> */}
+
+          <ListItem
             button
             onClick={event => this.goTo("/users")}
           >

@@ -1,3 +1,8 @@
+1.5.0-beta
+====================================
+- Added @prisma-cms/ui
+- Added tests
+
 1.4.5-beta
 ====================================
 - Fix AppBar styles
