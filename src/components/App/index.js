@@ -221,6 +221,8 @@ export default class App extends React.Component {
   render() {
 
     let {
+      queryFragments,
+      themeOptions,
       Renderer,
       ...other
     } = this.props;

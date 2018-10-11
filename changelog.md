@@ -1,6 +1,8 @@
 1.4.4-beta
 ====================================
 - Added menu styles
+- Fix queryFragments props
+- Fix themeOptions props
 
 1.4.3-beta
 ====================================
