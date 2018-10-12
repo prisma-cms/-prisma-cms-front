@@ -1,3 +1,8 @@
+1.6.0-beta
+====================================
+- Added @prisma-cms/ui
+- Added tests
+
 1.5.2-beta
 ====================================
 - Fix UserPage refs

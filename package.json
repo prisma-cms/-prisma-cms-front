@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.5.2-beta",
+  "version": "1.6.0-beta",
   "description": "",
   "main": "es/App.js",
   "module": "es/App.js",
@@ -41,7 +41,7 @@
     "@material-ui/icons": "^3.0.1",
     "@prisma-cms/component": "^1.0.2",
     "@prisma-cms/connector": "^1.0.0",
-    "@prisma-cms/ui": "^1.0.0",
+    "@prisma-cms/ui": "^1.2.0",
     "@types/react": "^16.1.0",
     "apollo-boost": "^0.1.16",
     "apollo-cache-inmemory": "^1.2.10",
