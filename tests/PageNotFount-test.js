@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import TestApp from "./App";
 
 import {
-  PageNotFount,
+  PageNotFound,
 } from "../src/App";
 
 
@@ -18,7 +18,7 @@ class Renderer extends Component {
 
   render() {
 
-    return <PageNotFount />;
+    return <PageNotFound />;
   }
 }
 
@@ -28,7 +28,7 @@ class RendererCustomTitle extends Component {
 
   render() {
 
-    return <PageNotFount
+    return <PageNotFound
       title={customTitle}
     />;
   }

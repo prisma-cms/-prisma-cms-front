@@ -1,3 +1,9 @@
+1.6.2-beta
+====================================
+- Fix export PageNotFound
+- Fix set default server status 200
+- Set package.json main /lib/App.js
+
 1.6.1-beta
 ====================================
 - Became PageLayout extends PrismaCmsComponent

@@ -12,7 +12,7 @@ import App from './components/App';
 
 import Renderer from "./components/App/Renderer";
 
-import PageNotFount from "./modules/pages/404";
+import PageNotFound from "./modules/pages/404";
 
 import {
   BrowserRouter as Router,
@@ -71,7 +71,7 @@ export {
   App,
   Renderer,
   PrismaCmsApp,
-  PageNotFount,
+  PageNotFound,
 }
 
 export default PrismaCmsApp
