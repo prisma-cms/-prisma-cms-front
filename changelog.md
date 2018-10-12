@@ -1,3 +1,7 @@
+1.6.1-beta
+====================================
+- Became PageLayout extends PrismaCmsComponent
+
 1.6.0-beta
 ====================================
 - Added @prisma-cms/ui

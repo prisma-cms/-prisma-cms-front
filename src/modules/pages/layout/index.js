@@ -3,36 +3,42 @@ import React, { Component, Fragment } from 'react';
 
 import PropTypes from 'prop-types';
 
+import PrismaCmsComponent from "@prisma-cms/component";
+
 import URI from 'urijs';
 
-export default class PageLayout extends Component {
+export default class PageLayout extends PrismaCmsComponent {
 
   static contextTypes = {
+    ...PrismaCmsComponent.contextTypes,
     user: PropTypes.object,
     client: PropTypes.object.isRequired,
     uri: PropTypes.object.isRequired,
   }
 
   static propTypes = {
+    ...PrismaCmsComponent.propTypes,
     setMeta: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
+    ...PrismaCmsComponent.defaultProps,
     setMeta: true,
   };
 
 
-  state = {};
-
-
   static childContextTypes = {
+    ...PrismaCmsComponent.childContextTypes,
     setPageMeta: PropTypes.func,
   }
 
 
   getChildContext() {
 
+    let context = super.getChildContext ? super.getChildContext() : {};
+
     return {
+      ...context,
       setPageMeta: meta => this.setPageMeta(meta),
     };
   }
