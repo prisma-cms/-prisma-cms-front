@@ -97,6 +97,7 @@ export default class UsersPage extends Page {
     const {
       View,
       first: limit,
+      data,
       ...other
     } = this.props;
 
@@ -128,6 +129,7 @@ export default class UsersPage extends Page {
       skip={skip}
       first={limit}
       limit={limit}
+      data={data}
       {...other}
     />)
 

@@ -7,7 +7,8 @@ import PropTypes from "prop-types";
 
 import chalk from "chalk";
 
-import TestApp from "./App";
+import TestApp from "../App";
+
 
 class Renderer extends Component {
 
@@ -46,6 +47,7 @@ describe('@prisma-cms/tests app', () => {
 
     render(<TestApp
       Renderer={Renderer}
+      lang="ru"
     >
       <div
         id="test"
@@ -65,7 +67,7 @@ describe('@prisma-cms/tests app', () => {
 
   it('Render Index App', () => {
   
-    require("../index"); 
+    require("../../index"); 
 
     expect(node.textContent).toContain("Main page");
     expect(node.textContent).toContain("Users");

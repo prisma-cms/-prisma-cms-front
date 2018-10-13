@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 // import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
@@ -13,94 +13,58 @@ import {
 
 
 import UserLink from '../../../ui/User/Link';
-
-// import Header from './Header';
-// import Body from './Body';
+ 
 
 import Pagination from '../../../Pagination';
 
 import moment from 'moment';
 
-let {...propTypes} = TableView.propTypes;
-
-let {...defaultProps} = TableView.defaultProps;
-
-
-Object.assign(defaultProps, {
-  // listName: "companiesConnection",
-  title: "Users",
-  limit: 10,
-  // Header,
-  // Body,
-  withPagination: true,
-});
-
+ 
 export class UsersPageView extends TableView {
+ 
 
-  
-  static propTypes = propTypes;
-
-  static defaultProps = defaultProps;
-
-
-  getColumns(){
-
-    return [
-      { 
-        id: 'username', 
-        numeric: false, 
-        disablePadding: false, 
-        label: 'User', 
+  static defaultProps = {
+    ...TableView.defaultProps,
+    // listName: "companiesConnection",
+    title: "Users",
+    limit: 10,
+    // Header,
+    // Body,
+    withPagination: true,
+    columnData: [
+      {
+        id: 'username',
+        numeric: false,
+        disablePadding: false,
+        label: 'User',
         renderer: (value, record) => {
+ 
 
-          // const {
-          //   fullname,
-          // } = record;
-
-          return <UserLink 
+          return <UserLink
             user={record}
           />;
+ 
 
-          // return <Link
-          //   to={`/profile/${value}`}
-          // >
-          //   {fullname || value}
-          // </Link>
-
-        } 
+        }
       },
-      { 
-        id: 'created_at', 
-        numeric: false, 
-        disablePadding: false, 
-        label: 'Reg date', 
+      {
+        id: 'created_at',
+        numeric: false,
+        disablePadding: false,
+        label: 'Reg date',
         renderer: (value, record) => {
-
-          // const {
-          //   fullname,
-          // } = record;
-
-          // return <UserLink 
-          //   user={record}
-          // />;
-
-          // return "sdfdsf";
-
-          // return <Link
-          //   to={`/profile/${value}`}
-          // >
-          //   {fullname || value}
-          // </Link>
+ 
 
           return value ? moment(value).format("LL") : "";
 
-        } 
+        }
       },
-    ];
-  }
+    ],
+  };
 
 
-  render(){
+
+  render() {
 
     const {
       limit,
@@ -113,7 +77,7 @@ export class UsersPageView extends TableView {
     const {
       objectsConnection,
     } = this.props.data;
-    
+
     const {
       edges,
       aggregate,
@@ -123,13 +87,13 @@ export class UsersPageView extends TableView {
       count = 0,
     } = aggregate || {};
 
-    if(!edges || !edges.length){
+    if (!edges || !edges.length) {
       return <Typography>
         Данные не были получены
       </Typography>
     }
 
-    
+
     return <Fragment>
 
       {super.render()}
@@ -142,7 +106,7 @@ export class UsersPageView extends TableView {
         {edges && edges.length ? <Grid
           item
           xs={12}
-          
+
         >
           <Pagination
             limit={limit}
@@ -156,7 +120,7 @@ export class UsersPageView extends TableView {
         }
 
       </Grid> : null
-    }
+      }
 
     </Fragment>;
 
