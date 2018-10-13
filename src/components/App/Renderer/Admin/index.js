@@ -148,8 +148,11 @@ class MiniDrawer extends React.Component {
 
             <AppBar
               // position="absolute"
-              position="relative"
+              // position="relative"
               className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+              style={{
+                position: "relative",
+              }}
             >
               <Toolbar disableGutters={!this.state.open}>
                 <IconButton

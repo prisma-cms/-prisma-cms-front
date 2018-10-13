@@ -97,8 +97,11 @@ export class MainMenu extends Component {
     return (
 
       <AppBar
-        position="relative"
+        // position="relative"
         className={classes.root}
+        style={{
+          position: "relative",
+        }}
       >
 
         <Grid
