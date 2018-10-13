@@ -11,7 +11,7 @@ export class MainPage extends Page {
 	setPageMeta(meta = {}) {
 
 		return super.setPageMeta({
-			title: "MainPage",
+			title: "Main page",
 		});
 
 	}

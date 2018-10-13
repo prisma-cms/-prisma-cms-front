@@ -3,6 +3,7 @@
 - Fix styles
 - Fix AppBar styles
 - Added tests
+- Make tests via jest
 
 1.6.2-beta
 ====================================

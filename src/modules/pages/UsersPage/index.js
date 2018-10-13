@@ -41,13 +41,22 @@ export default class UsersPage extends Page {
   }
 
 
+	setPageMeta(meta = {}) {
+
+		return super.setPageMeta({
+			title: "Users",
+		});
+
+	}
+
+
   addObject(event){
 
     const {
       history,
     } = this.props;
 
-    history.push(`/places/create/`);
+    history.push(`/users/create/`);
 
   }
 
@@ -59,20 +68,26 @@ export default class UsersPage extends Page {
     } = this.props;
 
 
-    const Renderer = compose(
-      graphql(usersConnection, {
-        // name: 'items', 
-      }),
-    
-    )(View);
-
-    Object.assign(this.state, {
+    const {
       Renderer,
-    });
+    } = this.state;
 
-    this.setPageMeta({
-      title: "Users",
-    });
+    if(!Renderer){
+
+      const Renderer = compose(
+        graphql(usersConnection, {
+          // name: 'items', 
+        }),
+      
+      )(View);
+  
+      Object.assign(this.state, {
+        Renderer,
+      });
+      
+    }
+
+    super.componentWillMount && super.componentWillMount();
 
   }
 

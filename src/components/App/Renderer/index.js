@@ -192,8 +192,6 @@ export class Renderer extends Component {
       uri,
     } = this.context;
 
-    console.log("renderOtherPages uri", uri.path());
-
     return <RoutedPage
       {...this.props}
       {...props}
@@ -202,17 +200,6 @@ export class Renderer extends Component {
       }}
     />
   }
-
-  // renderOtherPages(props) {
-
-  //   const {
-  //     PageNotFound,
-  //   } = this.props;
-
-  //   return <PageNotFound 
-  //     {...props}
-  //   />
-  // }
 
 
   renderRoutes() {
