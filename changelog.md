@@ -1,3 +1,7 @@
+1.8.1-beta
+====================================
+- Upgrade @prisma-cms/component
+
 1.8.0-beta
 ====================================
 - Upgrade apollo-cms@1.4.1

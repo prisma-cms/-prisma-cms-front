@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.8.0-beta",
+  "version": "1.8.1-beta",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@material-ui/icons": "^3.0.1",
-    "@prisma-cms/component": "^1.0.2",
+    "@prisma-cms/component": "^1.0.3",
     "@prisma-cms/connector": "^1.0.0",
     "@prisma-cms/ui": "^1.2.0",
     "@types/react": "^16.1.0",
