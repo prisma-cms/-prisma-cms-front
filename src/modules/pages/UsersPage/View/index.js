@@ -98,7 +98,7 @@ export class UsersPageView extends TableView {
 
       {super.render()}
 
-      {withPagination ? <Grid
+      {/* {withPagination ? <Grid
         container
         spacing={0}
       >
@@ -119,8 +119,9 @@ export class UsersPageView extends TableView {
         </Grid> : null
         }
 
-      </Grid> : null
+      </Grid> : null 
       }
+      */}
 
     </Fragment>;
 

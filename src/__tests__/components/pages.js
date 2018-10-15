@@ -134,23 +134,23 @@ let rules = [
     pathname: "/users/",
     title: "Users",
   },
-  {
-    name: "User page",
-    pathname: "/users/cjn29andg08zb0950gba9l3yo",
-    title: "test",
-  },
+  // {
+  //   name: "User page",
+  //   pathname: "/users/cjn29andg08zb0950gba9l3yo",
+  //   title: "test",
+  // },
   // {
   //   name: "User page not found",
   //   pathname: "/users/404",
   //   title: "Page not found",
   //   status: 404,
   // },
-  {
-    name: "Page not found",
-    pathname: "/404/",
-    title: "Page not found",
-    status: 404,
-  },
+  // {
+  //   name: "Page not found",
+  //   pathname: "/404/",
+  //   title: "Page not found",
+  //   status: 404,
+  // },
 ]
 
 
