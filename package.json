@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.8.1-beta",
+  "version": "1.9.1-beta",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "nwb build-web-module --copy-files",
+    "build-app": "react-scripts build",
     "clean": "nwb clean-module",
     "prepublishOnly": "npm run build",
     "start": "npm run start-js",
@@ -40,7 +41,6 @@
     "prettier-dry-run": "prettier-eslint \"src/**/*.+(js|jsx)\" -l debug"
   },
   "dependencies": {
-    "@material-ui/icons": "^3.0.1",
     "@prisma-cms/component": "^1.0.3",
     "@prisma-cms/connector": "^1.0.0",
     "@prisma-cms/ui": "^1.2.0",
@@ -48,7 +48,7 @@
     "apollo-boost": "^0.1.16",
     "apollo-cache-inmemory": "^1.2.10",
     "apollo-client": "^2.4.2",
-    "apollo-cms": "^1.4.1",
+    "apollo-cms": "^1.4.2",
     "apollo-error": "^1.0.2",
     "apollo-fetch-upload": "^1.2.0",
     "apollo-link": "^1.2.3",

@@ -1,3 +1,13 @@
+1.9.1-beta
+====================================
+- Fix SSR styles
+
+1.9.0-beta
+====================================
+- Remove @material-ui/icons
+- Upgrade packages
+- Fix SSR
+
 1.8.1-beta
 ====================================
 - Upgrade @prisma-cms/component

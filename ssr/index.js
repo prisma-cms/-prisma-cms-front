@@ -44,13 +44,19 @@ require('@babel/register')({
   // },
 });
 
+require("@babel/polyfill");
+
 ['.css', '.less', '.sass', '.ttf', '.woff', '.woff2', '.svg'].forEach((ext) => require.extensions[ext] = () => { });
 // ['.css', '.less', '.sass', '.ttf', '.woff', '.woff2'].forEach((ext) => require.extensions[ext] = () => {});
 // require('babel-polyfill');
 
+const queryFragments = require("../src/schema/generated/api.fragments");
+
 let SSRmiddlewareClass = require('./SSR');
 
-let SSRmiddleware = new SSRmiddlewareClass().middleware;
+let SSRmiddleware = new SSRmiddlewareClass({
+  queryFragments,
+}).middleware;
 
 const ws = require('ws');
 
@@ -69,25 +75,12 @@ var bodyParser = require('body-parser');
 
 const cwd = process.cwd();
 
-const proxy = require('http-proxy-middleware');
+const setupProxy = require("../src/setupProxy");
+
+setupProxy(app);
 
 
-app.use(proxy('/api/', {
-  target: 'http://localhost:4000/',
-  ws: true,
-  pathRewrite: {
-    "^/api/": "/"
-  }
-}));
-
-app.use(proxy('/images/', {
-  target: 'http://localhost:4000/',
-  pathRewrite: {
-    "^/images/resized/([^/]+)/uploads/(.+)": "/images/$1/$2",
-  }
-}));
-
-
+app.use('/static', express.static(cwd + '/build/static')); //Serves resources from build folder
 app.use('/build', express.static(cwd + '/build')); //Serves resources from build folder
 app.use('/public', express.static(cwd + '/public')); //Serves resources from public folder
 

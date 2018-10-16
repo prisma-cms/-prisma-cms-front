@@ -14,6 +14,7 @@ import { darken } from 'material-ui/styles/colorManipulator';
 
 import UriProvider from "../../modules/uri-provider";
 
+let sheetsManager = new Map();
 
 // const theme = createMuiTheme({
 //   palette: {
@@ -76,6 +77,7 @@ export default class App extends React.Component {
     themeOptions: PropTypes.object.isRequired,
     queryFragments: PropTypes.object.isRequired,
     lang: PropTypes.string.isRequired,
+    sheetsManager: PropTypes.object,
   }
 
 
@@ -87,6 +89,7 @@ export default class App extends React.Component {
       paletteType: 'light',
     },
     lang: null,
+    sheetsManager,
   }
 
 
@@ -225,6 +228,7 @@ export default class App extends React.Component {
       queryFragments,
       themeOptions,
       Renderer,
+      sheetsManager,
       ...other
     } = this.props;
 
@@ -235,7 +239,7 @@ export default class App extends React.Component {
     return (
       <MuiThemeProvider
         theme={theme}
-        sheetsManager={typeof window === "undefined" ? new Map() : undefined}
+        sheetsManager={sheetsManager}
       >
 
         <UriProvider>
