@@ -10,7 +10,7 @@ import ApolloCMS from 'apollo-cms/lib/App';
 
 import App from './components/App';
 
-import Renderer from "./components/App/Renderer";
+import {Renderer} from "./components/App/Renderer";
 
 import PageNotFound from "./modules/pages/404";
 

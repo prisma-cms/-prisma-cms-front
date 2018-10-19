@@ -63,11 +63,9 @@ export class UsersPageView extends TableView {
   };
 
 
-
   render() {
 
     const {
-      limit,
       page,
       withPagination,
     } = this.props;
@@ -76,7 +74,12 @@ export class UsersPageView extends TableView {
 
     const {
       objectsConnection,
+      loading,
+      variables: {
+        first: limit,
+      },
     } = this.props.data;
+
 
     const {
       edges,
@@ -88,9 +91,17 @@ export class UsersPageView extends TableView {
     } = aggregate || {};
 
     if (!edges || !edges.length) {
-      return <Typography>
-        Данные не были получены
-      </Typography>
+
+      if (loading) {
+        return null;
+      }
+      else {
+        return <Typography>
+          Данные не были получены
+        </Typography>
+      }
+
+
     }
 
 
@@ -98,7 +109,7 @@ export class UsersPageView extends TableView {
 
       {super.render()}
 
-      {/* {withPagination ? <Grid
+      {withPagination ? <Grid
         container
         spacing={0}
       >
@@ -119,9 +130,8 @@ export class UsersPageView extends TableView {
         </Grid> : null
         }
 
-      </Grid> : null 
+      </Grid> : null
       }
-      */}
 
     </Fragment>;
 

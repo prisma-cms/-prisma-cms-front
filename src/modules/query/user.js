@@ -30,12 +30,6 @@ export const usersConnection = gql`
       orderBy: $orderBy
       where:$where
     ){
-      pageInfo{
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
       aggregate{
         count
       }

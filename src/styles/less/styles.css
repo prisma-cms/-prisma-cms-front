@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+#root a {
+  text-decoration: none;
+}
 body,
 html {
   margin: 0;

@@ -1,3 +1,8 @@
+1.9.2-beta
+====================================
+- Fix anchors style
+- Fix users page pagination
+
 1.9.1-beta
 ====================================
 - Fix SSR styles
