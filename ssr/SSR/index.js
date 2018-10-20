@@ -64,7 +64,7 @@ class Server {
     } = props;
 
     api = new Prisma({
-      typeDefs: '../server/src/schema/generated/api.graphql',
+      typeDefs: 'src/schema/generated/api.graphql',
       endpoint: 'http://localhost:4000',
       secret: 'mysecret123',
       debug: false,

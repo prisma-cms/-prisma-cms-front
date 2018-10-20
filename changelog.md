@@ -1,3 +1,8 @@
+1.9.3-beta
+====================================
+- Upgrade prisma-binding@2.1.6
+- Fix SSR api schema
+
 1.9.2-beta
 ====================================
 - Fix anchors style

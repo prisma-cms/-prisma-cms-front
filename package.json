@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.9.2-beta",
+  "version": "1.9.3-beta",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -74,7 +74,7 @@
     "moment-timezone": "^0.5.14",
     "node-less-chokidar": "^0.1.2",
     "node-sass-chokidar": "^1.1.0",
-    "prisma-binding": "2.1.5",
+    "prisma-binding": "^2.1.6",
     "react": "^16.3.1",
     "react-apollo": "^2.2.3",
     "react-dom": "^16.3.0",
