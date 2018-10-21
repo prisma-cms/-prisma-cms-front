@@ -2,6 +2,7 @@
 ====================================
 - Fix Errors
 - Added Errors tests
+- Upgrade apollo-cms
 
 1.9.4-beta
 ====================================
