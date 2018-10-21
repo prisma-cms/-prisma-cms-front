@@ -1,18 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-
-// import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
-
-// import * as userActions from 'modules/Redux/actions/userActions';
-// import * as documentActions from 'modules/Redux/actions/documentActions';
-
-// import Prototype from 'material-ui-components/src/Auth';
+ 
 import Prototype from './Prototype';
-
-// import Avatar from 'modules/Site/components/fields/User/avatar.js';
-
-
+  
 
 
 class AuthPrototype extends Prototype{
@@ -125,23 +115,15 @@ export default class Auth extends Component{
 
 
   static propTypes = {
-    // handleClose: PropTypes.func.isRequired,
     loginCanceled: PropTypes.func.isRequired,
-    // GetOwnData: PropTypes.func.isRequired,
     loginComplete: PropTypes.func.isRequired,
-    // addInformerMessage: PropTypes.func.isRequired,
   }
 
   render(){
 
     let {
-      // userActions,
-      // documentActions,
-      // handleClose,
       loginCanceled,
-      // GetOwnData,
       loginComplete,
-      // addInformerMessage,
       ...other
     } = this.props;
 
@@ -150,39 +132,9 @@ export default class Auth extends Component{
 
     return <AuthPrototype
       loginCanceled={loginCanceled}
-      // GetOwnData={GetOwnData}
       loginComplete={loginComplete}
-      // addInformerMessage={addInformerMessage}
       {...other}
     />
   }
 }
-
-// Auth.defaultProps = defaultProps;
-
-// Auth.propTypes = {
-//   userActions: PropTypes.object.isRequired,
-//   documentActions: PropTypes.object.isRequired,
-// }; 
-
-// function mapStateToProps(state) {
-
-//   return state;
-// }
-
-
-// function mapDispatchToProps(dispatch) {
-
-
-
-//   return {
-//     // proxyActions: bindActionCreators(proxyActions, dispatch),
-//     userActions: bindActionCreators(userActions, dispatch),
-//     documentActions: bindActionCreators(documentActions, dispatch),
-//     // documentActions: bindActionCreators(documentActions, dispatch),
-//   }
-// }
-
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+ 

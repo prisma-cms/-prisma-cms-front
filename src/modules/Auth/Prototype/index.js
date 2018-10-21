@@ -2,23 +2,18 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-// import shortid from "shortid";
+
 
 import DialogPrototype, {
   DialogActions,
   DialogContent,
-  // DialogContentText,
-  // DialogTitle,
+  
 } from 'material-ui/Dialog';
 
 import Button from 'material-ui/Button';
 import TextFieldProto from 'material-ui/TextField';
 import Avatar from '../../Avatar';
-// import Avatar from 'material-ui-components/src/Avatar';
 
-// import Input, { InputLabel } from 'material-ui/Input';
-// import FormControl from 'material-ui/Form/FormControl';
-// import FormHelperText from 'material-ui/Form/FormHelperText';
 import { withStyles } from 'material-ui';
 
 
@@ -90,7 +85,7 @@ let lexicon = {
 
 class ProfileDialogAuthStepFindUser extends CustomComponent {
 
-  
+
   static defaultProps = {
     ...CustomComponent.defaultProps,
     locales: {
@@ -274,7 +269,7 @@ class ProfileDialogAuthStepAuth extends CustomComponent {
         key="restore"
         accent
         onClick={() => {
-          
+
           scope.setState({
             show_forgot_text: false,
           });
@@ -489,9 +484,9 @@ class ProfileDialogAuthStepRegister extends CustomComponent {
       </Button>
     ];
 
-    
+
     const passwordError = errors && errors.password;
-  
+
 
     return (
       <Dialog
@@ -531,11 +526,6 @@ class ProfileDialogAuthStepRegister extends CustomComponent {
                   this.forceUpdate();
                 }
               }}
-            // onKeyDown={(e) => {
-            //   if (e.which == 13) {
-            //     this.onEnter();
-            //   }
-            // }}
             />
 
 
@@ -554,11 +544,6 @@ class ProfileDialogAuthStepRegister extends CustomComponent {
                   this.forceUpdate();
                 }
               }}
-            // onKeyDown={(e) => {
-            //   if (e.which == 13) {
-            //     this.onEnter();
-            //   }
-            // }}
             />
 
             <TextField
@@ -576,11 +561,6 @@ class ProfileDialogAuthStepRegister extends CustomComponent {
                   this.forceUpdate();
                 }
               }}
-            // onKeyDown={(e) => {
-            //   if (e.which == 13) {
-            //     this.onEnter();
-            //   }
-            // }}
             />
 
             <div
@@ -589,50 +569,6 @@ class ProfileDialogAuthStepRegister extends CustomComponent {
               }}
             >
 
-
-
-              {/* <div
-              style={{
-                position: "relative",
-              }}
-            >
-
-              <InputLabel
-                style={{
-                  color: this.props.errors && this.props.errors.delegate ? "#ff1744" : undefined,
-                }}
-              >
-                Вы являетесь представителем бани или сауны?
-              </InputLabel>
-
-            </div> */}
-
-              {/* <div
-              style={{
-                textAlign: "center",
-                position: "relative",
-              }}
-            >
-
-              <Button
-                onClick={e => {
-                  this.setDelegate("1");
-                }}
-                accent={delegate === "1"}
-              >Да</Button>
-
-              <Button
-                onClick={e => {
-                  this.setDelegate("0");
-                }}
-                accent={delegate === "0"}
-              >Нет</Button>
-
-            </div> */}
-
-              {/*<FormHelperText>
-              Пожалуйста, сделайте выбор
-            </FormHelperText>*/}
 
             </div>
 
@@ -711,98 +647,6 @@ export class Auth extends CustomComponent {
     });
     this.props.loginCanceled();
   }
-
-  // findUser = () => {
-
-  //   console.log("findUser");
-
-  //   if (this.state.wait_for_response === true) {
-  //     return;
-  //   }
-
-  //   var query = this.state.login;
-
-  //   var body = new FormData();
-
-  //   var data = {
-  //     query: query,
-  //   };
-
-  //   for (var i in data) {
-  //     body.append(i, data[i]);
-  //   };
-
-  //   // var headers;
-
-  //   var newStata = {
-  //     errors: {
-  //       login: "",
-  //     },
-  //     wait_for_response: false,
-  //   }
-
-  //   fetch(this.props.connector_url + '?pub_action=users/find_user', {
-  //     credentials: 'same-origin',
-  //     method: "POST",
-  //     body: body,
-  //   })
-  //     .then(function (response) {
-
-  //       return response.json()
-  //     })
-  //     .then(function (data) {
-
-  //       if (data.success) {
-
-  //         if (data.object && data.object.id) {
-  //           Object.assign(newStata, {
-  //             step: 2,
-  //             login: data.object.username,
-  //             avatar: data.object.photo,
-  //             fullname: data.object.fullname,
-  //           });
-  //         }
-  //         else {
-
-  //           newStata.errors = {
-  //             login: {
-  //               errorText: "Ошибка",
-  //             }
-  //           }
-
-  //           this.props.addInformerMessage({
-  //             text: data.message || "Пользователь не был найден",
-  //             autohide: 3000,
-  //           });
-  //         }
-  //       }
-  //       else {
-
-  //         this.props.addInformerMessage({
-  //           text: data.message || "Request error",
-  //           autohide: 4000,
-  //         });
-  //       }
-
-  //       this.setState(newStata);
-
-  //     }.bind(this))
-  //     .catch((error) => {
-  //       console.error('Request failed', error);
-  //       this.setState(newStata);
-
-  //       this.props.addInformerMessage({
-  //         text: "Request error",
-  //         autohide: 4000,
-  //       });
-  //     }
-  //     );
-
-  //   this.setState({
-  //     wait_for_response: true,
-  //   });
-  // }
-
   findUser = async () => {
 
     const {
@@ -837,7 +681,7 @@ export class Auth extends CustomComponent {
           }],
         },
       },
-      fetchPolicy: "network-only", 
+      fetchPolicy: "network-only",
     })
       .catch(console.error);
 
@@ -857,11 +701,6 @@ export class Auth extends CustomComponent {
     } = result && result.data || {};
 
 
-    // const {
-    //   objects,
-    // } = response || {};
-
-
     const user = objects ? objects[0] : null;
 
     if (user) {
@@ -879,87 +718,11 @@ export class Auth extends CustomComponent {
         }
       }
 
-      // this.props.addInformerMessage({
-      //   text: data.message || "Пользователь не был найден",
-      //   autohide: 3000,
-      // });
     }
 
     this.setState(newStata);
 
   }
-
-  // loginSubmit = async () => {
-
-  //   if (this.state.wait_for_response === true) {
-  //     return;
-  //   }
-
-  //   var body = new FormData();
-
-  //   var data = {
-  //     login: this.state.login,
-  //     password: this.state.password,
-  //   };
-
-  //   for (var i in data) {
-  //     body.append(i, data[i]);
-  //   };
-
-  //   // var headers;
-
-  //   var errors = {}
-
-  //   var newState = {
-  //     errors,
-  //     wait_for_response: false,
-  //   };
-
-  //   fetch(this.props.connector_url + '?pub_action=login', {
-  //     credentials: 'same-origin',
-  //     method: "POST",
-  //     body: body,
-  //   })
-  //     .then(function (response) {
-  //       return response.json()
-  //     })
-  //     .then(function (data) {
-
-  //       if (data.success) {
-  //         this.props.GetOwnData();
-  //         this.props.loginComplete();
-
-  //         newState.email = "";
-  //         newState.password = "";
-  //       }
-  //       else {
-
-  //         errors.login_error = "Ошибка";
-
-  //         this.props.addInformerMessage({
-  //           text: data.message || "Request error",
-  //           autohide: 3000,
-  //         });
-  //       }
-
-  //       this.setState(newState);
-
-  //     }.bind(this))
-  //     .catch((error) => {
-
-
-  //       this.props.addInformerMessage({
-  //         text: "Request error",
-  //         autohide: 4000,
-  //       });
-  //       this.setState(newState);
-  //     });
-
-  //   this.setState({
-  //     wait_for_response: true,
-  //   });
-  //   // }
-  // }
 
   loginSubmit = async () => {
 
@@ -969,124 +732,70 @@ export class Auth extends CustomComponent {
 
     this.setState({
       wait_for_response: true,
-    });
-
-    // var body = new FormData();
+    }, async () => {
 
 
-    // for (var i in data) {
-    //   body.append(i, data[i]);
-    // };
+      var errors = {}
 
-    // var headers;
-
-    var errors = {}
-
-    var newState = {
-      errors,
-      wait_for_response: false,
-    };
+      var newState = {
+        errors,
+        wait_for_response: false,
+      };
 
 
-    const result = await this.mutate({
-      mutation: signin,
-      variables: {
-        where: {
-          username: this.state.login,
+      const result = await this.mutate({
+        mutation: signin,
+        variables: {
+          where: {
+            username: this.state.login,
+          },
+          password: this.state.password,
         },
-        password: this.state.password,
-      },
-    })
-      .catch(console.error);
-
-
-    const {
-      response,
-    } = result && result.data || {};
-
-    const {
-      success,
-      token,
-      data: user,
-    } = response || {};
-
-    // const {
-    //   user,
-    // } = data || {};
-
-    console.log("response", response);
-
-
-
-    if (success && token && user) {
-
-      newState.email = "";
-      newState.password = "";
+      })
+        .catch(console.error)
 
       const {
-        loginComplete,
-      } = this.props;
+        response,
+      } = result && result.data || {};
 
-      loginComplete({
+      const {
+        success,
         token,
-        user,
-      });
+        data: user,
+      } = response || {};
 
-    }
-    else {
-      errors.login_error = "Ошибка авторизации";
-    }
+      // const {
+      //   user,
+      // } = data || {};
 
-
-    this.setState(newState);
-
-    return;
+      console.log("response", response);
 
 
-    // fetch(this.props.connector_url + '?pub_action=login', {
-    //   credentials: 'same-origin',
-    //   method: "POST",
-    //   // body: body,
-    // })
-    //   .then(function (response) {
-    //     return response.json()
-    //   })
-    //   .then(function (data) {
 
-    //     if (data.success) {
-    //       this.props.GetOwnData();
-    //       this.props.loginComplete();
+      if (success && token && user) {
 
-    //       newState.email = "";
-    //       newState.password = "";
-    //     }
-    //     else {
+        newState.email = "";
+        newState.password = "";
 
-    //       errors.login_error = "Ошибка";
+        const {
+          loginComplete,
+        } = this.props;
 
-    //       this.props.addInformerMessage({
-    //         text: data.message || "Request error",
-    //         autohide: 3000,
-    //       });
-    //     }
+        loginComplete({
+          token,
+          user,
+        });
 
-    //     this.setState(newState);
-
-    //   }.bind(this))
-    //   .catch((error) => {
+      }
+      else {
+        errors.login_error = "Ошибка авторизации";
+      }
 
 
-    //     this.props.addInformerMessage({
-    //       text: "Request error",
-    //       autohide: 4000,
-    //     });
-    //     this.setState(newState);
-    //   });
+      this.setState(newState);
 
-    // this.setState({
-    //   wait_for_response: true,
-    // });
-    // }
+    });
+
   }
 
   registerSubmit = async () => {
@@ -1168,78 +877,16 @@ export class Auth extends CustomComponent {
         });
 
         Object.assign(newState, {
-          // errors: responseErrors ? responseErrors.map(({key: id, message: msg}) => ({id, msg})) : null,
           errors,
         });
       }
 
     }
-    // else{
-    //   data.data.map((error) => {
-    //     if (error.message != '') {
-    //       errors[error.key] = error.message;
-    //     }
-    //   });
-    // }
 
-
-    // fetch(this.props.connector_url + '?pub_action=registration', {
-    //   credentials: 'same-origin',
-    //   method: "POST",
-    //   body: body,
-    // })
-    //   .then(function (response) {
-    //     return response.json()
-    //   })
-    //   .then(function (data) {
-
-    //     if (data.success === true) {
-    //       this.props.GetOwnData();
-    //       this.props.loginComplete();
-
-    //       Object.assign(newState, {
-    //         step: 1,
-    //         login: "",
-    //         email: "",
-    //         password: "",
-    //       });
-    //     }
-    //     else {
-
-    //       if (data.data && data.data.length) {
-
-    //         data.data.map(function (error) {
-    //           if (error.msg != '') {
-    //             errors[error.id] = error.msg;
-    //           }
-    //         }, this);
-    //       }
-
-
-    //       this.props.addInformerMessage({
-    //         text: data.message || "Request error",
-    //         autohide: 3000,
-    //       });
-    //     }
-
-    //     this.setState(newState);
-
-    //   }.bind(this))
-    //   .catch((error) => {
-    //     console.error('Request failed', error);
-
-    //     this.props.addInformerMessage({
-    //       text: "Request error",
-    //       autohide: 4000,
-    //     });
-    //   });
 
 
     this.setState(newState);
 
-    // this.setState({
-    //   wait_for_response: true,
-    // });
   }
 
   async sendNewPassword() {
@@ -1291,65 +938,6 @@ export class Auth extends CustomComponent {
 
     return;
 
-
-    // var body = new FormData();
-
-    // var data = {
-    //   username: this.state.login,
-    // };
-
-    // for (var i in data) {
-    //   body.append(i, data[i]);
-    // };
-
-    // // var headers;
-
-    // this.setState({
-    //   password_send_in_progress: true,
-    // });
-
-    // fetch(this.props.connector_url + '?pub_action=password/forgot', {
-    //   credentials: 'same-origin',
-    //   method: "POST",
-    //   body: body,
-    // })
-    //   .then(function (response) {
-
-    //     return response.json()
-    //   })
-    //   .then(function (data) {
-
-    //     var newState = {
-    //       password_send_in_progress: false,
-    //       errors: this.state.errors,
-    //     };
-
-    //     if (data.success == true) {
-    //       Object.assign(newState, {
-    //         is_forgot: false,
-    //         show_forgot_text: true,
-    //       });
-
-    //       Object.assign(newState.errors, {
-    //         login_error: ""
-    //       });
-    //     }
-    //     else {
-
-    //       this.props.addInformerMessage({
-    //         text: data.message || "Request error",
-    //         autohide: 3000,
-    //       });
-    //     }
-
-    //     this.setState(newState);
-
-
-    //   }.bind(this))
-    //   .catch(function (error) {
-
-    //   }
-    //   );
   }
 
   setStep(step) {

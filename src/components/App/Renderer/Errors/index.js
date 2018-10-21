@@ -15,28 +15,32 @@ export default class Errors extends Component {
       errors,
     } = this.props;
 
-    return (
-      errors && errors.map((error, index) => {
-        
-        const {
-          message,
-        } = error;
-        
-        return (
-          <Snackbar
-            key={index}
-            open={true}
-            anchorOrigin={{
-              horizontal: "center",
-              vertical: "top",
-            }}
-            message={message}
-          >
-          </Snackbar>
 
-        )
+    let error = errors && errors[0];
 
-      }) || null
-    )
+    if(!error){
+      return null;
+    }
+
+    let {
+      message,
+    } = error;
+
+    message = message && message.replace(/^GraphQL error: */, '') || message;
+
+    return message
+      ?
+      <Snackbar
+        open={true}
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+        message={message}
+      >
+      </Snackbar>
+      :
+      null;
+
   }
 }

@@ -1,3 +1,13 @@
+1.9.5-beta
+====================================
+- Fix Errors
+- Added Errors tests
+
+1.9.4-beta
+====================================
+- Upgrade packages
+- Fix Auth
+
 1.9.3-beta
 ====================================
 - Upgrade prisma-binding@2.1.6
