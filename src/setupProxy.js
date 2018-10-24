@@ -18,6 +18,7 @@ module.exports = function (app) {
     target: 'http://localhost:4000/',
     pathRewrite: {
       "^/images/resized/([^/]+)/uploads/(.+)": "/images/$1/$2",
+      "^/images/resized/([^/]+)/(.+)": "/images/$1/$2",
       "^/images/([^/]+)/uploads/(.+)": "/images/$1/$2",
     }
   }));

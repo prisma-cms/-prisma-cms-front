@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { graphql, compose } from 'react-apollo';
 // import gql from 'graphql-tag';
 
-import UserView from './View';
+import View from './View';
 
 import {
   // user,
@@ -21,6 +21,12 @@ export class UserPage extends Page {
   static propTypes = {
     ...Page.propTypes,
     match: PropTypes.object.isRequired,
+    View: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    ...Page.defaultProps,
+    View,
   }
 
 
@@ -63,8 +69,6 @@ export class UserPage extends Page {
         console.error(e);
       });
 
-    console.log("updateUser result", result);
-
     return result;
 
   }
@@ -79,6 +83,7 @@ export class UserPage extends Page {
 
 
     const {
+      View,
       ...other
     } = this.props;
 
@@ -86,7 +91,7 @@ export class UserPage extends Page {
     //   return null;
     // }
 
-    return super.render(<UserView
+    return super.render(<View
       // object={user}
       // data={data}
       // saveObject={this.saveUser}
@@ -102,7 +107,11 @@ export default class UserPageConnector extends PrismaCmsConnector {
 
     const {
       getQueryFragment,
-    } = this.context;
+    } = this.props;
+
+    if (!getQueryFragment) {
+      return null;
+    }
 
     const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
 

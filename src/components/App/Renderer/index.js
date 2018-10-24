@@ -57,6 +57,7 @@ export class Renderer extends Component {
   };
 
   static contextTypes = {
+    getQueryFragment: PropTypes.func.isRequired,
     router: PropTypes.object.isRequired,
     errors: PropTypes.array.isRequired,
     onAuthSuccess: PropTypes.func.isRequired,
@@ -151,6 +152,10 @@ export class Renderer extends Component {
 
   getRoutes() {
 
+    const {
+      getQueryFragment,
+    } = this.context;
+
     return [{
       exact: true,
       path: "/",
@@ -173,6 +178,7 @@ export class Renderer extends Component {
 
         return <UserPage
           key={userId}
+          getQueryFragment={getQueryFragment}
           where={{
             id: userId,
           }}
@@ -267,7 +273,7 @@ export class Renderer extends Component {
 
     const {
       sudo,
-    } = currentUser || {}; 
+    } = currentUser || {};
 
     return sudo ? <AdminRenderer
       {...other}

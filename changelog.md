@@ -1,3 +1,12 @@
+1.9.6-beta
+====================================
+- Added images rewrite rule
+- Code refactoring
+- Fix setPageMeta()
+- Fix UserPage
+- Added Avatar::className
+- Added Avatar::fullname
+
 1.9.5-beta
 ====================================
 - Fix Errors

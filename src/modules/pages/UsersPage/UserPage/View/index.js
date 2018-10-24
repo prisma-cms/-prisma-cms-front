@@ -12,27 +12,15 @@ import UserAvatar from './Avatar';
 import UsersGroupsBlock from "./Groups";
 
 
-let propTypes = { ...EditableView.propTypes }
-let contextTypes = { ...EditableView.contextTypes }
-
-
-Object.assign(propTypes, {
-  // user: PropTypes.object.isRequired,
-});
-
-Object.assign(contextTypes, {
-  loadApiData: PropTypes.func.isRequired,
-  setPageMeta: PropTypes.func.isRequired,
-});
-
-
-
 
 export default class UserPageView extends EditableView {
 
-  static propTypes = propTypes;
 
-  static contextTypes = contextTypes;
+  static contextTypes = {
+    ...EditableView.contextTypes,
+    loadApiData: PropTypes.func.isRequired,
+    setPageMeta: PropTypes.func.isRequired,
+  };
 
 
   setPageMeta() {
@@ -41,7 +29,7 @@ export default class UserPageView extends EditableView {
       setPageMeta,
     } = this.context;
 
-    setPageMeta({
+    setPageMeta && setPageMeta({
       title: this.getTitle(),
     });
 
@@ -185,6 +173,10 @@ export default class UserPageView extends EditableView {
     const object = this.getObjectWithMutations();
     const inEditMode = this.isInEditMode();
 
+    if(!object){
+      return null;
+    }
+
     const {
       id,
       username,
@@ -241,6 +233,10 @@ export default class UserPageView extends EditableView {
 
     const object = this.getObjectWithMutations();
     const inEditMode = this.isInEditMode();
+
+    if(!object){
+      return null;
+    }
 
     const {
       user: currentUser,

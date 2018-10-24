@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Snackbar, { SnackbarContent } from "material-ui/Snackbar";
+import Snackbar from "material-ui/Snackbar";
 
 export default class Errors extends Component {
 

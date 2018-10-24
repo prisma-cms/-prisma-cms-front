@@ -54,6 +54,7 @@ export class UserAvatar extends Component {
       classes,
       size,
       editable,
+      className,
       ...other
     } = this.props;
 
@@ -64,24 +65,23 @@ export class UserAvatar extends Component {
 
 
     const {
-      id,
       image,
-      display_name: username,
-      firstname,
-      lastname,
+      username,
+      fullname,
     } = user;
 
-    // const name = [firstname, lastname].filter(n => n).reduce((prev, next) => [prev, " ", next]) || username;
-    const name = [firstname, lastname].filter(n => n).join(" ") || username;
+    const name = fullname || username;
 
     let classNames = [classes.avatar];
+
+    if(className){
+      classNames.push(className);
+    }
 
     let url;
 
     if(image){
 
-      // url = `/images/avatar/${image}`;
-      // url = `/images/resized/thumb/uploads/${image}`;
       url = `/images/resized/thumb/${image}`;
 
     }
