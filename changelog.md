@@ -1,3 +1,12 @@
+1.9.9-beta
+====================================
+- Add Renderer body class
+- Upgrade packages
+
+1.9.8-beta
+====================================
+- Fix dependencies
+
 1.9.7-beta
 ====================================
 - Upgrade react

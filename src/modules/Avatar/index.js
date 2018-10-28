@@ -20,6 +20,10 @@ const styles = {
     width: 40,
     height: 40,
   },
+  mediumAvatar: {
+    width: 60,
+    height: 60,
+  },
   bigAvatar: {
     width: 120,
     height: 120,
@@ -93,11 +97,14 @@ export class UserAvatar extends Component {
         classNames.push(classes.smallAvatar);
         break;
 
+      case 'medium': 
+
+        classNames.push(classes.mediumAvatar);
+        break;
 
       case 'big': 
 
         classNames.push(classes.bigAvatar);
-
         break;
 
     }

@@ -40,6 +40,7 @@ export const styles = {
     padding: "0 20px",
     margin: "0 auto",
   },
+  body: {},
 }
 
 export class Renderer extends Component {
@@ -253,8 +254,8 @@ export class Renderer extends Component {
       <div
         // item
         // xs={12}
-        className=""
         id="Renderer--body"
+        className={classes.body}
       >
         <div
           className={classes.wrapper}
