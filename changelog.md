@@ -1,3 +1,7 @@
+1.9.10-beta
+====================================
+- Upgrade dependencies
+
 1.9.9-beta
 ====================================
 - Add Renderer body class
