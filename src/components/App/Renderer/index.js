@@ -17,9 +17,11 @@ import MainPage from "../../../modules/pages/MainPage";
 
 import UsersPage from '../../../modules/pages/UsersPage';
 import UserPage from '../../../modules/pages/UsersPage/UserPage';
-import PageNotFound from '../../../modules/pages/404';
 
+import PageNotFound from '../../../modules/pages/404';
 import RoutedPage from "../../../modules/pages/RoutedPage";
+
+import GraphqlVoyagerPage from "../../../modules/pages/GraphqlVoyager";
 
 import AdminRenderer from "./Admin";
 
@@ -161,11 +163,13 @@ export class Renderer extends Component {
       exact: true,
       path: "/",
       component: MainPage,
-    }, {
+    },
+    {
       exact: true,
       path: "/users",
       component: UsersPage,
-    }, {
+    },
+    {
       exact: true,
       path: "/users/:userId",
       render: (props) => {
@@ -186,7 +190,13 @@ export class Renderer extends Component {
           {...props}
         />
       }
-    }, {
+    },
+    {
+      exact: true,
+      path: "/graphql-voyager",
+      component: GraphqlVoyagerPage,
+    },
+    {
       path: "*",
       render: props => this.renderOtherPages(props),
     },];
@@ -236,9 +246,7 @@ export class Renderer extends Component {
       ...other
     } = this.props;
 
-    let wrapper = <div
-      key="wrapper"
-      className={classes.root}
+    let wrapper = <Fragment
     >
 
       <div
@@ -257,16 +265,12 @@ export class Renderer extends Component {
         id="Renderer--body"
         className={classes.body}
       >
-        <div
-          className={classes.wrapper}
-        >
 
-          {this.renderRoutes()}
+        {this.renderRoutes()}
 
-        </div>
       </div>
 
-    </div>;
+    </Fragment>;
 
     const {
       user: currentUser,

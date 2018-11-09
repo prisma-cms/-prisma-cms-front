@@ -1,3 +1,8 @@
+1.9.11-beta
+====================================
+- Added graphql-voyager
+- Cleanup markup
+
 1.9.10-beta
 ====================================
 - Upgrade dependencies

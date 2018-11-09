@@ -4,6 +4,9 @@ const proxy = require('http-proxy-middleware');
 
 // const server = require("./server/middleware");
 
+const cwd = process.cwd();
+
+
 module.exports = function (app) {
 
   app.use(proxy('/api/', {
@@ -22,5 +25,10 @@ module.exports = function (app) {
       "^/images/([^/]+)/uploads/(.+)": "/images/$1/$2",
     }
   }));
+
+
+  app.get("/static/js/voyager.worker.js", (req, res, next) => {
+    res.sendFile(`${cwd}/node_modules/graphql-voyager/dist/voyager.worker.js`);
+  });
 
 };

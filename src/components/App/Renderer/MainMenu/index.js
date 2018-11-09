@@ -124,10 +124,7 @@ export class MainMenu extends Component {
             </Typography>
             </Link>
           </Grid>
-
-
-          {/* 
-        */}
+ 
           <Grid
             item
           >
@@ -138,6 +135,20 @@ export class MainMenu extends Component {
                 component="span"
               >
                 Users
+            </Typography>
+            </Link>
+          </Grid>
+ 
+          <Grid
+            item
+          >
+            <Link
+              to="/graphql-voyager"
+            >
+              <Typography
+                component="span"
+              >
+                Graphql Voyager
             </Typography>
             </Link>
           </Grid>
