@@ -1,3 +1,7 @@
+1.9.12-beta
+====================================
+- Fix graphql-voyager SSR
+
 1.9.11-beta
 ====================================
 - Added graphql-voyager

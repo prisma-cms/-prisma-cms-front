@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.9.11-beta",
+  "version": "1.9.12-beta",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -41,6 +41,7 @@
     "prettier-dry-run": "prettier-eslint \"src/**/*.+(js|jsx)\" -l debug"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@prisma-cms/component": "latest",
     "@prisma-cms/connector": "latest",
     "@prisma-cms/ui": "latest",

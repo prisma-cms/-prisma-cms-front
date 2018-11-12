@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Voyager } from 'graphql-voyager';
 
 class GraphqlVoyagerPage extends Component {
 
@@ -18,6 +17,13 @@ class GraphqlVoyagerPage extends Component {
   }
 
   render() {
+
+    if(typeof window === "undefined"){
+      return null;
+    }
+
+    const Voyager = require('graphql-voyager').Voyager;
+
     return (
       <Fragment>
         <link
@@ -25,7 +31,7 @@ class GraphqlVoyagerPage extends Component {
           href="https://cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.css"
         />
 
-        <style 
+        <style
           dangerouslySetInnerHTML={{
             __html: `
               #root{
