@@ -86,7 +86,7 @@ class Server {
     global.document = undefined;
 
 
-    const protocol = req.protocol || "http";
+    const protocol = req.headers["server-protocol"] || req.protocol || "http"; 
 
     const host = req.get('host');
 

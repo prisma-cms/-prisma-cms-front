@@ -1,3 +1,7 @@
+1.9.13-beta
+====================================
+- Added @prisma-cms/graphql-voyager
+
 1.9.12-beta
 ====================================
 - Fix graphql-voyager SSR

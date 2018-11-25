@@ -22,7 +22,7 @@ class GraphqlVoyagerPage extends Component {
       return null;
     }
 
-    const Voyager = require('graphql-voyager').Voyager;
+    const Voyager = require('@prisma-cms/graphql-voyager').Voyager;
 
     return (
       <Fragment>

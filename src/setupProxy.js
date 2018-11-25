@@ -28,7 +28,7 @@ module.exports = function (app) {
 
 
   app.get("/static/js/voyager.worker.js", (req, res, next) => {
-    res.sendFile(`${cwd}/node_modules/graphql-voyager/dist/voyager.worker.js`);
+    res.sendFile(`${cwd}/node_modules/@prisma-cms/graphql-voyager/dist/voyager.worker.js`);
   });
 
 };
