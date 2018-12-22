@@ -23,13 +23,13 @@ export default class UserPageView extends EditableView {
   };
 
 
-  setPageMeta() {
+  setPageMeta(meta) {
 
     const {
       setPageMeta,
     } = this.context;
 
-    setPageMeta && setPageMeta({
+    setPageMeta && setPageMeta(meta || {
       title: this.getTitle(),
     });
 

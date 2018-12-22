@@ -41,9 +41,9 @@ export default class UsersPage extends Page {
   }
 
 
-	setPageMeta(meta = {}) {
+	setPageMeta(meta) {
 
-		return super.setPageMeta({
+		return super.setPageMeta(meta || {
 			title: "Users",
 		});
 

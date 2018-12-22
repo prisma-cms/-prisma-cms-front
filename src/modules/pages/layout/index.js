@@ -45,13 +45,13 @@ export default class PageLayout extends PrismaCmsComponent {
 
 
 
-  setPageMeta(meta = {}) {
+  setPageMeta(meta) {
 
     let {
       title,
       description,
       status = 200,
-    } = meta;
+    } = meta || {};
 
     // console.log("setPageMeta meta", meta);
 

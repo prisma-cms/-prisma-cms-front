@@ -8,9 +8,9 @@ import Page from '../layout';
 
 export class MainPage extends Page {
 
-	setPageMeta(meta = {}) {
+	setPageMeta(meta) {
 
-		return super.setPageMeta({
+		return super.setPageMeta(meta || {
 			title: "Main page",
 		});
 

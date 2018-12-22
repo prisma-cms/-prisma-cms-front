@@ -20,13 +20,13 @@ export default class PageNotFound extends PageLayout {
   }
 
 
-  setPageMeta(meta = {}) {
+  setPageMeta(meta) {
 
     const {
       title,
     } = this.props;
 
-    return super.setPageMeta({
+    return super.setPageMeta(meta || {
       status: 404,
       title: title,
     })
