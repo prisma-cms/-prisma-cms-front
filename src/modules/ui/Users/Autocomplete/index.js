@@ -2,12 +2,12 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import Autocomplete, { styles as stylesProto } from 'autocomplete';
-import Avatar from 'Avatar';
+// import Avatar from 'Avatar';
 
-import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import { ListItem } from 'material-ui/List';
 
 import gql from 'graphql-tag';
-import { withState } from 'recompose';
+// import { withState } from 'recompose';
 import { withStyles } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 
@@ -60,6 +60,7 @@ export class UsersAutocomplete extends Component {
 
   static contextTypes = {
     client: PropTypes.object.isRequired,
+    Avatar: PropTypes.func.isRequired,
   }
 
   state = {
@@ -112,7 +113,7 @@ export class UsersAutocomplete extends Component {
       }]
     };
 
-    if(exclude && exclude.length){
+    if (exclude && exclude.length) {
       where.id_not_in = exclude;
     }
 
@@ -154,7 +155,7 @@ export class UsersAutocomplete extends Component {
   }
 
 
-  async submit(){
+  async submit() {
 
     const {
       user,
@@ -165,13 +166,13 @@ export class UsersAutocomplete extends Component {
     } = this.props;
 
     await onSubmit(user)
-    .catch(console.error);
+      .catch(console.error);
 
     this.resetData();
   }
-  
-  
-  resetData(){
+
+
+  resetData() {
     this.setState({
       user: null,
       value: "",
@@ -188,6 +189,10 @@ export class UsersAutocomplete extends Component {
     } = item;
 
     const text = fullname || username;
+
+    const {
+      Avatar,
+    } = this.context;
 
     return <Fragment>
       <Avatar

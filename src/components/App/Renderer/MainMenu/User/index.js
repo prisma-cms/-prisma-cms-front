@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 // import TextField from 'material-ui/TextField/TextField';
 
 
-import UserLink from '../../../../../modules/ui/User/Link';
+// import UserLink from '../../../../../modules/ui/User/Link';
 
 // import Wallet from '../../Wallet';
 
@@ -24,8 +24,8 @@ import UserLink from '../../../../../modules/ui/User/Link';
 
 export default class UserMenuItem extends Component {
 
-  static defaultProps = {
-  }
+  // static defaultProps = {
+  // }
 
 
   static propTypes = {
@@ -35,52 +35,57 @@ export default class UserMenuItem extends Component {
 
 
   static contextTypes = {
-    client: PropTypes.object.isRequired,
+    UserLink: PropTypes.func.isRequired,
     // resetStore: PropTypes.func.isRequired,
   };
 
 
-  constructor(props) {
+  // constructor(props) {
 
-    super(props);
-
-
-    this.state = {
-    };
-
-  }
-
-  componentDidMount() {
+  //   super(props);
 
 
-  }
+  //   this.state = {
+  //   };
+
+  // }
+
+  // componentDidMount() {
+
+
+  // }
 
 
   render() {
 
-    const {
-      user,
-      // isConnected,
-    } = this.props;
+    // const {
+    //   user,
+    //   // isConnected,
+    // } = this.props;
+
+    // const {
+    //   id,
+    //   username,
+    //   fullname,
+    //   // firstname,
+    //   // lastname,
+    //   email,
+    //   etherwallet,
+    // } = user;
+
+
+    // let connection;
 
     const {
-      id,
-      username,
-      fullname,
-      // firstname,
-      // lastname,
-      email,
-      etherwallet,
-    } = user;
-
-
-    let connection;
+      UserLink,
+    } = this.context;
 
     return <UserLink
-      user={user}
+      // user={user}
       style={{
         margin: 0,
       }}
+      {...this.props}
     />;
 
   }

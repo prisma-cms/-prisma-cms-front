@@ -25,6 +25,11 @@ import GraphqlVoyagerPage from "../../../modules/pages/GraphqlVoyager";
 
 import AdminRenderer from "./Admin";
 
+
+import Avatar from "../../../modules/ui/Avatar";
+import UserLink from "../../../modules/ui/Link/User";
+// import UserLink from "../../../modules/User/Link";
+
 export const styles = {
   root: {
     // width: "100%",
@@ -44,6 +49,7 @@ export const styles = {
   },
   body: {},
 }
+
 
 export class Renderer extends Component {
 
@@ -67,9 +73,11 @@ export class Renderer extends Component {
     uri: PropTypes.object.isRequired,
     user: PropTypes.object,
   };
-
+  
   static childContextTypes = {
     openLoginForm: PropTypes.func,
+    Avatar: PropTypes.func,
+    UserLink: PropTypes.func,
   }
 
 
@@ -89,6 +97,8 @@ export class Renderer extends Component {
 
     return {
       openLoginForm: this.openLoginForm,
+      Avatar,
+      UserLink,
     }
   }
 
@@ -349,13 +359,26 @@ export class Renderer extends Component {
       sudo,
     } = currentUser || {};
 
-    return sudo ? <AdminRenderer
+    return sudo ? this.renderAdmin(wrapper) : wrapper || null;
+  }
+
+
+  renderAdmin(wrapper) {
+
+    const {
+      classes,
+      AdminRenderer,
+      ...other
+    } = this.props;
+
+    return <AdminRenderer
       {...other}
     >
 
       {wrapper}
 
-    </AdminRenderer> : wrapper || null;
+    </AdminRenderer>
+
   }
 
 

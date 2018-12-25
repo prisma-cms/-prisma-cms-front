@@ -12,7 +12,7 @@ import DialogPrototype, {
 
 import Button from 'material-ui/Button';
 import TextFieldProto from 'material-ui/TextField';
-import Avatar from '../../Avatar';
+// import Avatar from '../../Avatar';
 
 import { withStyles } from 'material-ui';
 
@@ -117,6 +117,10 @@ class ProfileDialogAuthStepFindUser extends CustomComponent {
     const {
       classes,
     } = this.props;
+
+    const {
+      Avatar,
+    } = this.context;
 
 
     const cancel = this.lexicon("cancel");
@@ -248,6 +252,11 @@ class ProfileDialogAuthStepAuth extends CustomComponent {
       classes,
     } = this.props;
 
+    const {
+      Avatar,
+    } = this.context;
+
+    
     var actions = [];
 
     const signin = this.lexicon("signin");

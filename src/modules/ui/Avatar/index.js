@@ -67,12 +67,13 @@ export class UserAvatar extends Component {
       id,
       image,
       display_name: username,
+      fullname,
       firstname,
       lastname,
     } = user;
 
     // const name = [firstname, lastname].filter(n => n).reduce((prev, next) => [prev, " ", next]) || username;
-    const name = [firstname, lastname].filter(n => n).join(" ") || username;
+    const name = fullname || [firstname, lastname].filter(n => n).join(" ") || username;
 
     let classNames = [classes.avatar];
 

@@ -253,6 +253,30 @@ export default class UserPageView extends EditableView {
 
         {this.renderAvatar()}
 
+        {/* 
+          For google chrome anti autocomplete
+         */}
+        <input 
+          name="username"
+          style={{
+            border: "none",
+            height: 0,
+            width: 0,
+            background: "transparent",
+          }}
+        />
+
+        <input 
+          name="password"
+          type="password"
+          style={{
+            border: "none",
+            height: 0,
+            width: 0,
+            background: "transparent",
+          }}
+        />
+
       </Grid>
 
       <Grid

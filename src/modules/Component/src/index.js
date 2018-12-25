@@ -1,7 +1,16 @@
 
+import PropTypes from "prop-types";
+
 import PrismaCmsComponent from "@prisma-cms/component";
 
-export default PrismaCmsComponent;
+export default class CustomComponent extends PrismaCmsComponent {
+
+  static contextTypes = {
+    ...PrismaCmsComponent.contextTypes,
+    Avatar: PropTypes.func.isRequired,
+  }
+
+}
 
 // import React, { Fragment } from 'react'
 // import PropTypes from 'prop-types'

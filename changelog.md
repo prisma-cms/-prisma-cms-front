@@ -1,3 +1,9 @@
+1.9.16
+====================================
+- Added context Avatar
+- Added context UserLink
+- Code refactoring
+
 1.9.15
 ====================================
 - Added initCounters

@@ -1,129 +1,139 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import Avatar from 'material-ui/Avatar';
+import Avatar from "../ui/Avatar";
 
-import { withStyles } from 'material-ui/styles';
+export * from "../ui/Avatar";
 
-const styles = {
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  avatar: {
-    margin: 10,
-    textDecoration: "none",
-    // maxWidth: "100%",
-    // height: "auto",
-  },
-  smallAvatar: {
-    width: 40,
-    height: 40,
-  },
-  mediumAvatar: {
-    width: 60,
-    height: 60,
-  },
-  bigAvatar: {
-    width: 120,
-    height: 120,
-  },
-  editable: {
-    cursor: 'pointer',
-  },
-};
+export default Avatar;
+
+console.error("modules/Avatar deprecated. Use ui/Avatar instead");
 
 
-export class UserAvatar extends Component {
+// import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
 
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
-    size: PropTypes.string.isRequired,
-    editable: PropTypes.bool.isRequired,
-  }
+// import Avatar from 'material-ui/Avatar';
+
+// import { withStyles } from 'material-ui/styles';
+
+// const styles = {
+//   row: {
+//     display: 'flex',
+//     justifyContent: 'center',
+//   },
+//   avatar: {
+//     margin: 10,
+//     textDecoration: "none",
+//     // maxWidth: "100%",
+//     // height: "auto",
+//   },
+//   smallAvatar: {
+//     width: 40,
+//     height: 40,
+//   },
+//   mediumAvatar: {
+//     width: 60,
+//     height: 60,
+//   },
+//   bigAvatar: {
+//     width: 120,
+//     height: 120,
+//   },
+//   editable: {
+//     cursor: 'pointer',
+//   },
+// };
 
 
-  static defaultProps = {
-    size: "normal",
-    // size: "big",
-    editable: false,
-  };
+// export class UserAvatar extends Component {
+
+//   static propTypes = {
+//     classes: PropTypes.object.isRequired,
+//     user: PropTypes.object.isRequired,
+//     size: PropTypes.string.isRequired,
+//     editable: PropTypes.bool.isRequired,
+//   }
 
 
-  render() {
-
-    const {
-      user,
-      classes,
-      size,
-      editable,
-      className,
-      ...other
-    } = this.props;
+//   static defaultProps = {
+//     size: "normal",
+//     // size: "big",
+//     editable: false,
+//   };
 
 
-    if(!user){
-      return null;
-    }
+//   render() {
+
+//     const {
+//       user,
+//       classes,
+//       size,
+//       editable,
+//       className,
+//       ...other
+//     } = this.props;
 
 
-    const {
-      image,
-      username,
-      fullname,
-    } = user;
+//     if(!user){
+//       return null;
+//     }
 
-    const name = fullname || username;
 
-    let classNames = [classes.avatar];
+//     const {
+//       image,
+//       username,
+//       fullname,
+//     } = user;
 
-    if(className){
-      classNames.push(className);
-    }
+//     const name = fullname || username;
 
-    let url;
+//     let classNames = [classes.avatar];
 
-    if(image){
+//     if(className){
+//       classNames.push(className);
+//     }
 
-      url = `/images/resized/thumb/${image}`;
+//     let url;
 
-    }
+//     if(image){
 
-    switch(size){
+//       url = `/images/resized/thumb/${image}`;
 
-      case 'small': 
+//     }
 
-        classNames.push(classes.smallAvatar);
-        break;
+//     switch(size){
 
-      case 'medium': 
+//       case 'small': 
 
-        classNames.push(classes.mediumAvatar);
-        break;
+//         classNames.push(classes.smallAvatar);
+//         break;
 
-      case 'big': 
+//       case 'medium': 
 
-        classNames.push(classes.bigAvatar);
-        break;
+//         classNames.push(classes.mediumAvatar);
+//         break;
 
-    }
+//       case 'big': 
 
-    if(editable){
-      classNames.push(classes.editable);
-    }
+//         classNames.push(classes.bigAvatar);
+//         break;
 
-    return (
-      <Avatar
-        alt={name}
-        src={url || undefined}
-        className={classNames.join(" ")}
-        {...other}
-      >
-        {url ? "" : (name && name.substr(0, 1).toLocaleUpperCase() || "A")}
-      </Avatar>
-    )
-  }
-}
+//     }
 
-export default withStyles(styles)(UserAvatar);
+//     if(editable){
+//       classNames.push(classes.editable);
+//     }
+
+//     return (
+//       <Avatar
+//         alt={name}
+//         src={url || undefined}
+//         className={classNames.join(" ")}
+//         {...other}
+//       >
+//         {url ? "" : (name && name.substr(0, 1).toLocaleUpperCase() || "A")}
+//       </Avatar>
+//     )
+//   }
+// }
+
+// export default withStyles(styles)(UserAvatar);

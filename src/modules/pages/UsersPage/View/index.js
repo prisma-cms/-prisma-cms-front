@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
@@ -12,16 +12,16 @@ import {
 // import {Link} from 'react-router-dom';
 
 
-import UserLink from '../../../ui/User/Link';
- 
+// import UserLink from '../../../ui/User/Link';
+
 
 import Pagination from '../../../Pagination';
 
 import moment from 'moment';
 
- 
+
 export class UsersPageView extends TableView {
- 
+
 
   static defaultProps = {
     ...TableView.defaultProps,
@@ -31,36 +31,51 @@ export class UsersPageView extends TableView {
     // Header,
     // Body,
     withPagination: true,
-    columnData: [
+    columnData: [],
+  };
+
+  static contextTypes = {
+    ...TableView.contextTypes,
+    UserLink: PropTypes.func.isRequired,
+  }
+
+
+  getColumns() {
+
+    const {
+      UserLink,
+    } = this.context;
+
+    return [
       {
         id: 'username',
         numeric: false,
         disablePadding: false,
         label: 'User',
         renderer: (value, record) => {
- 
+
 
           return <UserLink
             user={record}
           />;
- 
+
 
         }
       },
       {
-        id: 'created_at',
+        id: 'createdAt',
         numeric: false,
         disablePadding: false,
         label: 'Reg date',
         renderer: (value, record) => {
- 
+
 
           return value ? moment(value).format("LL") : "";
 
         }
       },
-    ],
-  };
+    ];
+  }
 
 
   render() {

@@ -1,206 +1,223 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+
+import UserLink from "../../ui/Link/User";
+
+export * from "../../ui/Link/User";
+export default UserLink;
+
+console.error("User/Link deprecated. User ui/Link/User instead.");
 
 
-import Avatar from 'Avatar';
-
-import { Link } from 'react-router-dom';
-
-import { withStyles } from 'material-ui/styles';
-
-export const styles = {
-  row: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    textDecoration: "none",
-  },
-  // avatar: {
-  //   margin: 10,
-  // },
-  // smallAvatar: {
-  //   width: 30,
-  //   height: 30,
-  // },
-  // bigAvatar: {
-  //   width: 120,
-  //   height: 120,
-  // },
-  // editable: {
-  //   cursor: 'pointer',
-  // },
-};
+// import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
 
 
-export class UserLink extends Component {
+// // import Avatar from 'Avatar';
 
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
-    withAvatar: PropTypes.bool.isRequired,
-    fullname: PropTypes.bool.isRequired,
-    nameClassName: PropTypes.string,
-  }
+// import { Link } from 'react-router-dom';
 
+// import { withStyles } from 'material-ui/styles';
 
-  static defaultProps = {
-    withAvatar: true,
-    fullname: true,
-  };
-
-
-  getAvatar() {
-
-    const {
-      user,
-      withAvatar,
-      avatarProps,
-    } = this.props;
-
-    return withAvatar 
-      ? 
-      <Avatar
-        user={user}
-        size="small"
-        {...avatarProps}
-      /> : null;
-  }
-
-  
-  getName(){
-
-    const {
-      user,
-      fullname,
-    } = this.props;
-
-    const {
-      id,
-      username,
-      firstname,
-      middlename,
-      lastname,
-      photo,
-    } = user;
-
-    let name = [firstname];
-
-    if (fullname) {
-      name.push(middlename);
-    }
-
-    name.push(lastname);
-
-    name = name.filter(n => n).join(" ") || username;
+// export const styles = {
+//   row: {
+//     display: 'inline-flex',
+//     alignItems: 'center',
+//     textDecoration: "none",
+//   },
+//   // avatar: {
+//   //   margin: 10,
+//   // },
+//   // smallAvatar: {
+//   //   width: 30,
+//   //   height: 30,
+//   // },
+//   // bigAvatar: {
+//   //   width: 120,
+//   //   height: 120,
+//   // },
+//   // editable: {
+//   //   cursor: 'pointer',
+//   // },
+// };
 
 
-    return name;
+// export class UserLink extends Component {
 
-  }
-
-  getUrl(){
-
-    const {
-      user: {
-        username,
-      },
-    } = this.props;
+//   static propTypes = {
+//     classes: PropTypes.object.isRequired,
+//     user: PropTypes.object.isRequired,
+//     withAvatar: PropTypes.bool.isRequired,
+//     fullname: PropTypes.bool.isRequired,
+//     nameClassName: PropTypes.string,
+//   }
 
 
-    const url = `/profile/${username}`;
+//   static defaultProps = {
+//     withAvatar: true,
+//     fullname: true,
+//   };
 
-    return url;
-  }
+//   static contextTypes = {
+//     Avatar: PropTypes.func.isRequired,
+//   }
 
-  getCountry(){
+//   getAvatar() {
 
-    const {
-      user: {
-        Country,
-      },
-    } = this.props;
+//     const {
+//       user,
+//       withAvatar,
+//       avatarProps,
+//     } = this.props;
 
-    if(!Country){
-      return null;
-    }
-
-    const {
-      id,
-      name,
-    } = Country;
-
-    // const url = `/profile/${username}`;
-
-    return name;
-  }
+//     const {
+//       Avatar,
+//     } = this.context;
 
 
-  render() {
-
-    const {
-      user,
-      withAvatar,
-      fullname,
-      classes,
-      nameClassName,
-      ...other
-    } = this.props;
+//     return withAvatar
+//       ?
+//       <Avatar
+//         user={user}
+//         size="small"
+//         {...avatarProps}
+//       /> : null;
+//   }
 
 
-    if (!user) {
-      return null;
-    }
+//   getName() {
 
-    const {
-      id,
-      // username,
-      // firstname,
-      // middlename,
-      // lastname,
-      // photo,
-    } = user;
+//     const {
+//       user,
+//       fullname,
+//     } = this.props;
 
-    // const url = `/profile/${username}`;
+//     const {
+//       id,
+//       username,
+//       firstname,
+//       middlename,
+//       lastname,
+//       photo,
+//     } = user;
 
-    // let name = [firstname];
+//     let name = [firstname];
 
-    // if (fullname) {
-    //   name.push(middlename);
-    // }
+//     if (fullname) {
+//       name.push(middlename);
+//     }
 
-    // name.push(lastname);
+//     name.push(lastname);
 
-    // name = name.filter(n => n).join(" ") || username;
-
-
-    const name = this.getName();
-
-    const avatar = this.getAvatar();
-
-    const url = this.getUrl();
-
-    return (
-      <Link
-        key={id}
-        to={url}
-        href={url}
-        // style={{
-        //   display: "inline-flex",
-        //   alignItems: "baseline",
-        // }}
-        className={classes.row}
-        {...other}
-      >
-
-        {avatar} <span
-          className={nameClassName}
-        >
-          {name}
-        </span>
-
-      </Link>
-    )
-  }
-}
+//     name = name.filter(n => n).join(" ") || username;
 
 
-export default withStyles(styles)(UserLink);
+//     return name;
+
+//   }
+
+//   getUrl() {
+
+//     const {
+//       user: {
+//         username,
+//       },
+//     } = this.props;
+
+
+//     const url = `/profile/${username}`;
+
+//     return url;
+//   }
+
+//   getCountry() {
+
+//     const {
+//       user: {
+//         Country,
+//       },
+//     } = this.props;
+
+//     if (!Country) {
+//       return null;
+//     }
+
+//     const {
+//       id,
+//       name,
+//     } = Country;
+
+//     // const url = `/profile/${username}`;
+
+//     return name;
+//   }
+
+
+//   render() {
+
+//     const {
+//       user,
+//       withAvatar,
+//       fullname,
+//       classes,
+//       nameClassName,
+//       ...other
+//     } = this.props;
+
+
+//     if (!user) {
+//       return null;
+//     }
+
+//     const {
+//       id,
+//       // username,
+//       // firstname,
+//       // middlename,
+//       // lastname,
+//       // photo,
+//     } = user;
+
+//     // const url = `/profile/${username}`;
+
+//     // let name = [firstname];
+
+//     // if (fullname) {
+//     //   name.push(middlename);
+//     // }
+
+//     // name.push(lastname);
+
+//     // name = name.filter(n => n).join(" ") || username;
+
+
+//     const name = this.getName();
+
+//     const avatar = this.getAvatar();
+
+//     const url = this.getUrl();
+
+//     return (
+//       <Link
+//         key={id}
+//         to={url}
+//         href={url}
+//         // style={{
+//         //   display: "inline-flex",
+//         //   alignItems: "baseline",
+//         // }}
+//         className={classes.row}
+//         {...other}
+//       >
+
+//         {avatar} <span
+//           className={nameClassName}
+//         >
+//           {name}
+//         </span>
+
+//       </Link>
+//     )
+//   }
+// }
+
+
+// export default withStyles(styles)(UserLink);

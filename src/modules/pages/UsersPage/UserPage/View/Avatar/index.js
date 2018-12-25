@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import SingleUploaderInput from '../../../../../react-cms-uploads/src/components/uploader/SingleUploader';
 
-import Button from 'material-ui/Button/Button';
+// import Button from 'material-ui/Button/Button';
 
-import Avatar from '../../../../../ui/Avatar';
+// import Avatar from '../../../../../ui/Avatar';
 
 import NoPhoto from 'material-ui-icons/PersonOutline';
 
@@ -16,6 +16,11 @@ class FileInput extends Component {
     user: PropTypes.object.isRequired,
   }
 
+
+  static contextTypes = {
+    Avatar: PropTypes.func.isRequired,
+  }
+
   render() {
 
     const {
@@ -24,6 +29,10 @@ class FileInput extends Component {
       editable,
       ...other
     } = this.props;
+
+    const {
+      Avatar,
+    } = this.context;
 
     const {
       image,
