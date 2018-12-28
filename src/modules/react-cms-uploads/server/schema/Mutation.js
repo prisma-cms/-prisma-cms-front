@@ -47,7 +47,7 @@ const storeFS = ({ stream, filename }) => {
 
 const processUpload = async (upload, ctx, info) => {
 
-  // console.log('processUpload', upload);
+
 
   // return;
 
@@ -75,7 +75,7 @@ const processUpload = async (upload, ctx, info) => {
       }
     };
   
-    // console.log('processUpload file', file);
+
 
     return ctx.db.mutation.createFile({
       data: file,
@@ -130,7 +130,7 @@ module.exports = {
         )
       }
 
-      // console.log('resolve', resolve);
+
 
       resolve = (resolve && resolve
         // .map(n => {
@@ -145,7 +145,7 @@ module.exports = {
         .filter(n => n)
       ) || null;
 
-      // console.log('resolve 2', resolve);
+
 
       // if(resolve && resolve.length){
       //   return;

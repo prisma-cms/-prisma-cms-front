@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 
 import URI from 'urijs';
 
-// console.log("generatePath", generatePath);
+
 
 const styles = {
   wrapper: {

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import DialogPrototype, {
   DialogActions,
   DialogContent,
-  
+
 } from 'material-ui/Dialog';
 
 import Button from 'material-ui/Button';
@@ -52,6 +52,25 @@ class TextField extends Component {
 }
 
 
+class StepComponent extends CustomComponent {
+
+  static propTypes = {
+    ...CustomComponent.propTypes,
+    loginCanceled: PropTypes.func.isRequired,
+  }
+
+
+  onRequestClose = event => {
+
+    const {
+      loginCanceled,
+    } = this.props;
+
+    return loginCanceled(event);
+  }
+
+}
+
 let loginSubheaderStyle = {
   textAlign: 'center',
   fontWeight: 'bold',
@@ -83,7 +102,7 @@ let lexicon = {
 }
 
 
-class ProfileDialogAuthStepFindUser extends CustomComponent {
+class ProfileDialogAuthStepFindUser extends StepComponent {
 
 
   static defaultProps = {
@@ -216,7 +235,7 @@ class ProfileDialogAuthStepFindUser extends CustomComponent {
 
 }
 
-class ProfileDialogAuthStepAuth extends CustomComponent {
+class ProfileDialogAuthStepAuth extends StepComponent {
 
 
   static defaultProps = {
@@ -256,7 +275,7 @@ class ProfileDialogAuthStepAuth extends CustomComponent {
       Avatar,
     } = this.context;
 
-    
+
     var actions = [];
 
     const signin = this.lexicon("signin");
@@ -388,7 +407,7 @@ class ProfileDialogAuthStepAuth extends CustomComponent {
   }
 }
 
-class ProfileDialogAuthStepRegister extends CustomComponent {
+class ProfileDialogAuthStepRegister extends StepComponent {
 
   // state = {}
 
@@ -465,7 +484,7 @@ class ProfileDialogAuthStepRegister extends CustomComponent {
     const emailName = this.lexicon("email");
     const passwordName = this.lexicon("passwordName");
 
-    // console.log("registerTitle", registerTitle, this.state.lexicon);
+
 
 
     var actions = [
@@ -662,7 +681,7 @@ export class Auth extends CustomComponent {
       login: username,
     } = this.state;
 
-    console.log("findUser", username);
+
 
 
     if (this.state.wait_for_response === true) {
@@ -694,7 +713,7 @@ export class Auth extends CustomComponent {
     })
       .catch(console.error);
 
-    console.log("findUser result", result);
+
 
 
     var newStata = {
@@ -723,7 +742,7 @@ export class Auth extends CustomComponent {
 
       newStata.errors = {
         login: {
-          errorText: "User not found",
+          errorText: "Пользователь не найден",
         }
       }
 
@@ -761,7 +780,12 @@ export class Auth extends CustomComponent {
           password: this.state.password,
         },
       })
-        .catch(console.error)
+        .catch(error => {
+
+          console.error("loginSubmit error", error);
+
+          return error;
+        })
 
       const {
         response,
@@ -769,6 +793,8 @@ export class Auth extends CustomComponent {
 
       const {
         success,
+        message,
+        errors: responseErrors,
         token,
         data: user,
       } = response || {};
@@ -777,7 +803,7 @@ export class Auth extends CustomComponent {
       //   user,
       // } = data || {};
 
-      console.log("response", response);
+
 
 
 
@@ -797,7 +823,11 @@ export class Auth extends CustomComponent {
 
       }
       else {
-        errors.login_error = "Ошибка авторизации";
+
+        let usernameError = responseErrors && responseErrors.find(n => n.key === "username") || null;
+        let passwordError = responseErrors && responseErrors.find(n => n.key === "password") || null;
+
+        errors.login_error = (passwordError && passwordError.message) || (usernameError && usernameError.message) || message || "Ошибка авторизации";
       }
 
 
@@ -851,7 +881,7 @@ export class Auth extends CustomComponent {
     } = result && result.data || {}
 
 
-    console.log("response result", result);
+
 
     if (response) {
 
@@ -1037,6 +1067,7 @@ export class Auth extends CustomComponent {
               loginCanceled: this.props.loginCanceled,
             }}
             classes={classes}
+            {...this.props}
           />
         );
         break;
@@ -1060,6 +1091,7 @@ export class Auth extends CustomComponent {
                 loginCanceled: this.props.loginCanceled,
               }}
               classes={classes}
+              {...this.props}
             />
           );
         }

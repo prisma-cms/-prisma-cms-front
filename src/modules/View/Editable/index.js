@@ -69,7 +69,7 @@ export default class EditableView extends View {
 
     // const result = await saveObject(_dirty);
 
-    // console.log("EditView result", result);
+
 
 
     const result = await saveObject(_dirty)
@@ -156,7 +156,7 @@ export default class EditableView extends View {
 
     const value = object[name] || "";
 
-    // console.log("Editor", Editor, props);
+
 
     // return null;
 

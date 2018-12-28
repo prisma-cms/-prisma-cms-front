@@ -53,7 +53,7 @@ export default class PageLayout extends PrismaCmsComponent {
       status = 200,
     } = meta || {};
 
-    // console.log("setPageMeta meta", meta);
+
 
     if (!global.document) {
       global.document = {}
@@ -134,11 +134,11 @@ export default class PageLayout extends PrismaCmsComponent {
 
     const uri = this.getUri();
 
-    // console.log("uri", uri);
+
 
     const query = uri.query(true);
 
-    // console.log("query", query);
+
 
     return query ? query[param] : null;
 
@@ -161,7 +161,7 @@ export default class PageLayout extends PrismaCmsComponent {
 
     uri.query(search);
 
-    // console.log("location", location);
+
 
     return uri;
   }

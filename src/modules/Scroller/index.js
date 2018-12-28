@@ -13,15 +13,6 @@ class ScrollerProvider extends Component {
 
 
   componentDidUpdate(prevProps, prevState){
-    console.log("ScrollerProvider componentDidUpdate", 
-      prevProps.router, 
-      prevProps.location, 
-      this.props.location, 
-      // prevProps.router.history.location, 
-      // this.props.router.history.location, 
-      prevProps.location === this.props.location
-    );
-
 
     if(prevProps.location && this.props.location && prevProps.location !== this.props.location){
       window.scrollTo(0, 0)
@@ -47,27 +38,14 @@ class ScrollerProvider extends Component {
 
 export default class Scroller extends Component {
 
-  // static propTypes = {
-  //   prop: PropTypes
-  // }
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
   }
 
 
-  // componentDidUpdate(prevProps, prevState){
-  //   console.log("Scroller componentDidUpdate");
-  // }
-
   render() {
     
-    // const {
-    //   children: {
-    //     type: Type,
-    //     props,
-    //   },
-    // } = this.props;
 
     const {
       router,

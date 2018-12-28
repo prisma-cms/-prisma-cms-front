@@ -1,6 +1,6 @@
 const proxy = require('http-proxy-middleware');
 
-// console.log("Setup proxy");
+
 
 // const server = require("./server/middleware");
 

@@ -99,7 +99,7 @@ export default class UserPageView extends EditableView {
     const result = await super.save()
       .then(r => {
 
-        // console.log("onSave", r);
+
 
         const {
           loadApiData,
@@ -120,7 +120,7 @@ export default class UserPageView extends EditableView {
 
   onUpdateAvatar = (file) => {
 
-    console.log("onUpdateAvatar", file);
+
 
     if (file) {
 

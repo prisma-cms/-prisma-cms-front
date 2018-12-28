@@ -144,7 +144,7 @@ export class Autocomplete extends Component {
           // debug={true}
           renderInput={renderInput ? renderInput : props => {
 
-            // console.log("Autocomplete renderInput input", props);
+
 
             const {
               // pass input node into ref
@@ -245,7 +245,7 @@ export class Autocomplete extends Component {
             </Grid>
           }}
           renderItem={(item, isHighlighted, style) => {
-            console.log("renderItem item", item, value);
+
 
             const text = getItemText(item);
 

@@ -89,7 +89,7 @@ export default class CustomComponent extends PrismaCmsComponent {
 //       });
 
 
-//     // console.log("Component request result", result);
+
 
 
 //     this.setState({
@@ -114,7 +114,7 @@ export default class CustomComponent extends PrismaCmsComponent {
 //       //   response,
 //       // } = resultData || {};
 
-//       // console.log("result", result);
+
 
 //       let {
 //         success,
@@ -137,15 +137,15 @@ export default class CustomComponent extends PrismaCmsComponent {
 //           //   this.addError(error);
 //           // });
 
-//           // console.log("error 2", error);
+
 //         }
 //       }
 
-//       // console.log("success", success);
+
 
 //     }
 
-//     // console.log("error", error);
+
 
 //     this.setState({
 //       errors,
@@ -196,7 +196,7 @@ export default class CustomComponent extends PrismaCmsComponent {
 //       },
 //     } = field;
 
-//     // console.log("field", field);
+
 
 
 //     const error = errors ? errors.find(n => n.key === name) : null;
@@ -286,11 +286,11 @@ export default class CustomComponent extends PrismaCmsComponent {
 //     const history = this.getHistory();
 
 
-//     console.log("uri.toString()", uri.toString());
+
 
 //     history.push(uri.toString());
 
-//     // console.log("newUrl", newUrl);
+
 
 //   }
 
@@ -311,7 +311,7 @@ export default class CustomComponent extends PrismaCmsComponent {
 
 //     const filters = this.getFilters();
 
-//     // console.log("hasFilters search", Object.keys(filters).length);
+
 
 //     return Object.keys(filters).length > 0 ? true : false;
 //   }
@@ -327,7 +327,7 @@ export default class CustomComponent extends PrismaCmsComponent {
 //       ...filters
 //     } = this.getLocationUri().query(true);
 
-//     // console.log("hasFilters search", Object.keys(query).length);
+
 
 //     return filters;
 //   }

@@ -55,7 +55,7 @@ let test = (rule) => {
     node = document.createElement('div')
 
 
-    console.log(chalk.green("loop test start"));
+
 
 
     const {
@@ -65,7 +65,7 @@ let test = (rule) => {
       status = 200,
     } = rule;
 
-    console.log(chalk.green("test rule"), rule);
+
 
 
 
@@ -98,7 +98,7 @@ let test = (rule) => {
         } = global;
 
 
-        // console.log("document status", global.document);
+
 
         expect(currentPathname).toEqual(pathname);
 
@@ -160,7 +160,7 @@ describe('Pages test', () => {
 
     const rule = rules[i];
 
-    console.log(chalk.green("Got test"), new Date());
+
 
     const {
       name,

@@ -9,7 +9,7 @@ import { withStyles } from 'material-ui/styles';
 
 export const styles = theme => {
 
-  console.log("theme", theme);
+
 
   const {
     palette: {

@@ -52,13 +52,13 @@ describe('Render errors', () => {
       />
     </TestApp>, node, () => {
 
-      console.log(chalk.green("Errors node"), node.innerHTML);
-      console.log(chalk.green("Errors node"), node.textContent);
+
+
 
       let div = node.querySelector(".test-content");
 
-      console.log(chalk.green("Errors div"), node.innerHTML);
-      console.log(chalk.green("Errors div"), node.textContent);
+
+
 
       expect(div.textContent).toBe("Test Error");
 

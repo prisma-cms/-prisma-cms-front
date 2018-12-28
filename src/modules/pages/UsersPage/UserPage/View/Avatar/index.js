@@ -44,7 +44,7 @@ class FileInput extends Component {
         input,
       } = this;
 
-      console.log('input', input);
+
 
       input.click();
 
@@ -111,7 +111,7 @@ export default class UserProfileAvatar extends Component {
 
 
   onUpload(r) {
-    console.log("onUpload result", r);
+
 
     const {
       singleUpload,

@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.9.16",
+  "version": "1.9.17",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -77,9 +77,9 @@
     "node-less-chokidar": "^0.3.1",
     "node-sass-chokidar": "^1.1.0",
     "prisma-binding": "^2.1.6",
-    "react": "^16.6.0",
+    "react": "^16.7.0",
     "react-apollo": "^2.2.3",
-    "react-dom": "^16.6.0",
+    "react-dom": "^16.7.0",
     "react-router-dom": "4.3.1",
     "shortid": "^2.2.8",
     "socket.io": "^2.0.4",
@@ -102,7 +102,7 @@
     "enzyme": "^3.6.0",
     "nwb": "0.23.x",
     "prettier-eslint-cli": "4.7.1",
-    "react-scripts": "^2.1.1",
+    "react-scripts": "^2.1.2",
     "roddeh-i18n": "^1.1.1"
   },
   "author": "Fi1osof",

@@ -79,7 +79,7 @@ export class UsersAutocomplete extends Component {
       value,
     }, () => this.loadData());
 
-    console.log("UsersAutocomplete", event.target, value);
+
   }
 
 
@@ -126,7 +126,7 @@ export class UsersAutocomplete extends Component {
         },
       })
         .then(r => {
-          // console.log("users result", r);
+
 
           const {
             users,
@@ -148,7 +148,7 @@ export class UsersAutocomplete extends Component {
 
 
   onSelect = (value, item) => {
-    console.log("UsersAutocomplete onSelect", value, item);
+
     this.setState({
       user: item,
     });
@@ -253,7 +253,7 @@ export class UsersAutocomplete extends Component {
           ?
           props => {
 
-            // console.log("renderInput props", props);
+
 
             return <div
               style={{
@@ -295,9 +295,9 @@ export class UsersAutocomplete extends Component {
           undefined
         }
         renderItem={(item, isHighlighted, style) => {
-          // console.log("renderItem item", item, value);
 
-          // console.log("renderItem item isHighlighted", isHighlighted, item.label === value, item.value === value, value);
+
+
 
           // const text = getItemText(item);
 

@@ -10,7 +10,7 @@ import {
 
 import View from './View';
 
-// console.log('companiesConnection', companiesConnection);
+
 
 import Page from '../layout';
 

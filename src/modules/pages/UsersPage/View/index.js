@@ -85,7 +85,7 @@ export class UsersPageView extends TableView {
       withPagination,
     } = this.props;
 
-    // console.log("this.defaultProps", this.defaultProps);
+
 
     const {
       objectsConnection,

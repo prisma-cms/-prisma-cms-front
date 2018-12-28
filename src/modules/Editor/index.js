@@ -119,7 +119,7 @@ export class Editor extends Component {
       // editorState,
     };
 
-    // console.log("editor constructor", props);
+
 
   }
 
@@ -151,8 +151,8 @@ export class Editor extends Component {
 
   //   // return false;
 
-  //   // console.log("onEditorStateChange", editorState);
-  //   // console.log("onEditorStateChange maxLength", maxLength, this.getTextLength());
+
+
 
   //   // let plainText = editorState ? editorState.getCurrentContent().getPlainText() : "";
 
@@ -183,7 +183,7 @@ export class Editor extends Component {
     const content = convertToRaw(editorState.getCurrentContent());
     // const content = editorState.getCurrentContent();
 
-    console.log('send content', content);
+
 
     return send(content, editorState);
 

@@ -115,7 +115,7 @@ export default class CallRequestButton extends CustomComponent {
         this.addError(e.message || "Request error");
       });
 
-    console.log("createCall result", result);
+
 
     this.setState({
       inRequest: false,

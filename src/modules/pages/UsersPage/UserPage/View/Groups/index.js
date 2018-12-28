@@ -63,7 +63,7 @@ export class UserGroups extends CustomComponent {
       },
     } = this.props;
 
-    console.log("checkHandler", event, value, checked);
+
 
     let data = {};
 
@@ -99,7 +99,7 @@ export class UserGroups extends CustomComponent {
     refetch();
 
 
-    console.log("checkHandler result", result);
+
 
   }
 
@@ -188,7 +188,7 @@ export default compose(
   graphql(userGroupsQuery, {
     name: "allUsersGroups",
     skip: props => {
-      // console.log("skip", props);
+
 
       const {
         inEditMode,

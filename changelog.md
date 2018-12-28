@@ -1,3 +1,9 @@
+1.9.17
+====================================
+- Fix auth messages
+- Fix auth close modal
+- Cleanup console.log
+
 1.9.16
 ====================================
 - Added context Avatar
