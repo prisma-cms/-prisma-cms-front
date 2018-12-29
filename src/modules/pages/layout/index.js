@@ -49,8 +49,8 @@ export default class PageLayout extends PrismaCmsComponent {
 
     let {
       title,
-      description,
       status = 200,
+      ...other
     } = meta || {};
 
 
@@ -74,6 +74,7 @@ export default class PageLayout extends PrismaCmsComponent {
 
     Object.assign(document, {
       status,
+      ...other,
     });
 
   }
