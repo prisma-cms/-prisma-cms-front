@@ -5,6 +5,7 @@
 /lib
 /node_modules
 /umd
+/src/schema
 npm-debug.log*
 *.lock
 *.log

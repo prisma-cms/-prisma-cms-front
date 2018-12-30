@@ -1,3 +1,8 @@
+1.10.0
+====================================
+- Get query fragments from props
+- Remove src/schema
+
 1.9.18
 ====================================
 - Fix setPageMeta

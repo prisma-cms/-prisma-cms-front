@@ -14,6 +14,7 @@ export default class PageLayout extends PrismaCmsComponent {
     user: PropTypes.object,
     client: PropTypes.object.isRequired,
     uri: PropTypes.object.isRequired,
+    getQueryFragment: PropTypes.func.isRequired,
   }
 
   static propTypes = {

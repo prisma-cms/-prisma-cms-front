@@ -18,14 +18,15 @@ import { withStyles } from 'material-ui';
 
 
 import {
-  users,
-  signin,
-  signup,
+  // users,
+  // signin,
+  // signup,
   resetPassword,
 } from "../../query";
 
 
 import CustomComponent from "../../Component";
+import gql from 'graphql-tag';
 
 class Dialog extends Component {
 
@@ -58,6 +59,12 @@ class StepComponent extends CustomComponent {
     ...CustomComponent.propTypes,
     loginCanceled: PropTypes.func.isRequired,
   }
+
+
+  // static contextTypes = {
+  //   ...CustomComponent.contextTypes,
+  //   getQueryFragment: PropTypes.func.isRequired,
+  // }
 
 
   onRequestClose = event => {
@@ -650,6 +657,12 @@ export class Auth extends CustomComponent {
     // connector_url: PropTypes.string.isRequired,
   };
 
+
+  static contextTypes = {
+    ...CustomComponent.contextTypes,
+    getQueryFragment: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
 
     super(props);
@@ -675,13 +688,13 @@ export class Auth extends CustomComponent {
     });
     this.props.loginCanceled();
   }
+
+
   findUser = async () => {
 
     const {
       login: username,
     } = this.state;
-
-
 
 
     if (this.state.wait_for_response === true) {
@@ -696,6 +709,32 @@ export class Auth extends CustomComponent {
     this.setState({
       wait_for_response: true,
     });
+
+    const {
+      getQueryFragment,
+    } = this.context;
+
+    const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+    const users = gql`
+      query usersConnection(
+        $first:Int!
+        $skip:Int
+        $orderBy: UserOrderByInput
+        $where:UserWhereInput
+      ){
+        objects:users(
+          first: $first
+          skip: $skip
+          orderBy: $orderBy
+          where:$where
+        ){
+          ...UserNoNesting
+        }
+      }
+
+      ${UserNoNestingFragment}
+    `;
 
     const result = await this.query({
       query: users,
@@ -770,6 +809,38 @@ export class Auth extends CustomComponent {
         wait_for_response: false,
       };
 
+
+      const {
+        getQueryFragment,
+      } = this.context;
+
+      const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+
+      const signin = gql`
+        mutation signin(
+          $where: UserWhereUniqueInput!
+          $password: String!
+        ){
+          response:signin(
+            where: $where
+            password: $password
+          ){
+            success
+            message
+            errors{
+              key
+              message
+            }
+            token
+            data{
+              ...UserNoNesting
+            }
+          }
+        }
+
+        ${UserNoNestingFragment}
+      `;
 
       const result = await this.mutate({
         mutation: signin,
@@ -864,6 +935,36 @@ export class Auth extends CustomComponent {
       errors,
       wait_for_response: false,
     };
+
+
+    const {
+      getQueryFragment,
+    } = this.context;
+
+    const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+    const signup = gql`
+      mutation signup(
+        $data: UserCreateInput!
+      ){
+        response:signup(
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          token
+          data{
+            ...UserNoNesting
+          }
+        }
+      }
+
+      ${UserNoNestingFragment}
+    `;
 
 
     const result = await this.mutate({

@@ -6,10 +6,10 @@ import { graphql, compose } from 'react-apollo';
 
 import View from './View';
 
-import {
-  // user,
-  updateUserProcessor,
-} from '../../../query';
+// import {
+//   // user,
+//   updateUserProcessor,
+// } from '../../../query';
 
 import Page from '../../layout';
 import gql from 'graphql-tag';
@@ -22,6 +22,7 @@ export class UserPage extends Page {
     ...Page.propTypes,
     match: PropTypes.object.isRequired,
     View: PropTypes.func.isRequired,
+    // updateUserProcessor: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -35,43 +36,43 @@ export class UserPage extends Page {
   // }
 
 
-  saveUser = async (data) => {
+  // saveUser = async (data) => {
 
-    const {
-      updateUserProcessor,
-    } = this.props;
+  //   const {
+  //     updateUserProcessor,
+  //   } = this.props;
 
-    const {
-      user: {
-        user,
-      },
-    } = this.props;
+  //   const {
+  //     user: {
+  //       user,
+  //     },
+  //   } = this.props;
 
 
-    if (!user) {
-      return false;
-    }
+  //   if (!user) {
+  //     return false;
+  //   }
 
-    const {
-      id,
-    } = user;
+  //   const {
+  //     id,
+  //   } = user;
 
-    const result = await updateUserProcessor({
-      variables: {
-        updateUserData: data,
-        updateUserWhere: {
-          id,
-        },
-      },
-    })
-      .then(r => r)
-      .catch(e => {
-        console.error(e);
-      });
+  //   const result = await updateUserProcessor({
+  //     variables: {
+  //       updateUserData: data,
+  //       updateUserWhere: {
+  //         id,
+  //       },
+  //     },
+  //   })
+  //     .then(r => r)
+  //     .catch(e => {
+  //       console.error(e);
+  //     });
 
-    return result;
+  //   return result;
 
-  }
+  // }
 
 
   render() {
@@ -113,7 +114,35 @@ export default class UserPageConnector extends PrismaCmsConnector {
       return null;
     }
 
+
     const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+    const updateUserProcessor = gql`
+
+      mutation updateUserProcessor(
+        $data: UserUpdateInput!
+        $where: UserWhereUniqueInput!
+      ){
+        response: updateUserProcessor(
+          where: $where
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...UserNoNesting
+          }
+        }
+      }
+
+
+      ${UserNoNestingFragment}
+
+    `;
 
     const user = gql`
       query user(

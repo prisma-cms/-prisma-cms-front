@@ -4,22 +4,22 @@ import PropTypes from 'prop-types'
 
 import { graphql, compose } from 'react-apollo';
 
-import {
-  usersConnection,
-} from '../../query';
+// import {
+//   usersConnection,
+// } from '../../query';
 
 import View from './View';
 
-
-
 import Page from '../layout';
+import gql from 'graphql-tag';
 
-const propTypes = Object.assign({...Page.propTypes}, {
+
+const propTypes = Object.assign({ ...Page.propTypes }, {
   View: PropTypes.func.isRequired,
 });
 
 
-const defaultProps = Object.assign({...Page.defaultProps}, {
+const defaultProps = Object.assign({ ...Page.defaultProps }, {
   View,
   first: 10,
   orderBy: "username_ASC",
@@ -33,7 +33,7 @@ export default class UsersPage extends Page {
   static defaultProps = defaultProps
 
 
-  constructor(props){
+  constructor(props) {
 
     super(props);
 
@@ -41,16 +41,16 @@ export default class UsersPage extends Page {
   }
 
 
-	setPageMeta(meta) {
+  setPageMeta(meta) {
 
-		return super.setPageMeta(meta || {
-			title: "Users",
-		});
+    return super.setPageMeta(meta || {
+      title: "Users",
+    });
 
-	}
+  }
 
 
-  addObject(event){
+  addObject(event) {
 
     const {
       history,
@@ -61,7 +61,7 @@ export default class UsersPage extends Page {
   }
 
 
-  componentWillMount(){
+  componentWillMount() {
 
     const {
       View,
@@ -72,19 +72,52 @@ export default class UsersPage extends Page {
       Renderer,
     } = this.state;
 
-    if(!Renderer){
+    if (!Renderer) {
+
+      const {
+        getQueryFragment,
+      } = this.context;
+
+      const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
+
+      const usersConnection = gql`
+        query usersConnection(
+          $first:Int!
+          $skip:Int
+          $orderBy: UserOrderByInput!
+          $where:UserWhereInput
+        ){
+          objectsConnection:usersConnection(
+            first: $first
+            skip: $skip
+            orderBy: $orderBy
+            where:$where
+          ){
+            aggregate{
+              count
+            }
+            edges{
+              node{
+                ...UserNoNesting
+              }
+            }
+          }
+        }
+
+        ${UserNoNestingFragment}
+      `;
 
       const Renderer = compose(
         graphql(usersConnection, {
           // name: 'items', 
         }),
-      
+
       )(View);
-  
+
       Object.assign(this.state, {
         Renderer,
       });
-      
+
     }
 
     super.componentWillMount && super.componentWillMount();
@@ -110,11 +143,11 @@ export default class UsersPage extends Page {
       uri,
     } = this.context;
 
-    
+
     let {
       page,
     } = uri.query(true);
- 
+
 
     page = parseInt(page) || 0;
 
@@ -138,5 +171,5 @@ export default class UsersPage extends Page {
 }
 
 
- 
+
 

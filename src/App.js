@@ -45,18 +45,24 @@ class PrismaCmsApp extends Component {
       ...other
     } = this.props;
 
+    const {
+      queryFragments,
+    } = this.props;
+
+    const {
+      UserNoNestingFragment,
+    } = queryFragments;
+
     return <Router>
       <ApolloCMS
         endpoint={`${protocol}//${host}/api/`}
         apiQuery={`{
-        user:me{
-          id
-          username
-          fullname
-          sudo
-          image
+          user:me{
+            ...UserNoNesting
+          }
         }
-      }`}
+        ${UserNoNestingFragment}
+      `}
         {...apolloOptions}
       >
         <App
