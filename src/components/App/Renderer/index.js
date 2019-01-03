@@ -6,6 +6,10 @@ import {
   Switch,
 } from 'react-router-dom'
 
+import {
+  Context,
+} from "../../../App";
+
 import MainMenu from './MainMenu';
 
 import Errors from './Errors';
@@ -72,8 +76,10 @@ export class Renderer extends Component {
     onAuthSuccess: PropTypes.func.isRequired,
     uri: PropTypes.object.isRequired,
     user: PropTypes.object,
+    client: PropTypes.object.isRequired,
+    loadApiData: PropTypes.func.isRequired,
   };
-  
+
   static childContextTypes = {
     openLoginForm: PropTypes.func,
     Avatar: PropTypes.func,
@@ -384,16 +390,23 @@ export class Renderer extends Component {
 
   render() {
 
+    return <Context.Consumer>
+      {props => <Context.Provider
+        value={Object.assign(props, {
+          ...this.context,
+        })}
+      >
+        <Fragment>
 
-    return <Fragment>
+          {this.renderWrapper()}
 
-      {this.renderWrapper()}
+          {this.renderErrors()}
 
-      {this.renderErrors()}
+          {this.renderAuth()}
 
-      {this.renderAuth()}
-
-    </Fragment>
+        </Fragment>
+      </Context.Provider>}
+    </Context.Consumer>
 
   }
 }

@@ -10,7 +10,7 @@ import ApolloCMS from 'apollo-cms/lib/App';
 
 import App from './components/App';
 
-import {Renderer} from "./components/App/Renderer";
+import { Renderer } from "./components/App/Renderer";
 
 import PageNotFound from "./modules/pages/404";
 
@@ -18,6 +18,7 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom'
 
+import Context from "./components/Context";
 
 const {
   protocol,
@@ -37,6 +38,24 @@ class PrismaCmsApp extends Component {
   };
 
 
+  constructor(props) {
+
+    super(props);
+
+    const {
+      queryFragments,
+    } = this.props;
+
+
+    this.state = {
+      ...this.state,
+      context: {
+        queryFragments,
+        query: {},
+      },
+    }
+  }
+
   render() {
 
     const {
@@ -47,7 +66,11 @@ class PrismaCmsApp extends Component {
 
     const {
       queryFragments,
-    } = this.props;
+    } = other;
+
+    const {
+      context,
+    } = this.state;
 
     const {
       UserNoNestingFragment,
@@ -65,9 +88,13 @@ class PrismaCmsApp extends Component {
       `}
         {...apolloOptions}
       >
-        <App
-          {...other}
-        />
+        <Context.Provider
+          value={context}
+        >
+          <App
+            {...other}
+          />
+        </Context.Provider>
       </ApolloCMS>
     </Router>
   }
@@ -78,6 +105,7 @@ export {
   Renderer,
   PrismaCmsApp,
   PageNotFound,
+  Context,
 }
 
 export default PrismaCmsApp
