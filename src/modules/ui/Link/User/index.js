@@ -35,7 +35,7 @@ import Link from '../';
 
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-import { Context } from '../../../../App';
+import Context from "@prisma-cms/context";
 
 const styles = {
   root: {

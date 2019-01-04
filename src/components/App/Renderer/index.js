@@ -6,9 +6,7 @@ import {
   Switch,
 } from 'react-router-dom'
 
-import {
-  Context,
-} from "../../../App";
+import Context from "@prisma-cms/context";
 
 import MainMenu from './MainMenu';
 
@@ -79,6 +77,10 @@ export class Renderer extends Component {
     client: PropTypes.object.isRequired,
     loadApiData: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
+
+    theme: PropTypes.object.isRequired,
+    updateTheme: PropTypes.func.isRequired,
+    lang: PropTypes.string.isRequired,
   };
 
   static childContextTypes = {

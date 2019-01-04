@@ -94,7 +94,7 @@ export default class App extends React.Component {
 
 
   static childContextTypes = {
-    muiTheme: PropTypes.object,
+    theme: PropTypes.object,
     updateTheme: PropTypes.func,
     getQuery: PropTypes.func,
     getQueryFragment: PropTypes.func,
@@ -143,7 +143,7 @@ export default class App extends React.Component {
     } = this.state;
 
     return {
-      muiTheme: theme,
+      theme,
       updateTheme: themeOptions => this.updateTheme(themeOptions),
       getQuery: operation => this.getQuery(operation),
       getQueryFragment: fragmentName => this.getQueryFragment(fragmentName),

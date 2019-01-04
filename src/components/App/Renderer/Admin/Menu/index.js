@@ -29,7 +29,7 @@ class AdminMenu extends Component {
 
   static contextTypes = {
     updateTheme: PropTypes.func.isRequired,
-    muiTheme: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
     router: PropTypes.object.isRequired,
   }
 
@@ -153,7 +153,7 @@ class AdminMenu extends Component {
 
               const {
                 updateTheme,
-                muiTheme: {
+                theme: {
                   palette: {
                     type: paletteType,
                   },

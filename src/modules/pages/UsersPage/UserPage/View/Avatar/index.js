@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Context from "@prisma-cms/context";
+
 import SingleUploaderInput from '../../../../../react-cms-uploads/src/components/uploader/SingleUploader';
 
 // import Button from 'material-ui/Button/Button';
@@ -8,7 +10,6 @@ import SingleUploaderInput from '../../../../../react-cms-uploads/src/components
 // import Avatar from '../../../../../ui/Avatar';
 
 import NoPhoto from 'material-ui-icons/PersonOutline';
-import { Context } from '../../../../../../App';
 
 class FileInput extends Component {
 

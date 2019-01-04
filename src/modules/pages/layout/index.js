@@ -4,9 +4,9 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import PrismaCmsComponent from "@prisma-cms/component";
+import Context from "@prisma-cms/context";
 
 import URI from 'urijs';
-import { Context } from '../../../App';
 
 export default class PageLayout extends PrismaCmsComponent {
 

@@ -22,9 +22,7 @@ import PropTypes from 'prop-types';
 
 // import Subscriber from './Subscriber';
 
-import {
-  Context,
-} from "../../../../../App";
+import Context from "@prisma-cms/context";
 
 export default class UserMenuItem extends Component {
 

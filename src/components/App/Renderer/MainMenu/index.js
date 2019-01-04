@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Context from "@prisma-cms/context";
+
 import Grid from '../../../../modules/ui/Grid';
 
 import AppBar from 'material-ui/AppBar';
@@ -12,7 +14,8 @@ import { Link } from 'react-router-dom';
 
 import UserItem from './User';
 import { withStyles } from 'material-ui/styles';
-import { Context } from '../../../../App';
+
+// console.log("MainMenu Context", Context);
 
 // import Modal from './AuthModal';
 

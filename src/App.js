@@ -105,7 +105,6 @@ export {
   Renderer,
   PrismaCmsApp,
   PageNotFound,
-  Context,
 }
 
 export default PrismaCmsApp
