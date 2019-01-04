@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.11.3",
+  "version": "1.11.4",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -44,9 +44,9 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@prisma-cms/context": "latest",
     "@prisma-cms/component": "latest",
     "@prisma-cms/connector": "latest",
+    "@prisma-cms/context": "latest",
     "@prisma-cms/graphql-voyager": "^1.0.0-rc.26",
     "@prisma-cms/ui": "latest",
     "@types/react": "^16.4.18",
@@ -92,10 +92,12 @@
     "xml-writer": "^1.7.0"
   },
   "devDependencies": {
-    "@prisma-cms/server": "latest",
     "@babel/core": "7.1.2",
     "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@prisma-cms/server": "latest",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.4",

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import URI from "urijs";
 
+import Context from "@prisma-cms/context";
+
 export default class UriProvider extends Component {
 
   static contextTypes = {
@@ -37,17 +39,32 @@ export default class UriProvider extends Component {
 
   render() {
 
-
     const {
-      children: {
-        type: Type,
-        props,
-      },
+      children,
     } = this.props;
 
-    return <Type
-      {...props}
-    />
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={Object.assign(context, {
+          ...this.getChildContext(),
+        })}
+      >
+        {children || null}
+      </Context.Provider>}
+    </Context.Consumer>
+
+    // return null;
+
+    // const {
+    //   children: {
+    //     type: Type,
+    //     props,
+    //   },
+    // } = this.props;
+
+    // return <Type
+    //   {...props}
+    // />
 
   }
 }

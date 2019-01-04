@@ -67,21 +67,7 @@ export class Renderer extends Component {
     classes: {},
   };
 
-  static contextTypes = {
-    getQueryFragment: PropTypes.func.isRequired,
-    router: PropTypes.object.isRequired,
-    errors: PropTypes.array.isRequired,
-    onAuthSuccess: PropTypes.func.isRequired,
-    uri: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    client: PropTypes.object.isRequired,
-    loadApiData: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired,
-
-    theme: PropTypes.object.isRequired,
-    updateTheme: PropTypes.func.isRequired,
-    lang: PropTypes.string.isRequired,
-  };
+  static contextType = Context;
 
   static childContextTypes = {
     openLoginForm: PropTypes.func,
@@ -388,6 +374,26 @@ export class Renderer extends Component {
 
 
   render() {
+
+    // console.log("this.context", this.context);
+
+    // return <Context.Consumer>
+    //   {context => {
+
+    //     console.log("context", context);
+
+    //     return <Context.Provider
+    //       // value={Object.assign(context, this.context, {
+    //       //   ...this.getChildContext(),
+    //       //   Avatar,
+    //       //   UserLink,
+    //       // })}
+    //       value={context}
+    //     >
+    //       "wefwef"
+    //     </Context.Provider>
+    //   }}
+    // </Context.Consumer>
 
     return <Context.Consumer>
       {context => <Context.Provider

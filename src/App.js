@@ -5,8 +5,6 @@ import React, { Component } from 'react'
 
 import PropTypes from "prop-types";
 
-import Context from "@prisma-cms/context";
-
 import ApolloCMS from 'apollo-cms/lib/App';
 
 import App from './components/App';
@@ -88,13 +86,9 @@ class PrismaCmsApp extends Component {
       `}
         {...apolloOptions}
       >
-        <Context.Provider
-          value={context}
-        >
-          <App
-            {...other}
-          />
-        </Context.Provider>
+        <App
+          {...other}
+        />
       </ApolloCMS>
     </Router>
   }

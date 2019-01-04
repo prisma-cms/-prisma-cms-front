@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import Renderer from './Renderer';
 
 
+import Context from "@prisma-cms/context";
+
 import { MuiThemeProvider, createMuiTheme, getMuiTheme } from 'material-ui/styles';
 import blue from 'material-ui/colors/blue';
 // import lightBlue from 'material-ui/colors/lightBlue';
@@ -93,6 +95,12 @@ export default class App extends React.Component {
   }
 
 
+  static contextTypes = {
+    client: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
+    errors: PropTypes.array.isRequired,
+  }
+
   static childContextTypes = {
     theme: PropTypes.object,
     updateTheme: PropTypes.func,
@@ -116,7 +124,7 @@ export default class App extends React.Component {
       themeOptions,
     }
 
-    if(!lang){
+    if (!lang) {
 
       const {
         navigator,
@@ -184,12 +192,12 @@ export default class App extends React.Component {
   }
 
 
-  getQuery(operation){
+  getQuery(operation) {
 
   }
 
 
-  getQueryFragment(fragmentName){
+  getQueryFragment(fragmentName) {
 
     const {
       queryFragments: {
@@ -197,7 +205,7 @@ export default class App extends React.Component {
       },
     } = this.props;
 
-    if(!fragment){
+    if (!fragment) {
       throw new Error(`Can not get query fragment "${fragmentName}"`);
     }
 
@@ -241,12 +249,17 @@ export default class App extends React.Component {
         theme={theme}
         sheetsManager={sheetsManager}
       >
-
-        <UriProvider>
-          <Renderer
-            {...other}
-          />
-        </UriProvider>
+        <Context.Provider
+          value={Object.assign(this.context, {
+            ...this.getChildContext(),
+          })}
+        >
+          <UriProvider>
+            <Renderer
+              {...other}
+            />
+          </UriProvider>
+        </Context.Provider>
       </MuiThemeProvider>
     )
   }
