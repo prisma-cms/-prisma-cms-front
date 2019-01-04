@@ -1207,4 +1207,6 @@ export class Auth extends CustomComponent {
   }
 }
 
-export default withStyles(styles)(Auth);
+export default withStyles(styles)(props => <Auth
+  {...props}
+/>);

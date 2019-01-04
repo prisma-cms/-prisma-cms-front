@@ -99,6 +99,10 @@ export default class App extends React.Component {
     client: PropTypes.object.isRequired,
     router: PropTypes.object.isRequired,
     errors: PropTypes.array.isRequired,
+    user: PropTypes.object,
+    logout: PropTypes.func.isRequired,
+    loadApiData: PropTypes.func.isRequired,
+    onAuthSuccess: PropTypes.func.isRequired,
   }
 
   static childContextTypes = {
@@ -252,6 +256,8 @@ export default class App extends React.Component {
         <Context.Provider
           value={Object.assign(this.context, {
             ...this.getChildContext(),
+            queryFragments,
+            query: {},
           })}
         >
           <UriProvider>

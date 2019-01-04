@@ -228,4 +228,6 @@ export class MainMenu extends Component {
   }
 }
 
-export default withStyles(styles)(MainMenu);
+export default withStyles(styles)(props => <MainMenu
+  {...props}
+/>);

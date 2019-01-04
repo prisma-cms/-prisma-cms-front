@@ -155,4 +155,6 @@ export class UsersPageView extends TableView {
 }
 
 
-export default withStyles(styles)(UsersPageView);
+export default withStyles(styles)(props => <UsersPageView
+  {...props}
+/>);
