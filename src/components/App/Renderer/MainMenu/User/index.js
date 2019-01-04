@@ -22,6 +22,10 @@ import PropTypes from 'prop-types';
 
 // import Subscriber from './Subscriber';
 
+import {
+  Context,
+} from "../../../../../App";
+
 export default class UserMenuItem extends Component {
 
   // static defaultProps = {
@@ -34,10 +38,7 @@ export default class UserMenuItem extends Component {
   }
 
 
-  static contextTypes = {
-    UserLink: PropTypes.func.isRequired,
-    // resetStore: PropTypes.func.isRequired,
-  };
+  static contextType = Context;
 
 
   // constructor(props) {

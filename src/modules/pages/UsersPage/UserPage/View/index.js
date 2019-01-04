@@ -16,15 +16,9 @@ import UsersGroupsBlock from "./Groups";
 export default class UserPageView extends EditableView {
 
 
-  static contextTypes = {
-    ...EditableView.contextTypes,
-    loadApiData: PropTypes.func.isRequired,
-    setPageMeta: PropTypes.func.isRequired,
-  };
-
-
   setPageMeta(meta) {
 
+    return ;
     const {
       setPageMeta,
     } = this.context;
@@ -167,6 +161,12 @@ export default class UserPageView extends EditableView {
 
   }
 
+  // render(){
+
+  //   console.log("context", this.context.setPageMeta);
+
+  //   return null;
+  // }
 
   renderDefaultView() {
 

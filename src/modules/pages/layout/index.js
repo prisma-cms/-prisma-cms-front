@@ -6,16 +6,17 @@ import PropTypes from 'prop-types';
 import PrismaCmsComponent from "@prisma-cms/component";
 
 import URI from 'urijs';
+import { Context } from '../../../App';
 
 export default class PageLayout extends PrismaCmsComponent {
 
-  static contextTypes = {
-    ...PrismaCmsComponent.contextTypes,
-    user: PropTypes.object,
-    client: PropTypes.object.isRequired,
-    uri: PropTypes.object.isRequired,
-    getQueryFragment: PropTypes.func.isRequired,
-  }
+  // static contextTypes = {
+  //   ...PrismaCmsComponent.contextTypes,
+  //   user: PropTypes.object,
+  //   client: PropTypes.object.isRequired,
+  //   uri: PropTypes.object.isRequired,
+  //   getQueryFragment: PropTypes.func.isRequired,
+  // }
 
   static propTypes = {
     ...PrismaCmsComponent.propTypes,
@@ -132,6 +133,7 @@ export default class PageLayout extends PrismaCmsComponent {
     return page ? parseInt(page) : 1;
   }
 
+  
   getUriParam(param) {
 
     const uri = this.getUri();
@@ -145,6 +147,7 @@ export default class PageLayout extends PrismaCmsComponent {
     return query ? query[param] : null;
 
   }
+
 
   getUri() {
 
@@ -177,11 +180,14 @@ export default class PageLayout extends PrismaCmsComponent {
       return null;
     }
 
-    const {
-    } = this.props;
 
-
-    return content;
+    return <Context.Provider
+      value={Object.assign(this.context, {
+        ...this.getChildContext(),
+      })}
+    >
+      {content}
+    </Context.Provider>;
 
   }
 }

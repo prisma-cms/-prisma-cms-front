@@ -5,10 +5,10 @@ import PrismaCmsComponent from "@prisma-cms/component";
 
 export default class CustomComponent extends PrismaCmsComponent {
 
-  static contextTypes = {
-    ...PrismaCmsComponent.contextTypes,
-    Avatar: PropTypes.func.isRequired,
-  }
+  // static contextTypes = {
+  //   ...PrismaCmsComponent.contextTypes,
+  //   Avatar: PropTypes.func.isRequired,
+  // }
 
 }
 

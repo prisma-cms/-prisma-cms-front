@@ -41,11 +41,6 @@ export class UserGroups extends CustomComponent {
     // inEditMode: false,
   }
 
-  static contextTypes = {
-    ...CustomComponent.contextTypes,
-    user: PropTypes.object,
-  }
-
 
   checkHandler = async (event, checked) => {
 

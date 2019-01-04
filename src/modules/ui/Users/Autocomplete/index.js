@@ -13,6 +13,7 @@ import IconButton from 'material-ui/IconButton';
 
 import DoneIcon from 'material-ui-icons/Done';
 import ClearIcon from 'material-ui-icons/Clear';
+import { Context } from '../../../../App';
 
 const styles = {
   ...stylesProto,
@@ -58,10 +59,7 @@ export class UsersAutocomplete extends Component {
     onSubmit: PropTypes.func,
   }
 
-  static contextTypes = {
-    client: PropTypes.object.isRequired,
-    Avatar: PropTypes.func.isRequired,
-  }
+  static contextType = Context;
 
   state = {
     value: "",

@@ -78,12 +78,11 @@ export class Renderer extends Component {
     user: PropTypes.object,
     client: PropTypes.object.isRequired,
     loadApiData: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
   };
 
   static childContextTypes = {
     openLoginForm: PropTypes.func,
-    Avatar: PropTypes.func,
-    UserLink: PropTypes.func,
   }
 
 
@@ -103,8 +102,6 @@ export class Renderer extends Component {
 
     return {
       openLoginForm: this.openLoginForm,
-      Avatar,
-      UserLink,
     }
   }
 
@@ -390,23 +387,23 @@ export class Renderer extends Component {
 
   render() {
 
-    return <Context.Consumer>
-      {props => <Context.Provider
-        value={Object.assign(props, {
-          ...this.context,
-        })}
-      >
-        <Fragment>
+    return <Context.Provider
+      value={Object.assign(this.context, {
+        ...this.getChildContext(),
+        Avatar,
+        UserLink,
+      })}
+    >
+      <Fragment>
 
-          {this.renderWrapper()}
+        {this.renderWrapper()}
 
-          {this.renderErrors()}
+        {this.renderErrors()}
 
-          {this.renderAuth()}
+        {this.renderAuth()}
 
-        </Fragment>
-      </Context.Provider>}
-    </Context.Consumer>
+      </Fragment>
+    </Context.Provider>
 
   }
 }

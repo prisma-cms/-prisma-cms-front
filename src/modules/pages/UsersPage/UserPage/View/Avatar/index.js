@@ -8,6 +8,7 @@ import SingleUploaderInput from '../../../../../react-cms-uploads/src/components
 // import Avatar from '../../../../../ui/Avatar';
 
 import NoPhoto from 'material-ui-icons/PersonOutline';
+import { Context } from '../../../../../../App';
 
 class FileInput extends Component {
 
@@ -17,9 +18,7 @@ class FileInput extends Component {
   }
 
 
-  static contextTypes = {
-    Avatar: PropTypes.func.isRequired,
-  }
+  static contextType = Context;
 
   render() {
 

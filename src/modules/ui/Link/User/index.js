@@ -35,6 +35,7 @@ import Link from '../';
 
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
+import { Context } from '../../../../App';
 
 const styles = {
   root: {
@@ -84,9 +85,7 @@ export class UserLink extends Component {
   };
 
 
-  static contextTypes = {
-    Avatar: PropTypes.func.isRequired,
-  }
+  static contextType = Context;
 
 
   render() {

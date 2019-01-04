@@ -658,10 +658,10 @@ export class Auth extends CustomComponent {
   };
 
 
-  static contextTypes = {
-    ...CustomComponent.contextTypes,
-    getQueryFragment: PropTypes.func.isRequired,
-  }
+  // static contextTypes = {
+  //   ...CustomComponent.contextTypes,
+  //   getQueryFragment: PropTypes.func.isRequired,
+  // }
 
   constructor(props) {
 

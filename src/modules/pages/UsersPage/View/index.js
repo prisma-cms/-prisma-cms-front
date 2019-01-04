@@ -34,10 +34,10 @@ export class UsersPageView extends TableView {
     columnData: [],
   };
 
-  static contextTypes = {
-    ...TableView.contextTypes,
-    UserLink: PropTypes.func.isRequired,
-  }
+  // static contextTypes = {
+  //   ...TableView.contextTypes,
+  //   UserLink: PropTypes.func.isRequired,
+  // }
 
 
   getColumns() {

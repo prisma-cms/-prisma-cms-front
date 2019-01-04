@@ -3,8 +3,9 @@ import './styles/less/styles.css';
 
 import React, { Component } from 'react'
 
-
 import PropTypes from "prop-types";
+
+import Context from "@prisma-cms/context";
 
 import ApolloCMS from 'apollo-cms/lib/App';
 
@@ -18,7 +19,6 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom'
 
-import Context from "./components/Context";
 
 const {
   protocol,

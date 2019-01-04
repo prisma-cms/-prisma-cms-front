@@ -1,3 +1,8 @@
+1.11.1
+====================================
+- Added @prisma-cms/context
+- Replace contextTypes with contextType
+
 1.11.0
 ====================================
 - Added Context

@@ -67,6 +67,7 @@ export default class UsersPage extends Page {
       View,
     } = this.props;
 
+    // return;
 
     const {
       Renderer,
