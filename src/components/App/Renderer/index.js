@@ -387,23 +387,25 @@ export class Renderer extends Component {
 
   render() {
 
-    return <Context.Provider
-      value={Object.assign(this.context, {
-        ...this.getChildContext(),
-        Avatar,
-        UserLink,
-      })}
-    >
-      <Fragment>
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={Object.assign(context, this.context, {
+          ...this.getChildContext(),
+          Avatar,
+          UserLink,
+        })}
+      >
+        <Fragment>
 
-        {this.renderWrapper()}
+          {this.renderWrapper()}
 
-        {this.renderErrors()}
+          {this.renderErrors()}
 
-        {this.renderAuth()}
+          {this.renderAuth()}
 
-      </Fragment>
-    </Context.Provider>
+        </Fragment>
+      </Context.Provider>}
+    </Context.Consumer>
 
   }
 }

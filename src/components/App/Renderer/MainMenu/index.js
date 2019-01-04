@@ -68,6 +68,10 @@ export class MainMenu extends Component {
 
   }
 
+  // componentWillMount(){
+  //   console.log("menu componentWillMount");
+  // }
+
   // handleClose = () => {
 
   //   this.setState({
