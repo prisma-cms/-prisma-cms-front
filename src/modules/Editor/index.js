@@ -1,262 +1,271 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-
-import { Editor as DraftEditor } from '@fi1osof/react-draft-wysiwyg';
-import '@fi1osof/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
+import {
+  Editor,
+} from "../ui";
 
+console.log("@prisma-cms/front/src/modules/Editor is deprecated. Use {Editor}$prisma-cms/context instead");
 
-const {
-  createEmpty,
-  createWithContent,
-} = EditorState;
+export default Editor;
 
+// import React, { Component, Fragment } from 'react'
+// import PropTypes from 'prop-types'
 
-const styles = {
-  // row: {
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  // },
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    flexBasis: "100%",
-    // flexWrap: "wrap",
-    // border: "1px solid black",
-    margin: 0,
-  },
-  toolbar: {
-    // border: "1px solid red",
-    flexDirection: "row",
-    // '& > *': {
-    //   // flexDirection: "column",
-    //   boxSizing: "border-box",
-    // },
-    // flexBasis: "100%",
-  },
-  editor: {
-    height: "auto",
-    // border: "1px solid blue",
-    flexDirection: "row",
-    flexGrow: 1,
-    // flexBasis: "100%",
-  },
-  editable: {
-    height: 400,
-  },
-  // bigAvatar: {
-  //   width: 120,
-  //   height: 120,
-  // },
-  // editable: {
-  //   cursor: 'pointer',
-  // },
-};
+// import { Editor as DraftEditor } from '@fi1osof/react-draft-wysiwyg';
+// import '@fi1osof/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+// import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-export const createEditorState = function (value) {
+// import { withStyles } from 'material-ui/styles';
+// import Button from 'material-ui/Button';
 
-  let editorState;
-  let contentState;
 
-  if (value) {
+// const {
+//   createEmpty,
+//   createWithContent,
+// } = EditorState;
 
-    contentState = convertFromRaw(value);
-    editorState = createWithContent(contentState);
 
-  }
+// const styles = {
+//   // row: {
+//   //   display: 'flex',
+//   //   justifyContent: 'center',
+//   // },
+//   wrapper: {
+//     display: "flex",
+//     flexDirection: "column",
+//     flexBasis: "100%",
+//     // flexWrap: "wrap",
+//     // border: "1px solid black",
+//     margin: 0,
+//   },
+//   toolbar: {
+//     // border: "1px solid red",
+//     flexDirection: "row",
+//     // '& > *': {
+//     //   // flexDirection: "column",
+//     //   boxSizing: "border-box",
+//     // },
+//     // flexBasis: "100%",
+//   },
+//   editor: {
+//     height: "auto",
+//     // border: "1px solid blue",
+//     flexDirection: "row",
+//     flexGrow: 1,
+//     // flexBasis: "100%",
+//   },
+//   editable: {
+//     height: 400,
+//   },
+//   // bigAvatar: {
+//   //   width: 120,
+//   //   height: 120,
+//   // },
+//   // editable: {
+//   //   cursor: 'pointer',
+//   // },
+// };
 
-  if (!editorState) {
-    editorState = createEmpty();
-  }
 
-  return editorState;
+// export const createEditorState = function (value) {
 
-}
+//   let editorState;
+//   let contentState;
 
+//   if (value) {
 
-export class Editor extends Component {
+//     contentState = convertFromRaw(value);
+//     editorState = createWithContent(contentState);
 
+//   }
 
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    readOnly: PropTypes.bool.isRequired,
-    send: PropTypes.func,
-    value: PropTypes.object,
-    minLength: PropTypes.number,
-    maxLength: PropTypes.number,
-  }
+//   if (!editorState) {
+//     editorState = createEmpty();
+//   }
 
+//   return editorState;
 
-  constructor(props) {
+// }
 
-    super(props);
 
-    const {
-      value,
-    } = props;
+// export class Editor extends Component {
 
 
-    // let editorState;
-    // let contentState;
+//   static propTypes = {
+//     classes: PropTypes.object.isRequired,
+//     readOnly: PropTypes.bool.isRequired,
+//     send: PropTypes.func,
+//     value: PropTypes.object,
+//     minLength: PropTypes.number,
+//     maxLength: PropTypes.number,
+//   }
 
-    // if(value){
 
-    //   contentState = convertFromRaw(value);
-    //   editorState = createWithContent(contentState);
+//   constructor(props) {
 
-    // }
+//     super(props);
 
-    // if(!editorState){
-    //   editorState = createEmpty();
-    // }
+//     const {
+//       value,
+//     } = props;
 
-    this.state = {
-      // editorState,
-    };
 
+//     // let editorState;
+//     // let contentState;
 
+//     // if(value){
 
-  }
+//     //   contentState = convertFromRaw(value);
+//     //   editorState = createWithContent(contentState);
 
+//     // }
 
+//     // if(!editorState){
+//     //   editorState = createEmpty();
+//     // }
 
-  // getTextLength(){
+//     this.state = {
+//       // editorState,
+//     };
 
-  //   const {
-  //     // editorState,
-  //   } = this.state;
-  //   // } = this.props;
 
-  //   let plainText = editorState ? editorState.getCurrentContent().getPlainText() : "";
 
-  //   let textLength = plainText.length;
+//   }
 
-  //   return textLength;
 
-  // }
 
+//   // getTextLength(){
 
-  // onEditorStateChange(editorState){
+//   //   const {
+//   //     // editorState,
+//   //   } = this.state;
+//   //   // } = this.props;
 
+//   //   let plainText = editorState ? editorState.getCurrentContent().getPlainText() : "";
 
-  //   const {
-  //     maxLength,
-  //     onChange,
-  //   } = this.props;
+//   //   let textLength = plainText.length;
 
-  //   // return false;
+//   //   return textLength;
 
+//   // }
 
 
+//   // onEditorStateChange(editorState){
 
-  //   // let plainText = editorState ? editorState.getCurrentContent().getPlainText() : "";
 
-  //   // if(maxLength && maxLength <= plainText.length){
-  //   //   return false;
-  //   // }
+//   //   const {
+//   //     maxLength,
+//   //     onChange,
+//   //   } = this.props;
 
-  //   this.setState({
-  //     editorState,
-  //   }, () => {
+//   //   // return false;
 
-  //     onChange && onChange(editorState, convertToRaw(editorState.getCurrentContent()) );
 
-  //   });
-  // }
 
 
-  send() {
+//   //   // let plainText = editorState ? editorState.getCurrentContent().getPlainText() : "";
 
-    const {
-      send,
-    } = this.props;
+//   //   // if(maxLength && maxLength <= plainText.length){
+//   //   //   return false;
+//   //   // }
 
-    const {
-      editorState,
-    } = this.state;
+//   //   this.setState({
+//   //     editorState,
+//   //   }, () => {
 
-    const content = convertToRaw(editorState.getCurrentContent());
-    // const content = editorState.getCurrentContent();
+//   //     onChange && onChange(editorState, convertToRaw(editorState.getCurrentContent()) );
 
+//   //   });
+//   // }
 
 
-    return send(content, editorState);
+//   send() {
 
-  }
+//     const {
+//       send,
+//     } = this.props;
 
+//     const {
+//       editorState,
+//     } = this.state;
 
-  render() {
+//     const content = convertToRaw(editorState.getCurrentContent());
+//     // const content = editorState.getCurrentContent();
 
-    const {
-      classes,
-      send,
-      readOnly,
-      // onChange,
-      // editorState,
-      ...other
-    } = this.props;
 
 
-    const {
-      // editorState,
-    } = this.state;
+//     return send(content, editorState);
 
+//   }
 
-    const wrapperClassName = [classes.wrapper];
-    const toolbarClassName = [classes.toolbar];
-    const editorClassName = [classes.editor];
 
-    let buttons = [];
+//   render() {
 
-    if (!readOnly && send) {
+//     const {
+//       classes,
+//       send,
+//       readOnly,
+//       // onChange,
+//       // editorState,
+//       ...other
+//     } = this.props;
 
-      buttons.push(<Button
-        key="send"
-        onClick={event => {
-          this.send();
-        }}
-      >
-        Send
-      </Button>);
 
-      wrapperClassName.push(classes.editable);
+//     const {
+//       // editorState,
+//     } = this.state;
 
-    }
 
-    return (
-      <Fragment>
+//     const wrapperClassName = [classes.wrapper];
+//     const toolbarClassName = [classes.toolbar];
+//     const editorClassName = [classes.editor];
 
-        <DraftEditor
-          wrapperClassName={wrapperClassName.join(" ")}
-          toolbarClassName={toolbarClassName.join(" ")}
-          editorClassName={editorClassName.join(" ")}
-          // editorState={editorState}
-          // onEditorStateChange={newState => this.onEditorStateChange(newState)}
-          // toolbar={{
-          //   // list: { inDropdown: true },
-          // }}
-          // toolbarCustomButtons={[<span>ef</span>]}
-          // toolbarHidden={true}
-          toolbarStyle={{
-            display: "none",
-          }}
-          readOnly={readOnly}
-          {...other}
-        // wrapperStyle={{
-        //   height: 500
-        // }}
-        />
+//     let buttons = [];
 
-        {buttons}
+//     if (!readOnly && send) {
 
-      </Fragment>
-    )
-  }
-}
+//       buttons.push(<Button
+//         key="send"
+//         onClick={event => {
+//           this.send();
+//         }}
+//       >
+//         Send
+//       </Button>);
 
-export default withStyles(styles)(Editor);
+//       wrapperClassName.push(classes.editable);
+
+//     }
+
+//     return (
+//       <Fragment>
+
+//         <DraftEditor
+//           wrapperClassName={wrapperClassName.join(" ")}
+//           toolbarClassName={toolbarClassName.join(" ")}
+//           editorClassName={editorClassName.join(" ")}
+//           // editorState={editorState}
+//           // onEditorStateChange={newState => this.onEditorStateChange(newState)}
+//           // toolbar={{
+//           //   // list: { inDropdown: true },
+//           // }}
+//           // toolbarCustomButtons={[<span>ef</span>]}
+//           // toolbarHidden={true}
+//           toolbarStyle={{
+//             display: "none",
+//           }}
+//           readOnly={readOnly}
+//           {...other}
+//         // wrapperStyle={{
+//         //   height: 500
+//         // }}
+//         />
+
+//         {buttons}
+
+//       </Fragment>
+//     )
+//   }
+// }
+
+// export default withStyles(styles)(Editor);

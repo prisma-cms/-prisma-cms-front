@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.11.5",
+  "version": "1.11.6",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -47,6 +47,7 @@
     "@prisma-cms/component": "latest",
     "@prisma-cms/connector": "latest",
     "@prisma-cms/context": "latest",
+    "@prisma-cms/editor": "latest",
     "@prisma-cms/graphql-voyager": "^1.0.0-rc.26",
     "@prisma-cms/ui": "latest",
     "@types/react": "^16.4.18",

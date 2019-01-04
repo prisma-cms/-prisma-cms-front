@@ -18,7 +18,6 @@ export default class UserPageView extends EditableView {
 
   setPageMeta(meta) {
 
-    return ;
     const {
       setPageMeta,
     } = this.context;

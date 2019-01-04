@@ -27,10 +27,8 @@ import GraphqlVoyagerPage from "../../../modules/pages/GraphqlVoyager";
 
 import AdminRenderer from "./Admin";
 
+import * as UI from "../../../modules/ui";
 
-import Avatar from "../../../modules/ui/Avatar";
-import UserLink from "../../../modules/ui/Link/User";
-// import UserLink from "../../../modules/User/Link";
 
 export const styles = {
   root: {
@@ -399,8 +397,7 @@ export class Renderer extends Component {
       {context => <Context.Provider
         value={Object.assign(context, this.context, {
           ...this.getChildContext(),
-          Avatar,
-          UserLink,
+          ...UI,
         })}
       >
         <Fragment>
