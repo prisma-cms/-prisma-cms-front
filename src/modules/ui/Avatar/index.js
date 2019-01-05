@@ -66,7 +66,7 @@ export class UserAvatar extends Component {
     const {
       id,
       image,
-      display_name: username,
+      username,
       fullname,
       firstname,
       lastname,
