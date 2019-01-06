@@ -19,7 +19,7 @@ import { withStyles } from 'material-ui/styles';
 
 // import Modal from './AuthModal';
 
-const styles = theme => {
+export const styles = theme => {
 
 
   const {
@@ -33,11 +33,14 @@ const styles = theme => {
     root: {
 
       // Fix contrast 
-      "& a, & button": {
-        "&, & *": {
-          color: paletteType === "light" ? "#fff" : undefined,
-        },
-      },
+      // "& a, & button": {
+      //   "&, & *": {
+      //     color: paletteType === "light" ? "#fff" : undefined,
+      //   },
+      // },
+    },
+    link: {
+      color: paletteType === "light" ? "#fff" : undefined,
     },
   }
 }
@@ -128,6 +131,7 @@ export class MainMenu extends Component {
             >
               <Typography
                 component="span"
+                className={classes.link}
               >
                 Main page
             </Typography>
@@ -142,6 +146,7 @@ export class MainMenu extends Component {
             >
               <Typography
                 component="span"
+                className={classes.link}
               >
                 Users
             </Typography>
@@ -156,6 +161,7 @@ export class MainMenu extends Component {
             >
               <Typography
                 component="span"
+                className={classes.link}
               >
                 Graphql Voyager
               </Typography>
@@ -179,6 +185,7 @@ export class MainMenu extends Component {
                 <UserItem
                   key={userId}
                   user={user}
+                  classes={classes}
                 />
               </Grid>,
               <Grid
@@ -187,9 +194,10 @@ export class MainMenu extends Component {
               >
                 <Button
                   onClick={() => this.logout()}
+                  className={classes.link}
                 >
                   Signout
-              </Button>
+                </Button>
 
               </Grid>
             ]
@@ -211,6 +219,7 @@ export class MainMenu extends Component {
               >
                 <Typography
                   component="span"
+                  className={classes.link}
                 >
                   Signin
               </Typography>

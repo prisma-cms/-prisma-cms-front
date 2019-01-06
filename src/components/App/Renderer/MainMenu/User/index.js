@@ -23,6 +23,7 @@ import PropTypes from 'prop-types';
 // import Subscriber from './Subscriber';
 
 import Context from "@prisma-cms/context";
+import { Typography } from 'material-ui';
 
 export default class UserMenuItem extends Component {
 
@@ -32,7 +33,7 @@ export default class UserMenuItem extends Component {
 
   static propTypes = {
     user: PropTypes.object.isRequired,
-
+    classes: PropTypes.object.isRequired,
   }
 
 
@@ -57,10 +58,11 @@ export default class UserMenuItem extends Component {
 
   render() {
 
-    // const {
-    //   user,
-    //   // isConnected,
-    // } = this.props;
+    const {
+      user,
+      // isConnected,
+      classes,
+    } = this.props;
 
     // const {
     //   id,
@@ -74,18 +76,31 @@ export default class UserMenuItem extends Component {
 
 
     // let connection;
+ 
 
     const {
       UserLink,
     } = this.context;
 
+    const {
+      fullname,
+      username,
+    } = user || {};
+
     return <UserLink
-      // user={user}
+      user={user}
       style={{
-        margin: 0,
+        marginLeft: 5,
       }}
+      variant={null}
       {...this.props}
-    />;
+    >
+      <Typography
+        className={classes.link}
+      >
+        {fullname || username}
+      </Typography>
+    </UserLink>;
 
   }
 

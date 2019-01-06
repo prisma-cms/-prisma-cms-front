@@ -99,6 +99,7 @@ export class UserLink extends Component {
       showName,
       size,
       avatarProps,
+      children,
       ...other
     } = this.props;
 
@@ -168,15 +169,18 @@ export class UserLink extends Component {
             {...other}
           >
 
-            {variant !== undefined ?
-              <Typography
-                variant="title"
-              >
-                {name}
-                {this.props.position ? <span style={{ fontSize: '70%', fontStyle: 'italic' }}> - {this.props.position}</span> : null}
-              </Typography>
+            {children
+              ? children
               :
-              name
+              variant !== undefined ?
+                <Typography
+                  variant={variant}
+                >
+                  {name}
+                  {this.props.position ? <span style={{ fontSize: '70%', fontStyle: 'italic' }}> - {this.props.position}</span> : null}
+                </Typography>
+                :
+                name
             }
 
           </Link>
@@ -191,6 +195,6 @@ export class UserLink extends Component {
 }
 
 
-export default withStyles(styles)(props => <UserLink 
+export default withStyles(styles)(props => <UserLink
   {...props}
 />);
