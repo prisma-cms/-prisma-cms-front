@@ -151,22 +151,28 @@ export default class PageLayout extends PrismaCmsComponent {
 
   getUri() {
 
-    const {
-      // history: {
-      // },
-      location,
-    } = this.props;
+    // const {
+    //   // history: {
+    //   // },
+    //   location,
+    // } = this.props;
+
+    // const {
+    //   pathname,
+    //   search,
+    // } = location;
+
+    // let uri = new URI(pathname);
+
+    // uri.query(search);
+
+
+
+    // return uri;
 
     const {
-      pathname,
-      search,
-    } = location;
-
-    let uri = new URI(pathname);
-
-    uri.query(search);
-
-
+      uri,
+    } = this.context;
 
     return uri;
   }
