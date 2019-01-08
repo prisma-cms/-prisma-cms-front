@@ -4,7 +4,8 @@
   "description": "Accessible, extensible, Autocomplete for React.js",
   "main": "./src/Autocomplete",
   "files": [
-    "src"
+    "src",
+    "package.json"
   ],
   "repository": {
     "type": "git",
