@@ -248,6 +248,17 @@ export default class App extends React.Component {
       theme,
     } = this.state;
 
+
+
+    const {
+      user: currentUser,
+    } = this.context;
+
+    const {
+      id: currentUserId,
+    } = currentUser || {};
+    
+
     return (
       <MuiThemeProvider
         theme={theme}
@@ -262,6 +273,7 @@ export default class App extends React.Component {
         >
           <UriProvider>
             <Renderer
+              key={currentUserId}
               {...other}
             />
           </UriProvider>
