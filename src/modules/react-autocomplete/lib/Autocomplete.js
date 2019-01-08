@@ -603,5 +603,5 @@ class Autocomplete extends React.Component {
   }
 }
 
-module.exports = Autocomplete
+export default Autocomplete
 

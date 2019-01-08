@@ -1,3 +1,11 @@
+1.11.10
+====================================
+- Added PageLayout::
+  - getPaginationParams
+  - getFilters
+  - setFilters
+- Added Autocomplete
+
 1.11.9
 ====================================
 - Fix main menu styles

@@ -2,17 +2,20 @@ import React, { Component, Fragment } from 'react';
 
 import PropTypes from 'prop-types';
 
-import AutocompleteProto from 'react-autocomplete/lib';
+import Context from "@prisma-cms/context";
 
-import Grid from 'material-ui/Grid';
+import AutocompleteProto from '../../react-autocomplete/lib';
+
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
-import ListSubheader from 'material-ui/List/ListSubheader';
 
 import CloseIcon from 'material-ui-icons/Clear';
+import ViewIcon from 'material-ui-icons/RemoveRedEye';
+import AddIcon from 'material-ui-icons/AddCircleOutline';
+import SaveIcon from 'material-ui-icons/Save';
 
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem } from 'material-ui/List';
 
 import { withStyles } from 'material-ui/styles/';
 
@@ -20,18 +23,9 @@ export const styles = {
   root: {
     // border: "1px solid red",
     width: "100%",
-    position: "relative",
   },
   menuWrapper: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-
-    "&.direction-top": {
-      bottom: "auto",
-      top: 0,
-    },
+    position: "relative",
   },
   menuPaper: {
     maxHeight: 300,
@@ -41,13 +35,6 @@ export const styles = {
     position: "absolute",
     zIndex: 100,
     top: 0,
-    left: 0,
-    right: 0,
-
-    ".direction-top &": {
-      bottom: 0,
-      top: "auto",
-    },
   },
   menuList: {
     padding: 0,
@@ -61,7 +48,7 @@ export const styles = {
 
     fontSize: "0.9rem",
     "&:first-child": {
-      fontSize: "1.1rem",
+      // fontSize: "1.1rem",
     },
     "&:hover": {
       backgroundColor: "#eee",
@@ -71,9 +58,18 @@ export const styles = {
     },
   },
   menuListItemText: {},
+  actionButton: {
+    height: 30,
+    width: 30,
+  },
+  accent: {
+    color: "red",
+  },
 };
 
 export class Autocomplete extends Component {
+
+  static contextType = Context;
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
@@ -82,17 +78,17 @@ export class Autocomplete extends Component {
     onChange: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     onDelete: PropTypes.func,
+    viewHandler: PropTypes.func,
+    viewElement: PropTypes.object,
+    addHandler: PropTypes.func,
+    saveHandler: PropTypes.func,
     getItemText: PropTypes.func.isRequired,
-    direction: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     items: [],
     value: "",
     fullWidth: true,
-
-    // down || top
-    direction: "down",   
     getItemText: function (item) {
 
       const {
@@ -110,6 +106,10 @@ export class Autocomplete extends Component {
 
 
   render() {
+    
+    const {
+      Grid,
+    } = this.context;
 
     const {
       classes,
@@ -120,10 +120,14 @@ export class Autocomplete extends Component {
       style,
       getItemText,
       onDelete,
+      viewHandler,
+      viewElement,
+      saveHandler,
+      addHandler,
       renderInput,
-      direction,
       ...other
     } = this.props;
+
 
     // let items = [
     //   { value: 'AL', label: 'Alabama' },
@@ -135,6 +139,70 @@ export class Autocomplete extends Component {
     //   { value: 'CT', label: 'Connecticut' },
     // ];
 
+    let addButton;
+    let viewButton;
+    let saveButton;
+
+    if ((viewHandler || viewElement) && value) {
+
+      // if(!viewElement){
+      //   viewElement = IconButton;
+      // }
+
+      viewButton = <Grid
+        item
+      >
+        {viewElement
+          ?
+          viewElement
+          :
+          <IconButton
+            onClick={viewHandler}
+            className={classes.actionButton}
+          >
+            <ViewIcon />
+          </IconButton>
+        }
+      </Grid>
+    }
+
+    if (addHandler) {
+
+      // if(!viewElement){
+      //   viewElement = IconButton;
+      // }
+
+      addButton = <Grid
+        item
+      >
+        <IconButton
+          onClick={addHandler}
+          className={[classes.actionButton].join(" ")}
+        >
+          <AddIcon />
+        </IconButton>
+      </Grid>
+    }
+
+    if (saveHandler) {
+
+      // if(!viewElement){
+      //   viewElement = IconButton;
+      // }
+
+      saveButton = <Grid
+        item
+      >
+        <IconButton
+          onClick={saveHandler}
+          className={[classes.actionButton, classes.accent].join(" ")}
+        >
+          <SaveIcon />
+        </IconButton>
+      </Grid>
+    }
+
+
     return (
       <Grid
         container
@@ -143,7 +211,6 @@ export class Autocomplete extends Component {
         <AutocompleteProto
           // debug={true}
           renderInput={renderInput ? renderInput : props => {
-
 
 
             const {
@@ -171,6 +238,8 @@ export class Autocomplete extends Component {
                   {...props}
                 />
               </Grid>
+              {addButton}
+              {viewButton}
               {onDelete && value
                 ?
                 <Grid
@@ -178,6 +247,7 @@ export class Autocomplete extends Component {
                 >
                   <IconButton
                     onClick={onDelete}
+                    className={classes.actionButton}
                   >
                     <CloseIcon />
                   </IconButton>
@@ -185,6 +255,7 @@ export class Autocomplete extends Component {
                 :
                 null
               }
+              {saveButton}
             </Grid>
           }}
           renderDebug={(debugStates) => {
@@ -216,7 +287,7 @@ export class Autocomplete extends Component {
           // wrapperStyle={{ position: 'relative', display: 'inline-block' }}
           wrapperStyle={style}
           items={items}
-          getItemValue={(item) => item.value}
+          getItemValue={(item) => item.label}
           // shouldItemRender={matchStateToTerm}
           // sortItems={sortStates}
           // onChange={(event, value) => this.setState({ value })}
@@ -231,7 +302,7 @@ export class Autocomplete extends Component {
               className="menu"
               item
               xs={12}
-              className={[classes.menuWrapper, direction === "top" ? "direction-top" : ""].join(" ")}
+              className={classes.menuWrapper}
             >
               <Paper
                 className={classes.menuPaper}
@@ -245,7 +316,7 @@ export class Autocomplete extends Component {
             </Grid>
           }}
           renderItem={(item, isHighlighted, style) => {
-
+//            console.log("renderItem item", item, value);
 
             const text = getItemText(item);
 
@@ -270,4 +341,4 @@ export class Autocomplete extends Component {
   }
 }
 
-export default withStyles(styles)(Autocomplete);
+export default withStyles(styles)(props => <Autocomplete {...props}/>);
