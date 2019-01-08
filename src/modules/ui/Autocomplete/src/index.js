@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Context from "@prisma-cms/context";
 
-import AutocompleteProto from '../../react-autocomplete/lib';
+import AutocompleteProto from '../../../react-autocomplete';
 
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
