@@ -106,7 +106,7 @@ export class Autocomplete extends Component {
 
 
   render() {
-    
+
     const {
       Grid,
     } = this.context;
@@ -316,11 +316,16 @@ export class Autocomplete extends Component {
             </Grid>
           }}
           renderItem={(item, isHighlighted, style) => {
-//            console.log("renderItem item", item, value);
+            //            console.log("renderItem item", item, value);
 
             const text = getItemText(item);
 
+            const {
+              id,
+            } = item;
+
             return <ListItem
+              id={id}
               className={[classes.menuListItem, (isHighlighted || item.label === value || item.value === value) ? "active" : ""].join(" ")}
             >
               {/* <ListItemText
@@ -341,4 +346,4 @@ export class Autocomplete extends Component {
   }
 }
 
-export default withStyles(styles)(props => <Autocomplete {...props}/>);
+export default withStyles(styles)(props => <Autocomplete {...props} />);

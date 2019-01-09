@@ -6,6 +6,7 @@ import Grid from "./Grid";
 import Pagination from "./Pagination";
 import Editor from "./Editor";
 import Autocomplete from "./Autocomplete";
+import UserAutocomplete from "./Autocomplete/User";
 
 export {
   Avatar,
@@ -15,4 +16,5 @@ export {
   Pagination,
   Editor,
   Autocomplete,
+  UserAutocomplete,
 }
