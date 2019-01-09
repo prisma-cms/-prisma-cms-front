@@ -411,7 +411,7 @@ class Autocomplete extends React.Component {
     }
     const matchedItem = items[index] && props.isItemSelectable(items[index]) ? items[index] : null
     if (value !== '' && matchedItem) {
-      const itemValue = getItemValue(matchedItem)
+      const itemValue = getItemValue(matchedItem) || ""
       const itemValueDoesMatch = (itemValue.toLowerCase().indexOf(
         value.toLowerCase()
       ) === 0)
