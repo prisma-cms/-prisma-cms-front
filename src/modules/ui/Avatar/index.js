@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Context from "@prisma-cms/context";
+
 import Avatar from 'material-ui/Avatar';
 
 import { withStyles } from 'material-ui/styles';
@@ -47,6 +49,9 @@ export class UserAvatar extends Component {
   };
 
 
+  static contextType = Context;
+
+
   render() {
 
     const {
@@ -58,9 +63,15 @@ export class UserAvatar extends Component {
     } = this.props;
 
 
-    if(!user){
+    if (!user) {
       return null;
     }
+
+    const {
+      assetsBaseUrl,
+    } = this.context;
+
+    console.log("assetsBaseUrl", assetsBaseUrl);
 
 
     const {
@@ -79,23 +90,23 @@ export class UserAvatar extends Component {
 
     let url;
 
-    if(image){
+    if (image) {
 
       // url = `/images/avatar/${image}`;
       // url = `/images/resized/thumb/uploads/${image}`;
-      url = `/images/resized/thumb/${image}`;
+      url = `${assetsBaseUrl !== undefined ? assetsBaseUrl : "/"}images/resized/thumb/${image}`;
 
     }
 
-    switch(size){
+    switch (size) {
 
-      case 'small': 
+      case 'small':
 
         classNames.push(classes.smallAvatar);
         break;
 
 
-      case 'big': 
+      case 'big':
 
         classNames.push(classes.bigAvatar);
 
@@ -103,7 +114,7 @@ export class UserAvatar extends Component {
 
     }
 
-    if(editable){
+    if (editable) {
       classNames.push(classes.editable);
     }
 

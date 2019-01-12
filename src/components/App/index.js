@@ -80,6 +80,7 @@ export default class App extends React.Component {
     queryFragments: PropTypes.object.isRequired,
     lang: PropTypes.string.isRequired,
     sheetsManager: PropTypes.object,
+    assetsBaseUrl: PropTypes.string,
   }
 
 
@@ -241,6 +242,7 @@ export default class App extends React.Component {
       themeOptions,
       Renderer,
       sheetsManager,
+      assetsBaseUrl,
       ...other
     } = this.props;
 
@@ -269,6 +271,7 @@ export default class App extends React.Component {
             ...this.getChildContext(),
             queryFragments,
             query: {},
+            assetsBaseUrl,
           })}
         >
           <UriProvider>
