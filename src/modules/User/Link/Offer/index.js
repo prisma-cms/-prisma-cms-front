@@ -90,4 +90,6 @@ export class OfferOwnerLink extends UserLink {
   }
 }
 
-export default withStyles(styles)(OfferOwnerLink);
+export default withStyles(styles)(props => <OfferOwnerLink 
+  {...props}
+/>);

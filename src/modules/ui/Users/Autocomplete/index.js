@@ -13,7 +13,8 @@ import IconButton from 'material-ui/IconButton';
 
 import DoneIcon from 'material-ui-icons/Done';
 import ClearIcon from 'material-ui-icons/Clear';
-import { Context } from '../../../../App';
+
+import Context from "@prisma-cms/context";
 
 const styles = {
   ...stylesProto,
@@ -321,4 +322,6 @@ export class UsersAutocomplete extends Component {
   }
 }
 
-export default withStyles(styles)(UsersAutocomplete);
+export default withStyles(styles)(props => <UsersAutocomplete 
+  {...props}
+/>);

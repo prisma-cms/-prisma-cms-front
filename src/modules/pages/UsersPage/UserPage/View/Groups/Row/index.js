@@ -87,4 +87,6 @@ export class UserGroupRow extends Component {
   }
 }
 
-export default withStyles(styles)(UserGroupRow);
+export default withStyles(styles)(props => <UserGroupRow 
+  {...props}
+/>);

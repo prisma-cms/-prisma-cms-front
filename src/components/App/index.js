@@ -259,28 +259,31 @@ export default class App extends React.Component {
     const {
       id: currentUserId,
     } = currentUser || {};
-    
+
 
     return (
       <MuiThemeProvider
         theme={theme}
         sheetsManager={sheetsManager}
       >
-        <Context.Provider
-          value={Object.assign(this.context, {
-            ...this.getChildContext(),
-            queryFragments,
-            query: {},
-            assetsBaseUrl,
-          })}
-        >
-          <UriProvider>
-            <Renderer
-              key={currentUserId}
-              {...other}
-            />
-          </UriProvider>
-        </Context.Provider>
+        <Context.Consumer>
+          {context => <Context.Provider
+            value={Object.assign(context, this.context, {
+              ...this.getChildContext(),
+              queryFragments,
+              query: {},
+              assetsBaseUrl,
+            })}
+          >
+            <UriProvider>
+              <Renderer
+                key={currentUserId}
+                {...other}
+              />
+            </UriProvider>
+          </Context.Provider>
+          }
+        </Context.Consumer>
       </MuiThemeProvider>
     )
   }

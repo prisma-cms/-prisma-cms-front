@@ -42,4 +42,6 @@ AppTextField.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AppTextField);
+export default withStyles(styles)(props => <AppTextField 
+  {...props}
+/>);

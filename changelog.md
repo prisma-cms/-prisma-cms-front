@@ -1,3 +1,8 @@
+1.11.20
+====================================
+- Fix context
+- Fix withStyles
+
 1.11.19
 ====================================
 - Added context assetsBaseUrl
