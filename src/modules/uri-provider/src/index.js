@@ -7,10 +7,7 @@ import Context from "@prisma-cms/context";
 
 export default class UriProvider extends Component {
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-  }
-
+  static contextType = Context;
 
   static childContextTypes = {
     uri: PropTypes.object,
@@ -18,17 +15,31 @@ export default class UriProvider extends Component {
 
 
   getChildContext() {
-    const {
-      router: {
-        history,
-      },
-    } = this.context;
 
     const {
       location,
-    } = history;
+    } = global;
 
-    let uri = new URI(history.createHref(location));
+    let uri;
+
+    
+    if (location) {
+      uri = new URI(location);
+    }
+    else {
+      const {
+        router: {
+          history,
+        },
+      } = this.context;
+
+      const {
+        location,
+      } = history;
+
+      uri = new URI(history.createHref(location));
+    }
+
 
     return {
       uri,
