@@ -9,13 +9,6 @@ import {
   TableView,
 } from 'apollo-cms/lib/DataView/List/Table';
 
-// import {Link} from 'react-router-dom';
-
-
-// import UserLink from '../../../ui/User/Link';
-
-
-import Pagination from '../../../Pagination';
 
 import moment from 'moment';
 
@@ -79,6 +72,11 @@ export class UsersPageView extends TableView {
 
 
   render() {
+
+
+    const {
+      Pagination,
+    } = this.context;
 
     const {
       page,

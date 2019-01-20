@@ -277,7 +277,7 @@ export default class App extends React.Component {
           >
             <UriProvider>
               <Renderer
-                key={currentUserId}
+                // key={currentUserId}
                 {...other}
               />
             </UriProvider>

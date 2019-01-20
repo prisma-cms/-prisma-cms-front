@@ -76,40 +76,13 @@ export default class UsersPage extends Page {
     if (!Renderer) {
 
       const {
-        getQueryFragment,
+        query: {
+          usersConnection,
+        },
       } = this.context;
 
-      const UserNoNestingFragment = getQueryFragment("UserNoNestingFragment");
-
-      const usersConnection = gql`
-        query usersConnection(
-          $first:Int!
-          $skip:Int
-          $orderBy: UserOrderByInput!
-          $where:UserWhereInput
-        ){
-          objectsConnection:usersConnection(
-            first: $first
-            skip: $skip
-            orderBy: $orderBy
-            where:$where
-          ){
-            aggregate{
-              count
-            }
-            edges{
-              node{
-                ...UserNoNesting
-              }
-            }
-          }
-        }
-
-        ${UserNoNestingFragment}
-      `;
-
       const Renderer = compose(
-        graphql(usersConnection, {
+        graphql( gql(usersConnection), {
           // name: 'items', 
         }),
 

@@ -27,6 +27,9 @@ import GraphqlVoyagerPage from "../../../modules/pages/GraphqlVoyager";
 
 import AdminRenderer from "./Admin";
 
+import ContextProvider from "./ContextProvider";
+import SubscriptionProvider from "./SubscriptionProvider";
+
 import * as UI from "../../../modules/ui";
 
 
@@ -393,22 +396,35 @@ export class Renderer extends Component {
     //   }}
     // </Context.Consumer>
 
+    const {
+      user: currentUser,
+    } = this.context;
+
+    const {
+      id: currentUserId,
+    } = currentUser || {};
+
     return <Context.Consumer>
       {context => <Context.Provider
         value={Object.assign(context, this.context, {
           ...this.getChildContext(),
           ...UI,
         })}
-      >
-        <Fragment>
+      > <ContextProvider>
+          <SubscriptionProvider
+            // key={currentUserId}
+          >
+            <Fragment>
 
-          {this.renderWrapper()}
+              {this.renderWrapper()}
 
-          {this.renderErrors()}
+              {this.renderErrors()}
 
-          {this.renderAuth()}
+              {this.renderAuth()}
 
-        </Fragment>
+            </Fragment>
+          </SubscriptionProvider>
+        </ContextProvider>
       </Context.Provider>}
     </Context.Consumer>
 
