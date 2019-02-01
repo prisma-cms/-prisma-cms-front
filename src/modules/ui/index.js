@@ -9,6 +9,10 @@ import Autocomplete from "./Autocomplete";
 import UserAutocomplete from "./Autocomplete/User";
 import CheckBox from "./CheckBox";
 
+import Image, {
+  getImageUrl,
+} from "./Image";
+
 export {
   Avatar,
   Link,
@@ -19,4 +23,6 @@ export {
   Autocomplete,
   UserAutocomplete,
   CheckBox,
+  Image,
+  getImageUrl,
 }
