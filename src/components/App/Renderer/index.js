@@ -409,10 +409,11 @@ export class Renderer extends Component {
         value={Object.assign(context, this.context, {
           ...this.getChildContext(),
           ...UI,
+          rendererForceUpdate: () => this.forceUpdate(),
         })}
       > <ContextProvider>
           <SubscriptionProvider
-            // key={currentUserId}
+          // key={currentUserId}
           >
             <Fragment>
 
