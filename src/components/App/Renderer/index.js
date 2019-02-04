@@ -90,7 +90,7 @@ export class Renderer extends Component {
   getChildContext() {
 
     return {
-      openLoginForm: this.openLoginForm,
+      openLoginForm: event => this.openLoginForm(event),
     }
   }
 
@@ -163,7 +163,7 @@ export class Renderer extends Component {
   }
 
 
-  openLoginForm = (event) => {
+  openLoginForm(event) {
     this.setState({
       authOpen: true,
     });
@@ -171,13 +171,13 @@ export class Renderer extends Component {
 
 
 
-  onAuthSuccess = data => {
+  onAuthSuccess(data) {
 
     const {
       onAuthSuccess,
     } = this.context;
 
-    onAuthSuccess(data);
+    return onAuthSuccess(data);
 
   }
 
