@@ -1,3 +1,7 @@
+1.12.5
+====================================
+- Move Auth class into Renderer props
+
 1.12.4
 ====================================
 - Fix onAuthSuccess

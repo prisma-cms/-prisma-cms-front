@@ -59,12 +59,14 @@ export class Renderer extends Component {
   static propTypes = {
     PageNotFound: PropTypes.func.isRequired,
     AdminRenderer: PropTypes.func.isRequired,
+    Auth: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
     PageNotFound,
     AdminRenderer,
+    Auth,
     classes: {},
   };
 
@@ -195,6 +197,10 @@ export class Renderer extends Component {
   }
 
   renderAuth() {
+
+    const {
+      Auth,
+    } = this.props;
 
     const {
       authOpen,
