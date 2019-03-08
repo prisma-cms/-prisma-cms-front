@@ -1,10 +1,14 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from "prop-types";
 
 import Renderer from './Renderer';
 
+import {
+  buildClientSchema,
+  introspectionQuery,
+} from "graphql";
 
 import Context from "@prisma-cms/context";
 
@@ -15,6 +19,8 @@ import pink from 'material-ui/colors/pink';
 import { darken } from 'material-ui/styles/colorManipulator';
 
 import UriProvider from "../../modules/uri-provider";
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 let sheetsManager = new Map();
 
@@ -69,6 +75,28 @@ function getTheme(uiTheme) {
   return theme;
 }
 
+
+const SchemaLoader = graphql(gql`
+  ${introspectionQuery}
+`)((props) => {
+
+  const {
+    data: {
+      __schema: schema,
+    },
+    children,
+  } = props;
+
+  return <Context.Consumer>
+    {context => <Context.Provider
+      value={Object.assign(context, {
+        schema,
+      })}
+    >
+      {children}
+    </Context.Provider>}
+  </Context.Consumer>;
+});
 
 
 export default class App extends React.Component {
@@ -262,29 +290,31 @@ export default class App extends React.Component {
 
 
     return (
-      <MuiThemeProvider
-        theme={theme}
-        sheetsManager={sheetsManager}
-      >
-        <Context.Consumer>
-          {context => <Context.Provider
-            value={Object.assign(context, this.context, {
-              ...this.getChildContext(),
-              queryFragments,
-              query: {},
-              assetsBaseUrl,
-            })}
-          >
-            <UriProvider>
-              <Renderer
-                // key={currentUserId}
-                {...other}
-              />
-            </UriProvider>
-          </Context.Provider>
-          }
-        </Context.Consumer>
-      </MuiThemeProvider>
+      <SchemaLoader>
+        <MuiThemeProvider
+          theme={theme}
+          sheetsManager={sheetsManager}
+        >
+          <Context.Consumer>
+            {context => <Context.Provider
+              value={Object.assign(context, this.context, {
+                ...this.getChildContext(),
+                queryFragments,
+                query: {},
+                assetsBaseUrl,
+              })}
+            >
+              <UriProvider>
+                <Renderer
+                  // key={currentUserId}
+                  {...other}
+                />
+              </UriProvider>
+            </Context.Provider>
+            }
+          </Context.Consumer>
+        </MuiThemeProvider>
+      </SchemaLoader>
     )
   }
 }
