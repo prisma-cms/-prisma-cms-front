@@ -105,14 +105,14 @@ export class UsersPageView extends TableView {
 
     if (!edges || !edges.length) {
 
-      if (loading) {
-        return null;
-      }
-      else {
-        return <Typography>
-          Данные не были получены
-        </Typography>
-      }
+      // if (loading) {
+      //   return null;
+      // }
+      // else {
+      //   return <Typography>
+      //     Данные не были получены
+      //   </Typography>
+      // }
 
 
     }
