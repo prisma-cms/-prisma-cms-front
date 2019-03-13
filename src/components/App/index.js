@@ -78,25 +78,29 @@ function getTheme(uiTheme) {
 
 const SchemaLoader = graphql(gql`
   ${introspectionQuery}
-`)((props) => {
-
-  const {
-    data: {
-      __schema: schema,
+`, {
+    options: {
+      fetchPolicy: typeof window === "undefined" ? "no-cache" : undefined,
     },
-    children,
-  } = props;
+  })((props) => {
 
-  return <Context.Consumer>
-    {context => <Context.Provider
-      value={Object.assign(context, {
-        schema,
-      })}
-    >
-      {children}
-    </Context.Provider>}
-  </Context.Consumer>;
-});
+    const {
+      data: {
+        __schema: schema,
+      },
+      children,
+    } = props;
+
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={Object.assign(context, {
+          schema,
+        })}
+      >
+        {children}
+      </Context.Provider>}
+    </Context.Consumer>;
+  });
 
 
 export default class App extends React.Component {

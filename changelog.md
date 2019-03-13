@@ -1,3 +1,7 @@
+1.12.8
+====================================
+- Exclude schema from cache in SSR mode
+
 1.12.7
 ====================================
 - Fix UserPage view
