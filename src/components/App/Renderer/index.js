@@ -30,8 +30,6 @@ import AdminRenderer from "./Admin";
 import ContextProvider from "./ContextProvider";
 import SubscriptionProvider from "./SubscriptionProvider";
 
-import * as UI from "../../../modules/ui";
-
 
 export const styles = {
   root: {
@@ -414,7 +412,6 @@ export class Renderer extends Component {
       {context => <Context.Provider
         value={Object.assign(context, this.context, {
           ...this.getChildContext(),
-          ...UI,
           rendererForceUpdate: () => this.forceUpdate(),
         })}
       > <ContextProvider>

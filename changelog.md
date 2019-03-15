@@ -1,3 +1,7 @@
+1.12.9
+====================================
+- Move UI into context
+
 1.12.8
 ====================================
 - Exclude schema from cache in SSR mode
