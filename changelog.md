@@ -1,3 +1,7 @@
+====================================
+- Added Pagination::pageVariable
+- Auth refactoring
+
 1.12.10
 ====================================
 - Fix react-router

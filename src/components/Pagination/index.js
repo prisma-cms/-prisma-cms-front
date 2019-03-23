@@ -56,8 +56,14 @@ export class Pagination extends Component {
     // prop: PropTypes
     classes: PropTypes.object.isRequired,
     limit: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
+    // page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    pageVariable: PropTypes.string.isRequired,
+  }
+
+
+  static defaultProps = {
+    pageVariable: "page",
   }
 
 
@@ -68,11 +74,15 @@ export class Pagination extends Component {
 
   getNewLocation = (page) => {
 
+    // console.log("getNewLocation", page);
 
     const {
       router,
     } = this.context;
 
+    const {
+      pageVariable,
+    } = this.props;
 
     // return '/';
 
@@ -114,12 +124,15 @@ export class Pagination extends Component {
     // }
 
     Object.assign(query, {
-      page: page > 1 ? page : undefined,
+      [pageVariable]: page > 1 ? page : undefined,
     });
 
     uri.query(query);
 
-    return uri.toString();
+    // console.log("getNewLocation pageVariable", pageVariable);
+    // console.log("getNewLocation uri", uri.resource());
+
+    return uri.resource();
 
     // const newLocation = {
     //   pathname,
@@ -137,6 +150,17 @@ export class Pagination extends Component {
 
   }
 
+
+  getPage() {
+
+    const {
+      pageVariable,
+    } = this.props;
+
+    return this.props[pageVariable] || 1;
+  }
+
+
   render() {
 
 
@@ -144,7 +168,12 @@ export class Pagination extends Component {
       classes,
     } = this.props;
 
-    let { page, limit, total } = this.props;
+    let {
+      limit,
+      total,
+    } = this.props;
+
+    const page = this.getPage();
 
     if (!page || !limit || !total) {
       return null;

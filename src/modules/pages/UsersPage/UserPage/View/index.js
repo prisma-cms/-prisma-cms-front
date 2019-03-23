@@ -172,7 +172,7 @@ export default class UserPageView extends EditableView {
     const object = this.getObjectWithMutations();
     const inEditMode = this.isInEditMode();
 
-    if(!object){
+    if (!object) {
       return null;
     }
 
@@ -229,17 +229,18 @@ export default class UserPageView extends EditableView {
   }
 
   renderEditableView() {
-
+    
+    const {
+      user: currentUser,
+      PhoneField,
+    } = this.context;
+    
     const object = this.getObjectWithMutations();
     const inEditMode = this.isInEditMode();
 
-    if(!object){
+    if (!object) {
       return null;
     }
-
-    const {
-      user: currentUser,
-    } = this.context;
 
     return <Grid
       container
@@ -255,7 +256,7 @@ export default class UserPageView extends EditableView {
         {/* 
           For google chrome anti autocomplete
          */}
-        <input 
+        <input
           name="username"
           style={{
             border: "none",
@@ -265,7 +266,7 @@ export default class UserPageView extends EditableView {
           }}
         />
 
-        <input 
+        <input
           name="password"
           type="password"
           style={{
@@ -320,6 +321,18 @@ export default class UserPageView extends EditableView {
               name: "email",
               label: "Email",
               helperText: "Type email",
+            })}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            {this.getTextField({
+              Editor: PhoneField,
+              name: "phone",
+              label: "Phone",
+              helperText: "Type phone",
             })}
           </Grid>
 

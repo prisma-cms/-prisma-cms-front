@@ -80,7 +80,7 @@ export class Renderer extends Component {
     super(props);
 
     this.state = {
-      authOpen: false,
+      authOpen: true,
     };
 
   }

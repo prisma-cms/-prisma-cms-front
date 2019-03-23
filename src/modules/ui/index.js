@@ -3,11 +3,14 @@ import Avatar from "./Avatar";
 import Link from "./Link";
 import UserLink from "./Link/User";
 import Grid from "./Grid";
-import Pagination from "./Pagination";
+import Pagination from "../../components/Pagination";
 import Editor from "./Editor";
 import Autocomplete from "./Autocomplete";
 import UserAutocomplete from "./Autocomplete/User";
 import CheckBox from "./CheckBox";
+import PhoneField, {
+  formatPhone,
+} from "./Input/Phone";
 
 import Image, {
   getImageUrl,
@@ -25,4 +28,6 @@ export {
   CheckBox,
   Image,
   getImageUrl,
+  PhoneField,
+  formatPhone,
 }

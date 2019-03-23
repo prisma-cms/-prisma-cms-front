@@ -1,140 +1,410 @@
-import React, {Component} from 'react';
-import PropTypes from "prop-types";
- 
-import Prototype from './Prototype';
-  
+/**
+ * Форма ввода пароля или сброса выводится только тогда, когда найден конкретный пользователь.
+ * Пока он не найден, выводится форма для поиска пользователя.
+ * Когда пользователь найден, тогда переходим к нему и выбираем.
+ */
 
-
-class AuthPrototype extends Prototype{
-
-
-
-  findUser(){
-
-    if(this.state.wait_for_response === true){
-      return;
-    }
-
-    var query = this.state.login;
-
-    var body = new FormData();
-
-    var data = {
-      query: query,
-    };
-
-    for(var i in data){
-      body.append(i, data[i]);
-    };
-
-    // var headers;
-
-    var newStata = {
-      errors: {
-        login: "",
-      },
-      wait_for_response: false,
-    }
-
-    fetch(this.props.connector_url +'?pub_action=users/find_user',{
-      credentials: 'same-origin',
-      method: "POST",
-      body: body,
-    })
-      .then(function (response) {
-
-        return response.json()
-      })
-      .then(function (data) {
- 
-        if(data.success){
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 
 
-          if(data.object && data.object.id){
-            Object.assign(newStata, {
-              step: 2,
-              login: data.object.username,
-              avatar: data.object.image,
-              fullname: data.object.fullname || data.object.username,
-            });
-          }
-          else{
+import { withStyles } from 'material-ui';
 
-            newStata.errors = {
-              login: {
-                errorText: "Ошибка",
-              }
-            }
+import PrismaCmsComponent from "@prisma-cms/component";
 
-            this.props.addInformerMessage({
-              text: data.message || "Пользователь не был найден",
-              autohide: 3000,
-            });
-          }
-        }
-        else{
+import SigninForm from "./forms/Signin";
 
-          this.props.addInformerMessage({
-            text: data.message || "Request error",
-            autohide: 4000,
-          });
-        } 
+import Users from "./Users";
 
-        this.setState(newStata);
 
-      }.bind(this))
-      .catch((error) => {
-          console.error('Request failed', error);
-          this.setState(newStata);
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import { Button } from 'material-ui';
 
-          this.props.addInformerMessage({
-            text: "Request error",
-            autohide: 4000,
-          });
-        }
-      );
 
-    this.setState({
-      wait_for_response: true,
-    });
+const styles = {
+  root: {
+    // width: 360,
+  },
+  // DialogContentRoot: {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   flexBasis: "100%",
+  //   alignItems: "center",
+  // },
+};
+
+
+class Auth extends PrismaCmsComponent {
+
+  static propTypes = {
+    ...PrismaCmsComponent.propTypes,
+    loginCanceled: PropTypes.func.isRequired,
+    loginComplete: PropTypes.func.isRequired,
+
+    step: PropTypes.oneOf([
+      "findUser",
+      "signin",
+    ]).isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
-}
-
-
-
-export default class Auth extends Component{
-
   static defaultProps = {
-    open: false,
-    step: 1,
+    ...PrismaCmsComponent.defaultProps,
+    step: "findUser",
     showRegForm: true,
     allowPasswordRecovery: true,
+    first: 2,
+    fullWidth: true,
+    maxWidth: "xs",
   };
 
 
-  static propTypes = {
-    loginCanceled: PropTypes.func.isRequired,
-    loginComplete: PropTypes.func.isRequired,
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
+      ...this.state,
+      // open: true,
+    }
   }
 
-  render(){
+
+  renderForm() {
+
+    const {
+      step,
+    } = this.props;
+
+    let form;
+
+
+    switch (step) {
+
+      case "findUser":
+      case "signin":
+
+        form = this.renderSigninForm();
+        break;
+    }
+
+
+    return form;
+  }
+
+
+  renderSigninForm() {
+
+    // let actions = [];
+
+    // return <Fragment>
+    //   <DialogContent
+    //   // classes={{
+    //   //   root: classes.DialogContentRoot,
+    //   // }}
+    //   >
+
+    //     wefewf
+
+    //   </DialogContent>
+
+    //   <DialogActions>
+    //     {actions}
+    //   </DialogActions>
+    // </Fragment>
+
+    const {
+      open,
+      loginCanceled,
+      loginComplete,
+    } = this.props;
+
+    return <SigninForm
+      open={open}
+      loginCanceled={loginCanceled}
+      loginComplete={loginComplete}
+    />
+
+  }
+
+
+  getFilters() {
+
+
+    const {
+      uri,
+    } = this.context;
+
+
+    let {
+      page,
+      authFilters: filters,
+    } = uri.query(true);
+
+    if (filters) {
+
+      try {
+        filters = filters && JSON.parse(filters) || null;
+      }
+      catch (error) {
+        console.error(console.error(error));
+      }
+
+    }
+
+    return filters;
+  }
+
+
+  setFilters(filters) {
+
+    const {
+      uri,
+      router: {
+        history,
+      },
+    } = this.context;
+
+    // console.log("setFilters", filters);
+
+    let newUri = uri.clone();
+
+    const currentFilters = this.getFilters();
+
+    filters = {
+      ...currentFilters,
+      ...filters,
+    }
+
+
+    try {
+      filters = filters ? JSON.stringify(filters) : undefined;
+    }
+    catch (error) {
+      console.error(error);
+    }
+
+
+    if (filters === "{}") {
+      filters = undefined;
+    }
+
+    if (filters) {
+
+      // if (newUri.hasQuery) {
+      newUri = newUri.setQuery({
+        authFilters: filters,
+      });
+      // }
+      // else {
+      //   newUri = newUri.addQuery({
+      //     filters,
+      //   });
+      // }
+
+    }
+    else {
+
+      newUri.removeQuery("authFilters");
+
+    }
+
+    newUri.removeQuery("authPage");
+
+
+    const url = newUri.resource();
+
+    // console.log("setFilters uri", newUri, url);
+
+    history.push(url);
+
+  }
+
+
+  cleanFilters() {
+
+    const {
+      uri,
+      router: {
+        history,
+      },
+    } = this.context;
+
+
+    let newUri = uri.clone();
+
+
+    newUri.removeQuery("authPage");
+    newUri.removeQuery("authFilters");
+
+
+    const url = newUri.resource();
+
+    history.push(url);
+
+  }
+
+
+  prepareWhere() {
+
+    const {
+      search,
+    } = this.getFilters() || {};
+
+    let where;
+
+    if (search) {
+
+      where = {
+        OR: [
+          {
+            id: search,
+          },
+          {
+            username_contains: search,
+          },
+          {
+            email_contains: search,
+          },
+          {
+            fullname_contains: search,
+          },
+          {
+            phone_contains: search,
+          },
+        ],
+      };
+
+    }
+
+    return where;
+  }
+
+
+  renderActions() {
+
+    return <Fragment>
+      <Button
+        onClick={this.handleClose}
+      // color="primary"
+      >
+        Регистрация
+      </Button>
+      <Button
+        onClick={this.handleClose}
+      // color="primary"
+      >
+        Отмена
+      </Button>
+      <Button
+        onClick={this.handleClose}
+        color="primary"
+        autoFocus
+      >
+        Agree
+      </Button>
+    </Fragment>
+  }
+
+
+  render() {
+
+    const {
+      uri,
+    } = this.context;
 
     let {
       loginCanceled,
       loginComplete,
+
+      fullWidth,
+      maxWidth,
+      dialogProps,
+      classes,
+      step,
+      where,
+      first,
+      open,
       ...other
     } = this.props;
 
 
+    const {
+      password,
+      // open,
+    } = this.state;
+
+    const {
+      authPage,
+    } = uri.query(true);
 
 
-    return <AuthPrototype
-      loginCanceled={loginCanceled}
-      loginComplete={loginComplete}
-      {...other}
+    return this.renderForm() || null;
+
+
+
+    let skip;
+
+    if (authPage > 1 && first) {
+      skip = (authPage - 1) * first;
+    }
+
+    let users = <Users
+      first={first}
+      skip={skip}
+      where={this.prepareWhere()}
+      setFilters={filters => this.setFilters(filters)}
+      getFilters={() => this.getFilters()}
+      cleanFilters={() => this.cleanFilters()}
+      password={password || ""}
+      onPasswordChange={password => {
+        this.setState({
+          password,
+        });
+      }}
     />
+
+    return <Dialog
+      fullWidth={fullWidth}
+      maxWidth={maxWidth}
+      open={open ? true : false}
+      onClose={this.onRequestClose}
+      onEntering={this.handleEntering}
+      {...dialogProps}
+    >
+
+      <DialogTitle>
+        Авторизация
+      </DialogTitle>
+
+      <DialogContent
+      // classes={{
+      //   root: classes.DialogContentRoot,
+      // }}
+      >
+
+        {users}
+
+      </DialogContent>
+
+      <DialogActions>
+        {this.renderActions()}
+      </DialogActions>
+
+
+    </Dialog>
+
+
   }
+
 }
- 
+
+
+export default withStyles(styles)(props => <Auth
+  {...props}
+/>);

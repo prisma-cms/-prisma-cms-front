@@ -74,6 +74,7 @@ class ContextProvider extends Component {
     const {
       UserNoNestingFragment,
       BatchPayloadNoNestingFragment,
+      ResetPasswordNoNestingFragment,
     } = queryFragments;
 
 
@@ -202,6 +203,56 @@ class ContextProvider extends Component {
     `;
 
 
+    const signup = `
+      mutation signup(
+        $data: UserCreateInput!
+      ) {
+        response: signup(
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          token
+          data{
+            ...UserNoNesting
+          }
+        }
+      }
+
+      ${UserNoNestingFragment}
+    `;
+
+
+    const signin = `
+      mutation signin(
+        $data: SigninDataInput!
+        $where: UserWhereUniqueInput!
+      ) {
+        response: signin(
+          data: $data
+          where: $where
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          token
+          data{
+            ...UserNoNesting
+          }
+        }
+      }
+
+      ${UserNoNestingFragment}
+    `;
+
+
 
     const deleteUser = `
       mutation deleteUser (
@@ -231,6 +282,55 @@ class ContextProvider extends Component {
     `;
 
 
+    const createResetPasswordProcessor = `
+      mutation createResetPasswordProcessor(
+        $data: ResetPasswordCreateInput!
+      ) {
+        response: createResetPasswordProcessor(
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...ResetPasswordNoNesting
+          }
+        }
+      }
+
+      ${ResetPasswordNoNestingFragment}
+    `;
+
+
+    const resetPasswordProcessor = `
+      mutation resetPasswordProcessor(
+        $data: ResetPasswordInput!
+        $where: UserWhereUniqueInput!
+      ) {
+        response: resetPasswordProcessor(
+          data: $data
+          where: $where
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          token
+          data{
+            ...UserNoNesting
+          }
+        }
+      }
+
+      ${UserNoNestingFragment}
+    `;
+
+
     return {
       usersConnection,
       users,
@@ -238,7 +338,11 @@ class ContextProvider extends Component {
       createUserProcessor,
       updateUserProcessor,
       deleteUser,
+      signup,
+      signin,
       deleteManyUsers,
+      createResetPasswordProcessor,
+      resetPasswordProcessor,
     }
 
   }
