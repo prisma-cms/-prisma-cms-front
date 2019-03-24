@@ -10,13 +10,7 @@ import URI from 'urijs';
 
 export default class PageLayout extends PrismaCmsComponent {
 
-  // static contextTypes = {
-  //   ...PrismaCmsComponent.contextTypes,
-  //   user: PropTypes.object,
-  //   client: PropTypes.object.isRequired,
-  //   uri: PropTypes.object.isRequired,
-  //   getQueryFragment: PropTypes.func.isRequired,
-  // }
+  static contextType = Context;
 
   static propTypes = {
     ...PrismaCmsComponent.propTypes,
@@ -29,21 +23,21 @@ export default class PageLayout extends PrismaCmsComponent {
   };
 
 
-  static childContextTypes = {
-    ...PrismaCmsComponent.childContextTypes,
-    setPageMeta: PropTypes.func,
-  }
+  // static childContextTypes = {
+  //   ...PrismaCmsComponent.childContextTypes,
+  //   setPageMeta: PropTypes.func,
+  // }
 
 
-  getChildContext() {
+  // getChildContext() {
 
-    let context = super.getChildContext ? super.getChildContext() : {};
+  //   let context = super.getChildContext ? super.getChildContext() : {};
 
-    return {
-      ...context,
-      setPageMeta: meta => this.setPageMeta(meta),
-    };
-  }
+  //   return {
+  //     ...context,
+  //     setPageMeta: meta => this.setPageMeta(meta),
+  //   };
+  // }
 
 
 
@@ -261,13 +255,15 @@ export default class PageLayout extends PrismaCmsComponent {
     }
 
 
-    return <Context.Provider
-      value={Object.assign(this.context, {
-        ...this.getChildContext(),
-      })}
-    >
-      {content}
-    </Context.Provider>;
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={Object.assign(context, {
+          setPageMeta: meta => this.setPageMeta(meta),
+        })}
+      >
+        {content}
+      </Context.Provider>}
+    </Context.Consumer>;
 
   }
 }

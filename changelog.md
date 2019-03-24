@@ -1,3 +1,7 @@
+1.13.1
+====================================
+- Fix PageLayout context
+
 1.13.0
 ====================================
 - Added Pagination::pageVariable
