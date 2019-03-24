@@ -862,7 +862,12 @@ class AuthUsersConnector extends Component {
 
     this.Renderer = compose(
       graphql(gql(usersConnection), {
-        skip: (props) => !props.where ? true : false,
+        skip: (props) => {
+
+          console.log("skip props", props);
+
+          return !props.where ? true : false;
+        },
       }),
     )(View);
 
@@ -913,6 +918,9 @@ export default class AuthUsersForm extends PrismaCmsComponent {
       page,
       authFilters: filters,
     } = uri.query(true);
+
+
+    console.log("filters", filters);
 
     if (filters) {
 
@@ -1019,13 +1027,8 @@ export default class AuthUsersForm extends PrismaCmsComponent {
 
 
   prepareWhere() {
-
-    const {
-      ...where
-    } = this.getFilters() || {};
-
-
-    return where;
+ 
+    return this.getFilters();
   }
 
   render() {

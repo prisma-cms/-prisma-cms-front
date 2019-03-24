@@ -18,6 +18,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     listStyle: "none",
+    margin: 0,
+    padding: 0,
   },
   active: {
     background: "#ddd",
@@ -26,7 +28,7 @@ const styles = {
 
   },
   link: {
-    padding: "3px 8px",
+    padding: "3px 6px",
     border: "1px solid #ddd",
     marginLeft: 3,
     marginRight: 3,
@@ -157,7 +159,9 @@ export class Pagination extends Component {
       pageVariable,
     } = this.props;
 
-    return this.props[pageVariable] || 1;
+    const page = this.props[pageVariable];
+
+    return parseInt(page) || 1;
   }
 
 
