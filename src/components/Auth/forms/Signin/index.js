@@ -1021,34 +1021,9 @@ export default class AuthUsersForm extends PrismaCmsComponent {
   prepareWhere() {
 
     const {
-      search,
+      ...where
     } = this.getFilters() || {};
 
-    let where;
-
-    if (search) {
-
-      where = {
-        OR: [
-          {
-            id: search,
-          },
-          {
-            username_contains: search,
-          },
-          {
-            email_contains: search,
-          },
-          {
-            fullname_contains: search,
-          },
-          {
-            phone_contains: search,
-          },
-        ],
-      };
-
-    }
 
     return where;
   }
