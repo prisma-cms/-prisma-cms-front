@@ -864,10 +864,29 @@ class AuthUsersConnector extends Component {
       graphql(gql(usersConnection), {
         skip: (props) => {
 
-          console.log("skip props", props);
+          // console.log("skip props", props);
 
           return !props.where ? true : false;
         },
+        options: (props) => {
+
+          // console.log("options", props);
+
+          let {
+            where,
+            ...other
+          } = props || {}
+
+          return {
+            variables: {
+              where: {
+                showHidden: true,
+                ...where,
+              },
+              ...other
+            },
+          }
+        }
       }),
     )(View);
 
@@ -919,8 +938,6 @@ export default class AuthUsersForm extends PrismaCmsComponent {
       authFilters: filters,
     } = uri.query(true);
 
-
-    console.log("filters", filters);
 
     if (filters) {
 
@@ -1027,7 +1044,7 @@ export default class AuthUsersForm extends PrismaCmsComponent {
 
 
   prepareWhere() {
- 
+
     return this.getFilters();
   }
 

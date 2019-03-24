@@ -11,6 +11,14 @@ import UserAvatar from './Avatar';
 
 import UsersGroupsBlock from "./Groups";
 
+import {
+  Checkbox,
+} from "material-ui";
+import { FormControlLabel } from 'material-ui';
+import { Typography } from 'material-ui';
+import { FormControl } from 'material-ui';
+import { FormLabel } from 'material-ui';
+import { FormGroup } from 'material-ui';
 
 
 export default class UserPageView extends EditableView {
@@ -229,18 +237,22 @@ export default class UserPageView extends EditableView {
   }
 
   renderEditableView() {
-    
+
     const {
       user: currentUser,
       PhoneField,
     } = this.context;
-    
+
     const object = this.getObjectWithMutations();
     const inEditMode = this.isInEditMode();
 
     if (!object) {
       return null;
     }
+
+    const {
+      hidden,
+    } = object;
 
     return <Grid
       container
@@ -288,7 +300,7 @@ export default class UserPageView extends EditableView {
 
         <Grid
           container
-          spacing={8}
+          spacing={16}
         >
 
           <Grid
@@ -346,6 +358,35 @@ export default class UserPageView extends EditableView {
               type: "password",
               helperText: "Type password",
             })}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+          >
+            {/* <FormControl component="fieldset">
+              <FormLabel component="legend">Profile visibility</FormLabel>
+              <FormGroup> */}
+            <FormControlLabel
+              control={<Checkbox
+                checked={hidden ? true : false}
+                onChange={(event, checked) => {
+
+                  this.updateObject({
+                    hidden: checked,
+                  });
+
+                }}
+              />}
+              label="Hide profile"
+            />
+            {/* </FormGroup>
+            </FormControl> */}
+            <Typography
+              variant="caption"
+            >
+              If checked, profile will be exclude from lists.
+            </Typography>
           </Grid>
 
         </Grid>
