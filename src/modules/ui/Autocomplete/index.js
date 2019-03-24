@@ -316,7 +316,7 @@ export class Autocomplete extends Component {
             </Grid>
           }}
           renderItem={(item, isHighlighted, style) => {
-            //            console.log("renderItem item", item, value);
+
 
             const text = getItemText(item);
 

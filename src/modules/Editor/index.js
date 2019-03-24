@@ -3,7 +3,7 @@ import {
   Editor,
 } from "../ui";
 
-console.log("@prisma-cms/front/src/modules/Editor is deprecated. Use {Editor}$prisma-cms/context instead");
+
 
 export default Editor;
 

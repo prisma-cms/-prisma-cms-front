@@ -152,7 +152,7 @@ function SelectWrapped(props) {
       }}
       clearRenderer={() => <ClearIcon />}
       // onInputKeyDown={event => {
-      //   console.log("onInputKeyDown", event);
+
       //   event.preventDefault();
       // }}
       // openOnClick={false}
@@ -188,7 +188,7 @@ const ITEM_HEIGHT = 48;
 
 const styles = theme => {
 
-  // console.log("theme", theme.palette.text.primary);
+
 
   return {
     root: {

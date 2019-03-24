@@ -1,6 +1,9 @@
+1.13.0
 ====================================
 - Added Pagination::pageVariable
 - Auth refactoring
+- Added reset password
+- Added PhoneField
 
 1.12.10
 ====================================

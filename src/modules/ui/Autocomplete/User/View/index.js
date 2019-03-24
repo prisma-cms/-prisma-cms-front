@@ -92,7 +92,7 @@ export default class TopicBlogView extends Component {
         ...inputProps,
       }}
       onChange={(event, value) => {
-        // console.log("onChange", value);
+
         // this.setState({
         //   value: value,
         // }, () => {
@@ -105,7 +105,7 @@ export default class TopicBlogView extends Component {
         })
       }}
       // onSelect={(value, item) => {
-      //   console.log("onSelect", value, item);
+
       //   // this.loadObjectData(id);
       //   // this.setState({
       //   //   object: item,
@@ -122,7 +122,7 @@ export default class TopicBlogView extends Component {
       items={items}
       value={opened ? (search || "") : displayValue || value || ""}
       onMenuVisibilityChange={opened => {
-        //        console.log("onMenuVisibilityChange", opened);
+
 
         // if (opened && !items.length) {
         //   this.loadData();
@@ -144,7 +144,7 @@ export default class TopicBlogView extends Component {
       //   return label;
       // }}
       // onSelect={(value, item) => {
-      //   console.log("onSelect", value, item);
+
       //   const {
       //     id,
       //   } = item;

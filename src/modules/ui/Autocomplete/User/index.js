@@ -126,7 +126,7 @@ export default class UserAutocomplete extends PrismaCmsComponent {
         ]
       }}
       // onChange={(event, value) => {
-      //   console.log("onChange", value, event.target.value);
+
       //   this.setFilters({
       //     name_contains: value && value.trim() || undefined,
       //   })

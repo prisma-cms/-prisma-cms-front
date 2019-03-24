@@ -19,6 +19,7 @@ class AuthForm extends PrismaCmsComponent {
     maxWidth: PropTypes.string,
     dialogProps: PropTypes.object,
     loginCanceled: PropTypes.func.isRequired,
+    switchForm: PropTypes.func.isRequired,
   };
 
 
@@ -44,13 +45,108 @@ class AuthForm extends PrismaCmsComponent {
 
   // }
 
-  onRequestClose = event => {
+  onRequestClose(event) {
 
     const {
       loginCanceled,
     } = this.props;
 
     return loginCanceled();
+  }
+
+
+  cleanForm() {
+
+  }
+
+
+  closeForm() {
+    const {
+      cleanFilters,
+      loginCanceled,
+    } = this.props;
+
+    this.cleanForm()
+
+    loginCanceled();
+
+  }
+
+
+  switchForm(form) {
+
+    const {
+      switchForm,
+    } = this.props;
+
+    // this.cleanForm();
+
+    return switchForm(form);
+
+  }
+
+
+
+  onAuth(result) {
+
+    const {
+      response,
+    } = result && result.data || {};
+
+    const {
+      success,
+      message,
+      errors: responseErrors,
+      token,
+      data: user,
+    } = response || {};
+
+
+    if (success && token && user) {
+
+      const {
+        loginComplete,
+      } = this.props;
+
+      loginComplete({
+        token,
+        user,
+      });
+
+    }
+
+    this.closeForm();
+
+    return result;
+
+  }
+
+
+  mutate(params) {
+
+    this.setState({
+      inRequest: true,
+    });
+
+    return super.mutate(params)
+      .then(result => {
+
+        this.setState({
+          inRequest: false,
+        });
+
+        return result;
+
+      })
+      .catch(error => {
+
+        this.setState({
+          inRequest: false,
+        });
+
+        throw error;
+      });
+
   }
 
 
@@ -74,7 +170,7 @@ class AuthForm extends PrismaCmsComponent {
         fullWidth={fullWidth}
         maxWidth={maxWidth}
         open={open}
-        onClose={this.onRequestClose}
+        onClose={event => this.onRequestClose(event)}
         // onEntering={this.handleEntering}
         {...dialogProps}
       >
@@ -84,57 +180,6 @@ class AuthForm extends PrismaCmsComponent {
       </Dialog>
     )
 
-
-
-    const onSubmit = this.getSubmit();
-
-    console.log("getSubmit onSubmit", onSubmit);
-
-    return super.render(
-      <Dialog
-        fullWidth={fullWidth}
-        maxWidth={maxWidth}
-        open={open}
-        onClose={this.onRequestClose}
-        onEntering={this.handleEntering}
-        {...dialogProps}
-      >
-        <form
-          style={{
-            width: "100%",
-          }}
-          onSubmit={event => {
-
-            event.preventDefault();
-
-            console.log("onSubmit", onSubmit);
-
-            if (onSubmit) {
-              onSubmit();
-            }
-
-
-          }}
-        >
-
-          <DialogContent
-          // classes={{
-          //   root: classes.DialogContentRoot,
-          // }}
-          >
-
-            {this.renderForm()}
-
-          </DialogContent>
-
-          <DialogActions>
-            {this.renderActions()}
-          </DialogActions>
-
-        </form>
-
-      </Dialog>
-    )
 
   }
 }

@@ -14,6 +14,7 @@ import { withStyles } from 'material-ui';
 import PrismaCmsComponent from "@prisma-cms/component";
 
 import SigninForm from "./forms/Signin";
+import SignupForm from "./forms/Signup";
 
 import Users from "./Users";
 
@@ -47,15 +48,17 @@ class Auth extends PrismaCmsComponent {
     loginComplete: PropTypes.func.isRequired,
 
     step: PropTypes.oneOf([
-      "findUser",
+      // "findUser",
       "signin",
+      "signup",
     ]).isRequired,
+
     classes: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
     ...PrismaCmsComponent.defaultProps,
-    step: "findUser",
+    step: "signin",
     showRegForm: true,
     allowPasswordRecovery: true,
     first: 2,
@@ -68,8 +71,13 @@ class Auth extends PrismaCmsComponent {
 
     super(props);
 
+    const {
+      step,
+    } = props;
+
     this.state = {
       ...this.state,
+      step,
       // open: true,
     }
   }
@@ -79,17 +87,22 @@ class Auth extends PrismaCmsComponent {
 
     const {
       step,
-    } = this.props;
+    } = this.state;
 
     let form;
 
 
     switch (step) {
 
-      case "findUser":
+      // case "findUser":
       case "signin":
 
         form = this.renderSigninForm();
+        break;
+
+      case "signup":
+
+        form = this.renderSignupForm();
         break;
     }
 
@@ -99,24 +112,6 @@ class Auth extends PrismaCmsComponent {
 
 
   renderSigninForm() {
-
-    // let actions = [];
-
-    // return <Fragment>
-    //   <DialogContent
-    //   // classes={{
-    //   //   root: classes.DialogContentRoot,
-    //   // }}
-    //   >
-
-    //     wefewf
-
-    //   </DialogContent>
-
-    //   <DialogActions>
-    //     {actions}
-    //   </DialogActions>
-    // </Fragment>
 
     const {
       open,
@@ -128,6 +123,33 @@ class Auth extends PrismaCmsComponent {
       open={open}
       loginCanceled={loginCanceled}
       loginComplete={loginComplete}
+      switchForm={form => {
+        this.setState({
+          step: form,
+        });
+      }}
+    />
+
+  }
+
+
+  renderSignupForm() {
+
+    const {
+      open,
+      loginCanceled,
+      loginComplete,
+    } = this.props;
+
+    return <SignupForm
+      open={open}
+      loginCanceled={loginCanceled}
+      loginComplete={loginComplete}
+      switchForm={form => {
+        this.setState({
+          step: form,
+        });
+      }}
     />
 
   }
@@ -170,7 +192,7 @@ class Auth extends PrismaCmsComponent {
       },
     } = this.context;
 
-    // console.log("setFilters", filters);
+
 
     let newUri = uri.clone();
 
@@ -219,7 +241,7 @@ class Auth extends PrismaCmsComponent {
 
     const url = newUri.resource();
 
-    // console.log("setFilters uri", newUri, url);
+
 
     history.push(url);
 
@@ -253,34 +275,35 @@ class Auth extends PrismaCmsComponent {
   prepareWhere() {
 
     const {
-      search,
+      // search,
+      where,
     } = this.getFilters() || {};
 
-    let where;
+    // let where;
 
-    if (search) {
+    // if (search) {
 
-      where = {
-        OR: [
-          {
-            id: search,
-          },
-          {
-            username_contains: search,
-          },
-          {
-            email_contains: search,
-          },
-          {
-            fullname_contains: search,
-          },
-          {
-            phone_contains: search,
-          },
-        ],
-      };
+    //   where = {
+    //     OR: [
+    //       {
+    //         id: search,
+    //       },
+    //       {
+    //         username_contains: search,
+    //       },
+    //       {
+    //         email_contains: search,
+    //       },
+    //       {
+    //         fullname_contains: search,
+    //       },
+    //       {
+    //         phone_contains: search,
+    //       },
+    //     ],
+    //   };
 
-    }
+    // }
 
     return where;
   }

@@ -19,6 +19,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
+import { LinearProgress } from 'material-ui/Progress';
 
 class AuthUsers extends AuthForm {
 
@@ -46,7 +47,7 @@ class AuthUsers extends AuthForm {
       [name]: search,
     } = getFilters() || {}
 
-    console.log("getFilters", getFilters());
+
 
     return this.renderField(<TextField
       label="Логин"
@@ -88,8 +89,8 @@ class AuthUsers extends AuthForm {
       },
     } = this.context;
 
-    // console.log("signin", signin);
-    // console.log("context", this.context.query);
+
+
 
     // return;
 
@@ -131,8 +132,6 @@ class AuthUsers extends AuthForm {
       resetPasswordInRequest: true,
     });
 
-    // console.log("signin", signin);
-    // console.log("context", this.context.query);
 
     // return;
 
@@ -157,40 +156,6 @@ class AuthUsers extends AuthForm {
   }
 
 
-  onAuth(result) {
-
-    const {
-      response,
-    } = result && result.data || {};
-
-    const {
-      success,
-      message,
-      errors: responseErrors,
-      token,
-      data: user,
-    } = response || {};
-
-
-    if (success && token && user) {
-
-      const {
-        loginComplete,
-      } = this.props;
-
-      loginComplete({
-        token,
-        user,
-      });
-
-    }
-
-    this.closeForm();
-
-    return result;
-
-  }
-
 
   // getSubmit() {
 
@@ -204,7 +169,7 @@ class AuthUsers extends AuthForm {
 
   //   const user = this.getUser();
 
-  //   console.log("getSubmit user", user);
+
 
   //   if (user) {
 
@@ -264,22 +229,39 @@ class AuthUsers extends AuthForm {
   // }
 
 
-  closeForm() {
+
+
+  cleanFilters() {
+
     const {
       cleanFilters,
-      loginCanceled,
     } = this.props;
 
-    cleanFilters()
+    return cleanFilters();
+  }
 
-    loginCanceled();
+
+  cleanForm() {
+
+    this.cleanFilters()
 
     this.setState({
       resetPasswordId: null,
       resetPasswordCode: null,
     });
 
+    super.cleanForm();
+
   }
+
+
+  onRequestClose(event) {
+
+    this.cleanForm();
+
+    return super.onRequestClose();
+  }
+
 
 
   renderForm() {
@@ -303,6 +285,8 @@ class AuthUsers extends AuthForm {
     const {
       resetPasswordId,
       resetPasswordCode,
+      resetPasswordInRequest,
+      inRequest,
     } = this.state;
 
 
@@ -346,7 +330,7 @@ class AuthUsers extends AuthForm {
       users = objectsConnection ? objectsConnection.edges.map(n => n.node) : [];
       count = objectsConnection ? objectsConnection.aggregate.count : 0;
 
-      // console.log("users", users, count);
+
 
       if (users.length) {
 
@@ -440,6 +424,13 @@ class AuthUsers extends AuthForm {
         }}
       >
 
+        {/* <UserLink
+          user={user}
+          withAvatar={false}
+          style={{
+            textAlign: "center"
+          }}
+        > */}
         <Avatar
           size="big"
           user={user}
@@ -450,6 +441,7 @@ class AuthUsers extends AuthForm {
         >
           {username || userId} {fullname ? `(${fullname})` : null}
         </Typography>
+        {/* </UserLink> */}
 
         {/* <form
           style={{
@@ -521,6 +513,25 @@ class AuthUsers extends AuthForm {
     let actions = [];
 
 
+
+    if (!user) {
+
+      actions.push(<Button
+        key="registration"
+        // color="primary"
+        onClick={event => {
+
+          this.switchForm("signup");
+
+        }}
+        size="small"
+      >
+        Зарегистрироваться
+      </Button>);
+
+    }
+
+
     actions.push(<Button
       key="cancel"
       // color="primary"
@@ -529,6 +540,7 @@ class AuthUsers extends AuthForm {
         this.closeForm();
 
       }}
+      size="small"
     >
       Отмена
     </Button>);
@@ -536,7 +548,7 @@ class AuthUsers extends AuthForm {
 
     // const user = this.getUser();
 
-    // console.log("getSubmit user", user);
+
 
 
 
@@ -589,6 +601,8 @@ class AuthUsers extends AuthForm {
           key="submit"
           color="primary"
           type="submit"
+          size="small"
+          disabled={resetPasswordInRequest ? true : false}
         >
           Сбросить пароль
         </Button>);
@@ -635,6 +649,7 @@ class AuthUsers extends AuthForm {
         actions.push(<Button
           // color="primary"
           key="newPassword"
+          size="small"
           onClick={async event => {
 
             const {
@@ -643,7 +658,7 @@ class AuthUsers extends AuthForm {
               },
             } = this.context;
 
-            // console.log("createResetPasswordProcessor", createResetPasswordProcessor);
+
 
             this.mutate({
               mutation: gql(createResetPasswordProcessor),
@@ -659,9 +674,7 @@ class AuthUsers extends AuthForm {
             })
               .then(r => {
 
-                console.log("createResetPasswordProcessor result", r);
 
-                console.log("createResetPasswordProcessor resetPasswordId", resetPasswordId);
 
                 const {
                   id: resetPasswordId,
@@ -687,6 +700,7 @@ class AuthUsers extends AuthForm {
           key="submit"
           color="primary"
           type="submit"
+          size="small"
         >
           Войти
         </Button>);
@@ -721,7 +735,7 @@ class AuthUsers extends AuthForm {
 
           event.preventDefault();
 
-          console.log("onSubmit", onSubmit);
+
 
           if (onSubmit) {
             onSubmit();
@@ -731,9 +745,14 @@ class AuthUsers extends AuthForm {
         }}
       >
 
+        {inRequest ? <LinearProgress /> : null}
+
+
         <DialogTitle>
           {title}
         </DialogTitle>
+
+
 
         <DialogContent
         // classes={{
@@ -781,10 +800,14 @@ class AuthUsers extends AuthForm {
 
           </Grid>
 
+
+
         </DialogContent>
 
         <DialogActions>
+
           {actions}
+
         </DialogActions>
 
       </form>
@@ -831,7 +854,7 @@ class AuthUsersConnector extends Component {
       },
     } = this.context;
 
-    // console.log("usersConnection", usersConnection);
+
 
     const {
       View,
@@ -915,7 +938,7 @@ export default class AuthUsersForm extends PrismaCmsComponent {
       },
     } = this.context;
 
-    // console.log("setFilters", filters);
+
 
     let newUri = uri.clone();
 
@@ -964,7 +987,7 @@ export default class AuthUsersForm extends PrismaCmsComponent {
 
     const url = newUri.resource();
 
-    // console.log("setFilters uri", newUri, url);
+
 
     history.push(url);
 

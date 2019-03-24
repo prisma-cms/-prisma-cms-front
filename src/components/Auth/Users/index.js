@@ -36,7 +36,7 @@ class AuthUsers extends PrismaCmsComponent {
       [name]: search,
     } = getFilters() || {}
 
-    console.log("getFilters", getFilters());
+
 
     return this.renderField(<TextField
       label="Логин"
@@ -78,8 +78,8 @@ class AuthUsers extends PrismaCmsComponent {
       },
     } = this.context;
 
-    // console.log("signin", signin);
-    // console.log("context", this.context.query);
+
+
 
     // return;
 
@@ -343,7 +343,7 @@ class AuthUsersConnector extends Component {
       },
     } = this.context;
 
-    // console.log("usersConnection", usersConnection);
+
 
     const {
       View,

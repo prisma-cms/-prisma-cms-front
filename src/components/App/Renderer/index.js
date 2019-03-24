@@ -13,7 +13,7 @@ import MainMenu from './MainMenu';
 import Errors from './Errors';
 import { Typography, withStyles } from 'material-ui';
 
-import Auth from '../../../modules/Auth';
+import Auth from '../../Auth';
 
 import MainPage from "../../../modules/pages/MainPage";
 
@@ -80,7 +80,7 @@ export class Renderer extends Component {
     super(props);
 
     this.state = {
-      authOpen: true,
+      authOpen: false,
     };
 
   }
