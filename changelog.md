@@ -1,3 +1,8 @@
+1.13.5
+====================================
+- Fix export UserLink::styles
+- Added UserLink::makeUrl
+
 1.13.4
 ====================================
 - Added showHidden in Auth form

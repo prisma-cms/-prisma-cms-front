@@ -37,7 +37,7 @@ import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Context from "@prisma-cms/context";
 
-const styles = {
+export const styles = {
   root: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -88,6 +88,16 @@ export class UserLink extends Component {
   static contextType = Context;
 
 
+  makeUrl(user){
+
+    const {
+      id,
+    } = user;
+
+    return `/users/${id}`;
+  }
+
+
   render() {
 
     const {
@@ -121,8 +131,7 @@ export class UserLink extends Component {
 
     const name = fullname || username;
 
-    // const url = `/profile/${username}/`;
-    const url = `/users/${id}`;
+    const url = this.makeUrl(user);
 
 
     let avatarLink = <Link
