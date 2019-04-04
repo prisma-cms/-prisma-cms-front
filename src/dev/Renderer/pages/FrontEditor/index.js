@@ -41,7 +41,6 @@ class FrontEditorPage extends Component {
     components: [
       {
         "type": "Page",
-        "first": 5,
         "components": [
           {
             "type": "Grid",
