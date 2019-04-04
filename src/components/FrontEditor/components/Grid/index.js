@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import EditorComponent from '..';
 
+import GridIcon from "material-ui-icons/GridOn";
+
 
 class Grid extends EditorComponent {
 
@@ -16,6 +18,20 @@ class Grid extends EditorComponent {
   canBeDropped(dragItem) {
 
     return true;
+  }
+
+
+  renderPanelView() {
+
+    const {
+      classes,
+    } = this.context;
+
+    return super.renderPanelView(<div
+      className={classes.panelButton}
+    >
+      <GridIcon /> Grid
+    </div>);
   }
 
 
@@ -80,7 +96,7 @@ class Grid extends EditorComponent {
   prepareDragItem() {
 
     let newItem = super.prepareDragItem();
-    
+
     Object.assign(newItem, {
       container: true,
     });
@@ -95,7 +111,7 @@ class Grid extends EditorComponent {
       Grid: MaterialUiGrid,
     } = this.context;
 
-    console.log("Grid props", this.props);
+    // console.log("Grid props", this.props);
 
     return <MaterialUiGrid
 

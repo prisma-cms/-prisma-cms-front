@@ -17,8 +17,8 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom'
 
+import FrontEditorComponent from './components/FrontEditor/components/';
 import FrontEditor from './components/FrontEditor';
-// import FrontEditorComponent from './components/FrontEditor/components/';
 
 
 const {
@@ -103,7 +103,7 @@ export {
   PrismaCmsApp,
   PageNotFound,
   FrontEditor,
-  // FrontEditorComponent,
+  FrontEditorComponent,
 }
 
 export default PrismaCmsApp

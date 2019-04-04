@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FrontEditorComponent } from '../../../../../../App';
 
-import FrontEditorComponent from '../../../../../../components/FrontEditor/components';
 
-class UserAvatar extends FrontEditorComponent {
+class CurrentUserAvatar extends FrontEditorComponent {
 
   renderPanelView(content) {
 
-    return super.renderPanelView("User Avatar");
+    const {
+      Avatar,
+      classes,
+    } = this.context;
+
+
+    return super.renderPanelView(<div
+      className={classes.panelButton}
+    >
+      <Avatar
+        user={{}}
+      /> Current User Avatar
+    </div>);
   }
 
 
   renderMainView() {
 
     const {
-      // Grid: MaterialUiGrid,
       Avatar,
       user: currentUser,
     } = this.context;
@@ -33,4 +44,4 @@ class UserAvatar extends FrontEditorComponent {
 }
 
 
-export default UserAvatar;
+export default CurrentUserAvatar;

@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import EditorComponent  from '..'; 
+import EditorComponent from '..';
 
+import TextIcon from "material-ui-icons/Title";
 
 class TextArea extends EditorComponent {
 
 
   onBeforeDrop = () => {
 
+  }
+
+
+  renderPanelView() {
+
+    const {
+      classes,
+    } = this.context;
+
+    return super.renderPanelView(<div
+      className={classes.panelButton}
+    >
+      <TextIcon /> TextArea
+    </div>);
   }
 
 

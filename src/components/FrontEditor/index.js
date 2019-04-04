@@ -33,9 +33,20 @@ const styles = {
     overflow: "auto",
   },
   panelItem: {
-    border: "1px solid #ddd",
-    // cursor: "grab",
+    cursor: "grab",
     padding: 10,
+    border: "1px solid #ddd",
+    "&.active": {
+      border: "1px solid #b806bb",
+    },
+    "&:hover": {
+      border: "1px solid #7509da",
+    },
+  },
+  panelButton: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
   bordered: {
     border: "1px solid #ddd",
@@ -75,14 +86,15 @@ class FrontEditor extends Component {
     components: PropTypes.array,
     Components: PropTypes.arrayOf(PropTypes.func).isRequired,
     CustomComponents: PropTypes.arrayOf(PropTypes.func).isRequired,
+    toolbar: PropTypes.oneOf([PropTypes.string, PropTypes.func]),
   };
 
   static defaultProps = {
     debug: false,
     Components: [
       Grid,
-      // TextArea,
-      // UsersGrid,
+      TextArea,
+      UsersGrid,
     ],
     CustomComponents: [],
   }
@@ -127,176 +139,13 @@ class FrontEditor extends Component {
       CustomComponents,
     } = this.props;
 
-    // console.log("Components", Components);
 
     let baseComponents = [Page].concat(Components)
       .filter(n => n && !CustomComponents.find(i => i.name === n.name));
 
-    // console.log("baseComponents", baseComponents);
 
     return baseComponents.concat(CustomComponents).filter(n => n);
   }
-
-  // onDragOver(event) {
-
-  //   const {
-  //     dragItem,
-  //   } = this.state;
-
-  //   if (!dragItem) {
-  //     return;
-  //   }
-
-  //   event.preventDefault();
-
-
-
-  // }
-
-
-  // onDragEnter(event) {
-
-  //   const {
-  //     dragItem,
-  //   } = this.state;
-
-  //   if (!dragItem) {
-  //     return;
-  //   }
-
-
-
-  // }
-
-  // onDrop(event) {
-
-  //   const {
-  //     dragItem,
-  //   } = this.state;
-
-  //   if (!dragItem) {
-  //     return;
-  //   }
-
-
-
-
-  // }
-
-
-  // renderPanels() {
-
-  //   const {
-  //     Grid,
-  //   } = this.context;
-
-  //   const {
-  //     classes,
-  //   } = this.props;
-
-
-  //   let items = [
-  //     {
-  //       type: "Text",
-  //       label: "Текст",
-  //     },
-  //     {
-  //       type: "EditorGrid",
-  //       label: "Три колонки",
-  //     },
-  //   ];
-
-  //   return <Grid
-  //     container
-  //     spacing={8}
-  //   >
-
-  //     {items.map(n => {
-
-  //       const {
-  //         type,
-  //         label,
-  //       } = n;
-
-  //       return <Grid
-  //         key={type}
-  //         item
-  //         className={classes.panelItem}
-  //         draggable
-  //         onDragStart={event => {
-
-
-
-  //           this.setState({
-  //             dragItem: n,
-  //           });
-
-  //         }}
-  //         onDragEnd={event => {
-
-
-
-  //           this.setState({
-  //             dragItem: null,
-  //           });
-  //         }}
-  //       >
-  //         {label || type}
-  //       </Grid>
-  //     })}
-
-  //   </Grid>
-
-  // }
-
-
-  getParent(item) {
-
-    const {
-      components,
-    } = this.props;
-
-
-
-
-    // let parent;
-    // let current = findParent(item, components);
-
-    // if (components && components.length) {
-
-    //   components.reduce((current, next) => {
-
-
-
-
-    //     return current;
-
-    //   });
-
-    // }
-
-  }
-
-
-  // findParent(item, components){
-
-  //   let parent;
-
-  //   components.map(n => {
-
-  //     const {
-  //       children,
-  //     } = n;
-
-  //     if(children && children.length) {
-  //       this.findParent(item, children);
-  //     }
-
-  //   });
-
-  //   return parent;
-
-  // }
 
 
   renderPanels() {
@@ -316,32 +165,6 @@ class FrontEditor extends Component {
       activeItem,
     } = this.state;
 
-
-
-
-    // return null
-
-    // let items = [
-    //   // {
-    //   //   type: "Text",
-    //   //   label: "Текст",
-    //   // },
-    //   {
-    //     type: "Page",
-    //     label: "Основная страница",
-    //     Component: Page,
-    //   },
-    //   {
-    //     type: "TextArea",
-    //     label: "Текстовая область",
-    //     Component: TextArea,
-    //   },
-    //   {
-    //     type: "EditorGrid",
-    //     label: "Три колонки",
-    //     Component: EditorGrid,
-    //   },
-    // ];
 
     /**
      * Если выбран активный элемент, выводим настройки для него
@@ -374,34 +197,11 @@ class FrontEditor extends Component {
 
         const name = Component.name;
 
-        return <Grid
+        return <Component
           key={name}
-          item
-        >
-          <Component
-            mode="panel"
-            className={classes.panelItem}
-          // draggable
-          // onDragStart={event => {
-
-
-
-          //   this.setState({
-          //     dragItem: n,
-          //   });
-
-          // }}
-          // onDragEnd={event => {
-
-
-
-          //   this.setState({
-          //     dragItem: null,
-          //   });
-          // }}
-
-          />
-        </Grid>
+          mode="panel"
+          className={classes.panelItem}
+        />
       })}
 
       <Grid
@@ -418,24 +218,15 @@ class FrontEditor extends Component {
 
   renderItems() {
 
-    const {
-      Grid,
-    } = this.context;
 
     const {
-      // inEditMode,
       components,
-      // Components,
-      classes,
     } = this.props;
 
     const Components = this.getComponents();
 
     let output = [];
 
-
-
-    // return null;
 
     if (components && Array.isArray(components)) {
 
@@ -448,54 +239,16 @@ class FrontEditor extends Component {
           ...other
         } = n;
 
-
-        // console.log("Components", Components);
-
-        // return;
-
         let Component = Components.find(n => n.name === type);
 
-
-
-        // switch (type) {
-
-        //   case "Page":
-        //     Component = Page;
-
-        //     break;
-
-        //   case "Text":
-        //     Component = TextArea;
-
-        //     break;
-
-        //   case "EditorGrid":
-
-
-        //     Component = EditorGrid;
-
-        //     break;
-
-        // }
 
         if (Component) {
 
           output.push(<Component
             key={index}
-            // inEditMode={inEditMode}
-            // components={data || {}}
-            onChange={data => {
-
-
-
-            }}
             mode="main"
-            // props={props}
             component={n}
             deleteItem={() => {
-
-
-
 
               components.splice(index, 1);
 
@@ -555,9 +308,13 @@ class FrontEditor extends Component {
   }
 
 
-  renderToolbar(){
+  renderToolbar() {
 
-    return null;
+    const {
+      toolbar,
+    } = this.props;
+
+    return toolbar ? toolbar : null;
   }
 
 
@@ -627,12 +384,6 @@ class FrontEditor extends Component {
                 hoveredItem: component,
               });
             },
-            getParent: item => this.getParent(item),
-            // Components: {
-            //   EditorGrid: EditorGrid,
-            //   TextArea: TextArea,
-            //   Page: Page,
-            // },
             Components,
           })}
         >
@@ -648,9 +399,6 @@ class FrontEditor extends Component {
               >
                 <div
                   className={[classes.editor, classes.bordered].join(" ")}
-                // onDragOver={event => this.onDragOver(event)}
-                // onDragEnter={event => this.onDragEnter(event)}
-                // onDrop={event => this.onDrop(event)}
                 >
                   {items}
 

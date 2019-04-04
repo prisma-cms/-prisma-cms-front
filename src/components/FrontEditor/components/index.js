@@ -22,13 +22,11 @@ class EditorComponent extends Component {
     parent: PropTypes.object,
     deleteItem: PropTypes.func,
     deletable: PropTypes.bool.isRequired,
-    props: PropTypes.object.isRequired,
   };
 
 
   static defaultProps = {
     deletable: true,
-    props: {},
   }
 
   onDragStart() {
@@ -52,8 +50,6 @@ class EditorComponent extends Component {
     return {
       component: this,
       type: this.constructor.name,
-      props: {
-      },
     };
   }
 
@@ -100,17 +96,17 @@ class EditorComponent extends Component {
       if (newItem) {
 
         let {
-          children,
+          components: itemComponents,
         } = component;
 
-        children = children || [];
+        itemComponents = itemComponents || [];
 
 
-        children.push(newItem);
+        itemComponents.push(newItem);
 
 
         Object.assign(component, {
-          children,
+          components: itemComponents,
         });
 
         updateObject({
@@ -244,8 +240,24 @@ class EditorComponent extends Component {
   }
 
 
-  getRenderProps() {
+  getComponentProps() {
 
+
+
+    const {
+      component: {
+        type,
+        components,
+        ...props
+      },
+    } = this.props;
+
+
+    return props;
+  }
+
+
+  getRenderProps() {
 
     const {
       dragTarget,
@@ -259,31 +271,24 @@ class EditorComponent extends Component {
     const {
       className,
       mode,
-      component: {
-        props,
-      },
       deleteItem,
       deletable,
+      component,
       ...other
     } = this.props;
 
 
-    const {
-      children,
-      className: propsClassName,
-      ...otherProps
-    } = props || {};
-
-
     let classNames = [
       className,
-      propsClassName,
+      // propsClassName,
     ];
 
     let componentProps = {
+      ...component,
       ...other,
-      ...otherProps,
+      // ...otherProps,
     };
+
 
     if (inEditMode) {
 
@@ -324,16 +329,24 @@ class EditorComponent extends Component {
 
     const {
       classes,
+      Grid,
     } = this.context;
 
-    return <div
-      className={classes.panelItem}
-      draggable
-      onDragStart={event => this.onDragStart(event)}
-      onDragEnd={event => this.onDragEnd(event)}
+    // const isActive = this.isActive();
+
+    return <Grid
+      item
     >
-      {content || this.constructor.name}
-    </div>;
+      <div
+        // className={[classes.panelItem, isActive ? "active" : ""].join(" ")}
+        className={classes.panelItem}
+        draggable
+        onDragStart={event => this.onDragStart(event)}
+        onDragEnd={event => this.onDragEnd(event)}
+      >
+        {content || this.constructor.name}
+      </div>
+    </Grid>
   }
 
 
@@ -348,27 +361,20 @@ class EditorComponent extends Component {
 
     const {
       Grid,
-      components,
-      updateObject,
       setActiveItem,
-      getParent,
     } = this.context;
 
 
     let {
       props: {
         component,
-        props: componentProps,
         deleteItem,
         deletable,
+        style,
+        ...props
       },
     } = activeItem;
 
-
-    let {
-      style,
-      ...props
-    } = componentProps || {}
 
     style = style || {}
 
@@ -415,6 +421,7 @@ class EditorComponent extends Component {
                 onClick={event => {
 
                   deleteItem();
+                  setActiveItem(null);
 
                 }}
               >
@@ -428,35 +435,6 @@ class EditorComponent extends Component {
 
       </Grid>
 
-      {/* <Grid
-        item
-        xs={12}
-        sm={6}
-      >
-
-        <Button
-          size="small"
-          onClick={event => {
-
-            Object.assign(style, {
-              color: "red",
-            });
-
-            component.props = {
-              style,
-              ...props,
-            }
-
-            updateObject({
-              components,
-            })
-
-          }}
-        >
-          Set red
-        </Button>
-
-      </Grid> */}
 
     </Grid>;
   }
@@ -469,6 +447,15 @@ class EditorComponent extends Component {
     } = this.context;
 
     return activeItem;
+
+  }
+
+
+  isActive() {
+
+    const activeItem = this.getActiveItem();
+
+    return activeItem && activeItem instanceof this.constructor ? true : false;
 
   }
 
@@ -490,22 +477,18 @@ class EditorComponent extends Component {
 
     const {
       component: {
-        props,
-        children,
+        components: itemComponents,
       },
     } = this.props;
 
-
-    const {
-    } = props || {};
 
     let output = [];
 
 
 
-    if (children && children.length) {
+    if (itemComponents && itemComponents.length) {
 
-      children.map((n, index) => {
+      itemComponents.map((n, index) => {
 
         const {
           type,
@@ -521,12 +504,11 @@ class EditorComponent extends Component {
           output.push(<Component
             key={index}
             mode="main"
-            props={props}
             component={n}
             parent={this}
             deleteItem={() => {
 
-              children.splice(index, 1);
+              itemComponents.splice(index, 1);
 
               updateObject({
                 components,
@@ -567,7 +549,12 @@ class EditorComponent extends Component {
 
       case "panel":
 
-        content = this.renderPanelView();
+        const activeItem = this.getActiveItem();
+
+        if (!activeItem || this.isActive()) {
+          content = this.renderPanelView();
+        }
+
         break;
 
       case "main":
