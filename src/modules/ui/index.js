@@ -15,6 +15,7 @@ import PhoneField, {
 import Image, {
   getImageUrl,
 } from "./Image";
+import {FrontEditor} from "../../App";
 
 export {
   Avatar,
@@ -30,4 +31,5 @@ export {
   getImageUrl,
   PhoneField,
   formatPhone,
+  FrontEditor,
 }

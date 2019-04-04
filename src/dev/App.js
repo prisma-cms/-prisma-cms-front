@@ -3,30 +3,13 @@ import PropTypes from "prop-types";
 
 import PrismaCmsApp from '../App'
 
-import * as queryFragments from "../schema/generated/api.fragments";
+import DevRenderer from "./Renderer";
 
-export default class App extends Component {
+export default class DevApp extends PrismaCmsApp {
 
-  static propTypes = {
-    queryFragments: PropTypes.object.isRequired,
-  }
-  
   static defaultProps = {
-    queryFragments,
-    lang: "ru",
-  }
+    ...PrismaCmsApp.defaultProps,
+    Renderer: DevRenderer,
+  };
 
-  render() {
-
-    const {
-      queryFragments,
-      ...other
-    } = this.props;
-
-    return <PrismaCmsApp
-      queryFragments={queryFragments}
-      {...other}
-    />
-  }
 }
-

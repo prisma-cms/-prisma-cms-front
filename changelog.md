@@ -1,3 +1,7 @@
+====================================
+- Added DevRenderer
+- Added FrontEditor
+
 1.13.5
 ====================================
 - Fix export UserLink::styles
