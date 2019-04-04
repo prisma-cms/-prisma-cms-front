@@ -278,7 +278,6 @@ class FrontEditor extends Component {
 
   updateObject(data) {
 
-    // console.log("onChange", data);
 
     const {
       components,

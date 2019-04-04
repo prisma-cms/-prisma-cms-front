@@ -380,12 +380,12 @@ export class Renderer extends Component {
 
   render() {
 
-    // console.log("this.context", this.context);
+
 
     // return <Context.Consumer>
     //   {context => {
 
-    //     console.log("context", context);
+
 
     //     return <Context.Provider
     //       // value={Object.assign(context, this.context, {

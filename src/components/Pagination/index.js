@@ -76,7 +76,6 @@ export class Pagination extends Component {
 
   getNewLocation = (page) => {
 
-    // console.log("getNewLocation", page);
 
     const {
       router,
@@ -131,24 +130,8 @@ export class Pagination extends Component {
 
     uri.query(query);
 
-    // console.log("getNewLocation pageVariable", pageVariable);
-    // console.log("getNewLocation uri", uri.resource());
 
     return uri.resource();
-
-    // const newLocation = {
-    //   pathname,
-    //   search,
-    // };
-
-    // const newLocation = uri.toString();
-
-    // // let newLocation = router.createLocation(location);
-
-    // // newLocation.query.page = page > 1 ? page : undefined;
-
-    // // return router.createPath(newLocation);
-    // return history.createHref(newLocation);
 
   }
 

@@ -864,13 +864,13 @@ class AuthUsersConnector extends Component {
       graphql(gql(usersConnection), {
         skip: (props) => {
 
-          // console.log("skip props", props);
+
 
           return !props.where ? true : false;
         },
         options: (props) => {
 
-          // console.log("options", props);
+
 
           let {
             where,

@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import UserItem from './User';
 import { withStyles } from 'material-ui/styles';
 
-// console.log("MainMenu Context", Context);
+
 
 // import Modal from './AuthModal';
 
@@ -75,7 +75,7 @@ export class MainMenu extends Component {
   }
 
   // componentWillMount(){
-  //   console.log("menu componentWillMount");
+
   // }
 
   // handleClose = () => {

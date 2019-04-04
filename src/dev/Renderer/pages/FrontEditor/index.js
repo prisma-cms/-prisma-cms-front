@@ -62,8 +62,8 @@ class FrontEditorPage extends Component {
                 "type": "Grid",
                 "item": true,
                 "xs": 12,
-                "sm": 6,
-                "md": 4,
+                "sm": 2,
+                "md": true,
               },
             ]
           }
@@ -121,7 +121,7 @@ class FrontEditorPage extends Component {
             inEditMode={inEditMode}
             components={components}
             onChange={components => {
-              // console.log("onChange components", components);
+
               this.setState({
                 components,
               })

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Context from "@prisma-cms/context";
-import { Button, IconButton } from 'material-ui';
+import { Button, IconButton, TextField } from 'material-ui';
 
 import DeleteIcon from "material-ui-icons/Delete";
 import CloseIcon from "material-ui-icons/Close";
+import { FormControlLabel } from 'material-ui';
+import { Switch } from 'material-ui';
 
 
 class EditorComponent extends Component {
@@ -35,7 +37,7 @@ class EditorComponent extends Component {
       onDragStart,
     } = this.context;
 
-    console.log("this.prepareDragItem()", this.prepareDragItem());
+
 
     onDragStart(this.prepareDragItem());
 
@@ -105,12 +107,16 @@ class EditorComponent extends Component {
         itemComponents.push(newItem);
 
 
-        Object.assign(component, {
-          components: itemComponents,
-        });
+        // Object.assign(component, {
+        //   components: itemComponents,
+        // });
 
-        updateObject({
-          components,
+        // updateObject({
+        //   components,
+        // });
+
+        this.updateComponent(component, {
+          components: itemComponents,
         });
 
       }
@@ -240,20 +246,36 @@ class EditorComponent extends Component {
   }
 
 
-  getComponentProps() {
+  getComponentProps(component) {
 
 
+    // const {
+    //   component: {
+    //     type,
+    //     components,
+    //     ...props
+    //   },
+    // } = this.props;
 
     const {
+      mode,
+      deletable,
+      deleteItem,
+      parent,
+      components,
       component: {
         type,
-        components,
+        components: itemComponents,
         ...props
       },
-    } = this.props;
+      ...other
+    } = component.props;
 
 
-    return props;
+    return {
+      ...other,
+      ...props,
+    };
   }
 
 
@@ -370,13 +392,150 @@ class EditorComponent extends Component {
         component,
         deleteItem,
         deletable,
-        style,
-        ...props
+        ...other
+      },
+      constructor: {
+        propTypes,
+        // defaultProps,
       },
     } = activeItem;
 
 
+    let {
+      style,
+      type,
+      components,
+      // ...componentProps
+    } = component;
+
     style = style || {}
+
+
+    const componentProps = this.getComponentProps(activeItem);
+
+
+
+
+
+    let settings = [];
+
+    // if (propTypes) {
+
+    //   const names = Object.keys(propTypes);
+
+
+
+    //   names.map(name => {
+
+
+
+    //     const propType = propTypes[name];
+
+
+
+    //     if (propType === PropTypes.string || PropTypes.string.isRequired) {
+
+    //       settings.push(<TextField
+    //         key={name}
+    //         name={name}
+    //         label={name}
+    //         value={component[name] || ""}
+    //         fullWidth
+    //         onChange={event => this.onChangeProps(event)}
+    //       />);
+
+    //     }
+
+    //   })
+
+    // }
+
+
+
+
+    if (componentProps) {
+
+      const names = Object.keys(componentProps);
+
+
+      names.map(name => {
+
+
+        // const propType = propTypes[name];
+
+        let value = componentProps[name];
+
+        const type = typeof value;
+
+
+        const field = this.getEditorField({
+          key: name,
+          type,
+          name,
+          label: name,
+          value,
+        });
+
+        if (field) {
+          settings.push(field);
+        }
+
+        // if (type === "boolean") {
+
+        //   settings.push(<FormControlLabel
+        //     key={name}
+        //     control={
+        //       <Switch
+        //         checked={value}
+        //         // onChange={this.handleChange('checkedB')}
+        //         // value="checkedB"
+        //         color="primary"
+        //       />
+        //     }
+        //     label={name}
+        //   />);
+
+        // }
+
+        // else if (type === "string") {
+
+        //   settings.push(<TextField
+        //     key={name}
+        //     name={name}
+        //     label={name}
+        //     value={component[name] || ""}
+        //     fullWidth
+        //     onChange={event => this.onChangeProps(event)}
+        //   />);
+
+        // }
+        // else if (type === "number") {
+
+        //   settings.push(this.getEditorField({
+        //     key: name,
+        //     type: "number",
+        //     name: name,
+        //     label: name,
+        //     value: value || "",
+        //     fullWidth: true,
+        //   }));
+
+        //   // settings.push(<TextField
+        //   //   key={name}
+        //   //   type="number"
+        //   //   name={name}
+        //   //   label={name}
+        //   //   value={component[name] || ""}
+        //   //   fullWidth
+        //   //   onChange={event => this.onChangeProps(event)}
+        //   // />);
+        // }
+
+
+      })
+
+    }
+
 
 
     return <Grid
@@ -436,7 +595,249 @@ class EditorComponent extends Component {
       </Grid>
 
 
+      {settings && settings.length ?
+        <Grid
+          item
+          xs={12}
+        >
+          <Grid
+            container
+            spacing={8}
+            style={{
+              borderTop: "1px solid #ddd",
+            }}
+          >
+            {settings}
+          </Grid>
+        </Grid> :
+        null
+      }
+
     </Grid>;
+  }
+
+
+  getEditorField(props) {
+
+    const {
+      key,
+      type,
+      name,
+      value,
+      ...other
+    } = props;
+
+
+    const {
+      Grid,
+    } = this.context;
+
+    let field = null;
+
+    switch (type) {
+
+      case "boolean":
+
+
+
+        field = <Grid
+          key={key}
+          container
+        >
+          <Grid
+            item
+            xs
+          >
+            {/* <TextField
+              // key={name}
+              // type="number"
+              // name={name}
+              // label={name}
+              // value={component[name] || ""}
+              // fullWidth
+              onChange={event => this.onChangeProps(event)}
+              {...props}
+            /> */}
+
+            <FormControlLabel
+              control={
+                <Switch
+                  name={name}
+                  checked={value}
+                  color="primary"
+                  onChange={event => this.onChangeProps(event)}
+                  {...other}
+                />
+              }
+              label={name}
+            />
+
+          </Grid>
+          <Grid
+            item
+          >
+            <IconButton
+              onClick={event => {
+                this.removeProps(name);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+          ;
+
+        break;
+
+      case "number":
+      case "string":
+
+        field = <Grid
+          key={key}
+          container
+        >
+          <Grid
+            item
+            xs
+          >
+            <TextField
+              // key={name}
+              type={type}
+              name={name}
+              // label={name}
+              value={value || ""}
+              fullWidth
+              onChange={event => this.onChangeProps(event)}
+              {...other}
+            />
+
+          </Grid>
+          <Grid
+            item
+          >
+            <IconButton
+              onClick={event => {
+                this.removeProps(name);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+          ;
+
+      default: ;
+    }
+
+
+
+    return field;
+  }
+
+
+  onChangeProps(event) {
+
+
+    return this.updateProps(event.target);
+  }
+
+  updateProps(node) {
+
+    let {
+      name,
+      value,
+      type,
+      checked,
+    } = node;
+
+
+
+    const activeItem = this.getActiveItem();
+
+    const {
+      components,
+      updateObject,
+    } = this.context;
+
+    let {
+      props: {
+        component,
+      },
+    } = activeItem;
+
+
+    switch (type) {
+
+      case "boolean":
+      case "checkbox":
+
+        value = checked;
+        break;
+
+      case "number":
+
+
+
+        // value = parseFloat(value);
+        value = Number(value);
+
+
+        break;
+
+    }
+
+
+    this.updateComponentProps(component, name, value);
+
+  }
+
+
+  updateComponentProps(component, name, value) {
+
+    return this.updateComponent(component, {
+      [name]: value,
+    });
+  }
+
+
+  updateComponent(component, data) {
+
+    let {
+      components,
+      updateObject,
+    } = this.context;
+
+    Object.assign(component, data);
+
+    updateObject({
+      components,
+    });
+
+  }
+
+
+  removeProps(name) {
+
+    const activeItem = this.getActiveItem();
+
+    const {
+      components,
+      updateObject,
+    } = this.context;
+
+    let {
+      props: {
+        component,
+      },
+    } = activeItem;
+
+
+    delete component[name];
+
+    updateObject({
+      components,
+    })
+
   }
 
 

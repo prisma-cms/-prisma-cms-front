@@ -9,6 +9,15 @@ import GridIcon from "material-ui-icons/GridOn";
 class Grid extends EditorComponent {
 
 
+  // static propTypes = {
+  //   ...EditorComponent.propTypes,
+  // }
+
+
+  static defaultProps = {
+    ...EditorComponent.defaultProps,
+  }
+
 
   onBeforeDrop = () => {
 
@@ -18,6 +27,76 @@ class Grid extends EditorComponent {
   canBeDropped(dragItem) {
 
     return true;
+  }
+
+
+  getEditorField(props) {
+
+    const {
+      name,
+    } = props;
+
+    switch (name) {
+
+      case "container":
+      case "item":
+
+        Object.assign(props, {
+          disabled: true,
+        });
+
+        break;
+
+    }
+
+    return super.getEditorField(props);
+  }
+
+ 
+
+  updateComponentProps(component, name, value) {
+
+
+    switch (name) {
+
+      case "xs":
+      case "sm":
+      case "md":
+      case "lg":
+      case "xl":
+
+        if (value === 0) {
+          value = true;
+        }
+        else if (!value || typeof value !== "number" || value < 0 || value > 12) {
+          return false;
+        }
+
+        break;
+
+    }
+
+
+    return super.updateComponentProps(component, name, value);
+  }
+
+
+  removeProps(name) {
+
+
+    switch (name) {
+
+      case "container":
+      case "item":
+
+        return false;
+
+        break;
+
+    }
+
+
+    return super.removeProps(name);
   }
 
 
@@ -68,12 +147,16 @@ class Grid extends EditorComponent {
       case "Grid":
 
         if (container) {
+
+          delete newItem.container;
+
           Object.assign(newItem, {
-            container: undefined,
             item: true,
             xs: 12,
             sm: 6,
             md: 4,
+            lg: 4,
+            xl: 4,
           });
         }
         else {
@@ -111,7 +194,7 @@ class Grid extends EditorComponent {
       Grid: MaterialUiGrid,
     } = this.context;
 
-    // console.log("Grid props", this.props);
+
 
     return <MaterialUiGrid
 

@@ -25,15 +25,12 @@ class UsersGrid extends EditorComponent {
 
   renderMainView() {
 
-    // console.log("UsersGrid props", this.props);
-
-    // console.log("UsersGrid getComponentProps", this.getComponentProps());
 
     return <div
       {...this.getRenderProps()}
     >
       <UsersPage
-        {...this.getComponentProps()}
+        {...this.getComponentProps(this)}
       />
     </div>
   }

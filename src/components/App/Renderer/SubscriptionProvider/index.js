@@ -19,7 +19,7 @@ export default class SubscriptionProvider extends Component {
 
   componentDidMount() {
 
-    // console.log("SubscriptionProvider componentDidMount");
+
 
     this.subscribe();
 
@@ -34,7 +34,7 @@ export default class SubscriptionProvider extends Component {
 
   async subscribe() {
 
-    // console.log("SubscriptionProvider subscribe");
+
 
     const {
       client,
@@ -95,7 +95,7 @@ export default class SubscriptionProvider extends Component {
       subscriptions,
       queries,
     }, () => {
-      // console.log("SubscriptionProvider subscriptions", subscriptions.length, subscriptions);
+
     });
 
   }
