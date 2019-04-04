@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui';
 import Context from "@prisma-cms/context";
 
 import Page from './components/Page';
-import EditorGrid from './components/Grid';
+import Grid from './components/Grid';
 import TextArea from './components/TextArea';
 import UsersGrid from './components/UsersGrid';
 
@@ -80,9 +80,9 @@ class FrontEditor extends Component {
   static defaultProps = {
     debug: false,
     Components: [
-      EditorGrid,
-      TextArea,
-      UsersGrid,
+      Grid,
+      // TextArea,
+      // UsersGrid,
     ],
     CustomComponents: [],
   }

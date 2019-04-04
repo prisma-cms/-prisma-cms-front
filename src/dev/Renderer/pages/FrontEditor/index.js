@@ -17,8 +17,26 @@ class FrontEditorPage extends Component {
     components: [
       {
         "type": "Page",
-        "props": {},
-      },
+        "first": 5,
+        "children": [
+          {
+            "type": "Grid",
+            "container": true,
+            "children": [
+              {
+                "type": "UsersGrid",
+              },
+              {
+                "type": "Grid",
+                "item": true,
+                "xs": 12,
+                "sm": 6,
+                "md": 4,
+              }
+            ]
+          }
+        ]
+      }
     ],
   }
 
@@ -45,7 +63,7 @@ class FrontEditorPage extends Component {
           })
         }}
         CustomComponents={[
-          UserAvatar,
+          // UserAvatar,
         ]}
         debug={true}
       />

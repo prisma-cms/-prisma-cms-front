@@ -17,7 +17,7 @@ class Grid extends EditorComponent {
 
     return true;
   }
- 
+
 
   prepareNewItem() {
 
@@ -37,15 +37,9 @@ class Grid extends EditorComponent {
 
 
     let {
-      props: {
-        container,
-      },
+      container,
     } = this.props;
 
-
-    let {
-      props,
-    } = newItem;
 
 
     const {
@@ -59,22 +53,16 @@ class Grid extends EditorComponent {
 
         if (container) {
           Object.assign(newItem, {
-            props: {
-              ...props,
-              container: undefined,
-              item: true,
-              xs: 12,
-              sm: 6,
-              md: 4,
-            },
+            container: undefined,
+            item: true,
+            xs: 12,
+            sm: 6,
+            md: 4,
           });
         }
         else {
           Object.assign(newItem, {
-            props: {
-              ...props,
-              container: true,
-            },
+            container: true,
           });
         }
 
@@ -92,15 +80,10 @@ class Grid extends EditorComponent {
   prepareDragItem() {
 
     let newItem = super.prepareDragItem();
-
-    let {
-      props,
-    } = newItem;
-
-    newItem.props = {
-      ...props,
+    
+    Object.assign(newItem, {
       container: true,
-    }
+    });
 
     return newItem;
   }
@@ -111,6 +94,8 @@ class Grid extends EditorComponent {
     const {
       Grid: MaterialUiGrid,
     } = this.context;
+
+    console.log("Grid props", this.props);
 
     return <MaterialUiGrid
 
