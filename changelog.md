@@ -1,3 +1,7 @@
+1.14.3
+====================================
+- Fix FrontEditor::Connector
+
 1.14.2
 ====================================
 - Fix Pagination::pageVariable

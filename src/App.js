@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import ApolloCMS from 'apollo-cms/lib/App';
 
-import FrontEditor from './components/FrontEditor';
+// import FrontEditor from './components/FrontEditor';
 
 import App from './components/App';
 
@@ -102,7 +102,7 @@ export {
   Renderer,
   PrismaCmsApp,
   PageNotFound,
-  FrontEditor,
+  // FrontEditor,
 }
 
 export default PrismaCmsApp

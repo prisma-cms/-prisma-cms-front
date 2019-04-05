@@ -79,103 +79,6 @@ class Connector extends EditorComponent {
     let field;
 
 
-
-
-
-
-    if (activeItem) {
-
-      const {
-        props: {
-          query: fieldName,
-        },
-      } = activeItem;
-
-      if (fieldName) {
-
-        const Field = this.getSchemaField(fieldName);
-
-
-
-
-        if (Field) {
-
-          const {
-            args,
-          } = Field;
-
-          const arg = args ? args.find(n => n.name === name) : null;
-
-          if (arg) {
-
-
-            const {
-              type: {
-                kind: typeKind,
-                name: typeName,
-              },
-            } = arg;
-
-            switch (typeKind) {
-
-              case "ENUM":
-
-
-
-                const Type = this.getSchemaType(n => n.name === typeName && n.kind === typeKind);
-
-                if (Type) {
-
-
-
-                  const {
-                    enumValues,
-                  } = Type;
-
-                  field = <FormControl
-                    key={key}
-                    fullWidth
-                  >
-                    <InputLabel>{name}</InputLabel>
-                    <Select
-                      value={value || ""}
-                      onChange={event => this.onChangeProps(event)}
-                      inputProps={{
-                        name,
-                        // id: 'age-simple',
-                      }}
-                    >
-                      {enumValues.map(n => {
-
-                        const {
-                          name: fieldName,
-                        } = n;
-
-                        return <MenuItem
-                          key={fieldName}
-                          value={fieldName}
-                        >
-                          {fieldName}
-                        </MenuItem>
-                      })}
-                    </Select>
-                  </FormControl>;
-
-                }
-
-                break;
-
-            }
-
-          }
-
-        }
-
-      }
-
-    }
-
-
     if (!field) {
 
       switch (name) {
@@ -195,9 +98,7 @@ class Connector extends EditorComponent {
                 // id: 'age-simple',
               }}
             >
-              {queryNames.map(queryName => {
-
-
+              {queryNames.filter(n => n.endsWith && n.endsWith("Connection")).map(queryName => {
 
                 return <MenuItem
                   key={queryName}
@@ -210,12 +111,125 @@ class Connector extends EditorComponent {
           </FormControl>;
           break;
 
-        case "skip":
-        case "last":
+        // case "skip":
+        // case "last":
 
-          type = "number";
+        //   type = "number";
 
-          break;
+        //   break;
+      }
+
+    }
+
+
+    if (!field) {
+
+
+      if (activeItem) {
+
+        const {
+          props: {
+            query: fieldName,
+          },
+        } = activeItem;
+
+        if (fieldName) {
+
+          const Field = this.getSchemaField(fieldName);
+
+
+
+
+          if (Field) {
+
+            const {
+              args,
+            } = Field;
+
+            const arg = args ? args.find(n => n.name === name) : null;
+
+            if (arg) {
+
+
+              const {
+                type: {
+                  kind: typeKind,
+                  name: typeName,
+                },
+              } = arg;
+
+              switch (typeKind) {
+
+                case "ENUM":
+
+
+                  const Type = this.getSchemaType(n => n.name === typeName && n.kind === typeKind);
+
+                  if (Type) {
+
+
+
+                    const {
+                      enumValues,
+                    } = Type;
+
+                    field = <FormControl
+                      key={key}
+                      fullWidth
+                    >
+                      <InputLabel>{name}</InputLabel>
+                      <Select
+                        value={value || ""}
+                        onChange={event => this.onChangeProps(event)}
+                        inputProps={{
+                          name,
+                          // id: 'age-simple',
+                        }}
+                      >
+                        {enumValues.map(n => {
+
+                          const {
+                            name: fieldName,
+                          } = n;
+
+                          return <MenuItem
+                            key={fieldName}
+                            value={fieldName}
+                          >
+                            {fieldName}
+                          </MenuItem>
+                        })}
+                      </Select>
+                    </FormControl>;
+
+                  }
+
+                  break;
+
+                case "SCALAR":
+
+                  // console.log("arg", arg);
+
+                  switch (typeName) {
+
+                    case "Int":
+                    case "Float":
+
+                      type = "number";
+                      break;
+
+                  }
+
+                  break;
+
+              }
+
+            }
+
+          }
+
+        }
+
       }
 
     }
