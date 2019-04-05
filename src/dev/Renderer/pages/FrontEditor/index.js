@@ -44,52 +44,39 @@ class FrontEditorPage extends Component {
         "type": "Page",
         "components": [
           {
-            "type": "Page",
+            "type": "Connector",
+            "first": 10,
             "components": [
               {
-                "type": "Grid",
+                "type": "Filters"
+              },
+              {
+                "type": "ListView",
                 "components": [
                   {
                     "type": "Grid",
-                    "xs": 12,
                     "item": true,
+                    "xs": 12,
+                    "md": 6,
+                    "xl": 3,
                     "components": [
                       {
-                        "type": "Connector",
-                        "components": [
-                          {
-                            "type": "ListView",
-                            "components": [
-                              {
-                                "type": "Grid",
-                                "components": [
-                                  {
-                                    "type": "UserLink"
-                                  }
-                                ],
-                                "item": true,
-                                "xs": 12,
-                                "md": 6
-                              }
-                            ]
-                          },
-                          {
-                            "type": "Pagination"
-                          }
-                        ],
-                        "orderBy": "createdAt_ASC",
-                        "first": 12,
-                        "query": "usersConnection",
-                        "pagevariable": "userspage"
+                        "type": "UserLink"
                       }
                     ]
                   }
-                ],
-                "container": true
-              }
-            ]
+                ]
+              },
+              {
+                "type": "Pagination"
+              },
+            ],
+            "orderBy": null,
+            "skip": null,
+            "last": null,
+            "query": "usersConnection"
           }
-        ],
+        ]
       }
     ],
   }

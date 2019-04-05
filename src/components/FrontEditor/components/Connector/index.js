@@ -26,6 +26,7 @@ class Connector extends EditorComponent {
     ...EditorComponent.defaultProps,
     query: "",
     pagevariable: "page",
+    filtersname: "filters",
   };
 
 
@@ -50,6 +51,36 @@ class Connector extends EditorComponent {
       <ConnectorIcon
       /> Connector
     </div>);
+  }
+
+
+
+  prepareDragItem() {
+
+    let newItem = super.prepareDragItem();
+
+    Object.assign(newItem, {
+      "first": 12,
+      "components": [
+        {
+          "type": "ListView",
+          "components": [
+            {
+              "type": "Grid",
+              "item": true,
+              "xs": 12,
+              "md": 6,
+              "xl": 3
+            }
+          ]
+        },
+        {
+          "type": "Pagination"
+        }
+      ],
+    });
+
+    return newItem;
   }
 
 
@@ -208,7 +239,6 @@ class Connector extends EditorComponent {
 
                 case "SCALAR":
 
-                  // console.log("arg", arg);
 
                   switch (typeName) {
 
@@ -402,6 +432,96 @@ class Connector extends EditorComponent {
   }
 
 
+
+  getFilters() {
+
+
+    const {
+      filtersname,
+      // pagevariable,
+    } = this.props;
+
+    const {
+      uri,
+    } = this.context;
+
+
+    let {
+      // [pagevariable]: page,
+      [filtersname]: filters,
+    } = uri.query(true);
+
+    try {
+      filters = filters && JSON.parse(filters) || null;
+    }
+    catch (error) {
+      console.error(console.error(error));
+    }
+
+    return filters;
+  }
+
+
+  setFilters(filters) {
+
+    const {
+      uri,
+      router: {
+        history,
+      },
+    } = this.context;
+
+    const {
+      filtersname,
+    } = this.props;
+
+    let newUri = uri.clone();
+
+    try {
+
+      filters = filters ? JSON.stringify(filters) : undefined;
+    }
+    catch (error) {
+      console.error(error);
+    }
+
+    if (filters === "{}") {
+      filters = null;
+    }
+
+    if (filters) {
+
+      if (newUri.hasQuery) {
+        newUri = newUri.setQuery({
+          [filtersname]: filters,
+        });
+      }
+      else {
+        newUri = newUri.addQuery({
+          [filtersname]: filters,
+        });
+      }
+
+    }
+    else {
+
+      newUri.removeQuery("filters");
+
+    }
+
+    newUri.removeQuery("page");
+
+
+    const url = newUri.resource();
+
+
+    history.push(url);
+
+  }
+
+
+
+
   renderMainView() {
 
     const {
@@ -410,12 +530,49 @@ class Connector extends EditorComponent {
       ...other
     } = this.getRenderProps();
 
+
+    const {
+      where: propsWhere,
+      ...otherProps
+    } = this.getComponentProps(this);
+
+    const filters = this.getFilters();
+
+
+    let where;
+
+    let AND = [];
+
+    if (propsWhere) {
+      // AND.push({
+      //   ...propsWhere,
+      // });
+      AND.push(propsWhere);
+    }
+
+    if (filters) {
+      AND.push(filters);
+    }
+
+    if (AND.length) {
+
+
+      where = {
+        AND,
+      }
+    }
+
+
+
     return <div
       {...other}
     >
       <Viewer
         key={query}
-        {...this.getComponentProps(this)}
+        setFilters={filters => this.setFilters(filters)}
+        filters={filters || []}
+        where={where}
+        {...otherProps}
       >
         {super.renderMainView()}
       </Viewer>
@@ -504,7 +661,6 @@ class Viewer extends Component {
     page = parseInt(page) || 0;
 
     const skip = page ? (page - 1) * first : 0;
-
 
 
 

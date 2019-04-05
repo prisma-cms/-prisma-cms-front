@@ -1,3 +1,6 @@
+====================================
+- Added FrontEditor components
+
 1.14.3
 ====================================
 - Fix FrontEditor::Connector

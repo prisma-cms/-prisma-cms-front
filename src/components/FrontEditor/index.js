@@ -12,6 +12,11 @@ import Connector from './components/Connector';
 import ListView from './components/Connector/ListView';
 import Pagination from './components/Connector/Pagination';
 import UserLink from './components/Connector/UserLink';
+import Filters from './components/Connector/Filters';
+import CreatedBy from './components/Connector/Fields/CreatedBy';
+import Name from './components/Connector/Fields/Name';
+import Content from './components/Connector/Fields/Content';
+import Section from './components/Section';
 
 
 const styles = theme => {
@@ -116,6 +121,11 @@ class FrontEditor extends Component {
       ListView,
       Pagination,
       UserLink,
+      Filters,
+      CreatedBy,
+      Content,
+      Section,
+      Name,
     ],
     CustomComponents: [],
   }
