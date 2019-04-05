@@ -619,7 +619,7 @@ class EditorComponent extends Component {
 
   getEditorField(props) {
 
-    const {
+    let {
       key,
       type,
       name,
@@ -634,10 +634,17 @@ class EditorComponent extends Component {
 
     let field = null;
 
+    if (type === "object") {
+
+      if (value === null) {
+        type = "string";
+      }
+
+    }
+
     switch (type) {
 
       case "boolean":
-
 
 
         field = <Grid
@@ -691,6 +698,7 @@ class EditorComponent extends Component {
 
       case "number":
       case "string":
+      case "undefined":
 
         field = <Grid
           key={key}

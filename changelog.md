@@ -1,3 +1,7 @@
+1.14.1
+====================================
+- Fix EditorComponent::getEditorField();
+
 1.14.0
 ====================================
 - Added DevRenderer

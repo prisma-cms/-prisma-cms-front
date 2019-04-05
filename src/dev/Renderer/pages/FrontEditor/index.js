@@ -50,6 +50,8 @@ class FrontEditorPage extends Component {
               {
                 "type": "UsersGrid",
                 "first": 5,
+                "skip": null,
+                "first": 10,
               },
             ],
           },
