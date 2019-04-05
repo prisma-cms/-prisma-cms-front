@@ -13,6 +13,11 @@ class TextArea extends EditorComponent {
   }
 
 
+  canBeDropped(dragItem) {
+
+    return false;
+  }
+
   renderPanelView() {
 
     const {
@@ -51,6 +56,7 @@ class TextArea extends EditorComponent {
 
       },
       style: {
+        ...style,
         display: "inline-block",
       },
       ...props,

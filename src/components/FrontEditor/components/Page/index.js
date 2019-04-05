@@ -12,12 +12,6 @@ class Page extends EditorComponent {
   }
 
 
-  canBeDropped(dragItem) {
-
-    return true;
-  }
-
-
   renderPanelView() {
 
     return null;

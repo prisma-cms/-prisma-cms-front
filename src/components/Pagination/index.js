@@ -139,10 +139,11 @@ export class Pagination extends Component {
   getPage() {
 
     const {
-      pageVariable,
+      // pageVariable,
+      page,
     } = this.props;
 
-    const page = this.props[pageVariable];
+    // const page = this.props[pageVariable];
 
     return parseInt(page) || 1;
   }

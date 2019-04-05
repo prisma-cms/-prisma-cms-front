@@ -21,6 +21,12 @@ class UsersGrid extends EditorComponent {
       <PeopleIcon /> Users Grid
     </div>);
   }
+  
+
+  canBeDropped(dragItem) {
+
+    return false;
+  }
 
 
   renderMainView() {

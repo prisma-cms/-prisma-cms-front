@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import EditorComponent from '..';
 
 import GridIcon from "material-ui-icons/GridOn";
+import { Button } from 'material-ui';
 
 
 class Grid extends EditorComponent {
@@ -24,26 +25,34 @@ class Grid extends EditorComponent {
   }
 
 
-  canBeDropped(dragItem) {
-
-    return true;
-  }
-
-
   getEditorField(props) {
 
     const {
+      key,
       name,
+      value,
     } = props;
+
 
     switch (name) {
 
       case "container":
       case "item":
 
-        Object.assign(props, {
-          disabled: true,
-        });
+        return <Button
+          key={key}
+          size="small"
+          variant="raised"
+          onClick={event => {
+
+            const component = this.getActiveComponent();
+
+            this.updateComponentProps(component, name === "container" ? "item" : "container", true);
+
+          }}
+        >
+          {name}
+        </Button>
 
         break;
 
@@ -52,10 +61,9 @@ class Grid extends EditorComponent {
     return super.getEditorField(props);
   }
 
- 
+
 
   updateComponentProps(component, name, value) {
-
 
     switch (name) {
 
@@ -74,10 +82,39 @@ class Grid extends EditorComponent {
 
         break;
 
+      // case "container":
+
+      //   break;
+
     }
 
 
     return super.updateComponentProps(component, name, value);
+  }
+
+
+  updateComponent(component, data) {
+
+    if (data.container) {
+
+      Object.assign(data, {
+        item: undefined,
+        xs: undefined,
+        sm: undefined,
+        md: undefined,
+        lg: undefined,
+        xl: undefined,
+      });
+
+    }
+    else if (data.item) {
+      Object.assign(data, {
+        container: undefined,
+        ...this.getItemDefaultProps(),
+      });
+    }
+
+    return super.updateComponent(component, data);
   }
 
 
@@ -151,12 +188,8 @@ class Grid extends EditorComponent {
           delete newItem.container;
 
           Object.assign(newItem, {
+            ...this.getItemDefaultProps(),
             item: true,
-            xs: 12,
-            sm: 6,
-            md: 4,
-            lg: 4,
-            xl: 4,
           });
         }
         else {
@@ -173,6 +206,18 @@ class Grid extends EditorComponent {
 
     return newItem;
 
+  }
+
+
+  getItemDefaultProps() {
+
+    return {
+      xs: 12,
+      sm: 6,
+      md: 4,
+      lg: 3,
+      xl: 2,
+    };
   }
 
 

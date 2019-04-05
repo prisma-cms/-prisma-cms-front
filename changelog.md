@@ -1,3 +1,8 @@
+1.14.2
+====================================
+- Fix Pagination::pageVariable
+- Fix FrontEditor
+
 1.14.1
 ====================================
 - Fix EditorComponent::getEditorField();

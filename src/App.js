@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 
 import ApolloCMS from 'apollo-cms/lib/App';
 
+import FrontEditor from './components/FrontEditor';
+
 import App from './components/App';
 
 import { Renderer } from "./components/App/Renderer";
@@ -17,8 +19,6 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom'
 
-import FrontEditorComponent from './components/FrontEditor/components/';
-import FrontEditor from './components/FrontEditor';
 
 
 const {
@@ -103,7 +103,6 @@ export {
   PrismaCmsApp,
   PageNotFound,
   FrontEditor,
-  FrontEditorComponent,
 }
 
 export default PrismaCmsApp

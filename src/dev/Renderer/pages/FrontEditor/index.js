@@ -43,32 +43,52 @@ class FrontEditorPage extends Component {
         "type": "Page",
         "components": [
           {
-            "type": "Grid",
-            "item": true,
-            "xs": true,
-            components: [
-              {
-                "type": "UsersGrid",
-                "first": 5,
-                "skip": null,
-                "first": 10,
-              },
-            ],
-          },
-          {
-            "type": "Grid",
-            "container": true,
+            "type": "Page",
             "components": [
               {
                 "type": "Grid",
-                "item": true,
-                "xs": 12,
-                "sm": 2,
-                "md": true,
-              },
+                "components": [
+                  {
+                    "type": "Grid",
+                    "xs": 12,
+                    "item": true,
+                    "components": [
+                      {
+                        "type": "Connector",
+                        "components": [
+                          {
+                            "type": "ListView",
+                            "components": [
+                              {
+                                "type": "Grid",
+                                "components": [
+                                  {
+                                    "type": "UserLink"
+                                  }
+                                ],
+                                "item": true,
+                                "xs": 12,
+                                "md": 6
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Pagination"
+                          }
+                        ],
+                        "orderBy": "createdAt_ASC",
+                        "first": 12,
+                        "query": "usersConnection",
+                        "pagevariable": "userspage"
+                      }
+                    ]
+                  }
+                ],
+                "container": true
+              }
             ]
           }
-        ]
+        ],
       }
     ],
   }

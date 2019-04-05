@@ -15,7 +15,7 @@ import PhoneField, {
 import Image, {
   getImageUrl,
 } from "./Image";
-import {FrontEditor} from "../../App";
+import FrontEditor from "../../components/FrontEditor";
 
 export {
   Avatar,

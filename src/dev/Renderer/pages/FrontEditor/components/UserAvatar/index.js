@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FrontEditorComponent } from '../../../../../../App';
+import EditorComponent from '../../../../../../components/FrontEditor/components';
 
 
-class CurrentUserAvatar extends FrontEditorComponent {
+class CurrentUserAvatar extends EditorComponent {
 
   renderPanelView(content) {
 
     const {
       Avatar,
       classes,
+      user: currentUser,
     } = this.context;
 
 
@@ -17,9 +18,26 @@ class CurrentUserAvatar extends FrontEditorComponent {
       className={classes.panelButton}
     >
       <Avatar
-        user={{}}
+        user={currentUser || {}}
       /> Current User Avatar
     </div>);
+  }
+
+
+  getRenderProps() {
+
+    const {
+      style,
+      ...props
+    } = super.getRenderProps();
+
+    return {
+      style: {
+        display: "inline-block",
+        ...style,
+      },
+      ...props,
+    }
   }
 
 

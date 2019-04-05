@@ -203,7 +203,7 @@ class EditorComponent extends Component {
 
   canBeDropped(dragItem) {
 
-    return false;
+    return true;
   }
 
 
@@ -321,7 +321,7 @@ class EditorComponent extends Component {
 
       classNames = classNames.concat([
         classes.item,
-        inEditMode ? "inEditMode" : "",
+        inEditMode ? classes.itemEditable : "",
         isDragOvered ? "dragOvered" : "",
         isActive ? "active" : "",
         isHovered ? "hovered" : "",
@@ -352,16 +352,27 @@ class EditorComponent extends Component {
     const {
       classes,
       Grid,
+      hoveredItem,
+      dragTarget,
     } = this.context;
 
-    // const isActive = this.isActive();
+    const isActive = this.isActive();
+
+    const isHovered = hoveredItem instanceof this.constructor && !isActive ? true : false;
+
+    const isDragOvered = dragTarget && dragTarget instanceof this.constructor ? true : false;
+
 
     return <Grid
       item
     >
       <div
         // className={[classes.panelItem, isActive ? "active" : ""].join(" ")}
-        className={classes.panelItem}
+        className={[
+          classes.panelItem,
+          isHovered ? "hovered" : "",
+          isDragOvered ? "dragOvered" : "",
+        ].join(" ")}
         draggable
         onDragStart={event => this.onDragStart(event)}
         onDragEnd={event => this.onDragEnd(event)}
@@ -760,19 +771,20 @@ class EditorComponent extends Component {
 
 
 
-    const activeItem = this.getActiveItem();
+    // const activeItem = this.getActiveItem();
 
-    const {
-      components,
-      updateObject,
-    } = this.context;
+    // const {
+    //   components,
+    //   updateObject,
+    // } = this.context;
 
-    let {
-      props: {
-        component,
-      },
-    } = activeItem;
+    // let {
+    //   props: {
+    //     component,
+    //   },
+    // } = activeItem;
 
+    const component = this.getActiveComponent();
 
     switch (type) {
 
@@ -800,6 +812,20 @@ class EditorComponent extends Component {
   }
 
 
+  getActiveComponent() {
+
+    const activeItem = this.getActiveItem();
+
+    let {
+      props: {
+        component,
+      },
+    } = activeItem;
+
+    return component;
+  }
+
+
   updateComponentProps(component, name, value) {
 
     return this.updateComponent(component, {
@@ -815,7 +841,26 @@ class EditorComponent extends Component {
       updateObject,
     } = this.context;
 
-    Object.assign(component, data);
+    // Object.assign(component, data);
+
+    if (data) {
+
+      const keys = Object.keys(data);
+
+      keys.map(name => {
+
+        const value = data[name];
+
+        if (value === undefined) {
+          delete component[name];
+        }
+        else {
+          component[name] = value;
+        }
+
+      });
+
+    }
 
     updateObject({
       components,

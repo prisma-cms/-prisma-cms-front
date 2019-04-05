@@ -8,70 +8,87 @@ import Page from './components/Page';
 import Grid from './components/Grid';
 import TextArea from './components/TextArea';
 import UsersGrid from './components/UsersGrid';
+import Connector from './components/Connector';
+import ListView from './components/Connector/ListView';
+import Pagination from './components/Connector/Pagination';
+import UserLink from './components/Connector/UserLink';
 
-const styles = {
 
-  root: {
-    // border: "1px solid red",
-    flex: 1,
-    display: "flex",
-  },
-  toolbar: {
-    // border: "1px solid blue",
-  },
-  editor: {
-    // border: "1px solid red",
-    flex: 1,
-    overflow: "auto",
-    height: "100%",
-  },
-  panel: {
-    // border: "1px solid green",
-    // flex: 1,
-    width: 250,
-    height: "100%",
-    overflow: "auto",
-  },
-  panelItem: {
-    cursor: "grab",
-    padding: 10,
-    border: "1px solid #ddd",
-    "&.active": {
-      border: "1px solid #b806bb",
+const styles = theme => {
+
+  const dragOveredBorderColor = "red";
+  const hoveredBorderColor = "#7509da";
+  const activeBorderColor = "#b806bb";
+
+  return {
+
+    root: {
+      // border: `1px solid ${dragOveredBorderColor}`,
+      flex: 1,
+      display: "flex",
     },
-    "&:hover": {
-      border: "1px solid #7509da",
+    toolbar: {
+      // border: "1px solid blue",
     },
-  },
-  panelButton: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  bordered: {
-    border: "1px solid #ddd",
-  },
+    editor: {
+      // border: `1px solid ${dragOveredBorderColor}`,
+      flex: 1,
+      overflow: "auto",
+      height: "100%",
+    },
+    panel: {
+      // border: "1px solid green",
+      // flex: 1,
+      width: 250,
+      height: "100%",
+      overflow: "auto",
+    },
+    panelItem: {
+      cursor: "grab",
+      padding: 10,
+      border: "1px solid #ddd",
+      "&:hover": {
+        border: `1px solid ${hoveredBorderColor}`,
+      },
+      "&.active": {
+        border: `1px solid ${activeBorderColor}`,
+      },
+      "&.hovered": {
+        border: `1px solid ${hoveredBorderColor}`,
+      },
+      "&.dragOvered": {
+        border: `1px solid ${dragOveredBorderColor}`,
+      },
+    },
+    item: {
 
-  item: {
 
-    "&.inEditMode": {
+    },
+    // inEditMode
+    itemEditable: {
       minHeight: "30px",
       border: "1px dotted #ddd",
       padding: 5,
 
-      "&.dragOvered": {
-        border: "1px solid red",
-      },
       "&.active": {
-        border: "1px solid #b806bb",
+        border: `1px solid ${activeBorderColor}`,
+      },
+      "&.dragOvered": {
+        border: `1px solid ${dragOveredBorderColor}`,
       },
       "&.hovered": {
-        border: "1px solid #7509da",
+        border: `1px solid ${hoveredBorderColor}`,
       },
     },
-
-  },
-
+    panelButton: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    bordered: {
+      border: "1px solid #ddd",
+    },
+  }
 }
 
 class FrontEditor extends Component {
@@ -95,6 +112,10 @@ class FrontEditor extends Component {
       Grid,
       TextArea,
       UsersGrid,
+      Connector,
+      ListView,
+      Pagination,
+      UserLink,
     ],
     CustomComponents: [],
   }
