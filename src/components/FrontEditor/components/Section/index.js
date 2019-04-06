@@ -12,6 +12,8 @@ class Section extends EditorComponent {
     marginBottom: 10,
   }
 
+  static Name = "Section"
+
   renderPanelView() {
 
     const {

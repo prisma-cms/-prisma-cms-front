@@ -8,6 +8,8 @@ import EditorComponent from '../..';
 
 class Pagination extends EditorComponent {
 
+  static Name = "Pagination"
+
 
   renderPanelView() {
 

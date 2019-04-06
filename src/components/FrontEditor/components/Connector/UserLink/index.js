@@ -9,6 +9,8 @@ import EditorComponent from '../..';
 class UserLink extends EditorComponent {
 
 
+  static Name = "UserLink"
+
   renderPanelView() {
 
     const {

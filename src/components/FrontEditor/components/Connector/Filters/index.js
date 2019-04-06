@@ -11,6 +11,8 @@ import PrismaCmsFilters from "@prisma-cms/filters";
 
 class Filters extends EditorComponent {
 
+  static Name = "Filters"
+
 
   renderPanelView() {
 

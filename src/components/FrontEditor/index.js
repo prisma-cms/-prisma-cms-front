@@ -186,12 +186,31 @@ class FrontEditor extends Component {
       CustomComponents,
     } = this.props;
 
+    Components.map(n => {
+
+      console.log("Components name", n.name, n.Name);
+
+    });
+
+    CustomComponents.map(n => {
+
+      console.log("CustomComponents name", n.name, n.Name);
+
+    });
+
 
     let baseComponents = [Page].concat(Components)
-      .filter(n => n && !CustomComponents.find(i => i.name === n.name));
+      .filter(n => n && !CustomComponents.find(i => i.Name === n.Name));
 
+    console.log("baseComponents", baseComponents);
 
-    return baseComponents.concat(CustomComponents).filter(n => n);
+    baseComponents.map(n => {
+
+      console.log("name", n.name, n.Name, n.constructor.Name);
+
+    });
+
+    return baseComponents.concat(CustomComponents).filter(n => n && n.Name);
   }
 
 

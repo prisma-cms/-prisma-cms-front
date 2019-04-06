@@ -9,6 +9,8 @@ import PeopleIcon from "material-ui-icons/People";
 class UsersGrid extends EditorComponent {
 
 
+  static Name = "UsersGrid"
+
   renderPanelView() {
 
     const {

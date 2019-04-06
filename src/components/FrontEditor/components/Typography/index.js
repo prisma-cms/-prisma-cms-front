@@ -8,6 +8,8 @@ import TypographyMU from "material-ui/Typography";
 
 class Typography extends EditorComponent {
 
+  static Name = "Typography"
+
   static defaultProps = {
     ...EditorComponent.defaultProps,
     variant: "body1",

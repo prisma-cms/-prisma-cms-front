@@ -5,6 +5,8 @@ import EditorComponent from '../../../../../../components/FrontEditor/components
 
 class CurrentUserAvatar extends EditorComponent {
 
+  static Name = "CurrentUserAvatar";
+
   renderPanelView(content) {
 
     const {

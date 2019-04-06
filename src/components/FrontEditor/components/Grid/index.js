@@ -19,6 +19,7 @@ class Grid extends EditorComponent {
     ...EditorComponent.defaultProps,
   }
 
+  static Name = "Grid"
 
   onBeforeDrop = () => {
 

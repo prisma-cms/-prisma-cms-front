@@ -14,6 +14,8 @@ class Content extends EditorComponent {
     readOnly: true,
   }
 
+  static Name = "Content"
+
 
   renderPanelView() {
 

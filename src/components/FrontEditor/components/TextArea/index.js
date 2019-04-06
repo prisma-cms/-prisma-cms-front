@@ -8,6 +8,8 @@ import TextIcon from "material-ui-icons/Title";
 class TextArea extends EditorComponent {
 
 
+  static Name = "TextArea"
+
   onBeforeDrop = () => {
 
   }

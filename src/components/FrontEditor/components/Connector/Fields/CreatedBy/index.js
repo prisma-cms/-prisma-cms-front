@@ -10,6 +10,8 @@ import { ObjectContext } from '../../ListView';
 class CreatedBy extends EditorComponent {
 
 
+  static Name = "CreatedBy"
+
   renderPanelView() {
 
     const {

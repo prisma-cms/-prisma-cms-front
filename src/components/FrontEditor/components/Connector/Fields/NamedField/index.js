@@ -14,6 +14,9 @@ class NamedField extends EditorComponent {
   }
 
 
+  static Name = "NamedField"
+
+
   renderPanelView() {
 
     const {

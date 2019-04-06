@@ -16,6 +16,8 @@ class ListView extends EditorComponent {
     spacing: 8,
   };
 
+  static Name = "ListView"
+
 
   renderPanelView() {
 

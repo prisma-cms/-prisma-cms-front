@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import EditorComponent  from '..'; 
+import EditorComponent from '..';
 
 
 class Page extends EditorComponent {
@@ -10,6 +10,18 @@ class Page extends EditorComponent {
     ...EditorComponent.defaultProps,
     deletable: false,
   }
+
+
+  static Name = "Page"
+
+  // constructor(props) {
+
+  //   super(props);
+
+  //   this.name = "Page";
+  //   this.Name = "Page";
+
+  // }
 
 
   renderPanelView() {
