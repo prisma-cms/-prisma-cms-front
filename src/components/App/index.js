@@ -110,7 +110,7 @@ export default class App extends React.Component {
     Renderer: PropTypes.func.isRequired,
     themeOptions: PropTypes.object.isRequired,
     queryFragments: PropTypes.object.isRequired,
-    lang: PropTypes.string.isRequired,
+    lang: PropTypes.string,
     sheetsManager: PropTypes.object,
     assetsBaseUrl: PropTypes.string,
   }
@@ -153,7 +153,6 @@ export default class App extends React.Component {
 
     let {
       themeOptions,
-      lang,
     } = props;
 
     this.state = {
@@ -161,21 +160,10 @@ export default class App extends React.Component {
       themeOptions,
     }
 
-    if (!lang) {
-
-      const {
-        navigator,
-      } = global;
-
-      lang = navigator && navigator.language || "";
-
-    }
-
-    lang = lang && lang.substr(0, 2) || "";
+    this.initLanguage();
 
     Object.assign(this.state, {
       theme: this.getTheme(),
-      lang,
     });
 
   }
@@ -184,8 +172,10 @@ export default class App extends React.Component {
 
     const {
       theme,
-      lang,
     } = this.state;
+
+
+    const lang = this.getLanguage();
 
     return {
       theme,
@@ -194,6 +184,61 @@ export default class App extends React.Component {
       getQueryFragment: fragmentName => this.getQueryFragment(fragmentName),
       lang,
     }
+  }
+
+
+  initLanguage() {
+
+    let {
+      lang,
+    } = this.props;
+
+
+    if (!lang) {
+
+      const {
+        navigator,
+        localStorage,
+      } = global;
+
+      lang = (localStorage && localStorage.prismaCmsLang) || (navigator && navigator.language) || "en-En";
+
+    }
+
+
+    lang = lang && lang.substr(0, 2) || "en-En";
+
+
+    Object.assign(this.state, {
+      lang,
+    });
+
+  }
+
+  setLanguage(lang) {
+
+    const {
+      localStorage,
+    } = global;
+
+    if (localStorage) {
+      localStorage.setItem("prismaCmsLang", lang);
+    }
+
+    this.setState({
+      lang,
+    });
+
+  }
+
+  getLanguage() {
+
+    const {
+      lang,
+    } = this.state;
+
+    return lang;
+
   }
 
 
