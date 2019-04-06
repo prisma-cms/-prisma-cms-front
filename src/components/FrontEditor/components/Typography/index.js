@@ -13,7 +13,7 @@ class Typography extends EditorComponent {
     variant: "body1",
     color: "default",
     text: "",
-    type: "span",
+    displayType: "span",
     display: "inline-block",
   }
 
@@ -33,7 +33,7 @@ class Typography extends EditorComponent {
   renderMainView() {
 
     const {
-      component,
+      displayType,
       ...otherProps
     } = this.getComponentProps(this);
 
@@ -51,7 +51,7 @@ class Typography extends EditorComponent {
         ...style,
         display,
       }}
-      component={type}
+      component={displayType}
       {...other}
     // {...otherProps}
     >

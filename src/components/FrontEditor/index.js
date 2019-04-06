@@ -22,6 +22,14 @@ import Typography from './components/Typography';
 
 const styles = theme => {
 
+  // console.log("theme", theme);
+
+  const {
+    breakpoints,
+  } = theme;
+
+  const desktop = breakpoints.up("sm");
+
   const dragOveredBorderColor = "red";
   const hoveredBorderColor = "#7509da";
   const activeBorderColor = "#b806bb";
@@ -29,25 +37,31 @@ const styles = theme => {
   return {
 
     root: {
-      // border: `1px solid ${dragOveredBorderColor}`,
-      flex: 1,
-      display: "flex",
+      [desktop]: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "row-reverse",
+      },
+    },
+    editor: {
+
+      [desktop]: {
+        flex: 1,
+        overflow: "auto",
+        height: "100%",
+      },
+
+    },
+    panel: {
+
+      [desktop]: {
+        width: 250,
+        height: "100%",
+        overflow: "auto",
+      },
     },
     toolbar: {
       // border: "1px solid blue",
-    },
-    editor: {
-      // border: `1px solid ${dragOveredBorderColor}`,
-      flex: 1,
-      overflow: "auto",
-      height: "100%",
-    },
-    panel: {
-      // border: "1px solid green",
-      // flex: 1,
-      width: 250,
-      height: "100%",
-      overflow: "auto",
     },
     panelItem: {
       cursor: "grab",
@@ -430,6 +444,11 @@ class FrontEditor extends Component {
                 className={classes.root}
               >
                 <div
+                  className={[classes.panel, classes.bordered].join(" ")}
+                >
+                  {this.renderPanels()}
+                </div>
+                <div
                   className={[classes.editor, classes.bordered].join(" ")}
                 >
                   {items}
@@ -444,11 +463,6 @@ class FrontEditor extends Component {
                     {JSON.stringify(components, true, 2)}
                   </div> : null}
 
-                </div>
-                <div
-                  className={[classes.panel, classes.bordered].join(" ")}
-                >
-                  {this.renderPanels()}
                 </div>
               </div>
             </Fragment>

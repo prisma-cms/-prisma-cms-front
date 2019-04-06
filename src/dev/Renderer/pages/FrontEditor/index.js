@@ -74,9 +74,7 @@ class FrontEditorPage extends Component {
                 "type": "Pagination"
               },
             ],
-            "orderBy": null,
-            "skip": null,
-            "last": null,
+            "orderBy": "createdAt_ASC",
             "query": "usersConnection"
           }
         ]
