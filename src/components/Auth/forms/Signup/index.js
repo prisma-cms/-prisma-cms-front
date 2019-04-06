@@ -74,7 +74,7 @@ class SignupForm extends AuthForm {
         xs={12}
       >
         {this.renderField(<TextField
-          label="Логин"
+          label={this.lexicon("Login")}
           name="username"
           fullWidth
           value={username || ""}
@@ -87,7 +87,7 @@ class SignupForm extends AuthForm {
         xs={12}
       >
         {this.renderField(<TextField
-          label="Емейл"
+          label={this.lexicon("Email")}
           name="email"
           fullWidth
           value={email || ""}
@@ -100,7 +100,7 @@ class SignupForm extends AuthForm {
         xs={12}
       >
         {this.renderField(<PhoneField
-          label="Телефон"
+          label={this.lexicon("Phone")}
           name="phone"
           fullWidth
           value={phone || ""}
@@ -113,7 +113,7 @@ class SignupForm extends AuthForm {
         xs={12}
       >
         {this.renderField(<TextField
-          label="Полное имя"
+          label={this.lexicon("Fullname")}
           name="fullname"
           fullWidth
           value={fullname || ""}
@@ -126,7 +126,7 @@ class SignupForm extends AuthForm {
         xs={12}
       >
         {this.renderField(<TextField
-          label="Пароль"
+          label={this.lexicon("Password")}
           name="password"
           type="password"
           fullWidth
@@ -230,7 +230,7 @@ class SignupForm extends AuthForm {
       }}
       size="small"
     >
-      Отмена
+      {this.lexicon("Cancel")}
     </Button>);
 
 
@@ -242,7 +242,7 @@ class SignupForm extends AuthForm {
         type="submit"
         size="small"
       >
-        Зарегистрироваться
+        {this.lexicon("Signup")}
       </Button>);
 
     }
@@ -257,7 +257,7 @@ class SignupForm extends AuthForm {
         }}
         size="small"
       >
-        Авторизоваться
+        {this.lexicon("Signin")}
       </Button>);
     }
 
@@ -278,7 +278,7 @@ class SignupForm extends AuthForm {
     >
 
       <DialogTitle>
-        Регистрация
+        {this.lexicon("Signup")}
       </DialogTitle>
 
       <DialogContent>

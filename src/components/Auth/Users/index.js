@@ -11,6 +11,21 @@ import PrismaCmsComponent from "@prisma-cms/component";
 import { Button } from 'material-ui';
 
 
+const defaultLocales = {
+  ru: {
+    values: {
+      "Login": "Логин",
+      "Password": "Пароль",
+      "Signin": "Авторизоваться",
+      "Signup": "Регистрация",
+      "Cancel": "Отмена",
+      "Login, email, phone or user ID": "Логин, емейл, телефон или ID пользователя",
+      "Reset password": "Новый пароль",
+    },
+  },
+};
+
+
 class AuthUsers extends PrismaCmsComponent {
 
   static propTypes = {
@@ -21,6 +36,7 @@ class AuthUsers extends PrismaCmsComponent {
     cleanFilters: PropTypes.func.isRequired,
     onPasswordChange: PropTypes.func.isRequired,
     password: PropTypes.string.isRequired,
+    locales: defaultLocales,
   }
 
 
@@ -39,8 +55,8 @@ class AuthUsers extends PrismaCmsComponent {
 
 
     return this.renderField(<TextField
-      label="Логин"
-      helperText="Логин, емейл, телефон или ID пользователя"
+      label={this.lexicon("Login")}
+      helperText={this.lexicon("Login, email, phone or user ID")}
       fullWidth
       name={name}
       value={search || ""}
@@ -194,7 +210,7 @@ class AuthUsers extends PrismaCmsComponent {
                 fullWidth
                 name="password"
                 value={password || ""}
-                label="Пароль"
+                label={this.lexicon("Password")}
                 onChange={event => {
 
                   const {
@@ -217,7 +233,7 @@ class AuthUsers extends PrismaCmsComponent {
                   <Button
                   // color="primary"
                   >
-                    Новый пароль
+                    {this.lexicon("Reset password")}
                   </Button>
                 </Grid>
 
@@ -228,7 +244,7 @@ class AuthUsers extends PrismaCmsComponent {
                     // color="primary"
                     onClick={cleanFilters}
                   >
-                    Отмена
+                    {this.lexicon("Cancel")}
                   </Button>
                 </Grid>
 
@@ -311,7 +327,7 @@ class AuthUsers extends PrismaCmsComponent {
       <div>
 
         {usersList}
-        
+
         {searchForm}
 
       </div>

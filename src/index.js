@@ -10,5 +10,5 @@ import * as queryFragments from "./schema/generated/api.fragments";
 
 ReactDOM.render(<App
   queryFragments={queryFragments}
-  lang="ru"
+  lang="en"
 />, document.getElementById('root'));

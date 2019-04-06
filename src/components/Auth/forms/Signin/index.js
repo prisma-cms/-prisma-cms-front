@@ -50,8 +50,8 @@ class AuthUsers extends AuthForm {
 
 
     return this.renderField(<TextField
-      label="Логин"
-      helperText="Логин, емейл, телефон или ID пользователя"
+      label={this.lexicon("Login")}
+      helperText={this.lexicon("Login, email, phone or user ID")}
       fullWidth
       name={name}
       value={search || ""}
@@ -154,82 +154,7 @@ class AuthUsers extends AuthForm {
     return result;
 
   }
-
-
-
-  // getSubmit() {
-
-
-  //   let onSubmit;
-
-  //   const {
-  //     password,
-  //   } = this.state;
-
-
-  //   const user = this.getUser();
-
-
-
-  //   if (user) {
-
-
-  //     const {
-  //       id: userId,
-  //     } = user;
-
-  //     onSubmit = () => {
-
-  //       this.signin({
-  //         variables: {
-  //           where: {
-  //             id: userId,
-  //           },
-  //           data: {
-  //             password,
-  //           },
-  //         },
-  //       });
-
-  //     }
-  //   }
-
-
-  //   return onSubmit;
-  // }
-
-
-  // getUser() {
-
-  //   let user;
-
-  //   const {
-  //     data,
-  //   } = this.props;
-
-  //   if (data) {
-
-  //     const {
-  //       objectsConnection,
-  //       variables: {
-  //         first,
-  //       },
-  //     } = data;
-
-  //     const users = objectsConnection ? objectsConnection.edges.map(n => n.node) : [];
-  //     const count = objectsConnection ? objectsConnection.aggregate.count : 0;
-
-  //     if (count) {
-  //       user = users[0];
-  //     }
-
-  //   }
-
-  //   return user;
-  // }
-
-
-
+ 
 
   cleanFilters() {
 
@@ -354,7 +279,7 @@ class AuthUsers extends AuthForm {
               <Typography
                 variant="caption"
               >
-                Выберите пользователя из списка
+                {this.lexicon("Choose user from list")}
               </Typography>
 
             </Grid>
@@ -476,27 +401,6 @@ class AuthUsers extends AuthForm {
           >
           </Grid>
 
-          {/* <Grid
-              item
-              xs={12}
-            >
-              {this.renderField(<TextField
-                fullWidth
-                name="password"
-                value={password || ""}
-                label="Пароль"
-                helperText="Введите свой пароль"
-                onChange={event => {
-
-                  const {
-                    value,
-                  } = event.target;
-
-                  onPasswordChange(value);
-
-                }}
-              />)}
-            </Grid> */}
 
         </Grid>
 
@@ -526,7 +430,7 @@ class AuthUsers extends AuthForm {
         }}
         size="small"
       >
-        Зарегистрироваться
+        {this.lexicon("Signup")}
       </Button>);
 
     }
@@ -542,7 +446,7 @@ class AuthUsers extends AuthForm {
       }}
       size="small"
     >
-      Отмена
+      {this.lexicon("Cancel")}
     </Button>);
 
 
@@ -563,8 +467,8 @@ class AuthUsers extends AuthForm {
           fullWidth
           name="code"
           value={resetPasswordCode || ""}
-          label="Код"
-          helperText="Введите код подтверждения"
+          label={this.lexicon("Code")}
+          helperText={this.lexicon("Type confirm code")}
           // type="password"
           onChange={event => {
 
@@ -614,8 +518,8 @@ class AuthUsers extends AuthForm {
           fullWidth
           name="password"
           value={password || ""}
-          label="Пароль"
-          helperText="Введите свой пароль"
+          label={this.lexicon("Password")}
+          helperText={this.lexicon("Type password")}
           type="password"
           onChange={event => {
 
@@ -692,7 +596,7 @@ class AuthUsers extends AuthForm {
 
           }}
         >
-          Новый пароль
+          {this.lexicon("Reset password")}
         </Button>);
 
 
@@ -702,7 +606,7 @@ class AuthUsers extends AuthForm {
           type="submit"
           size="small"
         >
-          Войти
+          {this.lexicon("Signin")}
         </Button>);
 
       }
@@ -716,13 +620,7 @@ class AuthUsers extends AuthForm {
     }
 
 
-    let title = "Авторизация";
-
-
-
-
-
-
+    let title = this.lexicon("Authorization");
 
 
     return (

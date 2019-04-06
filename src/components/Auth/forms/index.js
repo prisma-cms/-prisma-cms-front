@@ -10,6 +10,32 @@ import Dialog, {
 
 import PrismaCmsComponent from "@prisma-cms/component";
 
+
+
+const defaultLocales = {
+  ru: {
+    values: {
+      "Authorization": "Авторизация переведено",
+      "Login, email, phone or user ID": "Логин, емейл, телефон или ID пользователя",
+      "Choose user from list": "Выберите пользователя из списка",
+      "Type confirm code": "Введите код подтверждения",
+      "Type password": "Введите свой пароль",
+      "Login": "Логин",
+      "Email": "Емейл",
+      "Phone": "Телефон",
+      "Fullname": "Полное имя",
+      "Password": "Пароль",
+      "Signin": "Авторизоваться",
+      "Signup": "Регистрация",
+      "Cancel": "Отмена",
+      "Reset password": "Новый пароль",
+      "Code": "Код",
+    },
+  },
+};
+
+
+
 class AuthForm extends PrismaCmsComponent {
 
   static propTypes = {
@@ -28,6 +54,7 @@ class AuthForm extends PrismaCmsComponent {
     open: true,
     fullWidth: true,
     maxWidth: "xs",
+    locales: defaultLocales
   }
 
 
