@@ -22,7 +22,7 @@ export const ConnectorContext = createContext({});
 class Connector extends EditorComponent {
 
 
-  static Name = "Connection"
+  static Name = "Connector"
 
   static defaultProps = {
     ...EditorComponent.defaultProps,

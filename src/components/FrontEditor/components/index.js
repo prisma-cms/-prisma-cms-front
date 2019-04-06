@@ -51,7 +51,7 @@ class EditorComponent extends Component {
 
     return {
       component: this,
-      type: this.constructor.name,
+      type: this.constructor.Name,
     };
   }
 
@@ -377,7 +377,7 @@ class EditorComponent extends Component {
         onDragStart={event => this.onDragStart(event)}
         onDragEnd={event => this.onDragEnd(event)}
       >
-        {content || this.constructor.name}
+        {content || this.constructor.Name}
       </div>
     </Grid>
   }
@@ -951,7 +951,7 @@ class EditorComponent extends Component {
         } = n;
 
 
-        let Component = Components.find(n => n.name === type);
+        let Component = Components.find(n => n.Name === type);
 
         if (Component) {
 

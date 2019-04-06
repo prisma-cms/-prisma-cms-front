@@ -186,29 +186,29 @@ class FrontEditor extends Component {
       CustomComponents,
     } = this.props;
 
-    Components.map(n => {
+    // Components.map(n => {
 
-      console.log("Components name", n.name, n.Name);
+    //   console.log("Components name", n.name, n.Name);
 
-    });
+    // });
 
-    CustomComponents.map(n => {
+    // CustomComponents.map(n => {
 
-      console.log("CustomComponents name", n.name, n.Name);
+    //   console.log("CustomComponents name", n.name, n.Name);
 
-    });
+    // });
 
 
     let baseComponents = [Page].concat(Components)
       .filter(n => n && !CustomComponents.find(i => i.Name === n.Name));
 
-    console.log("baseComponents", baseComponents);
+    // console.log("baseComponents", baseComponents);
 
-    baseComponents.map(n => {
+    // baseComponents.map(n => {
 
-      console.log("name", n.name, n.Name, n.constructor.Name);
+    //   console.log("name", n.name, n.Name, n.constructor.Name);
 
-    });
+    // });
 
     return baseComponents.concat(CustomComponents).filter(n => n && n.Name);
   }
@@ -261,7 +261,7 @@ class FrontEditor extends Component {
 
       {Components.map(Component => {
 
-        const name = Component.name;
+        const name = Component.Name;
 
         return <Component
           key={name}
@@ -305,7 +305,7 @@ class FrontEditor extends Component {
           ...other
         } = n;
 
-        let Component = Components.find(n => n.name === type);
+        let Component = Components.find(n => n.Name === type);
 
 
         if (Component) {
