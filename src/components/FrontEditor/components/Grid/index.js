@@ -104,12 +104,14 @@ class Grid extends EditorComponent {
         md: undefined,
         lg: undefined,
         xl: undefined,
+        alignItems: "flex-end",
       });
 
     }
     else if (data.item) {
       Object.assign(data, {
         container: undefined,
+        alignItems: undefined,
         ...this.getItemDefaultProps(),
       });
     }
@@ -195,6 +197,8 @@ class Grid extends EditorComponent {
         else {
           Object.assign(newItem, {
             container: true,
+            alignItems: "flex-end",
+            spacing: 0,
           });
         }
 

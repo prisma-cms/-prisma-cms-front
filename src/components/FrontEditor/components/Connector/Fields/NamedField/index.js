@@ -5,7 +5,13 @@ import { ObjectContext } from '../../ListView';
 
 import Icon from "material-ui-icons/ShortText";
 
-class Name extends EditorComponent {
+class NamedField extends EditorComponent {
+
+
+  static defaultProps = {
+    ...EditorComponent.defaultProps,
+    name: "",
+  }
 
 
   renderPanelView() {
@@ -17,7 +23,7 @@ class Name extends EditorComponent {
     return super.renderPanelView(<div
       className={classes.panelButton}
     >
-      <Icon /> Name
+      <Icon /> Object field
     </div>);
   }
 
@@ -28,11 +34,20 @@ class Name extends EditorComponent {
     //   UserLink,
     // } = this.context;
 
+    const {
+      name,
+      ...other
+    } = this.getRenderProps();
+
     return <span
-      {...this.getRenderProps()}
+      {...other}
     >
       <ObjectContext.Consumer>
         {context => {
+
+          if (!name) {
+            return null;
+          }
 
           const {
             object,
@@ -46,10 +61,10 @@ class Name extends EditorComponent {
 
 
           const {
-            name,
+            [name]: value,
           } = object;
 
-          return name || null;
+          return value && (typeof value !== "object") ? value : null;
 
         }}
       </ObjectContext.Consumer>
@@ -58,4 +73,4 @@ class Name extends EditorComponent {
 
 }
 
-export default Name;
+export default NamedField;

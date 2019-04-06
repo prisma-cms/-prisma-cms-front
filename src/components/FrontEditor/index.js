@@ -14,9 +14,10 @@ import Pagination from './components/Connector/Pagination';
 import UserLink from './components/Connector/UserLink';
 import Filters from './components/Connector/Filters';
 import CreatedBy from './components/Connector/Fields/CreatedBy';
-import Name from './components/Connector/Fields/Name';
+import NamedField from './components/Connector/Fields/NamedField';
 import Content from './components/Connector/Fields/Content';
 import Section from './components/Section';
+import Typography from './components/Typography';
 
 
 const styles = theme => {
@@ -115,17 +116,18 @@ class FrontEditor extends Component {
     debug: false,
     Components: [
       Grid,
-      TextArea,
+      Typography,
+      // TextArea,
       UsersGrid,
       Connector,
       ListView,
       Pagination,
+      NamedField,
       UserLink,
       Filters,
       CreatedBy,
       Content,
       Section,
-      Name,
     ],
     CustomComponents: [],
   }

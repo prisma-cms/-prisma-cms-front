@@ -62,7 +62,10 @@ class FrontEditorPage extends Component {
                     "components": [
                       {
                         "type": "UserLink"
-                      }
+                      }, ,
+                      {
+                        "type": "Typography"
+                      },
                     ]
                   }
                 ]
