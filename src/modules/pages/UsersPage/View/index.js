@@ -44,7 +44,7 @@ export class UsersPageView extends TableView {
         id: 'username',
         numeric: false,
         disablePadding: false,
-        label: 'User',
+        label: this.lexicon("User"),
         renderer: (value, record) => {
 
 
@@ -59,7 +59,7 @@ export class UsersPageView extends TableView {
         id: 'createdAt',
         numeric: false,
         disablePadding: false,
-        label: 'Reg date',
+        label: this.lexicon("Reg date"),
         renderer: (value, record) => {
 
 

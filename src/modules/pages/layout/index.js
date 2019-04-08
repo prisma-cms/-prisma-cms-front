@@ -8,6 +8,18 @@ import Context from "@prisma-cms/context";
 
 import URI from 'urijs';
 
+
+export const locales = {
+  ru: {
+    values: {
+      "Users": "Пользователи",
+      "User": "Пользователь",
+      "Reg date": "Дата регистрации",
+    },
+  },
+}
+
+
 export default class PageLayout extends PrismaCmsComponent {
 
   static contextType = Context;
@@ -20,6 +32,7 @@ export default class PageLayout extends PrismaCmsComponent {
   static defaultProps = {
     ...PrismaCmsComponent.defaultProps,
     setMeta: true,
+    locales,
   };
 
 

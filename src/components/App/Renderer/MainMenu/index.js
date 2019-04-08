@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Context from "@prisma-cms/context";
+import PrismaCmsComponent from "@prisma-cms/component";
 
 import Grid from '../../../../modules/ui/Grid';
 
@@ -45,24 +45,30 @@ export const styles = theme => {
   }
 }
 
-export class MainMenu extends Component {
+export const locales = {
+  ru: {
+    values: {
+      Signin: "Вход",
+      Signout: "Выход",
+      "Main page": "Главная страница",
+      "Users": "Пользователи",
+    },
+  },
+}
+
+export class MainMenu extends PrismaCmsComponent {
 
   static propTypes = {
+    ...PrismaCmsComponent.propTypes,
     classes: PropTypes.object.isRequired,
   }
 
-
-  // static contextTypes = {
-  //   logout: PropTypes.func.isRequired,
-  //   onAuthSuccess: PropTypes.func.isRequired,
-  //   user: PropTypes.object,
-  //   openLoginForm: PropTypes.func.isRequired,
-  // }
-  static contextType = Context;
-
-  state = {
-    // opened: false,
+  static defaultProps = {
+    ...PrismaCmsComponent.defaultProps,
+    locales,
   }
+
+
 
   logout() {
 
@@ -133,8 +139,8 @@ export class MainMenu extends Component {
                 component="span"
                 className={classes.link}
               >
-                Main page
-            </Typography>
+                {this.lexicon("Main page")}
+              </Typography>
             </Link>
           </Grid>
 
@@ -148,8 +154,8 @@ export class MainMenu extends Component {
                 component="span"
                 className={classes.link}
               >
-                Users
-            </Typography>
+                {this.lexicon("Users")}
+              </Typography>
             </Link>
           </Grid>
 
@@ -163,7 +169,7 @@ export class MainMenu extends Component {
                 component="span"
                 className={classes.link}
               >
-                Graphql Voyager
+                {this.lexicon("Graphql Voyager")}
               </Typography>
             </a>
           </Grid>
@@ -200,7 +206,7 @@ export class MainMenu extends Component {
                   onClick={() => this.logout()}
                   className={classes.link}
                 >
-                  Signout
+                  {this.lexicon("Signout")}
                 </Button>
 
               </Grid>
@@ -225,8 +231,8 @@ export class MainMenu extends Component {
                   component="span"
                   className={classes.link}
                 >
-                  Signin
-              </Typography>
+                  {this.lexicon("Signin")}
+                </Typography>
               </Button>
 
             </Grid>

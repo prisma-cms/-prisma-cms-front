@@ -14,37 +14,33 @@ import Page from '../layout';
 import gql from 'graphql-tag';
 
 
-const propTypes = Object.assign({ ...Page.propTypes }, {
-  View: PropTypes.func.isRequired,
-});
-
-
-const defaultProps = Object.assign({ ...Page.defaultProps }, {
-  View,
-  first: 10,
-  orderBy: "username_ASC",
-});
-
-
 export default class UsersPage extends Page {
 
-  static propTypes = propTypes
+  static propTypes = {
+    ...Page.propTypes,
+    View: PropTypes.func.isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    ...Page.defaultProps,
+    View,
+    first: 10,
+    orderBy: "username_ASC",
+  }
 
 
   constructor(props) {
 
     super(props);
 
-    this.state = {}
+    // this.state = {}
   }
 
 
   setPageMeta(meta) {
 
     return super.setPageMeta(meta || {
-      title: "Users",
+      title: this.lexicon("Users"),
     });
 
   }
@@ -82,7 +78,7 @@ export default class UsersPage extends Page {
       } = this.context;
 
       const Renderer = compose(
-        graphql( gql(usersConnection), {
+        graphql(gql(usersConnection), {
           // name: 'items', 
         }),
 
@@ -137,6 +133,7 @@ export default class UsersPage extends Page {
       first={limit}
       limit={limit}
       data={data}
+      title={this.lexicon("Users")}
       {...other}
     />)
 
