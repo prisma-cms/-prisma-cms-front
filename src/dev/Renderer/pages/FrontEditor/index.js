@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Context from "@prisma-cms/context";
 
-import UserAvatar from "./components/UserAvatar";
+// import UserAvatar from "./components/UserAvatar";
 import { Button } from 'material-ui';
 import { withStyles } from 'material-ui';
 import FrontEditor from '../../../../components/FrontEditor';

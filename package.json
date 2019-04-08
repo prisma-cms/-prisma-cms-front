@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.14.7",
+  "version": "1.15.0",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -51,6 +51,7 @@
     "@prisma-cms/graphql-voyager": "^1.0.0-rc.26",
     "@prisma-cms/ui": "latest",
     "@prisma-cms/filters": "latest",
+    "@prisma-cms/front-editor": "latest",
     "@types/react": "^16.4.18",
     "apollo-boost": "^0.1.19",
     "apollo-cache-inmemory": "^1.3.8",
