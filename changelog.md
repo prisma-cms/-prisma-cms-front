@@ -1,5 +1,7 @@
 1.15.1
 ====================================
+- Added App::setLanguage() context
+- Added App::getLanguage() context
 
 1.15.0
 ====================================
