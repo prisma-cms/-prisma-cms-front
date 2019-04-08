@@ -182,7 +182,6 @@ export class MainMenu extends PrismaCmsComponent {
           </Grid>
 
           <Language
-            context={this.context}
           />
 
           {user

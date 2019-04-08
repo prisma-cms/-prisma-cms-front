@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import { Select, MenuItem } from 'material-ui'
 import { withStyles } from 'material-ui'
 
+import enFlag from "../../assets/img/lang/us.png";
+import ruFlag from "../../assets/img/lang/ru.png";
+
+import Context from "@prisma-cms/context";
+
 const styles = theme => ({
 
   select: {
@@ -14,21 +19,19 @@ const styles = theme => ({
   flag: {
     display: 'inline-block',
     height: 20,
-    margin:'0 5px 0',
+    margin: '0 5px 0',
   },
 })
 
 class Language extends Component {
 
-  constructor() {
-    super()
-  }
+  static contextType = Context;
 
 
   handleChange = event => {
     const {
       setLanguage,
-    } = this.props.context;
+    } = this.context;
     setLanguage(event.target.value)
   }
 
@@ -37,12 +40,11 @@ class Language extends Component {
 
     const {
       classes,
-      context,
     } = this.props
 
     const {
       getLanguage,
-    } = context;
+    } = this.context;
 
     const lang = getLanguage()
 
@@ -57,8 +59,8 @@ class Language extends Component {
           value='en'
         >
           <img
-            src="/img/lang/us.png"
-            className={classes.flag} 
+            src={enFlag}
+            className={classes.flag}
           />
           EN
         </MenuItem>
@@ -67,7 +69,7 @@ class Language extends Component {
           value='ru'
         >
           <img
-            src="/img/lang/ru.png"
+            src={ruFlag}
             className={classes.flag}
           />
           RU
@@ -78,4 +80,6 @@ class Language extends Component {
   }
 }
 
-export default withStyles(styles)(Language)
+export default withStyles(styles)(props => <Language
+  {...props}
+/>)
