@@ -144,6 +144,8 @@ export default class App extends React.Component {
     getQuery: PropTypes.func,
     getQueryFragment: PropTypes.func,
     lang: PropTypes.string,
+    setLanguage: PropTypes.func,
+    getLanguage: PropTypes.func,
   }
 
 
@@ -182,6 +184,8 @@ export default class App extends React.Component {
       updateTheme: themeOptions => this.updateTheme(themeOptions),
       getQuery: operation => this.getQuery(operation),
       getQueryFragment: fragmentName => this.getQueryFragment(fragmentName),
+      setLanguage: this.setLanguage.bind(this),
+      getLanguage: this.getLanguage.bind(this),
       lang,
     }
   }
