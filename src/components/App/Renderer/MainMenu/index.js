@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import UserItem from './User';
 import { withStyles } from 'material-ui/styles';
 
-
+import Language from '../../../Language'
 
 // import Modal from './AuthModal';
 
@@ -174,6 +174,10 @@ export class MainMenu extends Component {
             xs
           >
           </Grid>
+
+          <Language
+            context={this.context}
+          />
 
           {user
             ?
