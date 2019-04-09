@@ -13,7 +13,7 @@ import App from './components/App';
 
 import { Renderer } from "./components/App/Renderer";
 
-import PageNotFound from "./modules/pages/404";
+import PageNotFound from "./components/pages/404";
 
 import {
   BrowserRouter as Router,

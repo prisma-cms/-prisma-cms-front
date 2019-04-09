@@ -15,15 +15,15 @@ import { Typography, withStyles } from 'material-ui';
 
 import Auth from '../../Auth';
 
-import MainPage from "../../../modules/pages/MainPage";
+import MainPage from "../../pages/MainPage";
 
-import UsersPage from '../../../modules/pages/UsersPage';
-import UserPage from '../../../modules/pages/UsersPage/UserPage';
+import UsersPage from '../../pages/UsersPage';
+import UserPage from '../../pages/UsersPage/UserPage';
 
-import PageNotFound from '../../../modules/pages/404';
-import RoutedPage from "../../../modules/pages/RoutedPage";
+import PageNotFound from '../../pages/404';
+import RoutedPage from "../../pages/RoutedPage";
 
-import GraphqlVoyagerPage from "../../../modules/pages/GraphqlVoyager";
+import GraphqlVoyagerPage from "../../pages/GraphqlVoyager";
 
 import AdminRenderer from "./Admin";
 

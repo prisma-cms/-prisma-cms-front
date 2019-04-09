@@ -1,16 +1,13 @@
 * {
   box-sizing: border-box;
 }
-#root a {
+a {
   text-decoration: none;
 }
 body,
 html {
   margin: 0;
   padding: 0;
-}
-.Pagination--root {
-  margin: 20px 0;
 }
 .rdw-editor-wrapper .public-DraftEditorPlaceholder-root {
   padding: 10px 15px;

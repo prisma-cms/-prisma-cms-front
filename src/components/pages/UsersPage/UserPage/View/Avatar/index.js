@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 
 import Context from "@prisma-cms/context";
 
-import SingleUploaderInput from '../../../../../react-cms-uploads/src/components/uploader/SingleUploader';
+// import SingleUploaderInput from '../../../../../react-cms-uploads/src/components/uploader/SingleUploader';
+import SingleUploaderInput from '../../../../../../modules/react-cms-uploads/src/components/uploader/SingleUploader';
 
 // import Button from 'material-ui/Button/Button';
 

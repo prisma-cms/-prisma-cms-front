@@ -4,14 +4,9 @@ import PropTypes from 'prop-types'
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import CustomComponent from "../../../../../Component";
+import PrismaCmsComponent from "@prisma-cms/component";
 
 import Row from './Row';
-
-
-import {
-  updateUserProcessor,
-} from "../../../../../query";
 
 
 const userGroupsQuery = gql`
@@ -28,21 +23,27 @@ const userGroupsQuery = gql`
 `;
 
 
-export class UserGroups extends CustomComponent {
+export class UserGroups extends PrismaCmsComponent {
 
   static propTypes = {
-    ...CustomComponent.propTypes,
+    ...PrismaCmsComponent.propTypes,
     user: PropTypes.object.isRequired,
     inEditMode: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
-    ...CustomComponent.defaultProps,
+    ...PrismaCmsComponent.defaultProps,
     // inEditMode: false,
   }
 
 
   checkHandler = async (event, checked) => {
+
+    const {
+      query: {
+        updateUserProcessor,
+      },
+    } = this.context;
 
     const {
       value,
