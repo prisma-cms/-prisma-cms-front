@@ -30,13 +30,7 @@ import AdminRenderer from "./Admin";
 import ContextProvider from "./ContextProvider";
 import SubscriptionProvider from "./SubscriptionProvider";
 // import AdminPage from '../../pages/admin';
-import Root from '../../pages/Root';
-
-
-import {
-  ContextProvider as FrontEditorContextProvider,
-  SubscriptionProvider as FrontEditorSubscriptionProvider,
-} from "@prisma-cms/front-editor"
+// import Root from '../../pages/Root';
 
 
 export const styles = {
@@ -244,11 +238,11 @@ export class Renderer extends Component {
     } = this.context;
 
     return [
-      {
-        exact: false,
-        path: "/",
-        component: Root,
-      },
+      // {
+      //   exact: false,
+      //   path: "/",
+      //   component: Root,
+      // },
       // {
       //   exact: true,
       //   path: "/",
@@ -441,25 +435,21 @@ export class Renderer extends Component {
           rendererForceUpdate: () => this.forceUpdate(),
         })}
       >
-        <FrontEditorContextProvider>
-          <FrontEditorSubscriptionProvider>
-            <ContextProvider>
-              <SubscriptionProvider
-              // key={currentUserId}
-              >
-                <Fragment>
+        <ContextProvider>
+          <SubscriptionProvider
+          // key={currentUserId}
+          >
+            <Fragment>
 
-                  {this.renderWrapper()}
+              {this.renderWrapper()}
 
-                  {this.renderErrors()}
+              {this.renderErrors()}
 
-                  {this.renderAuth()}
+              {this.renderAuth()}
 
-                </Fragment>
-              </SubscriptionProvider>
-            </ContextProvider>
-          </FrontEditorSubscriptionProvider>
-        </FrontEditorContextProvider>
+            </Fragment>
+          </SubscriptionProvider>
+        </ContextProvider>
       </Context.Provider>}
     </Context.Consumer>
 

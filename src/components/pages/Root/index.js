@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Context from "@prisma-cms/context";
 import PrismaCmsComponent from "@prisma-cms/component";
-import FrontEditor from "@prisma-cms/front-editor";
+// import FrontEditor from "@prisma-cms/front-editor";
 
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
