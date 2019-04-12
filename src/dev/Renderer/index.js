@@ -7,76 +7,78 @@ import {
 
 
 // import MainMenu from './MainMenu';
-import { withStyles } from 'material-ui';
+// import { withStyles } from 'material-ui';
 // import FrontEditorPage from './pages/FrontEditor';
 
 
-export const styles = {
+// export const styles = {
 
-  root: {
-    // border: "1px solid blue",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
+//   root: {
+//     // border: "1px solid blue",
+//     height: "100%",
+//     display: "flex",
+//     flexDirection: "column",
 
-    "& #Renderer--body": {
-      // border: "1px solid green",
-      flex: 1,
-      overflow: "auto",
-      display: "flex",
-      flexDirection: "column",
-    },
-  },
-}
+//     "& #Renderer--body": {
+//       // border: "1px solid green",
+//       flex: 1,
+//       overflow: "auto",
+//       display: "flex",
+//       flexDirection: "column",
+//     },
+//   },
+// }
 
 
 class DevRenderer extends PrismaCmsRenderer {
 
 
-  getRoutes() {
+  // getRoutes() {
 
-    let routes = super.getRoutes();
+  //   let routes = super.getRoutes();
 
-    return [
-      // {
-      //   exact: true,
-      //   path: "/",
-      //   component: FrontEditorPage,
-      // },
-      // {
-      //   path: "*",
-      //   render: props => this.renderOtherPages(props),
-      // },
-    ].concat(routes);
+  //   return [
+  //     // {
+  //     //   exact: true,
+  //     //   path: "/",
+  //     //   component: FrontEditorPage,
+  //     // },
+  //     // {
+  //     //   path: "*",
+  //     //   render: props => this.renderOtherPages(props),
+  //     // },
+  //   ].concat(routes);
 
-  }
+  // }
 
 
-  render() {
+  // render() {
 
-    const {
-      classes,
-    } = this.props;
+  //   const {
+  //     classes,
+  //   } = this.props;
 
-    return <div
-      className={classes.root}
-    >
-      <style 
-        dangerouslySetInnerHTML={{
-          __html: `
-            body, html, #root{
-              height: 100%;
-            }
-          `,
-        }}
-      />
-      {super.render()}
-    </div>
+  //   return <div
+  //     className={classes.root}
+  //   >
+  //     <style 
+  //       dangerouslySetInnerHTML={{
+  //         __html: `
+  //           body, html, #root{
+  //             height: 100%;
+  //           }
+  //         `,
+  //       }}
+  //     />
+  //     {super.render()}
+  //   </div>
 
-  }
+  // }
 
 }
 
-export default withStyles(styles)(props => <DevRenderer
-  {...props}
-/>);
+export default DevRenderer;
+
+// export default withStyles(styles)(props => <DevRenderer
+//   {...props}
+// />);

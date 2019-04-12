@@ -6,7 +6,7 @@ import Context from "@prisma-cms/context";
 // import UserAvatar from "./components/UserAvatar";
 import { Button } from 'material-ui';
 import { withStyles } from 'material-ui';
-import FrontEditor from '../../../../components/FrontEditor';
+// import FrontEditor from '../../../../components/FrontEditor';
 
 
 export const styles = {
