@@ -23,7 +23,7 @@ import Auth from '../../Auth';
 import PageNotFound from '../../pages/404';
 import RoutedPage from "../../pages/RoutedPage";
 
-// import GraphqlVoyagerPage from "../../pages/GraphqlVoyager";
+import GraphqlVoyagerPage from "../../pages/GraphqlVoyager";
 
 import AdminRenderer from "./Admin";
 
@@ -275,11 +275,11 @@ export class Renderer extends Component {
       //     />
       //   }
       // },
-      // {
-      //   exact: true,
-      //   path: "/graphql-voyager",
-      //   component: GraphqlVoyagerPage,
-      // },
+      {
+        exact: true,
+        path: "/graphql-voyager",
+        component: GraphqlVoyagerPage,
+      },
       // {
       //   path: "*",
       //   render: props => this.renderOtherPages(props),

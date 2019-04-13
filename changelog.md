@@ -1,3 +1,7 @@
+1.16.2
+====================================
+- Restore graphql-voyager page
+
 1.16.1
 ====================================
 - Remove @prisma-cms/front-editor
