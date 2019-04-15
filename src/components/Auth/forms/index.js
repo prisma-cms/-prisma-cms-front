@@ -15,7 +15,7 @@ import PrismaCmsComponent from "@prisma-cms/component";
 const defaultLocales = {
   ru: {
     values: {
-      "Authorization": "Авторизация переведено",
+      "Authorization": "Авторизация",
       "Login, email, phone or user ID": "Логин, емейл, телефон или ID пользователя",
       "Choose user from list": "Выберите пользователя из списка",
       "Type confirm code": "Введите код подтверждения",
