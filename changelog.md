@@ -1,3 +1,8 @@
+1.16.4
+====================================
+- Remove typeface-roboto
+- Fix styles
+
 1.16.3
 ====================================
 - Added typeface-roboto

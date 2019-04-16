@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.16.3",
+  "version": "1.16.4",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -92,7 +92,6 @@
     "socket.io": "^2.0.4",
     "socket.io-parser": "^3.1.2",
     "subscriptions-transport-ws": "^0.9.5",
-    "typeface-roboto": "^0.0.54",
     "urijs": "^1.19.1",
     "xml-writer": "^1.7.0"
   },

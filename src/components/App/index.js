@@ -21,6 +21,8 @@ import { darken } from 'material-ui/styles/colorManipulator';
 import UriProvider from "../../modules/uri-provider";
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import createTypography from 'material-ui/styles/createTypography';
+import createPalette from 'material-ui/styles/createPalette';
 
 let sheetsManager = new Map();
 
@@ -36,36 +38,52 @@ let sheetsManager = new Map();
 
 function getTheme(uiTheme) {
 
+
   const {
     direction,
     paletteType,
-    typography,
+    typography: typographyNull,
     // overrides,
     ...other
   } = uiTheme;
+
+
+  const palette = createPalette({
+    type: paletteType,
+    primary: {
+      ...blue,
+      // main: "#ff0000",
+    },
+    secondary: {
+      // Darken so we reach the AA contrast ratio level.
+      main: darken(pink.A400, 0.08),
+    },
+  });
+
+  // let palette = {
+  //   primary: {
+  //     ...blue,
+  //     // main: "#ff0000",
+  //   },
+  //   secondary: {
+  //     // Darken so we reach the AA contrast ratio level.
+  //     main: darken(pink.A400, 0.08),
+  //   },
+  //   type: paletteType,
+  // }
+
+
+  const typography = createTypography(palette, {
+    fontFamily: '"Roboto"',
+  });
 
   const theme = createMuiTheme({
     direction,
     nprogress: {
       color: paletteType === 'light' ? '#000' : '#fff',
     },
-    palette: {
-      primary: {
-        ...blue,
-        // main: "#ff0000",
-      },
-      secondary: {
-        // Darken so we reach the AA contrast ratio level.
-        main: darken(pink.A400, 0.08),
-      },
-      type: paletteType,
-    },
-    typography: {
-      fontFamily: "Roboto, Tahoma, Helvetica, sans-serif",
-      // htmlFontSize: 14,
-      fontSize: 14,
-      ...typography,
-    },
+    palette,
+    typography,
     // overrides: {
     //   // ...overrides,
     // },
