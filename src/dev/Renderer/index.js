@@ -6,7 +6,7 @@ import {
 } from "../../App";
 
 
-// import MainMenu from './MainMenu';
+import MainMenu from './MainMenu';
 // import { withStyles } from 'material-ui';
 // import FrontEditorPage from './pages/FrontEditor';
 
@@ -32,24 +32,23 @@ import {
 
 class DevRenderer extends PrismaCmsRenderer {
 
+  renderMenu() {
 
-  // getRoutes() {
+    return <MainMenu />
+  }
 
-  //   let routes = super.getRoutes();
 
-  //   return [
-  //     // {
-  //     //   exact: true,
-  //     //   path: "/",
-  //     //   component: FrontEditorPage,
-  //     // },
-  //     // {
-  //     //   path: "*",
-  //     //   render: props => this.renderOtherPages(props),
-  //     // },
-  //   ].concat(routes);
+  renderWrapper() {
 
-  // }
+    return this.renderWrapperOld();
+  }
+
+  
+  getRoutes() {
+
+    return this.getRoutesOld();
+
+  }
 
 
   // render() {

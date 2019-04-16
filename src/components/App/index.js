@@ -40,6 +40,7 @@ function getTheme(uiTheme) {
     direction,
     paletteType,
     typography,
+    // overrides,
     ...other
   } = uiTheme;
 
@@ -60,10 +61,14 @@ function getTheme(uiTheme) {
       type: paletteType,
     },
     typography: {
-      fontFamily: "Tahoma, Helvetica, sans-serif",
+      fontFamily: "Roboto, Tahoma, Helvetica, sans-serif",
+      // htmlFontSize: 14,
       fontSize: 14,
       ...typography,
     },
+    // overrides: {
+    //   // ...overrides,
+    // },
     ...other,
   });
 

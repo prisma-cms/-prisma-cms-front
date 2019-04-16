@@ -15,10 +15,10 @@ import Errors from './Errors';
 
 import Auth from '../../Auth';
 
-// import MainPage from "../../pages/MainPage";
+import MainPage from "../../pages/MainPage";
 
-// import UsersPage from '../../pages/UsersPage';
-// import UserPage from '../../pages/UsersPage/UserPage';
+import UsersPage from '../../pages/UsersPage';
+import UserPage from '../../pages/UsersPage/UserPage';
 
 import PageNotFound from '../../pages/404';
 import RoutedPage from "../../pages/RoutedPage";
@@ -233,6 +233,19 @@ export class Renderer extends Component {
 
   getRoutes() {
 
+    return [
+      {
+        exact: true,
+        path: "/graphql-voyager",
+        component: GraphqlVoyagerPage,
+      },
+    ];
+
+  }
+
+
+  getRoutesOld() {
+
     const {
       getQueryFragment,
     } = this.context;
@@ -243,38 +256,38 @@ export class Renderer extends Component {
       //   path: "/",
       //   component: Root,
       // },
-      // {
-      //   exact: true,
-      //   path: "/",
-      //   component: MainPage,
-      // },
-      // {
-      //   exact: true,
-      //   path: "/users",
-      //   component: UsersPage,
-      // },
-      // {
-      //   exact: true,
-      //   path: "/users/:userId",
-      //   render: (props) => {
-      //     const {
-      //       params,
-      //     } = props.match;
+      {
+        exact: true,
+        path: "/",
+        component: MainPage,
+      },
+      {
+        exact: true,
+        path: "/users",
+        component: UsersPage,
+      },
+      {
+        exact: true,
+        path: "/users/:userId",
+        render: (props) => {
+          const {
+            params,
+          } = props.match;
 
-      //     const {
-      //       userId,
-      //     } = params || {};
+          const {
+            userId,
+          } = params || {};
 
-      //     return <UserPage
-      //       key={userId}
-      //       getQueryFragment={getQueryFragment}
-      //       where={{
-      //         id: userId,
-      //       }}
-      //       {...props}
-      //     />
-      //   }
-      // },
+          return <UserPage
+            key={userId}
+            getQueryFragment={getQueryFragment}
+            where={{
+              id: userId,
+            }}
+            {...props}
+          />
+        }
+      },
       {
         exact: true,
         path: "/graphql-voyager",

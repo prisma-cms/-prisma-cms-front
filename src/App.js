@@ -1,3 +1,4 @@
+import 'typeface-roboto';
 
 import './styles/less/styles.css';
 
@@ -20,12 +21,12 @@ import {
 } from 'react-router-dom'
 
 
-
 const {
   protocol,
   // hostname,
   host,
 } = global.location || {};
+
 
 class PrismaCmsApp extends Component {
 
