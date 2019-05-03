@@ -99,31 +99,87 @@ function getTheme(uiTheme) {
 }
 
 
-const SchemaLoader = graphql(gql`
+let schema;
+
+const SchemaLoaderQuery = graphql(gql`
   ${introspectionQuery}
 `, {
     options: {
-      fetchPolicy: typeof window === "undefined" ? "no-cache" : undefined,
+      fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
+      // fetchPolicy: (props) => {
+      //   console.log("fetchPolicy", props);
+      //   return typeof window === "undefined" ? "no-cache" : "cache-only";
+      // },
     },
   })((props) => {
 
     const {
       data: {
-        __schema: schema,
+        __schema,
       },
       children,
+      onSchemaLoad,
     } = props;
+
+    if (__schema && !schema) {
+      schema = __schema;
+
+      onSchemaLoad && onSchemaLoad();
+    }
 
     return <Context.Consumer>
       {context => <Context.Provider
-        value={Object.assign(context, {
+        value={{
+          ...context,
           schema,
-        })}
+        }}
       >
         {children}
       </Context.Provider>}
     </Context.Consumer>;
   });
+
+
+class SchemaLoader extends Component {
+
+
+  // static contextType = Context;
+
+
+  render() {
+
+    const {
+      children,
+    } = this.props;
+
+
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={{
+          ...context,
+          schema,
+        }}
+      >
+
+        {/* 
+          Если схема не была подгружена, то вызываем загрузчик.
+          После того, как он схему подгрузит, он нам уже не нужен.
+          На сервере надо соблюсти вложенность, чтобы обязательно в контакст попала схема
+         */}
+        {!schema ? <SchemaLoaderQuery
+          onSchemaLoad={() => this.forceUpdate()}
+        >
+          1111111
+        </SchemaLoaderQuery> : null}
+
+        {children}
+
+      </Context.Provider>}
+    </Context.Consumer>;
+
+  }
+
+}
 
 
 export default class App extends React.Component {
