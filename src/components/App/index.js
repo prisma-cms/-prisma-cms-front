@@ -153,29 +153,37 @@ class SchemaLoader extends Component {
     } = this.props;
 
 
-    return <Context.Consumer>
-      {context => <Context.Provider
-        value={{
-          ...context,
-          schema,
-        }}
+    /* 
+    Если схема не была подгружена, то вызываем загрузчик.
+    После того, как он схему подгрузит, он нам уже не нужен.
+    На сервере надо соблюсти вложенность, чтобы обязательно в контакст попала схема
+    */
+
+    if (typeof window === "undefined") {
+      return <SchemaLoaderQuery
+        onSchemaLoad={() => this.forceUpdate()}
       >
-
-        {/* 
-          Если схема не была подгружена, то вызываем загрузчик.
-          После того, как он схему подгрузит, он нам уже не нужен.
-          На сервере надо соблюсти вложенность, чтобы обязательно в контакст попала схема
-         */}
-        {!schema ? <SchemaLoaderQuery
-          onSchemaLoad={() => this.forceUpdate()}
-        >
-          1111111
-        </SchemaLoaderQuery> : null}
-
         {children}
+      </SchemaLoaderQuery>;
+    }
+    else {
+      return <Context.Consumer>
+        {context => <Context.Provider
+          value={!schema || context && context.schema === schema ? context : {
+            ...context,
+            schema,
+          }}
+        >
+          {!schema ? <SchemaLoaderQuery
+            onSchemaLoad={() => this.forceUpdate()}
+          >
+          </SchemaLoaderQuery> : null}
 
-      </Context.Provider>}
-    </Context.Consumer>;
+          {children}
+
+        </Context.Provider>}
+      </Context.Consumer>;
+    }
 
   }
 
