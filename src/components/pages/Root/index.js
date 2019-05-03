@@ -67,8 +67,6 @@ class Root extends PrismaCmsComponent {
       inEditMode,
     } = this.state;
 
-    // console.log("this.context", this.context);
-
     let content = null;
 
     const {
@@ -181,8 +179,6 @@ class Root extends PrismaCmsComponent {
       </Fragment>;
     }
 
-    // console.log("result");
-
     return super.render(
       content
     );
@@ -219,8 +215,6 @@ export class RootConnector extends Component {
     const {
       View,
     } = this.props;
-
-    // console.log("context", this.context, templates);
 
     this.Renderer = compose(
       graphql(gql(templates)),

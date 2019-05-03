@@ -106,10 +106,6 @@ const SchemaLoaderQuery = graphql(gql`
 `, {
     options: {
       fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
-      // fetchPolicy: (props) => {
-      //   console.log("fetchPolicy", props);
-      //   return typeof window === "undefined" ? "no-cache" : "cache-only";
-      // },
     },
   })((props) => {
 

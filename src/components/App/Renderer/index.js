@@ -85,8 +85,6 @@ export class Renderer extends Component {
       authOpen: false,
     };
 
-    console.log("Renderer constructor");
-
   }
 
 
