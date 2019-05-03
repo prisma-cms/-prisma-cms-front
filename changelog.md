@@ -1,3 +1,7 @@
+1.16.5
+====================================
+- SchemaLoader code refactoring
+
 1.16.4
 ====================================
 - Remove typeface-roboto
