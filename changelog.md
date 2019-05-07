@@ -1,3 +1,7 @@
+1.16.7
+====================================
+- Fix userLink styles
+
 1.16.6
 ====================================
 - Set default link color is inherit

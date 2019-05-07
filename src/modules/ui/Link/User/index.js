@@ -31,7 +31,7 @@ import Typography from "material-ui/Typography";
 
 // import Avatar from '../../Avatar';
 
-import Link from '../';
+import { Link } from "react-router-dom";
 
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
@@ -121,6 +121,11 @@ export class UserLink extends Component {
       return null;
     }
 
+    let {
+      style: avatarStyle,
+      ...otherAvatarProps
+    } = avatarProps || {};
+
     const {
       Avatar,
     } = this.context;
@@ -148,7 +153,11 @@ export class UserLink extends Component {
       <Avatar
         user={user}
         className={[classes.avatar, "avatar-inline", `avatar-size--${size}`].join(" ")}
-        {...avatarProps}
+        style={{
+          marginRight: 5,
+          ...avatarStyle,
+        }}
+        {...otherAvatarProps}
       />
 
     </Link>
