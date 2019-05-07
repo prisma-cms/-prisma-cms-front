@@ -1,3 +1,7 @@
+1.16.6
+====================================
+- Set default link color is inherit
+
 1.16.5
 ====================================
 - SchemaLoader code refactoring

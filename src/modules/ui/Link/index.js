@@ -40,6 +40,11 @@ export class UiLink extends Component {
   static propTypes = {
     className: PropTypes.string,
     textClassName: PropTypes.string,
+    color: PropTypes.string,
+  }
+
+  static defaultProps = {
+    color: "inherit",
   }
 
   render() {
@@ -49,6 +54,7 @@ export class UiLink extends Component {
       textClassName,
       classes,
       children,
+      color,
       ...other
     } = this.props;
 
@@ -60,6 +66,7 @@ export class UiLink extends Component {
         <Typography
           component="span"
           className={[classes.text, textClassName].join(" ")}
+          color={color}
         >
           {children || ""}
         </Typography>
@@ -69,7 +76,7 @@ export class UiLink extends Component {
 }
 
 
-export default withStyles(styles)(props => <UiLink 
+export default withStyles(styles)(props => <UiLink
   {...props}
 />);
 

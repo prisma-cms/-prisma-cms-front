@@ -74,6 +74,7 @@ export class UserLink extends Component {
     withAvatar: PropTypes.bool.isRequired,
     showName: PropTypes.bool.isRequired,
     size: PropTypes.string.isRequired,
+    color: PropTypes.string,
     avatarProps: PropTypes.object,
   }
 
@@ -82,13 +83,14 @@ export class UserLink extends Component {
     withAvatar: true,
     showName: true,
     size: "normal",
+    color: "inherit",
   };
 
 
   static contextType = Context;
 
 
-  makeUrl(user){
+  makeUrl(user) {
 
     const {
       id,
@@ -110,6 +112,7 @@ export class UserLink extends Component {
       size,
       avatarProps,
       children,
+      color,
       ...other
     } = this.props;
 
@@ -184,6 +187,7 @@ export class UserLink extends Component {
               variant !== undefined ?
                 <Typography
                   variant={variant}
+                  color={color}
                 >
                   {name}
                   {this.props.position ? <span style={{ fontSize: '70%', fontStyle: 'italic' }}> - {this.props.position}</span> : null}
