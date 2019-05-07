@@ -338,6 +338,17 @@ export class Renderer extends Component {
 
   renderWrapper() {
 
+    // const {
+    //   uri,
+    //   history,
+    // } = this.context;
+
+    // console.log("uri", uri);
+
+    // console.log("uri.toString()", uri.toString());
+
+    // console.log("uri.domain()", uri.domain());
+
     return this.renderRoutes();
 
   }

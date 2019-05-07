@@ -88,9 +88,17 @@ class Server {
 
     const protocol = req.headers["server-protocol"] || req.protocol || "http"; 
 
+    console.log("req.headers", req.headers);
+
+    console.log("protocol", protocol);
+
     const host = req.get('host');
 
-    const uri = new URI(`${protocol}://${host}${req.url}`);
+    const url = `${protocol}://${host}${req.url}`;
+
+    console.log("url", url);
+
+    const uri = new URI(url);
 
     const {
       page,
@@ -134,6 +142,10 @@ class Server {
 
   async renderHTML(req, res) {
 
+
+    const host = req.get('host');
+
+    const uri = new URI(`${protocol}://${host}${req.url}`);
 
     let context = {}
 
@@ -197,6 +209,7 @@ class Server {
             <MainApp
               sheetsManager={new Map()}
               queryFragments={queryFragments}
+              uri={uri}
             />
           </StaticRouter>
         </ApolloProvider>

@@ -18,11 +18,13 @@ import blue from 'material-ui/colors/blue';
 import pink from 'material-ui/colors/pink';
 import { darken } from 'material-ui/styles/colorManipulator';
 
-import UriProvider from "../../modules/uri-provider";
+// import UriProvider from "../../modules/uri-provider";
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import createTypography from 'material-ui/styles/createTypography';
 import createPalette from 'material-ui/styles/createPalette';
+
+import URI from "urijs";
 
 let sheetsManager = new Map();
 
@@ -401,12 +403,17 @@ export default class App extends React.Component {
 
   render() {
 
+    const {
+      location,
+    } = global;
+
     let {
       queryFragments,
       themeOptions,
       Renderer,
       sheetsManager,
       assetsBaseUrl,
+      uri = new URI(location),
       ...other
     } = this.props;
 
@@ -438,14 +445,15 @@ export default class App extends React.Component {
                 queryFragments,
                 query: {},
                 assetsBaseUrl,
+                uri,
               })}
             >
-              <UriProvider>
-                <Renderer
-                  // key={currentUserId}
-                  {...other}
-                />
-              </UriProvider>
+              {/* <UriProvider> */}
+              <Renderer
+                // key={currentUserId}
+                {...other}
+              />
+              {/* </UriProvider> */}
             </Context.Provider>
             }
           </Context.Consumer>
