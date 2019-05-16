@@ -86,17 +86,17 @@ class Server {
     global.document = undefined;
 
 
-    const protocol = req.headers["server-protocol"] || req.protocol || "http"; 
+    const protocol = req.headers["server-protocol"] || req.protocol || "http";
 
-    console.log("req.headers", req.headers);
+    // console.log("req.headers", req.headers);
 
-    console.log("protocol", protocol);
+    // console.log("protocol", protocol);
 
     const host = req.get('host');
 
     const url = `${protocol}://${host}${req.url}`;
 
-    console.log("url", url);
+    // console.log("url", url);
 
     const uri = new URI(url);
 
@@ -143,10 +143,6 @@ class Server {
   async renderHTML(req, res) {
 
 
-    const host = req.get('host');
-
-    const uri = new URI(`${protocol}://${host}${req.url}`);
-
     let context = {}
 
 
@@ -155,6 +151,10 @@ class Server {
       protocol = "http:",
       // referer,
     } = req.headers;
+
+    const host = req.get('host');
+
+    const uri = new URI(`${protocol}//${host}${req.url}`);
 
 
     let assetsUrl;

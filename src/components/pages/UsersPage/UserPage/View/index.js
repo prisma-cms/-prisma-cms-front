@@ -16,9 +16,9 @@ import {
 } from "material-ui";
 import { FormControlLabel } from 'material-ui';
 import { Typography } from 'material-ui';
-import { FormControl } from 'material-ui';
-import { FormLabel } from 'material-ui';
-import { FormGroup } from 'material-ui';
+// import { FormControl } from 'material-ui';
+// import { FormLabel } from 'material-ui';
+// import { FormGroup } from 'material-ui';
 
 
 export default class UserPageView extends EditableView {
@@ -39,6 +39,8 @@ export default class UserPageView extends EditableView {
   componentWillMount() {
 
     this.setPageMeta();
+
+    super.componentWillMount && super.componentWillMount();
   }
 
 
