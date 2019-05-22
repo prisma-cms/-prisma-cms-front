@@ -83,7 +83,7 @@ export class UserGroups extends PrismaCmsComponent {
     }
 
     const result = await this.mutate({
-      mutation: updateUserProcessor,
+      mutation: gql(updateUserProcessor),
       variables: {
         where: {
           id: userId,
