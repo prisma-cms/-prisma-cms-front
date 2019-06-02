@@ -101,6 +101,8 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@prisma-cms/front": "latest",
+    "@prisma-cms/front-editor": "latest",
     "@prisma-cms/server": "latest",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",

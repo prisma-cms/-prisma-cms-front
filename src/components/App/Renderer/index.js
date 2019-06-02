@@ -59,6 +59,7 @@ export class Renderer extends Component {
   static propTypes = {
     PageNotFound: PropTypes.func.isRequired,
     AdminRenderer: PropTypes.func.isRequired,
+    renderAdmin: PropTypes.bool.isRequired,
     Auth: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
   }
@@ -66,6 +67,7 @@ export class Renderer extends Component {
   static defaultProps = {
     PageNotFound,
     AdminRenderer,
+    renderAdmin: false,
     Auth,
     classes: {},
   };
@@ -256,11 +258,11 @@ export class Renderer extends Component {
       //   path: "/",
       //   component: Root,
       // },
-      {
-        exact: true,
-        path: "/",
-        component: MainPage,
-      },
+      // {
+      //   exact: true,
+      //   path: "/",
+      //   component: MainPage,
+      // },
       {
         exact: true,
         path: "/users",
@@ -361,7 +363,8 @@ export class Renderer extends Component {
 
     const {
       classes,
-      AdminRenderer,
+      // AdminRenderer,
+      renderAdmin,
       ...other
     } = this.props;
 
@@ -399,7 +402,7 @@ export class Renderer extends Component {
       sudo,
     } = currentUser || {};
 
-    return sudo ? this.renderAdmin(wrapper) : wrapper || null;
+    return sudo && renderAdmin ? this.renderAdmin(wrapper) : wrapper || null;
   }
 
 
