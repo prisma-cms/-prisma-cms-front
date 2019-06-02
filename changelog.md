@@ -1,3 +1,9 @@
+1.17.0
+====================================
+- SSR code refactoring
+- Added SSR window.__PRISMA_CMS_API_SCHEMA__
+- Fix getApiSchema()
+
 1.16.10
 ====================================
 - Fix User::setGroups

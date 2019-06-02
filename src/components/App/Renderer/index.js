@@ -32,6 +32,13 @@ import SubscriptionProvider from "./SubscriptionProvider";
 // import AdminPage from '../../pages/admin';
 // import Root from '../../pages/Root';
 
+import {
+  ContextProvider as FrontEditorContextProvider,
+  SubscriptionProvider as FrontEditorSubscriptionProvider,
+  // FrontEditorRoot,
+} from "@prisma-cms/front-editor"
+import RootPage from '../../pages/Root';
+
 
 export const styles = {
   root: {
@@ -241,6 +248,11 @@ export class Renderer extends Component {
         path: "/graphql-voyager",
         component: GraphqlVoyagerPage,
       },
+      {
+        exact: false,
+        path: "/",
+        component: RootPage,
+      },
     ];
 
   }
@@ -359,7 +371,7 @@ export class Renderer extends Component {
   /**
    * Deprecated
    */
-  renderWrapperOld() {
+  renderWrapperOld__() {
 
     const {
       classes,
@@ -455,31 +467,34 @@ export class Renderer extends Component {
       id: currentUserId,
     } = currentUser || {};
 
-    return <Context.Consumer>
-      {context => <Context.Provider
-        value={Object.assign(context, this.context, {
-          ...this.getChildContext(),
-          rendererForceUpdate: () => this.forceUpdate(),
-        })}
-      >
-        <ContextProvider>
-          <SubscriptionProvider
-          // key={currentUserId}
+    return <FrontEditorContextProvider>
+      <FrontEditorSubscriptionProvider>
+        <Context.Consumer>
+          {context => <Context.Provider
+            value={Object.assign(context, this.context, {
+              ...this.getChildContext(),
+              rendererForceUpdate: () => this.forceUpdate(),
+            })}
           >
-            <Fragment>
+            <ContextProvider>
+              <SubscriptionProvider
+              // key={currentUserId}
+              >
+                <Fragment>
 
-              {this.renderWrapper()}
+                  {this.renderWrapper()}
 
-              {this.renderErrors()}
+                  {this.renderErrors()}
 
-              {this.renderAuth()}
+                  {this.renderAuth()}
 
-            </Fragment>
-          </SubscriptionProvider>
-        </ContextProvider>
-      </Context.Provider>}
-    </Context.Consumer>
-
+                </Fragment>
+              </SubscriptionProvider>
+            </ContextProvider>
+          </Context.Provider>}
+        </Context.Consumer>
+      </FrontEditorSubscriptionProvider>
+    </FrontEditorContextProvider>
   }
 }
 

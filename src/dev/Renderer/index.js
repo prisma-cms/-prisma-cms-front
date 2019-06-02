@@ -5,17 +5,11 @@ import {
   Renderer as PrismaCmsRenderer,
 } from "../../App";
 
-import {
-  ContextProvider as FrontEditorContextProvider,
-  SubscriptionProvider as FrontEditorSubscriptionProvider,
-  // FrontEditorRoot,
-} from "@prisma-cms/front-editor"
-
 
 import MainMenu from './MainMenu';
 // import { withStyles } from 'material-ui';
 // import FrontEditorPage from './pages/FrontEditor';
-import RootPage from "./pages/Root";
+// import RootPage from "./pages/Root";
 
 
 // export const styles = {
@@ -45,28 +39,35 @@ class DevRenderer extends PrismaCmsRenderer {
   }
 
 
-  renderWrapper() {
+  // renderWrapper() {
 
-    return <FrontEditorContextProvider>
-      <FrontEditorSubscriptionProvider>
-        {this.renderWrapperOld()}
-      </FrontEditorSubscriptionProvider>
-    </FrontEditorContextProvider>;
+  //   return <FrontEditorContextProvider>
+  //     <FrontEditorSubscriptionProvider>
+  //       {this.renderWrapperOld()}
+  //     </FrontEditorSubscriptionProvider>
+  //   </FrontEditorContextProvider>;
 
-  }
+  // }
 
 
-  getRoutes() {
+  // renderWrapper() {
 
-    return this.getRoutesOld().concat([
-      {
-        exact: false,
-        path: "/",
-        component: RootPage,
-      },
-    ]);
+  //   return this.renderWrapperOld();
 
-  }
+  // }
+
+
+  // getRoutes() {
+
+  //   return this.getRoutesOld().concat([
+  //     {
+  //       exact: false,
+  //       path: "/",
+  //       component: RootPage,
+  //     },
+  //   ]);
+
+  // }
 
 
   // render() {

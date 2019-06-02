@@ -46,7 +46,8 @@ require('@babel/register')({
 
 require("@babel/polyfill");
 
-['.css', '.less', '.sass', '.ttf', '.woff', '.woff2', '.svg'].forEach((ext) => require.extensions[ext] = () => { });
+['.css', '.less', '.sass', '.ttf', '.woff', '.woff2', '.svg', '.png', '.jpg', '.jpeg', '.gif']
+  .forEach((ext) => require.extensions[ext] = () => { });
 // ['.css', '.less', '.sass', '.ttf', '.woff', '.woff2'].forEach((ext) => require.extensions[ext] = () => {});
 // require('babel-polyfill');
 
@@ -86,7 +87,7 @@ app.use('/public', express.static(cwd + '/public')); //Serves resources from pub
 
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
-})); 
+}));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 
 
@@ -97,10 +98,10 @@ const port = argv.port || process.env.PORT || 3000;
 
 // Start your app.
 app.listen(port, (err) => {
-	if (err) {
+  if (err) {
     // return logger.error(err.message);
     console.error(err);
-	}
+  }
   // logger.appStarted(port);
   console.log("Server started");
 });

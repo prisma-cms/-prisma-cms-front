@@ -120,9 +120,12 @@ const SchemaLoaderQuery = graphql(gql`
     } = props;
 
     if (__schema && !schema) {
+
+      // console.log("__schema loaded");
+
       schema = __schema;
 
-      onSchemaLoad && onSchemaLoad();
+      onSchemaLoad && onSchemaLoad(__schema);
     }
 
     return <Context.Consumer>
@@ -143,11 +146,27 @@ class SchemaLoader extends Component {
 
   // static contextType = Context;
 
+  componentWillMount() {
+
+    const {
+      __PRISMA_CMS_API_SCHEMA__,
+    } = global;
+
+
+    if (__PRISMA_CMS_API_SCHEMA__) {
+      schema = __PRISMA_CMS_API_SCHEMA__;
+    }
+
+    super.componentWillMount && super.componentWillMount();
+
+  }
+
 
   render() {
 
     const {
       children,
+      onSchemaLoad,
     } = this.props;
 
 
@@ -157,31 +176,38 @@ class SchemaLoader extends Component {
     На сервере надо соблюсти вложенность, чтобы обязательно в контакст попала схема
     */
 
-    if (typeof window === "undefined") {
-      return <SchemaLoaderQuery
-        onSchemaLoad={() => this.forceUpdate()}
+    // if (false || typeof window === "undefined") {
+
+    //   return <SchemaLoaderQuery
+    //     onSchemaLoad={(schema) => {
+    //       onSchemaLoad && onSchemaLoad(schema);
+    //       this.forceUpdate();
+    //     }}
+    //   >
+    //     {children}
+    //   </SchemaLoaderQuery>;
+    // }
+    // else {
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={!schema || context && context.schema === schema ? context : {
+          ...context,
+          schema,
+        }}
       >
-        {children}
-      </SchemaLoaderQuery>;
-    }
-    else {
-      return <Context.Consumer>
-        {context => <Context.Provider
-          value={!schema || context && context.schema === schema ? context : {
-            ...context,
-            schema,
+        {!schema ? <SchemaLoaderQuery
+          onSchemaLoad={(schema) => {
+            onSchemaLoad && onSchemaLoad(schema);
+            this.forceUpdate();
           }}
         >
-          {!schema ? <SchemaLoaderQuery
-            onSchemaLoad={() => this.forceUpdate()}
-          >
-          </SchemaLoaderQuery> : null}
+        </SchemaLoaderQuery> : null}
 
-          {children}
+        {children}
 
-        </Context.Provider>}
-      </Context.Consumer>;
-    }
+      </Context.Provider>}
+    </Context.Consumer>;
+    // }
 
   }
 
@@ -198,6 +224,11 @@ export default class App extends React.Component {
     lang: PropTypes.string,
     sheetsManager: PropTypes.object,
     assetsBaseUrl: PropTypes.string,
+
+    /**
+     * Это надо для сохранения схемы в режиме SSR
+     */
+    onSchemaLoad: PropTypes.func,
   }
 
 
@@ -414,6 +445,7 @@ export default class App extends React.Component {
       sheetsManager,
       assetsBaseUrl,
       uri = new URI(location),
+      onSchemaLoad,
       ...other
     } = this.props;
 
@@ -433,7 +465,9 @@ export default class App extends React.Component {
 
 
     return (
-      <SchemaLoader>
+      <SchemaLoader
+        onSchemaLoad={onSchemaLoad}
+      >
         <MuiThemeProvider
           theme={theme}
           sheetsManager={sheetsManager}
