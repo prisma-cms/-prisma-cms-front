@@ -107,7 +107,8 @@ const SchemaLoaderQuery = graphql(gql`
   ${introspectionQuery}
 `, {
     options: {
-      fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
+      // fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
+      fetchPolicy: "no-cache",
     },
   })((props) => {
 
@@ -190,7 +191,7 @@ class SchemaLoader extends Component {
     // else {
     return <Context.Consumer>
       {context => <Context.Provider
-        value={!schema || context && context.schema === schema ? context : {
+        value={!schema || (context && context.schema === schema) ? context : {
           ...context,
           schema,
         }}

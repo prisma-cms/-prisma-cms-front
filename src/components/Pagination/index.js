@@ -16,9 +16,11 @@ const styles = {
   },
   row: {
     display: 'flex',
+    flexDirection: "row",
+    flexWrap: "nowrap",
     justifyContent: 'center',
     listStyle: "none",
-    margin: 0,
+    // margin: 0,
     padding: 0,
   },
   active: {
@@ -61,6 +63,7 @@ export class Pagination extends Component {
     // page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     pageVariable: PropTypes.string.isRequired,
+    rowProps: PropTypes.object,
   }
 
 
@@ -154,11 +157,11 @@ export class Pagination extends Component {
 
     const {
       classes,
-    } = this.props;
-
-    let {
       limit,
       total,
+      rowProps,
+      pageVariable,
+      ...other
     } = this.props;
 
     const page = this.getPage();
@@ -271,9 +274,13 @@ export class Pagination extends Component {
 
 
     return (
-      <div className={[wrapperClass, "Pagination--root"].join(" ")}>
+      <div
+        className={[wrapperClass, "Pagination--root"].join(" ")}
+        {...other}
+      >
         <ul
           className={rowClass}
+          {...rowProps}
         >
           {rows}
         </ul>

@@ -1,3 +1,8 @@
+1.17.1
+====================================
+- Fix Pagination styles
+- Fix getApiSchema fetchPolicy
+
 1.17.0
 ====================================
 - SSR code refactoring
