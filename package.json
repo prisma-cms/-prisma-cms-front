@@ -1,14 +1,12 @@
 {
   "name": "@prisma-cms/front",
-  "version": "1.17.1",
+  "version": "1.17.2",
   "private": false,
   "description": "",
   "main": "lib/App.js",
-  "module": "es/App.js",
   "files": [
     "src",
     "ssr",
-    "es",
     "lib",
     "umd"
   ],
@@ -28,6 +26,7 @@
     "build-css": "run-p -ncr build-less",
     "build-less": "node-less-chokidar src/styles/less",
     "build-sass": "node-less-chokidar src/styles/sass -o src/styles/sass/",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "watch-css": "run-p -ncr watch-less",
     "watch-less": "node-less-chokidar src/styles/less --watch",
     "watch-sass": "node-sass-chokidar src/styles/sass/ -o src/styles/sass/ --watch",
@@ -115,6 +114,7 @@
     "nwb": "0.23.x",
     "prettier-eslint-cli": "4.7.1",
     "react-scripts": "^2.1.2",
+    "source-map-explorer": "^2.0.1",
     "roddeh-i18n": "^1.1.1"
   },
   "resolutions": {

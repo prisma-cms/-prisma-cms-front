@@ -1,3 +1,8 @@
+1.17.2
+====================================
+- Added source-map-explorer
+- Remove es
+
 1.17.1
 ====================================
 - Fix Pagination styles
