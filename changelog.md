@@ -1,3 +1,8 @@
+2.1.0
+====================================
+- Remove apollo-cms
+- Fix ws-connection for non-http schemas
+
 2.0.1
 ====================================
 - Added Renderer::routes

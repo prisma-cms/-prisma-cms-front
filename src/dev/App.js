@@ -10,6 +10,8 @@ export default class DevApp extends PrismaCmsApp {
   static defaultProps = {
     ...PrismaCmsApp.defaultProps,
     Renderer: DevRenderer,
+    apolloOptions: {
+    },
   };
 
 }

@@ -6,7 +6,8 @@ import React, { Component } from 'react'
 
 import PropTypes from "prop-types";
 
-import ApolloCMS from 'apollo-cms/lib/App';
+// import Apollo from 'apollo-cms/lib/App';
+import Apollo from "./components/Apollo";
 
 // import FrontEditor from './components/FrontEditor';
 
@@ -77,7 +78,7 @@ class PrismaCmsApp extends Component {
     const endpoint = `${protocol}//${host}/api/`;
 
     return <Router>
-      <ApolloCMS
+      <Apollo
         endpoint={endpoint}
         apiQuery={`{
           user:me{
@@ -98,7 +99,7 @@ class PrismaCmsApp extends Component {
         <App
           {...other}
         />
-      </ApolloCMS>
+      </Apollo>
     </Router>
   }
 }
