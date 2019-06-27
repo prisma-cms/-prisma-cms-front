@@ -66,12 +66,14 @@ export class Renderer extends Component {
     PageNotFound: PropTypes.func.isRequired,
     Auth: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
+    routes: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
     PageNotFound,
     Auth,
     classes: {},
+    routes: [],
   };
 
   static contextType = Context;
@@ -237,13 +239,19 @@ export class Renderer extends Component {
 
   getRoutes() {
 
-    return [
-      // {
-      //   exact: true,
-      //   path: "/graphql-voyager",
-      //   component: GraphqlVoyagerPage,
-      // },
-    ];
+    const {
+      routes,
+    } = this.props;
+
+    return routes || [];
+
+    // return [
+    //   // {
+    //   //   exact: true,
+    //   //   path: "/graphql-voyager",
+    //   //   component: GraphqlVoyagerPage,
+    //   // },
+    // ];
 
   }
 

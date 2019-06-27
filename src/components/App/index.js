@@ -222,7 +222,7 @@ export default class App extends React.Component {
   static propTypes = {
     Renderer: PropTypes.func.isRequired,
     themeOptions: PropTypes.object.isRequired,
-    queryFragments: PropTypes.object.isRequired,
+    queryFragments: PropTypes.object,
     lang: PropTypes.string,
     sheetsManager: PropTypes.object,
     assetsBaseUrl: PropTypes.string,
