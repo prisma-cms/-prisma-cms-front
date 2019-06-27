@@ -22,13 +22,6 @@ import {
 } from 'react-router-dom'
 
 
-const {
-  protocol,
-  // hostname,
-  host,
-} = global.location || {};
-
-
 class PrismaCmsApp extends Component {
 
   static propTypes = {
@@ -61,21 +54,33 @@ class PrismaCmsApp extends Component {
 
   render() {
 
-    const {
+    let {
       App,
       apolloOptions,
+      endpoint,
       ...other
     } = this.props;
 
-    // const {
-    //   queryFragments,
-    // } = other;
+    if (!endpoint) {
 
-    // const {
-    //   UserNoNestingFragment,
-    // } = queryFragments;
+      if (apolloOptions && apolloOptions.endpoint) {
 
-    const endpoint = `${protocol}//${host}/api/`;
+        endpoint = apolloOptions.endpoint;
+
+      }
+      else {
+
+        const {
+          protocol,
+          // hostname,
+          host,
+        } = global.location || {};
+
+        endpoint = `${protocol}//${host}/api/`;
+
+      }
+
+    }
 
     return <Router>
       <Apollo

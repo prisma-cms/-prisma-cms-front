@@ -8,7 +8,12 @@ import App from "./dev/App";
 
 // import * as queryFragments from "./schema/generated/api.fragments";
 
-ReactDOM.render(<App
+const node = document.getElementById('root');
+
+if (node) {
+  ReactDOM.render(<App
   // queryFragments={queryFragments}
   // lang="en"
-/>, document.getElementById('root'));
+  />, node);
+}
+

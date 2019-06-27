@@ -1,14 +1,13 @@
 {
   "name": "@prisma-cms/front",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": false,
   "description": "",
   "main": "lib/App.js",
   "files": [
     "src",
     "ssr",
-    "lib",
-    "umd"
+    "lib"
   ],
   "scripts": {
     "build": "nwb build-web-module --copy-files",

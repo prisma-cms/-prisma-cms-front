@@ -1,7 +1,7 @@
 module.exports = {
   type: 'react-app',
   npm: {
-    esModules: true,
+    esModules: false,
     umd: false
   },
   babel: {
