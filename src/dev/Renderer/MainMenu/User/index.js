@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 import Context from "@prisma-cms/context";
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 export default class UserMenuItem extends Component {
 

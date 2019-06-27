@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Select, MenuItem } from 'material-ui'
-import { withStyles } from 'material-ui'
+import Select from 'material-ui/Select'
+import MenuItem from 'material-ui/Menu/MenuItem';
+import withStyles from 'material-ui/styles/withStyles'
 
 import enFlag from "../../assets/img/lang/us.png";
 import ruFlag from "../../assets/img/lang/ru.png";

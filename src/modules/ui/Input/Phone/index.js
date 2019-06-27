@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import NumberFormatProto from "react-number-format";
-import { TextField } from 'material-ui';
+import TextField from 'material-ui/TextField';
 
 
 export function formatPhone(value) {

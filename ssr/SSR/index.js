@@ -66,13 +66,20 @@ class Server {
       ...other
     } = props;
 
-    api = new Prisma({
-      typeDefs: 'src/schema/generated/api.graphql',
-      endpoint: 'http://localhost:4000',
-      secret: 'mysecret123',
-      debug: false,
-      ...other,
-    });
+    const schemaFile = "src/schema/generated/api.graphql";
+
+    if (fs.existsSync(schemaFile)) {
+
+      api = new Prisma({
+        typeDefs: schemaFile,
+        endpoint: 'http://localhost:4000',
+        secret: 'mysecret123',
+        debug: false,
+        ...other,
+      });
+
+    }
+
 
     this.App = App || MainApp;
 

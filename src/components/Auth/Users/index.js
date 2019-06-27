@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import Context from "@prisma-cms/context";
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { TextField, Typography } from 'material-ui';
+import TextField from 'material-ui/TextField';
 
 
 import PrismaCmsComponent from "@prisma-cms/component";
-import { Button } from 'material-ui';
+import Button from 'material-ui/Button';
 
 
 const defaultLocales = {

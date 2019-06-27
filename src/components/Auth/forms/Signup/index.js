@@ -9,8 +9,8 @@ import Dialog, {
 
 
 import AuthForm from "../";
-import { Button } from 'material-ui';
-import { TextField } from 'material-ui';
+import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
 import gql from 'graphql-tag';
 
 
@@ -143,7 +143,39 @@ class SignupForm extends AuthForm {
 
     const {
       query: {
-        signup,
+        signup = `
+          mutation signup(
+            $data:UserCreateInput!
+          ){
+            response: signup(
+              data:$data
+            ){
+              success
+              message
+              errors{
+                key
+                message
+              }
+              token
+              data{
+                ...user
+              }
+            }
+          }
+          
+          
+          fragment user on User {
+            id
+            username
+            email
+            phone
+            showEmail
+            showPhone
+            sudo
+            hasEmail
+            hasPhone
+          }
+        `,
       },
     } = this.context;
 

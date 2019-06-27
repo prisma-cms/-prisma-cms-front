@@ -7,28 +7,6 @@ import {
 
 
 import MainMenu from './MainMenu';
-// import { withStyles } from 'material-ui';
-// import FrontEditorPage from './pages/FrontEditor';
-// import RootPage from "./pages/Root";
-
-
-// export const styles = {
-
-//   root: {
-//     // border: "1px solid blue",
-//     height: "100%",
-//     display: "flex",
-//     flexDirection: "column",
-
-//     "& #Renderer--body": {
-//       // border: "1px solid green",
-//       flex: 1,
-//       overflow: "auto",
-//       display: "flex",
-//       flexDirection: "column",
-//     },
-//   },
-// }
 
 
 class DevRenderer extends PrismaCmsRenderer {

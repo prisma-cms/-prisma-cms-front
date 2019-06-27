@@ -4,9 +4,9 @@ import Link from "./Link";
 import UserLink from "./Link/User";
 import Grid from "./Grid";
 import Pagination from "../../components/Pagination";
-import Editor from "./Editor";
-import Autocomplete from "./Autocomplete";
-import UserAutocomplete from "./Autocomplete/User";
+// import Editor from "./Editor";
+// import Autocomplete from "./Autocomplete";
+// import UserAutocomplete from "./Autocomplete/User";
 import CheckBox from "./CheckBox";
 import PhoneField, {
   formatPhone,
@@ -23,9 +23,9 @@ export {
   UserLink,
   Grid,
   Pagination,
-  Editor,
-  Autocomplete,
-  UserAutocomplete,
+  // Editor,
+  // Autocomplete,
+  // UserAutocomplete,
   CheckBox,
   Image,
   getImageUrl,

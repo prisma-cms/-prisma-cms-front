@@ -51,12 +51,12 @@ require("@babel/polyfill");
 // ['.css', '.less', '.sass', '.ttf', '.woff', '.woff2'].forEach((ext) => require.extensions[ext] = () => {});
 // require('babel-polyfill');
 
-const queryFragments = require("../src/schema/generated/api.fragments");
+// const queryFragments = require("../src/schema/generated/api.fragments");
 
 let SSRmiddlewareClass = require('./SSR');
 
 let SSRmiddleware = new SSRmiddlewareClass({
-  queryFragments,
+  // queryFragments,
 }).middleware;
 
 const ws = require('ws');

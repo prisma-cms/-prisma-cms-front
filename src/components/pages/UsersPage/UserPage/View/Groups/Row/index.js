@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui';
+import withStyles from 'material-ui/styles/withStyles';
 
 import GroupIcon from 'material-ui-icons/Group';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';

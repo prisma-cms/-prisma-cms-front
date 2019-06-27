@@ -1,3 +1,8 @@
+2.0.0
+====================================
+- Code refactoring
+- Remove @prisma-cms/front-editor
+
 1.17.2
 ====================================
 - Added source-map-explorer

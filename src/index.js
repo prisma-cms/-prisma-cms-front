@@ -4,11 +4,11 @@ import React from 'react'
 
 import App from "./dev/App";
 
-import "moment/locale/ru";
+// import "moment/locale/ru";
 
-import * as queryFragments from "./schema/generated/api.fragments";
+// import * as queryFragments from "./schema/generated/api.fragments";
 
 ReactDOM.render(<App
-  queryFragments={queryFragments}
+  // queryFragments={queryFragments}
   // lang="en"
 />, document.getElementById('root'));

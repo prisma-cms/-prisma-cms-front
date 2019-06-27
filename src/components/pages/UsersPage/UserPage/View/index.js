@@ -5,20 +5,13 @@ import Grid from 'material-ui/Grid';
 
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
-
 import UserAvatar from './Avatar';
-
 
 import UsersGroupsBlock from "./Groups";
 
-import {
-  Checkbox,
-} from "material-ui";
-import { FormControlLabel } from 'material-ui';
-import { Typography } from 'material-ui';
-// import { FormControl } from 'material-ui';
-// import { FormLabel } from 'material-ui';
-// import { FormGroup } from 'material-ui';
+import Checkbox from "material-ui/Checkbox";
+import FormControlLabel from 'material-ui/Form/FormControlLabel';
+import Typography from 'material-ui/Typography';
 
 
 export default class UserPageView extends EditableView {

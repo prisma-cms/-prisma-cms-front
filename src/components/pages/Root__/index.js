@@ -7,7 +7,7 @@ import PrismaCmsComponent from "@prisma-cms/component";
 
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Button } from 'material-ui';
+import Button from 'material-ui/Button';
 
 
 import {

@@ -3,22 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import InboxIcon from 'material-ui-icons/MoveToInbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
-import StarIcon from 'material-ui-icons/Star';
-import SendIcon from 'material-ui-icons/Send';
-import MailIcon from 'material-ui-icons/Mail';
-import DeleteIcon from 'material-ui-icons/Delete';
-import ReportIcon from 'material-ui-icons/Report';
 import HighlightIcon from 'material-ui-icons/Highlight';
 import UsersIcon from 'material-ui-icons/People';
 import OrdersIcon from 'material-ui-icons/ShoppingBasket';
-import CategoriesIcon from 'material-ui-icons/Folder';
-import ResourcesIcon from 'material-ui-icons/FontDownload';
 import ShopIcon from 'material-ui-icons/Shop';
 
-import { Divider, List } from 'material-ui';
-
+import Divider from 'material-ui/Divider';
+import List from 'material-ui/List';
 
 
 class AdminMenu extends Component {

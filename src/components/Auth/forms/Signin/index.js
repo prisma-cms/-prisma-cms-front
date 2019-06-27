@@ -4,22 +4,21 @@ import PropTypes from 'prop-types';
 import Context from "@prisma-cms/context";
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { TextField, Typography } from 'material-ui';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 import PrismaCmsComponent from "@prisma-cms/component";
 
-import { Button } from 'material-ui';
-
 import AuthForm from "../";
 
-
-import Dialog, {
+import {
   DialogActions,
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog';
 
-import { LinearProgress } from 'material-ui/Progress';
+import LinearProgress from 'material-ui/Progress/LinearProgress';
 
 class AuthUsers extends AuthForm {
 
@@ -85,7 +84,40 @@ class AuthUsers extends AuthForm {
 
     const {
       query: {
-        signin,
+        signin = `
+          mutation signin(
+            $where:UserWhereUniqueInput!
+            $data:SigninDataInput!
+          ){
+            response: signin(
+              where:$where
+              data:$data
+            ){
+              success
+              message
+              errors{
+                key
+                message
+              }
+              token
+              data{
+                ...user
+              }
+            }
+          }
+          
+          fragment user on User {
+            id
+            username
+            email
+            phone
+            showEmail
+            showPhone
+            sudo
+            hasEmail
+            hasPhone
+          }
+        `,
       },
     } = this.context;
 
@@ -113,7 +145,41 @@ class AuthUsers extends AuthForm {
 
     const {
       query: {
-        resetPasswordProcessor,
+        resetPasswordProcessor = `
+          mutation resetPasswordProcessor(
+            $where: UserWhereUniqueInput!
+            $data:ResetPasswordInput!
+          ){
+            response: resetPasswordProcessor(
+              where: $where
+              data:$data
+            ){
+              success
+              message
+              errors{
+                key
+                message
+              }
+              token
+              data{
+                ...user
+              }
+            }
+          }
+          
+          
+          fragment user on User {
+            id
+            username
+            email
+            phone
+            showEmail
+            showPhone
+            sudo
+            hasEmail
+            hasPhone
+          }
+        `,
       },
     } = this.context;
 
@@ -154,7 +220,7 @@ class AuthUsers extends AuthForm {
     return result;
 
   }
- 
+
 
   cleanFilters() {
 
@@ -558,7 +624,27 @@ class AuthUsers extends AuthForm {
 
             const {
               query: {
-                createResetPasswordProcessor,
+                createResetPasswordProcessor = `
+                  mutation createResetPasswordProcessor(
+                    $data:ResetPasswordCreateInput!
+                  ){
+                    response: createResetPasswordProcessor(
+                      data:$data
+                    ){
+                      success
+                      message
+                      errors{
+                        key
+                        message
+                      }
+                      data{
+                        id
+                        code
+                        validTill
+                      }
+                    }
+                  }
+                `,
               },
             } = this.context;
 
@@ -748,7 +834,42 @@ class AuthUsersConnector extends Component {
 
     const {
       query: {
-        usersConnection,
+        usersConnection = `
+          query usersConnection (
+            $where:UserWhereInput
+            $first:Int = 10
+            $skip:Int
+            $orderBy:UserOrderByInput
+          ){
+            objectsConnection: usersConnection (
+              where: $where
+              first:$first
+              skip:$skip
+              orderBy: $orderBy
+            ){
+              aggregate{
+                count
+              }
+              edges{
+                node{
+                  ...user
+                }
+              }
+            }
+          }
+          
+          fragment user on User {
+            id
+            username
+            email
+            phone
+            showEmail
+            showPhone
+            sudo
+            hasEmail
+            hasPhone
+          }
+        `,
       },
     } = this.context;
 

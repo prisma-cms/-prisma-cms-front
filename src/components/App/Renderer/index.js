@@ -11,33 +11,32 @@ import Context from "@prisma-cms/context";
 // import MainMenu from './MainMenu';
 
 import Errors from './Errors';
-// import { Typography, withStyles } from 'material-ui';
 
 import Auth from '../../Auth';
 
-import MainPage from "../../pages/MainPage";
+// import MainPage from "../../pages/MainPage";
 
-import UsersPage from '../../pages/UsersPage';
-import UserPage from '../../pages/UsersPage/UserPage';
+// import UsersPage from '../../pages/UsersPage';
+// import UserPage from '../../pages/UsersPage/UserPage';
 
 import PageNotFound from '../../pages/404';
-import RoutedPage from "../../pages/RoutedPage";
+// import RoutedPage from "../../pages/RoutedPage";
 
-import GraphqlVoyagerPage from "../../pages/GraphqlVoyager";
+// import GraphqlVoyagerPage from "../../pages/GraphqlVoyager";
 
-import AdminRenderer from "./Admin";
+// import AdminRenderer from "./Admin";
 
 import ContextProvider from "./ContextProvider";
 import SubscriptionProvider from "./SubscriptionProvider";
 // import AdminPage from '../../pages/admin';
 // import Root from '../../pages/Root';
 
-import {
-  ContextProvider as FrontEditorContextProvider,
-  SubscriptionProvider as FrontEditorSubscriptionProvider,
-  // FrontEditorRoot,
-} from "@prisma-cms/front-editor"
-import RootPage from '../../pages/Root';
+// import {
+//   ContextProvider as FrontEditorContextProvider,
+//   SubscriptionProvider as FrontEditorSubscriptionProvider,
+//   // FrontEditorRoot,
+// } from "@prisma-cms/front-editor"
+// import RootPage from '../../pages/Root';
 
 
 export const styles = {
@@ -65,16 +64,12 @@ export class Renderer extends Component {
 
   static propTypes = {
     PageNotFound: PropTypes.func.isRequired,
-    AdminRenderer: PropTypes.func.isRequired,
-    renderAdmin: PropTypes.bool.isRequired,
     Auth: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
     PageNotFound,
-    AdminRenderer,
-    renderAdmin: false,
     Auth,
     classes: {},
   };
@@ -243,92 +238,87 @@ export class Renderer extends Component {
   getRoutes() {
 
     return [
-      {
-        exact: true,
-        path: "/graphql-voyager",
-        component: GraphqlVoyagerPage,
-      },
-      {
-        exact: false,
-        path: "/",
-        component: RootPage,
-      },
-    ];
-
-  }
-
-
-  getRoutesOld() {
-
-    const {
-      getQueryFragment,
-    } = this.context;
-
-    return [
-      // {
-      //   exact: false,
-      //   path: "/",
-      //   component: Root,
-      // },
       // {
       //   exact: true,
-      //   path: "/",
-      //   component: MainPage,
-      // },
-      {
-        exact: true,
-        path: "/users",
-        component: UsersPage,
-      },
-      {
-        exact: true,
-        path: "/users/:userId",
-        render: (props) => {
-          const {
-            params,
-          } = props.match;
-
-          const {
-            userId,
-          } = params || {};
-
-          return <UserPage
-            key={userId}
-            getQueryFragment={getQueryFragment}
-            where={{
-              id: userId,
-            }}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: true,
-        path: "/graphql-voyager",
-        component: GraphqlVoyagerPage,
-      },
-      // {
-      //   path: "*",
-      //   render: props => this.renderOtherPages(props),
+      //   path: "/graphql-voyager",
+      //   component: GraphqlVoyagerPage,
       // },
     ];
 
   }
 
-  renderOtherPages(props) {
 
-    const {
-      uri,
-    } = this.context;
+  // getRoutesOld() {
 
-    return <RoutedPage
-      {...this.props}
-      {...props}
-      where={{
-        path: uri.path(),
-      }}
-    />
-  }
+  //   const {
+  //     getQueryFragment,
+  //   } = this.context;
+
+  //   return [
+  //     // {
+  //     //   exact: false,
+  //     //   path: "/",
+  //     //   component: Root,
+  //     // },
+  //     // {
+  //     //   exact: true,
+  //     //   path: "/",
+  //     //   component: MainPage,
+  //     // },
+  //     {
+  //       exact: true,
+  //       path: "/users",
+  //       component: UsersPage,
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/users/:userId",
+  //       render: (props) => {
+  //         const {
+  //           params,
+  //         } = props.match;
+
+  //         const {
+  //           userId,
+  //         } = params || {};
+
+  //         return <UserPage
+  //           key={userId}
+  //           getQueryFragment={getQueryFragment}
+  //           where={{
+  //             id: userId,
+  //           }}
+  //           {...props}
+  //         />
+  //       }
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/graphql-voyager",
+  //       component: GraphqlVoyagerPage,
+  //     },
+  //     // {
+  //     //   path: "*",
+  //     //   render: props => this.renderOtherPages(props),
+  //     // },
+  //   ];
+
+  // }
+
+  // renderOtherPages(props) {
+
+  //   const {
+  //     uri,
+  //   } = this.context;
+
+  //   return <RoutedPage
+  //     {...this.props}
+  //     {...props}
+  //     where={{
+  //       path: uri.path(),
+  //     }}
+  //   />
+  // }
 
 
   renderRoutes() {
@@ -375,8 +365,6 @@ export class Renderer extends Component {
 
     const {
       classes,
-      // AdminRenderer,
-      renderAdmin,
       ...other
     } = this.props;
 
@@ -406,34 +394,13 @@ export class Renderer extends Component {
 
     </Fragment>;
 
-    const {
-      user: currentUser,
-    } = this.context;
-
-    const {
-      sudo,
-    } = currentUser || {};
-
-    return sudo && renderAdmin ? this.renderAdmin(wrapper) : wrapper || null;
+    return wrapper || null;
   }
 
 
   renderAdmin(wrapper) {
 
-    const {
-      classes,
-      AdminRenderer,
-      ...other
-    } = this.props;
-
-    return <AdminRenderer
-      {...other}
-    >
-
-      {wrapper}
-
-    </AdminRenderer>
-
+    return wrapper;
   }
 
 
@@ -467,34 +434,30 @@ export class Renderer extends Component {
       id: currentUserId,
     } = currentUser || {};
 
-    return <FrontEditorContextProvider>
-      <FrontEditorSubscriptionProvider>
-        <Context.Consumer>
-          {context => <Context.Provider
-            value={Object.assign(context, this.context, {
-              ...this.getChildContext(),
-              rendererForceUpdate: () => this.forceUpdate(),
-            })}
+    return <Context.Consumer>
+      {context => <Context.Provider
+        value={Object.assign(context, this.context, {
+          ...this.getChildContext(),
+          rendererForceUpdate: () => this.forceUpdate(),
+        })}
+      >
+        <ContextProvider>
+          <SubscriptionProvider
+          // key={currentUserId}
           >
-            <ContextProvider>
-              <SubscriptionProvider
-              // key={currentUserId}
-              >
-                <Fragment>
+            <Fragment>
 
-                  {this.renderWrapper()}
+              {this.renderWrapper()}
 
-                  {this.renderErrors()}
+              {this.renderErrors()}
 
-                  {this.renderAuth()}
+              {this.renderAuth()}
 
-                </Fragment>
-              </SubscriptionProvider>
-            </ContextProvider>
-          </Context.Provider>}
-        </Context.Consumer>
-      </FrontEditorSubscriptionProvider>
-    </FrontEditorContextProvider>
+            </Fragment>
+          </SubscriptionProvider>
+        </ContextProvider>
+      </Context.Provider>}
+    </Context.Consumer>
   }
 }
 

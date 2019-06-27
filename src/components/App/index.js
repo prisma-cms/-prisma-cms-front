@@ -12,7 +12,8 @@ import {
 
 import Context from "@prisma-cms/context";
 
-import { MuiThemeProvider, createMuiTheme, getMuiTheme } from 'material-ui/styles';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import blue from 'material-ui/colors/blue';
 // import lightBlue from 'material-ui/colors/lightBlue';
 import pink from 'material-ui/colors/pink';

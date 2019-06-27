@@ -9,22 +9,22 @@ import PropTypes from 'prop-types';
 
 
 
-import { withStyles } from 'material-ui';
+import withStyles from 'material-ui/styles/withStyles';
 
 import PrismaCmsComponent from "@prisma-cms/component";
 
 import SigninForm from "./forms/Signin";
 import SignupForm from "./forms/Signup";
 
-import Users from "./Users";
+// import Users from "./Users";
 
 
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog';
-import { Button } from 'material-ui';
+// import Dialog, {
+//   DialogActions,
+//   DialogContent,
+//   DialogTitle,
+// } from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 
 
 const styles = {
