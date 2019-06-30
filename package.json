@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -58,6 +58,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "debug": "^4.1.0",
+    "dom-scroll-into-view": "^1.2.1",
     "graphql": "14.0.2",
     "graphql-cli": "^2.17.0",
     "graphql-tag": "2.10.0",
