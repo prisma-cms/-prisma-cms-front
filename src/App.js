@@ -89,6 +89,7 @@ class PrismaCmsApp extends Component {
           user:me{
             id
             username
+            fullname
             email
             phone
             showEmail

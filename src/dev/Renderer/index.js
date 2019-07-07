@@ -7,6 +7,8 @@ import {
 
 
 import MainMenu from './MainMenu';
+import MainPage from './pages/MainPage';
+import UserPageConnector from '../../components/pages/UsersPage/UserPage';
 
 
 class DevRenderer extends PrismaCmsRenderer {
@@ -35,17 +37,39 @@ class DevRenderer extends PrismaCmsRenderer {
   // }
 
 
-  // getRoutes() {
+  getRoutes() {
 
-  //   return this.getRoutesOld().concat([
-  //     {
-  //       exact: false,
-  //       path: "/",
-  //       component: RootPage,
-  //     },
-  //   ]);
+    return [
+      {
+        exact: true,
+        path: "/users/:userId",
+        render: (props) => {
+          const {
+            params,
+          } = props.match;
 
-  // }
+          const {
+            userId,
+          } = params || {};
+
+          return <UserPageConnector
+            key={userId}
+            where={{
+              id: userId,
+            }}
+            {...props}
+          />
+        }
+      },
+      {
+        exact: false,
+        path: "*",
+        // component: RootPage,
+        component: MainPage,
+      },
+    ].concat(super.getRoutes());
+
+  }
 
 
   // render() {

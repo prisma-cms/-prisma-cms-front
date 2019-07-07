@@ -245,11 +245,29 @@ class SignupForm extends AuthForm {
       data,
     } = this.state;
 
+    const {
+      useMetamask,
+    } = this.props;
+
     let actions = [];
 
 
     const values = Object.values({ ...data }).filter(n => n);
 
+    if (useMetamask) {
+      actions.push(<Button
+        key="metamask"
+        // color="primary"
+        onClick={event => {
+
+          this.switchForm("metamask");
+
+        }}
+        size="small"
+      >
+        {this.lexicon("Metamask")}
+      </Button>);
+    }
 
 
     actions.push(<Button

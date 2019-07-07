@@ -67,6 +67,7 @@ export class Renderer extends Component {
     Auth: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
     routes: PropTypes.array.isRequired,
+    useMetamask: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -74,6 +75,7 @@ export class Renderer extends Component {
     Auth,
     classes: {},
     routes: [],
+    useMetamask: true,
   };
 
   static contextType = Context;
@@ -206,6 +208,7 @@ export class Renderer extends Component {
 
     const {
       Auth,
+      useMetamask,
     } = this.props;
 
     const {
@@ -215,6 +218,7 @@ export class Renderer extends Component {
 
     return <Auth
       open={authOpen}
+      useMetamask={useMetamask}
       loginComplete={data => {
         this.setState({
           authOpen: false,

@@ -15,6 +15,7 @@ import PrismaCmsComponent from "@prisma-cms/component";
 
 import SigninForm from "./forms/Signin";
 import SignupForm from "./forms/Signup";
+import MetamaskForm from "./forms/Metamask";
 
 // import Users from "./Users";
 
@@ -54,6 +55,7 @@ class Auth extends PrismaCmsComponent {
     ]).isRequired,
 
     classes: PropTypes.object.isRequired,
+    useMetamask: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -64,6 +66,7 @@ class Auth extends PrismaCmsComponent {
     first: 2,
     fullWidth: true,
     maxWidth: "xs",
+    useMetamask: true,
   };
 
 
@@ -104,6 +107,11 @@ class Auth extends PrismaCmsComponent {
 
         form = this.renderSignupForm();
         break;
+
+      case "metamask":
+
+        form = this.renderMetamaskForm();
+        break;
     }
 
 
@@ -117,12 +125,14 @@ class Auth extends PrismaCmsComponent {
       open,
       loginCanceled,
       loginComplete,
+      useMetamask,
     } = this.props;
 
     return <SigninForm
       open={open}
       loginCanceled={loginCanceled}
       loginComplete={loginComplete}
+      useMetamask={useMetamask}
       switchForm={form => {
         this.setState({
           step: form,
@@ -139,9 +149,33 @@ class Auth extends PrismaCmsComponent {
       open,
       loginCanceled,
       loginComplete,
+      useMetamask,
     } = this.props;
 
     return <SignupForm
+      open={open}
+      loginCanceled={loginCanceled}
+      loginComplete={loginComplete}
+      useMetamask={useMetamask}
+      switchForm={form => {
+        this.setState({
+          step: form,
+        });
+      }}
+    />
+
+  }
+
+
+  renderMetamaskForm() {
+
+    const {
+      open,
+      loginCanceled,
+      loginComplete,
+    } = this.props;
+
+    return <MetamaskForm
       open={open}
       loginCanceled={loginCanceled}
       loginComplete={loginComplete}

@@ -270,6 +270,7 @@ class AuthUsers extends AuthForm {
       password,
       onPasswordChange,
       cleanFilters,
+      useMetamask,
     } = this.props;
 
 
@@ -485,6 +486,21 @@ class AuthUsers extends AuthForm {
 
 
     if (!user) {
+
+      if (useMetamask) {
+        actions.push(<Button
+          key="metamask"
+          // color="primary"
+          onClick={event => {
+
+            this.switchForm("metamask");
+
+          }}
+          size="small"
+        >
+          {this.lexicon("Metamask")}
+        </Button>);
+      }
 
       actions.push(<Button
         key="registration"

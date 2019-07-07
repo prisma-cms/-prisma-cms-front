@@ -12,6 +12,7 @@ import UsersGroupsBlock from "./Groups";
 import Checkbox from "material-ui/Checkbox";
 import FormControlLabel from 'material-ui/Form/FormControlLabel';
 import Typography from 'material-ui/Typography';
+import MetamaskAccount from './MetamaskAccount';
 
 
 export default class UserPageView extends EditableView {
@@ -191,6 +192,7 @@ export default class UserPageView extends EditableView {
     } = this.context;
 
     const {
+      id: currentUserId,
     } = currentUser || {}
 
     return <Grid
@@ -214,6 +216,16 @@ export default class UserPageView extends EditableView {
         sm={6}
         md={4}
       >
+
+        {currentUserId ?
+          <MetamaskAccount
+            where={{
+              UserAuthed: {
+                id: currentUserId,
+              },
+            }}
+          />
+          : null}
 
         <UsersGroupsBlock
           user={object}
@@ -340,17 +352,6 @@ export default class UserPageView extends EditableView {
               name: "phone",
               label: "Phone",
               helperText: "Type phone",
-            })}
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-          >
-            {this.getTextField({
-              name: "weight",
-              label: "Weight",
-              type: "number",
             })}
           </Grid>
 
