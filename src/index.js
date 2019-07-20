@@ -2,7 +2,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import App from "./dev/App";
+import App from "./dev";
 
 // import "moment/locale/ru";
 

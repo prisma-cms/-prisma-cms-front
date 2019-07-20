@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -84,6 +84,7 @@
     "xml-writer": "^1.7.0"
   },
   "devDependencies": {
+    "@prisma-cms/performance": "latest",
     "@babel/core": "7.1.2",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.3",

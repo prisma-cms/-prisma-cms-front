@@ -1,68 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
+
+import Page from "../layout";
+import DevApp from '../../../App';
 
 
-import PrismaCmsComponent from "@prisma-cms/component";
-
-
-class MainPage extends PrismaCmsComponent {
+class DevMainPage extends Page {
 
   render() {
 
     const {
-      user: currentUser,
-      UserLink,
-      openLoginForm,
-      logout,
-    } = this.context;
 
+      /**
+       * https://github.com/ReactTraining/react-router/issues/5665
+       */
+      staticContext,
 
-    let output = null;
+      children,
+      ...other
+    } = this.props;
 
-    // console.log(this.context);
-
-    if (currentUser) {
-
-      output = <div>
-
-        <UserLink
-          user={currentUser}
-        />
-
-        <Button
-          onClick={event => {
-
-            logout();
-
-          }}
+    return super.render(
+      <div>
+        <div
+          id="buttons"
         >
-          Logout
-        </Button>
+          <button
+            onClick={event => this.forceUpdate()}
+          >
+            Force update
+          </button>
+          <button
+            onClick={event => this.setState({
+              new_date: new Date(),
+            })}
+          >
+            Update State
+          </button>
+        </div>
+
+        <div
+          id="content"
+        >
+          <DevApp
+            children={children || "Main page"}
+            {...other}
+          >
+          </DevApp>
+        </div>
 
       </div>
-
-    }
-    else {
-
-      output = <div>
-        <Button
-          onClick={event => {
-
-            openLoginForm();
-
-          }}
-        >
-          Signin
-        </Button>
-      </div>;
-
-    }
-
-
-    return output;
+    );
   }
 }
 
 
-export default MainPage;
+export default DevMainPage;

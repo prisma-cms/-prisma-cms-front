@@ -1,3 +1,7 @@
+2.3.0
+====================================
+- Added @prisma-cms/performance dev dependency
+
 2.2.0
 ====================================
 - Added auth via Metamask

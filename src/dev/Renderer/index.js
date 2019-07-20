@@ -1,17 +1,94 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from "prop-types";
 
-import {
+import App, {
+  // ContextProvider,
+  // SubscriptionProvider,
   Renderer as PrismaCmsRenderer,
 } from "../../App";
 
+// import { Renderer as PrismaCmsRenderer } from '@prisma-cms/front'
 
 import MainMenu from './MainMenu';
-import MainPage from './pages/MainPage';
-import UserPageConnector from '../../components/pages/UsersPage/UserPage';
+import { withStyles } from 'material-ui';
+import DevMainPage from './pages/MainPage';
+
+
+export const styles = {
+
+  root: {
+    // border: "1px solid blue",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+
+    "& #Renderer--body": {
+      // border: "1px solid green",
+      flex: 1,
+      overflow: "auto",
+      display: "flex",
+      flexDirection: "column",
+    },
+  },
+}
 
 
 class DevRenderer extends PrismaCmsRenderer {
+
+
+  static propTypes = {
+    ...PrismaCmsRenderer.propTypes,
+    pure: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    ...PrismaCmsRenderer.defaultProps,
+    pure: false,
+  }
+
+
+  getRoutes() {
+
+    let routes = super.getRoutes();
+
+    return [
+      {
+        exact: true,
+        path: "/",
+        // component: DevMainPage,
+        render: props => {
+          // console.log("props", { ...props });
+          return <DevMainPage
+          />;
+        }
+        // render: props => {
+        //   console.log("props", { ...props });
+        //   return null;
+        // }
+        // render: props => {
+        //   // console.log("props", { ...props });
+        //   return <DevMainPage
+        //     {...props}
+        //   >
+        //     <div>
+        //     Test
+        //     </div>
+        //   </DevMainPage>;
+        // }
+        // render: props => {
+        //   console.log("props", { ...props });
+        //   return null;
+        // }
+      },
+      // {
+      //   path: "*",
+      //   render: props => this.renderOtherPages(props),
+      // },
+    ].concat(routes);
+
+  }
+
+
 
   renderMenu() {
 
@@ -21,84 +98,45 @@ class DevRenderer extends PrismaCmsRenderer {
 
   // renderWrapper() {
 
-  //   return <FrontEditorContextProvider>
-  //     <FrontEditorSubscriptionProvider>
-  //       {this.renderWrapperOld()}
-  //     </FrontEditorSubscriptionProvider>
-  //   </FrontEditorContextProvider>;
+  //   return <ContextProvider>
+  //     <SubscriptionProvider>
+  //       {super.renderWrapper()}
+  //     </SubscriptionProvider>
+  //   </ContextProvider>;
 
   // }
 
 
-  // renderWrapper() {
+  render() {
 
-  //   return this.renderWrapperOld();
+    const {
+      pure,
+      classes,
+      ...other
+    } = this.props;
 
-  // }
-
-
-  getRoutes() {
-
-    return [
-      {
-        exact: true,
-        path: "/users/:userId",
-        render: (props) => {
-          const {
-            params,
-          } = props.match;
-
-          const {
-            userId,
-          } = params || {};
-
-          return <UserPageConnector
-            key={userId}
-            where={{
-              id: userId,
-            }}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: false,
-        path: "*",
-        // component: RootPage,
-        component: MainPage,
-      },
-    ].concat(super.getRoutes());
+    return pure ? <App
+      {...other}
+    /> :
+      <div
+        className={classes.root}
+      >
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+            body, html, #root{
+              height: 100%;
+            }
+          `,
+          }}
+        />
+        {super.render()}
+      </div>;
 
   }
 
-
-  // render() {
-
-  //   const {
-  //     classes,
-  //   } = this.props;
-
-  //   return <div
-  //     className={classes.root}
-  //   >
-  //     <style 
-  //       dangerouslySetInnerHTML={{
-  //         __html: `
-  //           body, html, #root{
-  //             height: 100%;
-  //           }
-  //         `,
-  //       }}
-  //     />
-  //     {super.render()}
-  //   </div>
-
-  // }
-
 }
 
-export default DevRenderer;
-
-// export default withStyles(styles)(props => <DevRenderer
-//   {...props}
-// />);
+export default withStyles(styles)(props => <DevRenderer
+  {...props}
+/>);
