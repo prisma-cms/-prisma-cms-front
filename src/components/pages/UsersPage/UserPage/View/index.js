@@ -181,7 +181,7 @@ export default class UserPageView extends EditableView {
     }
 
     const {
-      id,
+      id: userId,
       username,
       fullname,
     } = object;
@@ -217,7 +217,7 @@ export default class UserPageView extends EditableView {
         md={4}
       >
 
-        {currentUserId ?
+        {currentUserId && currentUserId === userId ?
           <MetamaskAccount
             where={{
               UserAuthed: {

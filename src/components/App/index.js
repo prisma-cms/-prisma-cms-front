@@ -273,11 +273,13 @@ export default class App extends React.Component {
 
     let {
       themeOptions,
+      query,
     } = props;
 
     this.state = {
       ...this.state,
       themeOptions,
+      query: query || {},
     }
 
     this.initLanguage();
@@ -285,6 +287,8 @@ export default class App extends React.Component {
     Object.assign(this.state, {
       theme: this.getTheme(),
     });
+
+    // console.log("Front App constructor", this.props);
 
   }
 
@@ -453,6 +457,7 @@ export default class App extends React.Component {
 
     const {
       theme,
+      query,
     } = this.state;
 
 
@@ -479,7 +484,7 @@ export default class App extends React.Component {
               value={Object.assign(context, this.context, {
                 ...this.getChildContext(),
                 queryFragments,
-                query: {},
+                query,
                 assetsBaseUrl,
                 uri,
               })}

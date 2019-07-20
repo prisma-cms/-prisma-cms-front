@@ -100,7 +100,7 @@ export class Renderer extends Component {
   getChildContext() {
 
     return {
-      openLoginForm: event => this.openLoginForm(event),
+      openLoginForm: this.openLoginForm,
     }
   }
 
@@ -171,6 +171,9 @@ export class Renderer extends Component {
 
     return;
   }
+
+
+  openLoginForm = event => this.openLoginForm(event);
 
 
   openLoginForm(event) {
@@ -416,6 +419,9 @@ export class Renderer extends Component {
   }
 
 
+  forceUpdateBind = () => this.forceUpdate();
+
+
   render() {
 
 
@@ -450,7 +456,7 @@ export class Renderer extends Component {
       {context => <Context.Provider
         value={Object.assign(context, this.context, {
           ...this.getChildContext(),
-          rendererForceUpdate: () => this.forceUpdate(),
+          rendererForceUpdate: this.forceUpdateBind,
         })}
       >
         <ContextProvider>

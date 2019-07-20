@@ -258,7 +258,9 @@ class MetamaskAccount extends PrismaCmsComponent {
           item
           xs={12}
         >
-          {address}
+          <a href={`https://etherscan.io/address/${address}`} target="_blank">
+            {address}
+          </a>
         </Grid>
 
       });

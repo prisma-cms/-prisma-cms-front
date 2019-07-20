@@ -47,7 +47,9 @@ class PrismaCmsApp extends Component {
       ...this.state,
       context: {
         // queryFragments,
-        query: {},
+        query: {
+          dsfsd: "SDfsdF",
+        },
       },
     }
   }
