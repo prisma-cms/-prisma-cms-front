@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Page from "../layout";
 import DevApp from '../../../App';
+import MainMenu from '../../MainMenu';
 
 
 class DevMainPage extends Page {
@@ -28,6 +29,7 @@ class DevMainPage extends Page {
     return super.render(
       <div>
 
+        <MainMenu />
 
         <div
           id="buttons"

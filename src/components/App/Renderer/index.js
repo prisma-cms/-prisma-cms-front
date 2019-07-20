@@ -93,8 +93,11 @@ export class Renderer extends Component {
       authOpen: false,
     };
 
-  }
+    this.openLoginForm = this.openLoginForm.bind(this);
+    this.loginComplete = this.loginComplete.bind(this);
+    this.loginCanceled = this.loginCanceled.bind(this);
 
+  }
 
 
   getChildContext() {
@@ -103,9 +106,6 @@ export class Renderer extends Component {
       openLoginForm: this.openLoginForm,
     }
   }
-
-
-  openLoginForm = event => this.openLoginForm(event);
 
 
   openLoginForm(event) {
@@ -154,19 +154,25 @@ export class Renderer extends Component {
     return <Auth
       open={authOpen}
       useMetamask={useMetamask}
-      loginComplete={data => {
-        this.setState({
-          authOpen: false,
-        });
-        this.onAuthSuccess(data);
-      }}
-      loginCanceled={data => {
-        this.setState({
-          authOpen: false,
-        });
-      }}
+      loginComplete={this.loginComplete}
+      loginCanceled={this.loginCanceled}
     />
   }
+
+
+  loginComplete(data) {
+    this.setState({
+      authOpen: false,
+    });
+    this.onAuthSuccess(data);
+  };
+
+
+  loginCanceled() {
+    this.setState({
+      authOpen: false,
+    });
+  };
 
 
   renderMenu() {
