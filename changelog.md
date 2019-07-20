@@ -1,3 +1,7 @@
+2.3.1
+====================================
+- Fix contexts
+
 2.3.0
 ====================================
 - Added @prisma-cms/performance dev dependency

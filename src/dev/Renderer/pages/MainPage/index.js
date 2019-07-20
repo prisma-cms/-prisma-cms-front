@@ -20,30 +20,80 @@ class DevMainPage extends Page {
       ...other
     } = this.props;
 
+    const {
+      Link,
+      Grid,
+    } = this.context;
+
     return super.render(
       <div>
+
+
         <div
           id="buttons"
         >
-          <button
-            onClick={event => this.forceUpdate()}
+          <Grid
+            container
+            spacing={8}
           >
-            Force update
-          </button>
-          <button
-            onClick={event => this.setState({
-              new_date: new Date(),
-            })}
-          >
-            Update State
-          </button>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/"
+              >
+                Main page
+                </Link>
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/users"
+              >
+                User
+                </Link>
+            </Grid>
+
+            <Grid
+              item
+            >
+              <button
+                onClick={event => this.forceUpdate()}
+              >
+                Force update
+              </button>
+            </Grid>
+
+            <Grid
+              item
+            >
+              <button
+                onClick={event => this.setState({
+                  new_date: new Date(),
+                })}
+              >
+                Update State
+              </button>
+            </Grid>
+
+          </Grid>
+
         </div>
 
         <div
           id="content"
         >
+
+
           <DevApp
             children={children || "Main page"}
+            props={this.props}
+            state={this.state}
+            context={this.context}
+            prefix="dev_app"
             {...other}
           >
           </DevApp>

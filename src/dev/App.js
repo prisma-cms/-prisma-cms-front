@@ -12,6 +12,7 @@ export default class DevApp extends PureComponent {
 
     const {
       children,
+      ...other
     } = this.props;
 
     return <Fragment>
@@ -20,10 +21,11 @@ export default class DevApp extends PureComponent {
       >
         <PrismaCmsPerformanceTester
           // test={{}}
-          props={this.props}
-          state={this.state}
-          context={this.context}
-          prefix="dev_app"
+          // props={this.props}
+          // state={this.state}
+          // context={this.context}
+          // prefix="dev_app"
+          {...other}
         />
       </div>
 

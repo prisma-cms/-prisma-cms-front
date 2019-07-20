@@ -215,15 +215,18 @@ export default class Apollo extends React.Component { // eslint-disable-line rea
     let context = {
       token,
       user,
-      onAuthSuccess: data => this.onAuthSuccess(data),
-      loadApiData: () => this.loadApiData(),
-      logout: () => this.logout(),
+      onAuthSuccess: this.onAuthSuccessBind,
+      loadApiData: this.loadApiDataBind,
+      logout: this.logoutBind,
       errors,
       localStorage,
     };
 
     return context;
   }
+
+
+  onAuthSuccessBind = data => this.onAuthSuccess(data);
 
 
   async onAuthSuccess(data) {
@@ -262,6 +265,8 @@ export default class Apollo extends React.Component { // eslint-disable-line rea
 
   }
 
+
+  logoutBind = () => this.logout();
 
   async logout() {
 
@@ -393,6 +398,9 @@ export default class Apollo extends React.Component { // eslint-disable-line rea
 
   }
 
+
+
+  loadApiDataBind = () => this.loadApiData();
 
   async loadApiData() {
 

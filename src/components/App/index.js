@@ -276,10 +276,17 @@ export default class App extends React.Component {
       query,
     } = props;
 
+    const {
+      location,
+    } = global;
+
+    const uri = new URI(location);
+
     this.state = {
       ...this.state,
       themeOptions,
       query: query || {},
+      uri,
     }
 
     this.initLanguage();
@@ -289,6 +296,13 @@ export default class App extends React.Component {
     });
 
     // console.log("Front App constructor", this.props);
+
+    this.updateTheme = this.updateTheme.bind(this);
+    this.getQuery = this.getQuery.bind(this);
+    this.getQueryFragment = this.getQueryFragment.bind(this);
+    this.setLanguage = this.setLanguage.bind(this);
+    this.getLanguage = this.getLanguage.bind(this);
+
 
   }
 
@@ -303,11 +317,11 @@ export default class App extends React.Component {
 
     return {
       theme,
-      updateTheme: themeOptions => this.updateTheme(themeOptions),
-      getQuery: operation => this.getQuery(operation),
-      getQueryFragment: fragmentName => this.getQueryFragment(fragmentName),
-      setLanguage: this.setLanguage.bind(this),
-      getLanguage: this.getLanguage.bind(this),
+      updateTheme: this.updateTheme,
+      getQuery: this.getQuery,
+      getQueryFragment: this.getQueryFragment,
+      setLanguage: this.setLanguage,
+      getLanguage: this.getLanguage,
       lang,
     }
   }
@@ -438,11 +452,121 @@ export default class App extends React.Component {
 
 
 
-  render() {
+  componentDidMount() {
+
+    this.initCounters();
+
+    super.componentDidMount && super.componentDidMount();
+  }
+
+
+  initCounters() {
 
     const {
-      location,
-    } = global;
+      router,
+    } = this.context;
+
+    const {
+      history,
+    } = router;
+
+
+    if (typeof window !== "undefined") {
+
+
+      history.listen(() => {
+
+        const {
+          location,
+        } = global;
+
+        if (location) {
+
+          const newUri = new URI(location);
+
+          const newHref = newUri.resource();
+
+          if (newHref) {
+
+            const {
+              uri,
+            } = this.state;
+
+            const currentHref = uri.resource();
+
+
+            if (currentHref && newHref && currentHref !== newHref) {
+
+              // console.log("history location changed currentHref", uri, currentHref, newHref, currentHref === newHref);
+
+              this.setState({
+                uri: newUri,
+              }, () => {
+
+                try {
+                  // Это надо чтобы при смене страницы отправлялась статистика в гугл
+                  let {
+                    // yaCounter000001: yaCounter,
+                    Ya,
+                    gtag,
+                    dataLayer,
+                  } = global;
+
+
+                  const {
+                    // Metrika,
+                    _metrika,
+                  } = Ya || {};
+
+                  // const yaCounters = Metrika && Metrika.counters() || [];
+
+                  const {
+                    counter: yaCounter,
+                  } = _metrika || {};
+
+                  // Отправка данных в яндекс.метрику
+                  yaCounter && yaCounter.clickmap && yaCounter.clickmap().hit(location.pathname);
+
+
+                  // Отправка данных в гугл
+                  const googleAnalyticsConfig = dataLayer && dataLayer.find(n => n && n[0] === "config" && n[1]);
+
+                  const {
+                    1: googleAnalyticsId,
+                  } = googleAnalyticsConfig || {};
+
+                  gtag && googleAnalyticsId && gtag('event', 'page_view', {
+                    send_to: googleAnalyticsId,
+                    page_path: location.pathname,
+                    page_title: window.document.tittle,
+                    page_location: location.toString(),
+                  });
+
+                }
+                catch (error) {
+                  console.error(error);
+                }
+
+              });
+
+            }
+
+          }
+
+        }
+
+
+      });
+
+    }
+
+    return;
+  }
+
+
+
+
+  render() {
 
     let {
       queryFragments,
@@ -450,7 +574,6 @@ export default class App extends React.Component {
       Renderer,
       sheetsManager,
       assetsBaseUrl,
-      uri = new URI(location),
       onSchemaLoad,
       ...other
     } = this.props;
@@ -458,6 +581,7 @@ export default class App extends React.Component {
     const {
       theme,
       query,
+      uri,
     } = this.state;
 
 

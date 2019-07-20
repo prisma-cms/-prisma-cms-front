@@ -1,82 +1,82 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
 
-import URI from "urijs";
+// import URI from "urijs";
 
-import Context from "@prisma-cms/context";
+// import Context from "@prisma-cms/context";
 
-export default class UriProvider extends Component {
+// export default class UriProvider extends Component {
 
-  static contextType = Context;
+//   static contextType = Context;
 
-  static childContextTypes = {
-    uri: PropTypes.object,
-  };
+//   static childContextTypes = {
+//     uri: PropTypes.object,
+//   };
 
 
-  getChildContext() {
+//   getChildContext() {
 
-    const {
-      location,
-    } = global;
+//     const {
+//       location,
+//     } = global;
 
-    let uri;
+//     let uri;
 
     
-    if (location) {
-      uri = new URI(location);
-    }
-    else {
-      const {
-        router: {
-          history,
-        },
-      } = this.context;
+//     if (location) {
+//       uri = new URI(location);
+//     }
+//     else {
+//       const {
+//         router: {
+//           history,
+//         },
+//       } = this.context;
 
-      const {
-        location,
-      } = history;
+//       const {
+//         location,
+//       } = history;
 
-      uri = new URI(history.createHref(location));
-    }
-
-
-    return {
-      uri,
-    }
-
-  }
+//       uri = new URI(history.createHref(location));
+//     }
 
 
-  render() {
+//     return {
+//       uri,
+//     }
 
-    const {
-      children,
-    } = this.props;
+//   }
 
-    return <Context.Consumer>
-      {context => <Context.Provider
-        value={Object.assign(context, {
-          ...this.getChildContext(),
-        })}
-      >
-        {children || null}
-      </Context.Provider>}
-    </Context.Consumer>
 
-    // return null;
+//   render() {
 
-    // const {
-    //   children: {
-    //     type: Type,
-    //     props,
-    //   },
-    // } = this.props;
+//     const {
+//       children,
+//     } = this.props;
 
-    // return <Type
-    //   {...props}
-    // />
+//     return <Context.Consumer>
+//       {context => <Context.Provider
+//         value={Object.assign(context, {
+//           ...this.getChildContext(),
+//         })}
+//       >
+//         {children || null}
+//       </Context.Provider>}
+//     </Context.Consumer>
 
-  }
-}
+//     // return null;
+
+//     // const {
+//     //   children: {
+//     //     type: Type,
+//     //     props,
+//     //   },
+//     // } = this.props;
+
+//     // return <Type
+//     //   {...props}
+//     // />
+
+//   }
+// }
 

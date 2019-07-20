@@ -53,7 +53,7 @@ class DevRenderer extends PrismaCmsRenderer {
 
     return [
       {
-        exact: true,
+        exact: false,
         path: "/",
         // component: DevMainPage,
         render: props => {
