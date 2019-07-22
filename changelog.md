@@ -1,3 +1,6 @@
+====================================
+- Added introspectionFromSchema
+
 2.5.0
 ====================================
 - Remove query module

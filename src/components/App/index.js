@@ -8,6 +8,11 @@ import Renderer from './Renderer';
 import {
   buildClientSchema,
   introspectionQuery,
+  introspectionFromSchema,
+  buildSchema,
+  printSchema,
+  print,
+  parse,
 } from "graphql";
 
 import Context from "@prisma-cms/context";
@@ -114,20 +119,46 @@ const SchemaLoaderQuery = graphql(gql`
   })((props) => {
 
     const {
-      data: {
-        __schema,
-      },
+      // data: {
+      //   __schema,
+      // },
+      data: introspection,
       children,
       onSchemaLoad,
     } = props;
 
+    const {
+      __schema,
+    } = introspection;
+
     if (__schema && !schema) {
 
-      // console.log("__schema loaded");
+
+      console.log("__schema loaded", __schema);
+
+
+
+      // console.log("__schema print", print(__schema));
+
+      const clientSchema = buildClientSchema(introspection);
+
+      const schemaSDL = printSchema(clientSchema, {
+        // commentDescriptions: false,
+      })
+
+      // console.log("__schema schemaSDL", schemaSDL);
+
+      // console.log("__schema parse schemaSDL", parse(schemaSDL));
+      // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
+      // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
+      // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(schemaSDL)));
+
+      // console.log("__schema buildClientSchema", clientSchema);
+      // console.log("__schema introspectionFromSchema", introspectionFromSchema(clientSchema));
 
       schema = __schema;
 
-      onSchemaLoad && onSchemaLoad(__schema);
+      onSchemaLoad && onSchemaLoad(schemaSDL);
     }
 
     return <Context.Consumer>
@@ -151,11 +182,23 @@ class SchemaLoader extends PureComponent {
   componentWillMount() {
 
     const {
+      __PRISMA_CMS_API_SCHEMA_DSL__,
       __PRISMA_CMS_API_SCHEMA__,
     } = global;
 
+    // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
 
-    if (__PRISMA_CMS_API_SCHEMA__) {
+    if (__PRISMA_CMS_API_SCHEMA_DSL__) {
+      // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
+
+      // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+      // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
+      // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
+
+      schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
+
+    }
+    else if (__PRISMA_CMS_API_SCHEMA__) {
       schema = __PRISMA_CMS_API_SCHEMA__;
     }
 

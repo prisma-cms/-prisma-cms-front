@@ -220,13 +220,23 @@ class Server {
               sheetsManager={new Map()}
               // queryFragments={queryFragments}
               uri={uri}
-              onSchemaLoad={schema => {
+              // onSchemaLoad={schema => {
+
+              //   // console.log("onSchemaLoad", schema);
+              //   // console.log(chalk.green("onSchemaLoad"));
+
+              //   if (!apiSchema && schema) {
+              //     apiSchema = `window.__PRISMA_CMS_API_SCHEMA__=${JSON.stringify(schema).replace(/</g, '\\u003c')};`;
+              //   }
+
+              // }}
+              onSchemaLoad={clientSchema => {
 
                 // console.log("onSchemaLoad", schema);
                 // console.log(chalk.green("onSchemaLoad"));
 
-                if (!apiSchema && schema) {
-                  apiSchema = `window.__PRISMA_CMS_API_SCHEMA__=${JSON.stringify(schema).replace(/</g, '\\u003c')};`;
+                if (!apiSchema && clientSchema) {
+                  apiSchema = `window.__PRISMA_CMS_API_SCHEMA_DSL__=${JSON.stringify(clientSchema).replace(/</g, '\\u003c')};`;
                 }
 
               }}
@@ -351,6 +361,8 @@ class Server {
             </script>`);
 
           }
+
+          console.log("content", content);
 
           root.html(content);
 
