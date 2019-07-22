@@ -109,7 +109,7 @@ export default class UserPageConnector extends PrismaCmsConnector {
           }
         }
       `,
-    } = this.contex.query || {};
+    } = this.context.query || {};
 
     const {
       View,

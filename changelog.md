@@ -1,3 +1,9 @@
+
+2.6.2
+====================================
+- Fix UserPage
+- Fix ContextProvider
+
 2.6.1
 ====================================
 - Fix introspectionFromSchema
