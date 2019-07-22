@@ -154,7 +154,7 @@ const SchemaLoaderQuery = graphql(gql`
       // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(schemaSDL)));
 
       // console.log("__schema buildClientSchema", clientSchema);
-      // console.log("__schema introspectionFromSchema", introspectionFromSchema(clientSchema));
+      // console.log("__schema introspectionFromSchema", introspectionFromSchema(clientSchema).__schema);
 
       schema = __schema;
 
@@ -195,7 +195,7 @@ class SchemaLoader extends PureComponent {
       // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
       // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
 
-      schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
+      schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
 
     }
     else if (__PRISMA_CMS_API_SCHEMA__) {

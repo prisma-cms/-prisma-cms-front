@@ -1,3 +1,7 @@
+2.6.1
+====================================
+- Fix introspectionFromSchema
+
 2.6.0
 ====================================
 - Added introspectionFromSchema
