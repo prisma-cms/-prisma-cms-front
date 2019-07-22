@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
@@ -116,7 +116,7 @@ class Select extends SelectProto {
 
 
 
-class Option extends React.Component {
+class Option extends PureComponent {
   handleClick = event => {
     this.props.onSelect(this.props.option, event);
   };
@@ -304,7 +304,7 @@ const styles = theme => {
   };
 };
 
-class SelectField extends React.Component {
+class SelectField extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,

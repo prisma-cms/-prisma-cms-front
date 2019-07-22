@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
@@ -92,7 +92,7 @@ const styles = theme => ({
   },
 });
 
-class MiniDrawer extends React.Component {
+class MiniDrawer extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,

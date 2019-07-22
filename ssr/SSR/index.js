@@ -329,7 +329,7 @@ class Server {
 
 
 
-          head.append(`<style
+          root.before(`<style
             id="server-side-jss"
           >
             ${sheets.toString()}
@@ -340,13 +340,13 @@ class Server {
           //   __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
           // }} />
 
-          body.prepend(`<script type="text/javascript">
+          root.after(`<script type="text/javascript">
             ${`window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`}
           </script>`);
 
           if (apiSchema) {
 
-            body.prepend(`<script type="text/javascript">
+            root.after(`<script type="text/javascript">
               ${apiSchema}
             </script>`);
 

@@ -216,7 +216,7 @@ class SchemaLoader extends PureComponent {
 }
 
 
-export default class App extends React.Component {
+export default class App extends PureComponent {
 
 
   static propTypes = {
@@ -275,16 +275,10 @@ export default class App extends React.Component {
       themeOptions,
     } = props;
 
-    const {
-      location,
-    } = global;
-
-    const uri = new URI(location);
 
     this.state = {
       ...this.state,
       themeOptions,
-      uri,
     }
 
     this.initLanguage();
@@ -442,6 +436,45 @@ export default class App extends React.Component {
       styles && styles.remove();
 
     }
+
+
+    let {
+      location,
+      // } = global;
+    } = {};
+
+
+    if (!location) {
+      // location = this.context.router.history.location;
+
+      const {
+        router: {
+          history,
+        },
+      } = this.context;
+
+      const {
+        location: routerLocation,
+        createHref,
+      } = history;
+
+      // console.log("location this.context.router", this.context.router);
+
+      location = createHref(routerLocation);
+
+    }
+
+    // console.log("location this.context.router", this.context.router);
+    // console.log("location", location);
+
+    const uri = new URI(location);
+
+    // console.log("location uri", uri);
+    // console.log("componentWillMount", this.context.router);
+
+    Object.assign(this.state, {
+      uri,
+    });
 
     super.componentWillMount && super.componentWillMount();
   }

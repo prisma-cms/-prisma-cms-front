@@ -1,6 +1,10 @@
+2.5.0
 ====================================
 - Remove query module
 - Remove queryFragments
+- Migrate on PureComponent
+- Fix ssr
+- Fix init uri
 
 2.4.0
 ====================================
