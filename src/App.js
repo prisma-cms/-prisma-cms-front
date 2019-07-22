@@ -34,25 +34,15 @@ class PrismaCmsApp extends Component {
   };
 
 
-  constructor(props) {
+  // constructor(props) {
 
-    super(props);
+  //   super(props);
 
-    const {
-      // queryFragments,
-    } = this.props;
+  //   const {
+  //     // queryFragments,
+  //   } = this.props;
 
-
-    this.state = {
-      ...this.state,
-      context: {
-        // queryFragments,
-        query: {
-          dsfsd: "SDfsdF",
-        },
-      },
-    }
-  }
+  // }
 
   render() {
 

@@ -107,13 +107,13 @@ class DevRenderer extends PrismaCmsRenderer {
 
   // }
 
-  renderWrapper() {
+  // renderWrapper() {
 
-    return <ContextProviderDev>
-      {super.renderWrapper()}
-    </ContextProviderDev>;
+  //   return <ContextProviderDev>
+  //     {super.renderWrapper()}
+  //   </ContextProviderDev>;
 
-  }
+  // }
 
 
   render() {

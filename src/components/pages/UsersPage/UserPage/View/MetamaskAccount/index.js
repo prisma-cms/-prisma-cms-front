@@ -128,30 +128,28 @@ class MetamaskAccount extends PrismaCmsComponent {
           } = queryFragments || {};
 
           const {
-            query: {
-              signup = `
-            mutation ethConnectAuthAccount(
-              $data:EthRecoverPersonalSignatureDataInput!
-            ){
-              response: ethConnectAuthAccount(
-                data:$data
+            signup = `
+              mutation ethConnectAuthAccount(
+                $data:EthRecoverPersonalSignatureDataInput!
               ){
-                success
-                message
-                errors{
-                  key
+                response: ethConnectAuthAccount(
+                  data:$data
+                ){
+                  success
                   message
-                }
-                data{
-                  ...EthAccountNoNesting
+                  errors{
+                    key
+                    message
+                  }
+                  data{
+                    ...EthAccountNoNesting
+                  }
                 }
               }
-            }
-            
-            ${EthAccountNoNestingFragment}
-          `,
-            },
-          } = this.context;
+              
+              ${EthAccountNoNestingFragment}
+            `,
+          } = this.context.query || {};
 
 
           const {

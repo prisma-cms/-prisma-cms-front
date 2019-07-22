@@ -234,8 +234,7 @@ export default class MetamaskForm extends AuthForm {
           } = queryFragments || {};
 
           const {
-            query: {
-              signup = `
+            signup = `
             mutation ethSigninOrSignup(
               $data:EthRecoverPersonalSignatureDataInput!
             ){
@@ -257,8 +256,7 @@ export default class MetamaskForm extends AuthForm {
             
             ${UserNoNestingFragment}
           `,
-            },
-          } = this.context;
+          } = this.context.query || {};
 
 
           const {

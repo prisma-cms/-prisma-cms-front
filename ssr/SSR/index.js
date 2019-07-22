@@ -183,7 +183,7 @@ class Server {
     const {
       App: MainApp,
       props: {
-        queryFragments,
+        // queryFragments,
       },
     } = this;
 
@@ -218,7 +218,7 @@ class Server {
           <StaticRouter location={req.url} context={context}>
             <MainApp
               sheetsManager={new Map()}
-              queryFragments={queryFragments}
+              // queryFragments={queryFragments}
               uri={uri}
               onSchemaLoad={schema => {
 

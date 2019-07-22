@@ -1,3 +1,7 @@
+====================================
+- Remove query module
+- Remove queryFragments
+
 2.4.0
 ====================================
 - Migrate on PureComponent

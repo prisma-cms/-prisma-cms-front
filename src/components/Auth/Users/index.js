@@ -89,10 +89,8 @@ class AuthUsers extends PrismaCmsComponent {
   async signin(options) {
 
     const {
-      query: {
-        signin,
-      },
-    } = this.context;
+      signin,
+    } = this.context.query || {};
 
 
 
@@ -354,10 +352,8 @@ class AuthUsersConnector extends PureComponent {
   componentWillMount() {
 
     const {
-      query: {
-        usersConnection,
-      },
-    } = this.context;
+      usersConnection,
+    } = this.context.query || {};
 
 
 

@@ -83,43 +83,41 @@ class AuthUsers extends AuthForm {
   async signin(options) {
 
     const {
-      query: {
-        signin = `
-          mutation signin(
-            $where:UserWhereUniqueInput!
-            $data:SigninDataInput!
+      signin = `
+        mutation signin(
+          $where:UserWhereUniqueInput!
+          $data:SigninDataInput!
+        ){
+          response: signin(
+            where:$where
+            data:$data
           ){
-            response: signin(
-              where:$where
-              data:$data
-            ){
-              success
+            success
+            message
+            errors{
+              key
               message
-              errors{
-                key
-                message
-              }
-              token
-              data{
-                ...user
-              }
+            }
+            token
+            data{
+              ...user
             }
           }
-          
-          fragment user on User {
-            id
-            username
-            email
-            phone
-            showEmail
-            showPhone
-            sudo
-            hasEmail
-            hasPhone
-          }
-        `,
-      },
-    } = this.context;
+        }
+        
+        fragment user on User {
+          id
+          username
+          email
+          phone
+          showEmail
+          showPhone
+          sudo
+          hasEmail
+          hasPhone
+        }
+      `,
+    } = this.context.query || {};
 
 
 
@@ -144,44 +142,42 @@ class AuthUsers extends AuthForm {
   async resetPassword(options) {
 
     const {
-      query: {
-        resetPasswordProcessor = `
-          mutation resetPasswordProcessor(
-            $where: UserWhereUniqueInput!
-            $data:ResetPasswordInput!
+      resetPasswordProcessor = `
+        mutation resetPasswordProcessor(
+          $where: UserWhereUniqueInput!
+          $data:ResetPasswordInput!
+        ){
+          response: resetPasswordProcessor(
+            where: $where
+            data:$data
           ){
-            response: resetPasswordProcessor(
-              where: $where
-              data:$data
-            ){
-              success
+            success
+            message
+            errors{
+              key
               message
-              errors{
-                key
-                message
-              }
-              token
-              data{
-                ...user
-              }
+            }
+            token
+            data{
+              ...user
             }
           }
-          
-          
-          fragment user on User {
-            id
-            username
-            email
-            phone
-            showEmail
-            showPhone
-            sudo
-            hasEmail
-            hasPhone
-          }
-        `,
-      },
-    } = this.context;
+        }
+        
+        
+        fragment user on User {
+          id
+          username
+          email
+          phone
+          showEmail
+          showPhone
+          sudo
+          hasEmail
+          hasPhone
+        }
+      `,
+    } = this.context.query || {};
 
 
     const {
@@ -639,30 +635,28 @@ class AuthUsers extends AuthForm {
           onClick={async event => {
 
             const {
-              query: {
-                createResetPasswordProcessor = `
-                  mutation createResetPasswordProcessor(
-                    $data:ResetPasswordCreateInput!
+              createResetPasswordProcessor = `
+                mutation createResetPasswordProcessor(
+                  $data:ResetPasswordCreateInput!
+                ){
+                  response: createResetPasswordProcessor(
+                    data:$data
                   ){
-                    response: createResetPasswordProcessor(
-                      data:$data
-                    ){
-                      success
+                    success
+                    message
+                    errors{
+                      key
                       message
-                      errors{
-                        key
-                        message
-                      }
-                      data{
-                        id
-                        code
-                        validTill
-                      }
+                    }
+                    data{
+                      id
+                      code
+                      validTill
                     }
                   }
-                `,
-              },
-            } = this.context;
+                }
+              `,
+            } = this.context.query || {};
 
 
 
@@ -849,45 +843,43 @@ class AuthUsersConnector extends PureComponent {
   componentWillMount() {
 
     const {
-      query: {
-        usersConnection = `
-          query usersConnection (
-            $where:UserWhereInput
-            $first:Int = 10
-            $skip:Int
-            $orderBy:UserOrderByInput
+      usersConnection = `
+        query usersConnection (
+          $where:UserWhereInput
+          $first:Int = 10
+          $skip:Int
+          $orderBy:UserOrderByInput
+        ){
+          objectsConnection: usersConnection (
+            where: $where
+            first:$first
+            skip:$skip
+            orderBy: $orderBy
           ){
-            objectsConnection: usersConnection (
-              where: $where
-              first:$first
-              skip:$skip
-              orderBy: $orderBy
-            ){
-              aggregate{
-                count
-              }
-              edges{
-                node{
-                  ...user
-                }
+            aggregate{
+              count
+            }
+            edges{
+              node{
+                ...user
               }
             }
           }
-          
-          fragment user on User {
-            id
-            username
-            email
-            phone
-            showEmail
-            showPhone
-            sudo
-            hasEmail
-            hasPhone
-          }
-        `,
-      },
-    } = this.context;
+        }
+        
+        fragment user on User {
+          id
+          username
+          email
+          phone
+          showEmail
+          showPhone
+          sudo
+          hasEmail
+          hasPhone
+        }
+      `,
+    } = this.context.query || {};
 
 
 

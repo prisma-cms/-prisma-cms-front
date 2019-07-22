@@ -142,42 +142,40 @@ class SignupForm extends AuthForm {
   async signup() {
 
     const {
-      query: {
-        signup = `
-          mutation signup(
-            $data:UserCreateInput!
+      signup = `
+        mutation signup(
+          $data:UserCreateInput!
+        ){
+          response: signup(
+            data:$data
           ){
-            response: signup(
-              data:$data
-            ){
-              success
+            success
+            message
+            errors{
+              key
               message
-              errors{
-                key
-                message
-              }
-              token
-              data{
-                ...user
-              }
+            }
+            token
+            data{
+              ...user
             }
           }
-          
-          
-          fragment user on User {
-            id
-            username
-            email
-            phone
-            showEmail
-            showPhone
-            sudo
-            hasEmail
-            hasPhone
-          }
-        `,
-      },
-    } = this.context;
+        }
+        
+        
+        fragment user on User {
+          id
+          username
+          email
+          phone
+          showEmail
+          showPhone
+          sudo
+          hasEmail
+          hasPhone
+        }
+      `,
+    } = this.context.query || {};
 
 
     const {

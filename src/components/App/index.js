@@ -273,20 +273,17 @@ export default class App extends React.Component {
 
     let {
       themeOptions,
-      query,
     } = props;
 
     const {
       location,
     } = global;
 
-    // const uri = new URI(location);
-    const uri = new URI("/dsfsdfdsf");
+    const uri = new URI(location);
 
     this.state = {
       ...this.state,
       themeOptions,
-      query: query || {},
       uri,
     }
 
@@ -423,10 +420,8 @@ export default class App extends React.Component {
   getQueryFragment(fragmentName) {
 
     const {
-      queryFragments: {
-        [fragmentName]: fragment,
-      },
-    } = this.props;
+      [fragmentName]: fragment,
+    } = this.props.queryFragments || {};
 
     if (!fragment) {
       throw new Error(`Can not get query fragment "${fragmentName}"`);
@@ -498,10 +493,9 @@ export default class App extends React.Component {
 
             if (currentHref && newHref && currentHref !== newHref) {
 
-              console.log("history location changed currentHref", uri, currentHref, newHref, currentHref === newHref);
+              // console.log("history location changed currentHref", uri, currentHref, newHref, currentHref === newHref);
 
               this.setState({
-                // uri,
                 uri: newUri,
               }, () => {
 
@@ -571,7 +565,6 @@ export default class App extends React.Component {
   render() {
 
     let {
-      queryFragments,
       themeOptions,
       Renderer,
       sheetsManager,
@@ -582,7 +575,6 @@ export default class App extends React.Component {
 
     const {
       theme,
-      query,
       uri,
     } = this.state;
 
@@ -609,8 +601,6 @@ export default class App extends React.Component {
             {context => <Context.Provider
               value={Object.assign(context, this.context, {
                 ...this.getChildContext(),
-                queryFragments,
-                query,
                 assetsBaseUrl,
                 uri,
               })}

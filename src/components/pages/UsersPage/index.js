@@ -72,21 +72,23 @@ export default class UsersPage extends Page {
     if (!Renderer) {
 
       const {
-        query: {
-          usersConnection,
-        },
-      } = this.context;
+        usersConnection,
+      } = this.context.query || {};
 
-      const Renderer = compose(
-        graphql(gql(usersConnection), {
-          // name: 'items', 
-        }),
+      if (usersConnection) {
 
-      )(View);
+        const Renderer = compose(
+          graphql(gql(usersConnection), {
+            // name: 'items', 
+          }),
 
-      Object.assign(this.state, {
-        Renderer,
-      });
+        )(View);
+
+        Object.assign(this.state, {
+          Renderer,
+        });
+
+      }
 
     }
 
@@ -108,6 +110,10 @@ export default class UsersPage extends Page {
     const {
       Renderer,
     } = this.state;
+
+    if(!Renderer) {
+      return null;
+    }
 
     const {
       uri,

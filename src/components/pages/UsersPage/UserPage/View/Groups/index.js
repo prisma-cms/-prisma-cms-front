@@ -40,10 +40,15 @@ export class UserGroups extends PrismaCmsComponent {
   checkHandler = async (event, checked) => {
 
     const {
-      query: {
-        updateUserProcessor,
-      },
-    } = this.context;
+      updateUserProcessor = `
+      query userGroups($where: UserGroupWhereInput) {
+        objects: userGroups(where: $where) {
+          id
+          name
+        }
+      }
+      `,
+    } = this.context.query || {};
 
     const {
       value,
@@ -119,7 +124,7 @@ export class UserGroups extends PrismaCmsComponent {
       user: currentUser,
     } = this.context;
 
-    if(!currentUser || currentUser.sudo !== true){
+    if (!currentUser || currentUser.sudo !== true) {
       return null;
     }
 

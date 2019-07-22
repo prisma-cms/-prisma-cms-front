@@ -59,14 +59,42 @@ export default class UserPageConnector extends PrismaCmsConnector {
   prepareQuery() {
 
     const {
-      query: {
-        user = `
-          query user (
-            $where: UserWhereUniqueInput!
+      user = `
+        query user (
+          $where: UserWhereUniqueInput!
+        ){
+          object: user (
+            where: $where
           ){
-            object: user (
-              where: $where
-            ){
+            id
+            username
+            fullname
+            email
+            phone
+            showEmail
+            showPhone
+            sudo
+            hasEmail
+            hasPhone
+          }
+        }
+      `,
+      updateUserProcessor = `
+        mutation updateUserProcessor(
+          $data: UserUpdateInput!
+          $where: UserWhereUniqueInput
+        ) {
+          response: updateUserProcessor(
+            data: $data
+            where: $where
+          ){
+            success
+            message
+            errors{
+              key
+              message
+            }
+            data{
               id
               username
               fullname
@@ -79,39 +107,9 @@ export default class UserPageConnector extends PrismaCmsConnector {
               hasPhone
             }
           }
-        `,
-        updateUserProcessor = `
-          mutation updateUserProcessor(
-            $data: UserUpdateInput!
-            $where: UserWhereUniqueInput
-          ) {
-            response: updateUserProcessor(
-              data: $data
-              where: $where
-            ){
-              success
-              message
-              errors{
-                key
-                message
-              }
-              data{
-                id
-                username
-                fullname
-                email
-                phone
-                showEmail
-                showPhone
-                sudo
-                hasEmail
-                hasPhone
-              }
-            }
-          }
-        `,
-      },
-    } = this.context;
+        }
+      `,
+    } = this.contex.query || {};
 
     const {
       View,
