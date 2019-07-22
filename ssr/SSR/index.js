@@ -135,7 +135,7 @@ class Server {
 
         break;
 
-      default: response = this.renderHTML(req, res, uri)
+      default: response = await this.renderHTML(req, res, uri)
         .catch(error => {
           console.error(chalk.red("Server error"), error);
           res.status(500);
