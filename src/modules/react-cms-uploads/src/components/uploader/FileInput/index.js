@@ -1,8 +1,8 @@
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default class FileInput extends PureComponent{
+export default class FileInput extends Component{
 
   render(){
 

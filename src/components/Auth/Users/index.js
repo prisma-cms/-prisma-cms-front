@@ -335,7 +335,7 @@ class AuthUsers extends PrismaCmsComponent {
 }
 
 
-class AuthUsersConnector extends PureComponent {
+class AuthUsersConnector extends Component {
 
   static contextType = Context;
 

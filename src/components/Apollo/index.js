@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 
 import PropTypes from 'prop-types';
 
@@ -24,7 +24,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import URI from "urijs";
 
 
-export default class Apollo extends PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class Apollo extends Component { // eslint-disable-line react/prefer-stateless-function
 
 
   static propTypes = {

@@ -48,7 +48,7 @@ const usersQuery = gql`
   }
 `;
 
-export class UsersAutocomplete extends PureComponent {
+export class UsersAutocomplete extends Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,

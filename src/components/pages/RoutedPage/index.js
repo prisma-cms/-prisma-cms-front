@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import gql from "graphql-tag";
@@ -20,7 +20,7 @@ const route = gql`
   }
 `;
 
-class RoutedPage extends PureComponent {
+class RoutedPage extends Component {
 
   static propTypes = {
     PageNotFound: PropTypes.func.isRequired,

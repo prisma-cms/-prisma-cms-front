@@ -1,13 +1,13 @@
 
 import './index.css';
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 // import PrismaCmsApp from '@prisma-cms/front'
 import PrismaCmsApp from '../App'
 import DevRenderer from "./Renderer";
 
 
-export default class DevAppRenderer extends PureComponent {
+export default class DevAppRenderer extends Component {
 
   static defaultProps = {
   }

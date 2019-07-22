@@ -186,7 +186,7 @@ class Root extends PrismaCmsComponent {
 }
 
 
-export class RootConnector extends PureComponent {
+export class RootConnector extends Component {
 
   static contextType = Context;
 

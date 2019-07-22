@@ -2,7 +2,7 @@
 
 import './styles/less/styles.css';
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 
 import PropTypes from "prop-types";
 
@@ -22,7 +22,7 @@ import {
 } from 'react-router-dom'
 
 
-class PrismaCmsApp extends PureComponent {
+class PrismaCmsApp extends Component {
 
   static propTypes = {
     App: PropTypes.func.isRequired,

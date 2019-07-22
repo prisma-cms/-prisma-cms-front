@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Context from "@prisma-cms/context";
@@ -29,7 +29,7 @@ export const styles = {
   },
 }
 
-class FrontEditorPage extends PureComponent {
+class FrontEditorPage extends Component {
 
   static contextType = Context;
 

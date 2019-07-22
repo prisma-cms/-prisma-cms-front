@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -40,7 +40,7 @@ const routes = gql`
   }
 `;
 
-export class RouterProvider extends PureComponent {
+export class RouterProvider extends Component {
 
   render() {
 

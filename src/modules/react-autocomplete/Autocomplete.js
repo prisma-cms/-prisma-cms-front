@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import { Component } from 'react';
 
 const React = require('react')
 const PropTypes = require('prop-types')
@@ -27,7 +27,7 @@ function getScrollOffset() {
   }
 }
 
-class Autocomplete extends PureComponent {
+class Autocomplete extends Component {
 
   static propTypes = {
     /**

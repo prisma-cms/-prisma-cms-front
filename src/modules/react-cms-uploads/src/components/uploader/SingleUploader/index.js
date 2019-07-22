@@ -1,5 +1,5 @@
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { graphql, compose } from 'react-apollo';
@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 
 import FileInput from '../FileInput';
 
-export class SingleUploader extends PureComponent{
+export class SingleUploader extends Component{
 
   static propTypes = {
     mutate: PropTypes.func.isRequired,

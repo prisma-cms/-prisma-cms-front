@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Snackbar from "material-ui/Snackbar";
 
-export default class Errors extends PureComponent {
+export default class Errors extends Component {
 
   static propTypes = {
     errors: PropTypes.array.isRequired,

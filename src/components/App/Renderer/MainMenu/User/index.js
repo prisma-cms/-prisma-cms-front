@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -25,7 +25,7 @@ import PropTypes from 'prop-types';
 import Context from "@prisma-cms/context";
 import Typography from 'material-ui/Typography';
 
-export default class UserMenuItem extends PureComponent {
+export default class UserMenuItem extends Component {
 
   // static defaultProps = {
   // }

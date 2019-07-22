@@ -1,6 +1,6 @@
 
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 
 import Page from '../layout';

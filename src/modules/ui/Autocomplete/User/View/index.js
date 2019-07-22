@@ -1,6 +1,6 @@
 
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import Context from "@prisma-cms/context";
 
 // import ViewIcon from "material-ui-icons/RemoveRedEye";
 
-export default class TopicBlogView extends PureComponent {
+export default class TopicBlogView extends Component {
 
   static contextType = Context;
 

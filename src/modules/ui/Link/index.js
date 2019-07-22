@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom';
@@ -35,7 +35,7 @@ export const styles = theme => {
 
 };
 
-export class UiLink extends PureComponent {
+export class UiLink extends Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -81,12 +81,12 @@ export default withStyles(styles)(props => <UiLink
 />);
 
 
-// import React, { PureComponent } from 'react'
+// import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 
 // import {Link} from 'react-router-dom';
 
-// export default class UiLink extends PureComponent {
+// export default class UiLink extends Component {
 
 //   static propTypes = {
 //     // prop: PropTypes

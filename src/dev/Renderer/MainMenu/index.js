@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Context from "@prisma-cms/context";
@@ -8,7 +8,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import UserItem from './User';
 import { withStyles } from 'material-ui/styles';
@@ -43,7 +43,7 @@ export const styles = theme => {
   }
 }
 
-export class MainMenu extends PureComponent {
+export class MainMenu extends Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
@@ -125,7 +125,7 @@ export class MainMenu extends PureComponent {
           <Grid
             item
           >
-            <Link
+            <NavLink
               to="/"
             >
               <Typography
@@ -134,13 +134,13 @@ export class MainMenu extends PureComponent {
               >
                 Main page
             </Typography>
-            </Link>
+            </NavLink>
           </Grid>
           
           <Grid
             item
           >
-            <Link
+            <NavLink
               to="/templates"
             >
               <Typography
@@ -149,13 +149,13 @@ export class MainMenu extends PureComponent {
               >
                 Templates
             </Typography>
-            </Link>
+            </NavLink>
           </Grid>
 
           <Grid
             item
           >
-            <Link
+            <NavLink
               to="/users"
             >
               <Typography
@@ -164,7 +164,7 @@ export class MainMenu extends PureComponent {
               >
                 Users
             </Typography>
-            </Link>
+            </NavLink>
           </Grid>
 
           <Grid

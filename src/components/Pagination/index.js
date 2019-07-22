@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles';
@@ -54,7 +54,7 @@ const styles = {
 };
 
 
-export class Pagination extends PureComponent {
+export class Pagination extends Component {
 
   static propTypes = {
     // prop: PropTypes

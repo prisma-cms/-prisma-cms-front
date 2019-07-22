@@ -8,7 +8,7 @@ export default Avatar;
 console.error("modules/Avatar deprecated. Use ui/Avatar instead");
 
 
-// import React, { PureComponent } from 'react'
+// import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 
 // import Avatar from 'material-ui/Avatar';
@@ -44,7 +44,7 @@ console.error("modules/Avatar deprecated. Use ui/Avatar instead");
 // };
 
 
-// export class UserAvatar extends PureComponent {
+// export class UserAvatar extends Component {
 
 //   static propTypes = {
 //     classes: PropTypes.object.isRequired,

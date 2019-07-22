@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from "prop-types";
 
 import App, {
@@ -53,6 +53,30 @@ class DevRenderer extends PrismaCmsRenderer {
     let routes = super.getRoutes();
 
     return [
+      {
+        exact: true,
+        path: "/users",
+        // component: DevMainPage,
+        render: props => {
+          // console.log("props", { ...props });
+          return <DevMainPage
+          >
+            Users
+          </DevMainPage>;
+        }
+      },
+      {
+        exact: true,
+        path: "/templates",
+        // component: DevMainPage,
+        render: props => {
+          // console.log("props", { ...props });
+          return <DevMainPage
+          >
+            Templates
+          </DevMainPage>;
+        }
+      },
       {
         exact: false,
         path: "/",

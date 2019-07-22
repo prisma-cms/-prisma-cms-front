@@ -1,11 +1,11 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 // import App from '../App';
 
 import PrismaCmsPerformanceTester from "@prisma-cms/performance";
 
-export default class DevApp extends PureComponent {
+export default class DevApp extends Component {
 
 
   render() {

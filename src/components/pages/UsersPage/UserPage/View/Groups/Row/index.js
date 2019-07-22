@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from 'material-ui/styles/withStyles';
 
@@ -22,7 +22,7 @@ const styles = {
   },
 }
 
-export class UserGroupRow extends PureComponent {
+export class UserGroupRow extends Component {
 
   static propTypes = {
     item: PropTypes.object.isRequired,

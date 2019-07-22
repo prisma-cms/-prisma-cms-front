@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from "prop-types";
 
 import Renderer from './Renderer';
@@ -174,7 +174,7 @@ const SchemaLoaderQuery = graphql(gql`
   });
 
 
-class SchemaLoader extends PureComponent {
+class SchemaLoader extends Component {
 
 
   // static contextType = Context;
@@ -259,7 +259,7 @@ class SchemaLoader extends PureComponent {
 }
 
 
-export default class App extends PureComponent {
+export default class App extends Component {
 
 
   static propTypes = {

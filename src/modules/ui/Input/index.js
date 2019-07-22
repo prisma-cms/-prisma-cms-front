@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default class Input extends PureComponent{
+export default class Input extends Component{
 
   static propTypes = {
     // prop: PropTypes

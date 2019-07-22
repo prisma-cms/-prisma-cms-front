@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -67,7 +67,7 @@ export const styles = {
   },
 };
 
-export class Autocomplete extends PureComponent {
+export class Autocomplete extends Component {
 
   static contextType = Context;
 

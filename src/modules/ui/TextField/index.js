@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-class AppTextField extends PureComponent {
+class AppTextField extends Component {
 
   render() {
     
