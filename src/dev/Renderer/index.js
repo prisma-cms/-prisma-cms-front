@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from "prop-types";
 
 import App, {
@@ -12,6 +12,7 @@ import App, {
 import MainMenu from './MainMenu';
 import { withStyles } from 'material-ui';
 import DevMainPage from './pages/MainPage';
+import ContextProviderDev from './ContextProvider';
 
 
 export const styles = {
@@ -105,6 +106,14 @@ class DevRenderer extends PrismaCmsRenderer {
   //   </ContextProvider>;
 
   // }
+
+  renderWrapper() {
+
+    return <ContextProviderDev>
+      {super.renderWrapper()}
+    </ContextProviderDev>;
+
+  }
 
 
   render() {

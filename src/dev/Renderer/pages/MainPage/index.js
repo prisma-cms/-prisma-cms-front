@@ -1,9 +1,27 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import PrismaCmsComponent from "@prisma-cms/component";
+import PrismaCmsPerformanceTester from "@prisma-cms/performance";
+
 import Page from "../layout";
 import DevApp from '../../../App';
 import MainMenu from '../../MainMenu';
+
+
+class PrismaComponent extends PrismaCmsComponent {
+
+  render() {
+
+    return <PrismaCmsPerformanceTester
+      test={{}}
+      props={this.props}
+      state={this.state}
+      context={this.context}
+      prefix="Dev__PrismaComponent"
+    />;
+  }
+}
 
 
 class DevMainPage extends Page {
@@ -99,6 +117,11 @@ class DevMainPage extends Page {
             {...other}
           >
           </DevApp>
+
+          <PrismaComponent
+
+          />
+
         </div>
 
       </div>

@@ -280,7 +280,8 @@ export default class App extends React.Component {
       location,
     } = global;
 
-    const uri = new URI(location);
+    // const uri = new URI(location);
+    const uri = new URI("/dsfsdfdsf");
 
     this.state = {
       ...this.state,
@@ -497,9 +498,10 @@ export default class App extends React.Component {
 
             if (currentHref && newHref && currentHref !== newHref) {
 
-              // console.log("history location changed currentHref", uri, currentHref, newHref, currentHref === newHref);
+              console.log("history location changed currentHref", uri, currentHref, newHref, currentHref === newHref);
 
               this.setState({
+                // uri,
                 uri: newUri,
               }, () => {
 
