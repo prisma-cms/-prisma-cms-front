@@ -362,7 +362,7 @@ class Server {
 
           }
 
-          console.log("content", content);
+          // console.log("content", content);
 
           root.html(content);
 

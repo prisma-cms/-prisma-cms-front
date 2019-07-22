@@ -72,7 +72,7 @@ if (process.env.HOST) {
   console.log(
     `Learn more here: ${chalk.yellow('https://bit.ly/CRA-advanced-config')}`
   );
-  console.log();
+  // console.log();
 }
 
 // We require that you explicitly set browsers and do not fall back to
@@ -137,7 +137,7 @@ checkBrowsers(paths.appPath, isInteractive)
             'Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app.'
           )
         );
-        console.log();
+        // console.log();
       }
 
       console.log(chalk.cyan('Starting the development server...\n'));

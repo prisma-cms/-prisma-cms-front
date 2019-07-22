@@ -134,7 +134,7 @@ const SchemaLoaderQuery = graphql(gql`
     if (__schema && !schema) {
 
 
-      console.log("__schema loaded", __schema);
+      // console.log("__schema loaded", __schema);
 
 
 
