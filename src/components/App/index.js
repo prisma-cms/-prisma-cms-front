@@ -480,40 +480,56 @@ export default class App extends Component {
 
     }
 
-
     let {
-      location,
-      // } = global;
-    } = {};
+      uri,
+    } = this.props;
 
 
-    if (!location) {
-      // location = this.context.router.history.location;
+    // console.log("location uri", uri);
 
-      const {
-        router: {
-          history,
-        },
-      } = this.context;
+    if (!uri) {
 
-      const {
-        location: routerLocation,
-        createHref,
-      } = history;
+      let {
+        location,
+      } = global;
+
+
+      if (!location) {
+        // location = this.context.router.history.location;
+
+        // const {
+        //   router: {
+        //     history,
+        //   },
+        // } = this.context;
+
+        // const {
+        //   location: routerLocation,
+        //   createHref,
+        // } = history;
+
+        // // console.log("location this.context.router", this.context.router);
+
+        // location = createHref(routerLocation);
+
+        /**
+         * В режиме SSR uri надо обязательно получать, так как 
+         * из реакт-роутера location без домена
+         */
+        throw new Error("Can not get location");
+
+      }
 
       // console.log("location this.context.router", this.context.router);
+      // console.log("location", location);
 
-      location = createHref(routerLocation);
+      uri = new URI(location);
+
 
     }
 
-    // console.log("location this.context.router", this.context.router);
-    // console.log("location", location);
+    // console.log("location uri", uri, uri && uri.toString());
 
-    const uri = new URI(location);
-
-    // console.log("location uri", uri);
-    // console.log("componentWillMount", this.context.router);
 
     Object.assign(this.state, {
       uri,
