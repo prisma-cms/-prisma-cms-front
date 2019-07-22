@@ -3,7 +3,7 @@
  * Выводит форматированный номер заказа и слаба
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import NumberFormatProto from "react-number-format";
@@ -33,7 +33,7 @@ class NumberFormat extends NumberFormatProto {
 }
 
 
-class PhoneField extends Component {
+class PhoneField extends PureComponent {
 
 
   valueToText = formatPhone;

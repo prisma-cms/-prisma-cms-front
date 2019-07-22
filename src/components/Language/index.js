@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'material-ui/Select'
 import MenuItem from 'material-ui/Menu/MenuItem';
@@ -24,7 +24,7 @@ const styles = theme => ({
   },
 })
 
-class Language extends Component {
+class Language extends PureComponent {
 
   static contextType = Context;
 

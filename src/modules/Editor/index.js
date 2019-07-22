@@ -88,7 +88,7 @@ export default Editor;
 // }
 
 
-// export class Editor extends Component {
+// export class Editor extends PureComponent {
 
 
 //   static propTypes = {

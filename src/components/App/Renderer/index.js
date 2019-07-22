@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -60,7 +60,7 @@ export const styles = {
 }
 
 
-export class Renderer extends Component {
+export class Renderer extends PureComponent {
 
   static propTypes = {
     PageNotFound: PropTypes.func.isRequired,

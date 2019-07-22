@@ -1,11 +1,11 @@
-// import React, { Component } from 'react'
+// import React, { PureComponent } from 'react'
 // import PropTypes from 'prop-types'
 
 // import URI from "urijs";
 
 // import Context from "@prisma-cms/context";
 
-// export default class UriProvider extends Component {
+// export default class UriProvider extends PureComponent {
 
 //   static contextType = Context;
 

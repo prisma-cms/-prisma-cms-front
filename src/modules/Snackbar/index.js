@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import SnackbarUI from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
 
-export default class Snackbar extends Component {
+export default class Snackbar extends PureComponent {
 
   static propTypes = {
     opened: PropTypes.bool.isRequired,

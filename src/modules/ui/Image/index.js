@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 
@@ -13,7 +13,7 @@ export const getImageUrl = (src, type = "thumb") => {
 }
 
 
-export class Image extends Component {
+export class Image extends PureComponent {
 
   static propTypes = {
     src: PropTypes.string.isRequired,

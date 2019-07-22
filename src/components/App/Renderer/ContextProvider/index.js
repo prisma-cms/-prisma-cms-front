@@ -1,13 +1,11 @@
 
-import React, {
-  Component,
-} from 'react';
+import React, { PureComponent } from 'react';
 
 import Context from '@prisma-cms/context';
 
 import * as UI from "../../../../modules/ui";
 
-class ContextProvider extends Component {
+class ContextProvider extends PureComponent {
 
   static contextType = Context;
 

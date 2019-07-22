@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class ScrollerProvider extends Component {
+class ScrollerProvider extends PureComponent {
 
   // static propTypes = {
   //   prop: PropTypes
@@ -36,7 +36,7 @@ class ScrollerProvider extends Component {
   }
 }
 
-export default class Scroller extends Component {
+export default class Scroller extends PureComponent {
 
 
   static contextTypes = {

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Context from "@prisma-cms/context";
@@ -832,7 +832,7 @@ class AuthUsers extends AuthForm {
 }
 
 
-class AuthUsersConnector extends Component {
+class AuthUsersConnector extends PureComponent {
 
   static contextType = Context;
 

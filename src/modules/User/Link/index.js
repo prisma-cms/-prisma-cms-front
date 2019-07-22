@@ -7,7 +7,7 @@ export default UserLink;
 console.error("User/Link deprecated. User ui/Link/User instead.");
 
 
-// import React, { Component } from 'react'
+// import React, { PureComponent } from 'react'
 // import PropTypes from 'prop-types'
 
 
@@ -40,7 +40,7 @@ console.error("User/Link deprecated. User ui/Link/User instead.");
 // };
 
 
-// export class UserLink extends Component {
+// export class UserLink extends PureComponent {
 
 //   static propTypes = {
 //     classes: PropTypes.object.isRequired,

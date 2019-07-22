@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class AdminPage extends Component {
+class AdminPage extends PureComponent {
   render() {
     return (
       <div>

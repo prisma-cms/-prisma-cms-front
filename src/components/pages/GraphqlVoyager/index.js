@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 
-class GraphqlVoyagerPage extends Component {
+class GraphqlVoyagerPage extends PureComponent {
 
   static propTypes = {
 

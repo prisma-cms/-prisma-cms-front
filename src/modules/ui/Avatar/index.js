@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import Context from "@prisma-cms/context";
@@ -32,7 +32,7 @@ const styles = {
 };
 
 
-export class UserAvatar extends Component {
+export class UserAvatar extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,

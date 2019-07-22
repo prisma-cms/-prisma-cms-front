@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import Context from "@prisma-cms/context";
@@ -12,7 +12,7 @@ import SingleUploaderInput from '../../../../../../modules/react-cms-uploads/src
 
 import NoPhoto from 'material-ui-icons/PersonOutline';
 
-class FileInput extends Component {
+class FileInput extends PureComponent {
 
 
   static propTypes = {
@@ -91,7 +91,7 @@ class FileInput extends Component {
 }
 
 
-export default class UserProfileAvatar extends Component {
+export default class UserProfileAvatar extends PureComponent {
 
   static propTypes = {
     user: PropTypes.object.isRequired,

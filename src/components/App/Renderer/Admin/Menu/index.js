@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
@@ -12,7 +12,7 @@ import Divider from 'material-ui/Divider';
 import List from 'material-ui/List';
 
 
-class AdminMenu extends Component {
+class AdminMenu extends PureComponent {
 
   static propTypes = {
 

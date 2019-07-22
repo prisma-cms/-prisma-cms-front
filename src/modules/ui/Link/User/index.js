@@ -1,6 +1,6 @@
 
 
-// import React, { Component } from 'react'
+// import React, { PureComponent } from 'react'
 // import PropTypes from 'prop-types'
 
 // import Link from '../';
@@ -24,7 +24,7 @@
 
 // }
 
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Typography from "material-ui/Typography";
 
@@ -66,7 +66,7 @@ export const styles = {
 };
 
 
-export class UserLink extends Component {
+export class UserLink extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,

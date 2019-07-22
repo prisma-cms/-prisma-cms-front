@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from 'material-ui/styles/withStyles';
 
@@ -21,7 +21,7 @@ const styles = {
   },
 }
 
-export class CheckBoxWithLabel extends Component {
+export class CheckBoxWithLabel extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
