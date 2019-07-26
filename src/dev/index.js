@@ -1,6 +1,3 @@
-
-import './index.css';
-
 import React, { Component } from 'react';
 // import PrismaCmsApp from '@prisma-cms/front'
 import PrismaCmsApp from '../App'

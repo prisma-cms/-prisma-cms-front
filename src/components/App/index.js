@@ -50,7 +50,7 @@ function getTheme(uiTheme) {
   const {
     direction,
     paletteType,
-    typography: typographyNull,
+    // typography: typographyNull,
     // overrides,
     ...other
   } = uiTheme;
@@ -81,9 +81,9 @@ function getTheme(uiTheme) {
   // }
 
 
-  const typography = createTypography(palette, {
-    fontFamily: '"Roboto"',
-  });
+  // const typography = createTypography(palette, {
+  //   fontFamily: '"Roboto"',
+  // });
 
   const theme = createMuiTheme({
     direction,
@@ -91,7 +91,7 @@ function getTheme(uiTheme) {
       color: paletteType === 'light' ? '#000' : '#fff',
     },
     palette,
-    typography,
+    // typography,
     // overrides: {
     //   // ...overrides,
     // },
