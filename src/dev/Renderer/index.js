@@ -12,7 +12,9 @@ import App, {
 import MainMenu from './MainMenu';
 import { withStyles } from 'material-ui';
 import DevMainPage from './pages/MainPage';
-import ContextProviderDev from './ContextProvider';
+// import ContextProviderDev from './ContextProvider';
+
+import GraphqlVoyagerPage from "../../components/pages/GraphqlVoyager";
 
 
 export const styles = {
@@ -53,6 +55,11 @@ class DevRenderer extends PrismaCmsRenderer {
     let routes = super.getRoutes();
 
     return [
+      {
+        exact: true,
+        path: "/graphql-voyager",
+        component: GraphqlVoyagerPage,
+      },
       {
         exact: true,
         path: "/users",

@@ -1,3 +1,8 @@
+2.6.6
+====================================
+- Restore Editor
+- Added Dev::GraphqlVoyagerPage
+
 2.6.5
 ====================================
 - Added service-worker
