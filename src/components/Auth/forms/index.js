@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 
 
 import Dialog, {
-  DialogActions,
-  DialogContent,
+  // DialogActions,
+  // DialogContent,
 } from 'material-ui/Dialog';
 
 import PrismaCmsComponent from "@prisma-cms/component";

@@ -265,8 +265,9 @@ class AuthUsers extends AuthForm {
       data,
       password,
       onPasswordChange,
-      cleanFilters,
+      // cleanFilters,
       useMetamask,
+      showRegForm,
     } = this.props;
 
 
@@ -498,18 +499,20 @@ class AuthUsers extends AuthForm {
         </Button>);
       }
 
-      actions.push(<Button
-        key="registration"
-        // color="primary"
-        onClick={event => {
+      if (showRegForm) {
+        actions.push(<Button
+          key="registration"
+          // color="primary"
+          onClick={event => {
 
-          this.switchForm("signup");
+            this.switchForm("signup");
 
-        }}
-        size="small"
-      >
-        {this.lexicon("Signup")}
-      </Button>);
+          }}
+          size="small"
+        >
+          {this.lexicon("Signup")}
+        </Button>);
+      }
 
     }
 

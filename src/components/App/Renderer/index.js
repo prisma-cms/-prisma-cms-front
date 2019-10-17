@@ -68,6 +68,11 @@ export class Renderer extends Component {
     classes: PropTypes.object.isRequired,
     routes: PropTypes.array.isRequired,
     useMetamask: PropTypes.bool.isRequired,
+
+    /**
+     * Props for Auth component
+     */
+    authProps: PropTypes.object,
   }
 
   static defaultProps = {
@@ -144,6 +149,7 @@ export class Renderer extends Component {
     const {
       Auth,
       useMetamask,
+      authProps,
     } = this.props;
 
     const {
@@ -156,6 +162,7 @@ export class Renderer extends Component {
       useMetamask={useMetamask}
       loginComplete={this.loginComplete}
       loginCanceled={this.loginCanceled}
+      {...authProps}
     />
   }
 

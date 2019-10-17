@@ -56,6 +56,7 @@ class Auth extends PrismaCmsComponent {
 
     classes: PropTypes.object.isRequired,
     useMetamask: PropTypes.bool.isRequired,
+    showRegForm: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -126,6 +127,7 @@ class Auth extends PrismaCmsComponent {
       loginCanceled,
       loginComplete,
       useMetamask,
+      showRegForm,
     } = this.props;
 
     return <SigninForm
@@ -133,6 +135,7 @@ class Auth extends PrismaCmsComponent {
       loginCanceled={loginCanceled}
       loginComplete={loginComplete}
       useMetamask={useMetamask}
+      showRegForm={showRegForm}
       switchForm={form => {
         this.setState({
           step: form,
@@ -371,6 +374,7 @@ class Auth extends PrismaCmsComponent {
 
   render() {
 
+    console.log("this.props", this.props);
 
     return this.renderForm() || null;
 
