@@ -374,8 +374,6 @@ class Auth extends PrismaCmsComponent {
 
   render() {
 
-    console.log("this.props", this.props);
-
     return this.renderForm() || null;
 
   }
