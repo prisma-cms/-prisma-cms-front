@@ -69,10 +69,40 @@ export default class UsersPage extends Page {
       Renderer,
     } = this.state;
 
+
     if (!Renderer) {
 
       const {
-        usersConnection,
+        usersConnection = `
+          query usersConnection (
+            $first: Int = 10
+            $skip: Int
+            $where: UserWhereInput
+            $orderBy: UserOrderByInput
+          ){
+            objectsConnection: usersConnection (
+              first: $first
+              skip: $skip
+              where: $where
+              orderBy: $orderBy
+            ){
+              aggregate{
+                count
+              }
+              edges{
+                node{
+                  id
+                  createdAt
+                  updatedAt
+                  username
+                  fullname
+                  email
+                  image
+                }
+              }
+            }
+          }
+        `,
       } = this.context.query || {};
 
       if (usersConnection) {
@@ -111,7 +141,7 @@ export default class UsersPage extends Page {
       Renderer,
     } = this.state;
 
-    if(!Renderer) {
+    if (!Renderer) {
       return null;
     }
 

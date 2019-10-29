@@ -46,7 +46,7 @@ require('@babel/register')({
 
 require("@babel/polyfill");
 
-['.css', '.less', '.sass', '.ttf', '.woff', '.woff2', '.svg', '.png', '.jpg', '.jpeg', '.gif']
+['.css', '.less', '.sass', '.scss', '.ttf', '.woff', '.woff2', '.svg', '.png', '.jpg', '.jpeg', '.gif']
   .forEach((ext) => require.extensions[ext] = () => { });
 // ['.css', '.less', '.sass', '.ttf', '.woff', '.woff2'].forEach((ext) => require.extensions[ext] = () => {});
 // require('babel-polyfill');
@@ -81,9 +81,12 @@ const setupProxy = require("../src/setupProxy");
 setupProxy(app);
 
 
-app.use('/static', express.static(cwd + '/build/static')); //Serves resources from build folder
-app.use('/build', express.static(cwd + '/build')); //Serves resources from build folder
-app.use('/public', express.static(cwd + '/public')); //Serves resources from public folder
+// app.use('/static', express.static(cwd + '/build/static')); //Serves resources from build folder
+// app.use('/build', express.static(cwd + '/build')); //Serves resources from build folder
+// app.use('/public', express.static(cwd + '/public')); //Serves resources from public folder
+
+app.use(express.static(cwd + '/build')); //Serves resources from build folder
+app.use(express.static(cwd + '/public')); //Serves resources from public folder
 
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true

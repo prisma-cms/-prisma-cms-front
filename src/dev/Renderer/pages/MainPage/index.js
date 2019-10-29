@@ -5,7 +5,7 @@ import PrismaCmsComponent from "@prisma-cms/component";
 import PrismaCmsPerformanceTester from "@prisma-cms/performance";
 
 import Page from "../layout";
-import DevApp from '../../../App';
+// import DevApp from '../../../App';
 import MainMenu from '../../MainMenu';
 
 
@@ -107,16 +107,20 @@ class DevMainPage extends Page {
           id="content"
         >
 
-
-          <DevApp
-            children={children || "Main page"}
-            props={this.props}
-            state={this.state}
-            context={this.context}
-            prefix="dev_app"
-            {...other}
-          >
-          </DevApp>
+          <Fragment>
+            <div
+              id="prisma-cms-performance-tester"
+            >
+              <PrismaCmsPerformanceTester
+                props={this.props}
+                state={this.state}
+                context={this.context}
+                prefix="dev_app"
+                {...other}
+              />
+            </div>
+            {children || null}
+          </Fragment>
 
           <PrismaComponent
 

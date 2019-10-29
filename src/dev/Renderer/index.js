@@ -15,6 +15,7 @@ import DevMainPage from './pages/MainPage';
 // import ContextProviderDev from './ContextProvider';
 
 import GraphqlVoyagerPage from "../../components/pages/GraphqlVoyager";
+import UsersPage from '../../components/pages/UsersPage';
 
 
 export const styles = {
@@ -68,7 +69,9 @@ class DevRenderer extends PrismaCmsRenderer {
           // console.log("props", { ...props });
           return <DevMainPage
           >
-            Users
+            <UsersPage 
+              
+            />
           </DevMainPage>;
         }
       },

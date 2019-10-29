@@ -70,6 +70,7 @@
     "load-script": "^1.0.0",
     "material-ui": "1.0.0-beta.43",
     "material-ui-icons": "^1.0.0-beta.17",
+    "moment": "^2.24.0",
     "node-less-chokidar": "^0.3.1",
     "node-sass-chokidar": "^1.1.0",
     "prisma-binding": "^2.1.6",
@@ -85,13 +86,13 @@
     "xml-writer": "^1.7.0"
   },
   "devDependencies": {
-    "@prisma-cms/performance": "latest",
-    "@prisma-cms/graphql-voyager": "latest",
     "@babel/core": "7.1.2",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@prisma-cms/graphql-voyager": "latest",
+    "@prisma-cms/performance": "latest",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.4",

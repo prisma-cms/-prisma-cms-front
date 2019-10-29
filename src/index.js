@@ -2,7 +2,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import App from "./dev";
+import Dev from "./dev";
 
 import * as serviceWorker from './serviceWorker';
 
@@ -13,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 const node = document.getElementById('root');
 
 if (node) {
-  ReactDOM.render(<App
+  ReactDOM.render(<Dev
   // queryFragments={queryFragments}
   // lang="en"
   />, node);

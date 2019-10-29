@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
+// import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 
 import {
@@ -10,7 +10,7 @@ import {
 } from 'apollo-cms/lib/DataView/List/Table';
 
 
-// import moment from 'moment';
+import moment from 'moment';
 
 
 export class UsersPageView extends TableView {
@@ -55,18 +55,16 @@ export class UsersPageView extends TableView {
 
         }
       },
-      // {
-      //   id: 'createdAt',
-      //   numeric: false,
-      //   disablePadding: false,
-      //   label: this.lexicon("Reg date"),
-      //   renderer: (value, record) => {
+      {
+        id: 'createdAt',
+        numeric: false,
+        disablePadding: false,
+        label: this.lexicon("Reg date"),
+        renderer: (value, record) => {
 
-
-      //     return value ? moment(value).format("LL") : "";
-
-      //   }
-      // },
+          return value ? moment(value).format("LL") : "";
+        }
+      },
     ];
   }
 

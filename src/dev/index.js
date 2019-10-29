@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 // import PrismaCmsApp from '@prisma-cms/front'
-import PrismaCmsApp from '../App'
+import MainApp from "../App";
+import DevApp from './App'
+
 import DevRenderer from "./Renderer";
 
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom'
 
-export default class DevAppRenderer extends Component {
+export default class Dev extends Component {
 
   static defaultProps = {
   }
@@ -15,11 +20,14 @@ export default class DevAppRenderer extends Component {
       ...other
     } = this.props;
 
-    return <PrismaCmsApp
-      Renderer={DevRenderer}
-      // pure={true}
-      {...other}
-    />
+    return <Router>
+      <DevApp
+        App={MainApp}
+        Renderer={DevRenderer}
+        // pure={true}
+        {...other}
+      />
+    </Router>
   }
 }
 

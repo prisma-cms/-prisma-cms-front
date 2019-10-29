@@ -1,6 +1,6 @@
 
 
-import './styles/less/styles.css';
+// import './styles/less/styles.css';
 
 import React, { Component } from 'react'
 
