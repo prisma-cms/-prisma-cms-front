@@ -1,5 +1,8 @@
+2.7.0
 ====================================
 - Code refactoring
+- Added async apollo state loader
+- Added apiSchema loader
 
 2.6.7
 ====================================

@@ -17,6 +17,8 @@ import DevMainPage from './pages/MainPage';
 import GraphqlVoyagerPage from "../../components/pages/GraphqlVoyager";
 import UsersPage from '../../components/pages/UsersPage';
 
+import Filters from "@prisma-cms/filters";
+
 
 export const styles = {
 
@@ -69,8 +71,13 @@ class DevRenderer extends PrismaCmsRenderer {
           // console.log("props", { ...props });
           return <DevMainPage
           >
-            <UsersPage 
-              
+            <Filters
+              queryName="users"
+              filters={{}}
+              setFilters={() => false}
+            />
+            <UsersPage
+
             />
           </DevMainPage>;
         }

@@ -111,69 +111,165 @@ function getTheme(uiTheme) {
 
 let schema;
 
+// const SchemaLoaderQuery = graphql(gql`
+//   ${introspectionQuery}
+// `, {
+//     options: {
+//       // fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
+//       fetchPolicy: "no-cache",
+//     },
+//   })((props) => {
+
+//     const {
+//       // data: {
+//       //   __schema,
+//       // },
+//       data: introspection,
+//       children,
+//       onSchemaLoad,
+//     } = props;
+
+//     const {
+//       __schema,
+//     } = introspection;
+
+//     if (__schema && !schema) {
+
+
+//       // console.log("SchemaLoaderQuery __schema loaded", __schema);
+
+
+
+//       // console.log("__schema print", print(__schema));
+
+//       const clientSchema = buildClientSchema(introspection);
+
+//       console.log("SchemaLoaderQuery clientSchema", clientSchema);
+
+//       const schemaSDL = printSchema(clientSchema, {
+//         // commentDescriptions: false,
+//       })
+
+//       console.log("SchemaLoaderQuery schemaSDL", schemaSDL);
+
+
+//       const buildedSchema = buildSchema(schemaSDL);
+
+//       console.log("SchemaLoaderQuery buildedSchema", buildedSchema);
+
+//       // const introspection = introspectionFromSchema(buildedSchema).__schema
+//       const introspection2 = introspectionFromSchema(buildedSchema)
+
+//       console.log("SchemaLoaderQuery introspection2", introspection2, introspection2 ? introspection2.__schema : null);
+
+//       // console.log("__schema schemaSDL", schemaSDL);
+
+//       // console.log("__schema parse schemaSDL", parse(schemaSDL));
+//       // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
+//       // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
+//       // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(schemaSDL)));
+
+//       // console.log("__schema buildClientSchema", clientSchema);
+//       // console.log("__schema introspectionFromSchema", introspectionFromSchema(clientSchema).__schema);
+
+//       schema = __schema;
+
+//       onSchemaLoad && onSchemaLoad(schemaSDL);
+//     }
+
+//     return <Context.Consumer>
+//       {context => <Context.Provider
+//         value={{
+//           ...context,
+//           schema,
+//         }}
+//       >
+//         {children}
+//       </Context.Provider>}
+//     </Context.Consumer>;
+//   });
+
 const SchemaLoaderQuery = graphql(gql`
-  ${introspectionQuery}
+  query {
+    schemaSDL: apiSchema
+  }
 `, {
-    options: {
-      // fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
-      fetchPolicy: "no-cache",
+  options: {
+    // fetchPolicy: typeof window === "undefined" ? "no-cache" : "cache-first",
+    fetchPolicy: "no-cache",
+  },
+})((props) => {
+
+  const {
+    // data: {
+    //   __schema,
+    // },
+    data: {
+      schemaSDL,
     },
-  })((props) => {
+    children,
+    onSchemaLoad,
+  } = props;
 
-    const {
-      // data: {
-      //   __schema,
-      // },
-      data: introspection,
-      children,
-      onSchemaLoad,
-    } = props;
+  // const {
+  //   __schema,
+  // } = introspection;
 
-    const {
-      __schema,
-    } = introspection;
-
-    if (__schema && !schema) {
+  if (schemaSDL && !schema) {
 
 
-      // console.log("__schema loaded", __schema);
+    // console.log("SchemaLoaderQuery __schema loaded", __schema);
 
 
 
-      // console.log("__schema print", print(__schema));
+    // console.log("__schema print", print(__schema));
 
-      const clientSchema = buildClientSchema(introspection);
+    // const clientSchema = buildClientSchema(introspection);
 
-      const schemaSDL = printSchema(clientSchema, {
-        // commentDescriptions: false,
-      })
+    // console.log("SchemaLoaderQuery clientSchema", clientSchema);
 
-      // console.log("__schema schemaSDL", schemaSDL);
+    // const schemaSDL = printSchema(clientSchema, {
+    //   // commentDescriptions: false,
+    // })
 
-      // console.log("__schema parse schemaSDL", parse(schemaSDL));
-      // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
-      // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
-      // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(schemaSDL)));
+    // console.log("SchemaLoaderQuery schemaSDL", schemaSDL);
 
-      // console.log("__schema buildClientSchema", clientSchema);
-      // console.log("__schema introspectionFromSchema", introspectionFromSchema(clientSchema).__schema);
 
-      schema = __schema;
+    const buildedSchema = buildSchema(schemaSDL);
 
-      onSchemaLoad && onSchemaLoad(schemaSDL);
-    }
+    // console.log("SchemaLoaderQuery buildedSchema", buildedSchema);
 
-    return <Context.Consumer>
-      {context => <Context.Provider
-        value={{
-          ...context,
-          schema,
-        }}
-      >
-        {children}
-      </Context.Provider>}
-    </Context.Consumer>;
-  });
+    // const introspection = introspectionFromSchema(buildedSchema).__schema
+    const introspection2 = introspectionFromSchema(buildedSchema)
+
+    // console.log("SchemaLoaderQuery introspection2", introspection2, introspection2 ? introspection2.__schema : null);
+
+    // console.log("__schema schemaSDL", schemaSDL);
+
+    // console.log("__schema parse schemaSDL", parse(schemaSDL));
+    // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
+    // console.log("__schema parse buildSchema", buildSchema(schemaSDL));
+    // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(schemaSDL)));
+
+    // console.log("__schema buildClientSchema", clientSchema);
+    // console.log("__schema introspectionFromSchema", introspectionFromSchema(clientSchema).__schema);
+
+    schema = introspection2.__schema;
+
+    onSchemaLoad && onSchemaLoad(schemaSDL);
+  }
+
+  return <Context.Consumer>
+    {context => <Context.Provider
+      value={{
+        ...context,
+        schema,
+      }}
+    >
+      {children}
+    </Context.Provider>}
+  </Context.Consumer>;
+});
 
 
 class SchemaLoader extends Component {
@@ -181,31 +277,39 @@ class SchemaLoader extends Component {
 
   // static contextType = Context;
 
-  componentWillMount() {
+  // componentWillMount() {
 
-    const {
-      __PRISMA_CMS_API_SCHEMA_DSL__,
-      __PRISMA_CMS_API_SCHEMA__,
-    } = global;
+  //   const {
+  //     __PRISMA_CMS_API_SCHEMA_DSL__,
+  //     __PRISMA_CMS_API_SCHEMA__,
+  //   } = global;
 
-    // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+  //   // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
 
-    if (__PRISMA_CMS_API_SCHEMA_DSL__) {
-      // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
+  //   if (__PRISMA_CMS_API_SCHEMA_DSL__) {
+  //     // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
 
-      // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
-      // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
-      // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
+  //     // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+  //     // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
+  //     // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
 
-      schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
+  //     schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
 
-    }
-    else if (__PRISMA_CMS_API_SCHEMA__) {
-      schema = __PRISMA_CMS_API_SCHEMA__;
-    }
+  //   }
+  //   else if (__PRISMA_CMS_API_SCHEMA__) {
+  //     schema = __PRISMA_CMS_API_SCHEMA__;
+  //   }
 
-    super.componentWillMount && super.componentWillMount();
+  //   super.componentWillMount && super.componentWillMount();
 
+  // }
+
+
+  shouldComponentUpdate() {
+
+    // console.log("shouldComponentUpdate", schema ? true : false);
+
+    return schema ? true : false;
   }
 
 

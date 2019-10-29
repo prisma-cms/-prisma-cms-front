@@ -29,12 +29,15 @@ export default class UsersPage extends Page {
   }
 
 
-  constructor(props) {
+  // constructor(props) {
 
-    super(props);
+  //   super(props);
 
-    // this.state = {}
-  }
+  //   // console.log("UsersPage construct", this.props);
+  //   // console.log("UsersPage construct");
+
+  //   // this.state = {}
+  // }
 
 
   setPageMeta(meta) {

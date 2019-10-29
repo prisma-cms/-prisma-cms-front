@@ -79,6 +79,7 @@ export class UsersPageView extends TableView {
     const {
       page,
       withPagination,
+      data,
     } = this.props;
 
 
@@ -89,7 +90,7 @@ export class UsersPageView extends TableView {
       variables: {
         first: limit,
       },
-    } = this.props.data;
+    } = data;
 
 
     const {
@@ -115,6 +116,11 @@ export class UsersPageView extends TableView {
 
     }
 
+
+    // console.log("Users edges data.loading", data ? data.loading : null);
+    // console.log("Users data", data);
+    // console.log("Users this.props", this.props);
+    // console.log("Users edges", edges);
 
     return <Fragment>
 

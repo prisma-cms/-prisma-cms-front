@@ -53,10 +53,17 @@ require("@babel/polyfill");
 
 // const queryFragments = require("../src/schema/generated/api.fragments");
 
+
+const apolloCaches = {
+
+};
+
+
 let SSRmiddlewareClass = require('./SSR');
 
 let SSRmiddleware = new SSRmiddlewareClass({
   // queryFragments,
+  apolloCaches,
 }).middleware;
 
 const ws = require('ws');
@@ -93,6 +100,30 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 
+
+app.get('/__apollo-state__/:state_id', async (req, res, next) => {
+
+  const {
+    state_id,
+  } = req.params;
+
+
+  const state = apolloCaches[state_id];
+
+  if (state) {
+
+    delete apolloCaches[state_id];
+
+    res.status(200);
+    res.contentType(`application/json`);
+    res.setHeader("Cache-Control", "no-cache");
+    res.send(state);
+  }
+  else {
+    res.status(404).send('File not found');
+  }
+
+});
 
 app.get('**', SSRmiddleware);
 

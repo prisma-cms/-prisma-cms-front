@@ -184,6 +184,7 @@ class Server {
       App: MainApp,
       props: {
         // queryFragments,
+        apolloCaches,
       },
     } = this;
 
@@ -232,11 +233,12 @@ class Server {
               // }}
               onSchemaLoad={clientSchema => {
 
+                // console.log(chalk.green("onSchemaLoad loaded"));
                 // console.log("onSchemaLoad", schema);
                 // console.log(chalk.green("onSchemaLoad"));
 
                 if (!apiSchema && clientSchema) {
-                  apiSchema = `window.__PRISMA_CMS_API_SCHEMA_DSL__=${JSON.stringify(clientSchema).replace(/</g, '\\u003c')};`;
+                  // apiSchema = `window.__PRISMA_CMS_API_SCHEMA_DSL__=${JSON.stringify(clientSchema).replace(/</g, '\\u003c')};`;
                 }
 
               }}
@@ -346,13 +348,26 @@ class Server {
           </style>`);
 
 
-          // <script dangerouslySetInnerHTML={{
-          //   __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
-          // }} />
+          const apolloStateId = new Date().getTime() * Math.random();
+
+          // console.log("apolloStateId", apolloStateId);
 
           root.after(`<script type="text/javascript">
-            ${`window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`}
+            ${`window.__APOLLO_STATE_ID__=${apolloStateId};`}
           </script>`);
+
+          apolloCaches[apolloStateId] = state;
+
+
+          setTimeout(() => {
+            delete apolloCaches[apolloStateId]
+          }, 60 * 5 * 1000);
+
+          // root.after(`<script type="text/javascript">
+          //   ${`window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`}
+          // </script>`);
+
+
 
           if (apiSchema) {
 
