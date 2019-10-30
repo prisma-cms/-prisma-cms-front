@@ -21,16 +21,24 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom'
 
+import URI from "urijs";
+
+const uri = new URI();
+
+const endpoint = `${uri.origin()}/api/`;
+
 
 class PrismaCmsApp extends Component {
 
   static propTypes = {
     App: PropTypes.func.isRequired,
+    endpoint: PropTypes.string.isRequired,
   }
 
 
   static defaultProps = {
     App,
+    endpoint,
   };
 
 
@@ -62,13 +70,13 @@ class PrismaCmsApp extends Component {
       }
       else {
 
-        const {
-          protocol,
-          // hostname,
-          host,
-        } = global.location || {};
+        // const {
+        //   protocol,
+        //   // hostname,
+        //   host,
+        // } = global.location || {};
 
-        endpoint = `${protocol}//${host}/api/`;
+        // endpoint = `${protocol}//${host}/api/`;
 
       }
 
@@ -102,7 +110,95 @@ class PrismaCmsApp extends Component {
   }
 }
 
+
+const loader = function () {
+
+  return new Promise((resolve, reject) => {
+
+
+    const {
+      __APOLLO_STATE_ID__,
+    } = global;
+
+
+
+    setTimeout(() => {
+
+      fetch(endpoint, {
+        method: "POST",
+        body: JSON.stringify({
+          query: `  {
+            schemaSDL: apiSchema
+          }
+        `,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(r => r.json())
+        .then(({
+          data: {
+            schemaSDL,
+          },
+        }) => {
+
+          // console.log("schemaSDL", schemaSDL);
+
+          global.__PRISMA_CMS_API_SCHEMA_DSL__ = schemaSDL;
+
+          // global.__APOLLO_STATE__ = state;
+
+          // render();
+
+
+          // if (__APOLLO_STATE_ID__ && base_path === "__apollo-state__" && apollo_state_id) {
+          if (__APOLLO_STATE_ID__) {
+
+
+            setTimeout(() => {
+
+              fetch(`/__apollo-state__/${__APOLLO_STATE_ID__}`, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+                .then(r => r.json())
+                .then(state => {
+
+                  // console.log("state", state);
+
+                  global.__APOLLO_STATE__ = state;
+
+                  resolve();
+
+                  return;
+                })
+                .catch(reject)
+
+            }, 200);
+
+
+          }
+          else {
+            resolve();
+          }
+
+
+          return;
+        })
+        .catch(reject)
+
+    }, 200);
+
+
+  });
+
+}
+
 export {
+  endpoint,
+  loader,
   App,
   Renderer,
   PrismaCmsApp,

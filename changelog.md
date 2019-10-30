@@ -1,3 +1,8 @@
+2.7.1
+====================================
+- Added front loader
+- Added apiSchema preloading
+
 2.7.0
 ====================================
 - Code refactoring

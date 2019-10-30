@@ -38,6 +38,7 @@ var XMLWriter = require('xml-writer');
 
 const { Prisma } = require('prisma-binding')
 
+// eslint-disable-next-line no-unused-vars
 let api;
 
 const JssProvider = require('react-jss').JssProvider;
@@ -110,10 +111,6 @@ class Server {
 
     const uri = new URI(url);
 
-    const {
-      page,
-    } = uri.query(true);
-
 
     const urlPath = uri.path();
 
@@ -165,19 +162,6 @@ class Server {
     const host = req.get('host');
 
     const uri = new URI(`${protocol}//${host}${req.url}`);
-
-
-    let assetsUrl;
-
-    let js_src;
-    let css_src;
-
-    let inline_styles;
-
-    let basePath = process.cwd() + "/";
-
-    let buildPath = basePath + "build/";
-
 
 
     const {
@@ -296,7 +280,6 @@ class Server {
 
 
           let head = $("head");
-          let body = $("body");
 
           if (title) {
             head.find("title").html(title);
@@ -401,66 +384,6 @@ class Server {
           //   </html>
           // );
 
-
-          const response___ = (
-            <html>
-              <head>
-                <title>{title || "Prisma-CMS"}</title>
-
-                <base href="/" />
-
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content={description || ""} />
-                <meta name="language" content="Russian" />
-                <meta http-equiv="content-language" content="ru" />
-
-                <link rel="shortcut icon" href="/favicon.ico" />
-
-                {canonical ? <link rel="canonical" href={canonical} /> : ""}
-
-                {css_src ? <link
-                  type="text/css"
-                  rel="stylesheet"
-                  href={css_src}
-                /> : null}
-
-                <style
-                  id="server-side-jss"
-                  key="server-side-jss"
-                  type="text/css"
-                  dangerouslySetInnerHTML={{ __html: sheets.toString() }}
-                />
-
-
-              </head>
-
-              <body>
-                <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
-                <script dangerouslySetInnerHTML={{
-                  __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
-                }} />
-
-                <script dangerouslySetInnerHTML={{
-                  __html: `
-                    setTimeout(() => {
-                      var script = document.createElement('script');
-
-                      script.setAttribute('src', '${js_src}');
-
-                      document.head.appendChild(script);
-
-
-                    }, 1000);
-                    `,
-                }} />
-
-              </body>
-            </html>
-          );
-
-
-
-          return response;
         }
 
 
@@ -511,7 +434,6 @@ class Server {
       case "main":
 
         return this.renderMainSitemap(req, res, uri);
-        break;
 
       default:
         return this.renderRootSitemap(req, res, uri);

@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/front",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "private": false,
   "description": "",
   "main": "lib/App.js",
@@ -119,6 +119,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prisma-cms/front.git"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

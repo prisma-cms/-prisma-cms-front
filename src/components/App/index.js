@@ -277,32 +277,33 @@ class SchemaLoader extends Component {
 
   // static contextType = Context;
 
-  // componentWillMount() {
+  componentWillMount() {
 
-  //   const {
-  //     __PRISMA_CMS_API_SCHEMA_DSL__,
-  //     __PRISMA_CMS_API_SCHEMA__,
-  //   } = global;
+    const {
+      __PRISMA_CMS_API_SCHEMA_DSL__,
+      __PRISMA_CMS_API_SCHEMA__,
+    } = global;
 
-  //   // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+    // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+    // console.log("__PRISMA_CMS_API_SCHEMA__", __PRISMA_CMS_API_SCHEMA__);
 
-  //   if (__PRISMA_CMS_API_SCHEMA_DSL__) {
-  //     // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
+    if (__PRISMA_CMS_API_SCHEMA_DSL__) {
+      // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
 
-  //     // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
-  //     // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
-  //     // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
+      // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+      // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
+      // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
 
-  //     schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
+      schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
 
-  //   }
-  //   else if (__PRISMA_CMS_API_SCHEMA__) {
-  //     schema = __PRISMA_CMS_API_SCHEMA__;
-  //   }
+    }
+    else if (__PRISMA_CMS_API_SCHEMA__) {
+      schema = __PRISMA_CMS_API_SCHEMA__;
+    }
 
-  //   super.componentWillMount && super.componentWillMount();
+    super.componentWillMount && super.componentWillMount();
 
-  // }
+  }
 
 
   shouldComponentUpdate() {
