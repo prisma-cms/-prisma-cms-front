@@ -8,13 +8,13 @@ import '../../styles/less/styles.css';
 import Renderer from './Renderer';
 
 import {
-  buildClientSchema,
-  introspectionQuery,
+  // buildClientSchema,
+  // introspectionQuery,
   introspectionFromSchema,
   buildSchema,
-  printSchema,
-  print,
-  parse,
+  // printSchema,
+  // print,
+  // parse,
 } from "graphql";
 
 import Context from "@prisma-cms/context";
@@ -287,18 +287,29 @@ class SchemaLoader extends Component {
     // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
     // console.log("__PRISMA_CMS_API_SCHEMA__", __PRISMA_CMS_API_SCHEMA__);
 
-    if (__PRISMA_CMS_API_SCHEMA_DSL__) {
-      // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
+    if (!schema) {
 
-      // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
-      // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
-      // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
+      if (__PRISMA_CMS_API_SCHEMA_DSL__) {
 
-      schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
+        // console.log("__PRISMA_CMS_API_SCHEMA_DSL__", true);
 
-    }
-    else if (__PRISMA_CMS_API_SCHEMA__) {
-      schema = __PRISMA_CMS_API_SCHEMA__;
+        // schema = introspectionFromSchema(__PRISMA_CMS_API_SCHEMA_DSL__).__schema;
+
+        // console.log("__schema parse __PRISMA_CMS_API_SCHEMA_DSL__", __PRISMA_CMS_API_SCHEMA_DSL__);
+        // console.log("__schema parse buildSchema", buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__));
+        // console.log("__schema parse introspectionFromSchema", introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)));
+
+        schema = introspectionFromSchema(buildSchema(__PRISMA_CMS_API_SCHEMA_DSL__)).__schema;
+
+      }
+      else if (__PRISMA_CMS_API_SCHEMA__) {
+        // console.log("__PRISMA_CMS_API_SCHEMA__", true);
+        schema = __PRISMA_CMS_API_SCHEMA__;
+      }
+      // else {
+      //   console.log("__PRISMA_CMS_API_SCHEMA__ is empty");
+      // }
+
     }
 
     super.componentWillMount && super.componentWillMount();
