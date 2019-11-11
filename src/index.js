@@ -2,7 +2,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { loader } from './App';
+import {
+  loader,
+  // endpoint,
+} from './App';
 import Dev from "./dev";
 
 import * as serviceWorker from './serviceWorker';
@@ -19,7 +22,9 @@ const node = document.getElementById('root');
 if (node) {
 
 
-  loader(node)
+  loader({
+    // endpoint,
+  })
     .then(() => {
 
       ReactDOM.render(<Dev

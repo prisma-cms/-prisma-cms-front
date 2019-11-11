@@ -25,7 +25,7 @@ import URI from "urijs";
 
 const uri = new URI();
 
-const endpoint = `${uri.origin()}/api/`;
+const defaultEndpoint = `${uri.origin()}/api/`;
 
 
 class PrismaCmsApp extends Component {
@@ -38,7 +38,7 @@ class PrismaCmsApp extends Component {
 
   static defaultProps = {
     App,
-    endpoint,
+    endpoint: defaultEndpoint,
   };
 
 
@@ -111,7 +111,9 @@ class PrismaCmsApp extends Component {
 }
 
 
-const loader = function () {
+const loader = function ({
+  endpoint = defaultEndpoint,
+}) {
 
   return new Promise((resolve, reject) => {
 
@@ -197,7 +199,7 @@ const loader = function () {
 }
 
 export {
-  endpoint,
+  defaultEndpoint as endpoint,
   loader,
   App,
   Renderer,
