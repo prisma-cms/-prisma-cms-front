@@ -53,6 +53,10 @@ require("@babel/polyfill");
 
 // const queryFragments = require("../src/schema/generated/api.fragments");
 
+const {
+  API_ENDPOINT = 'http://localhost:4000',
+} = process.env;
+
 
 const apolloCaches = {
 
@@ -64,6 +68,7 @@ let SSRmiddlewareClass = require('./SSR');
 let SSRmiddleware = new SSRmiddlewareClass({
   // queryFragments,
   apolloCaches,
+  API_ENDPOINT,
 }).middleware;
 
 const ws = require('ws');

@@ -21,10 +21,7 @@ const node = document.getElementById('root');
 
 if (node) {
 
-
-  loader({
-    // endpoint,
-  })
+  loader()
     .then(() => {
 
       ReactDOM.render(<Dev

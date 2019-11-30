@@ -113,7 +113,7 @@ class PrismaCmsApp extends Component {
 
 const loader = function ({
   endpoint = defaultEndpoint,
-}) {
+} = {}) {
 
   return new Promise((resolve, reject) => {
 
