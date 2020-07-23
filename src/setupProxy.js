@@ -1,4 +1,5 @@
 const proxy = require('http-proxy-middleware');
+const express = require('express');
 
 
 
@@ -30,6 +31,7 @@ module.exports = function (app) {
     }
   }));
 
+  app.use(express.static(cwd + '/shared')); //Serves resources from public folder
 
   app.get(["/static/js/voyager.worker.js", "/voyager.worker.js"], (req, res, next) => {
     res.sendFile(`${cwd}/node_modules/@prisma-cms/graphql-voyager/dist/voyager.worker.js`);
