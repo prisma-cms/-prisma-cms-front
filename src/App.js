@@ -1,7 +1,4 @@
 
-
-// import './styles/less/styles.css';
-
 import React, { Component } from 'react'
 
 import PropTypes from "prop-types";

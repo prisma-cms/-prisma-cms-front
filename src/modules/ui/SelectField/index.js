@@ -11,7 +11,7 @@ import ArrowDropUpIcon from 'material-ui-icons/ArrowDropUp';
 import ClearIcon from 'material-ui-icons/Clear';
 import Chip from 'material-ui/Chip';
 import SelectProto from 'react-select';
-import 'react-select/dist/react-select.css';
+// import 'react-select/dist/react-select.css';
 import classNames from 'classnames';
 
 

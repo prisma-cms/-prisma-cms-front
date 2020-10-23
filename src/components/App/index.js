@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types";
 
-import '../../styles/less/styles.css';
+// import '../../styles/less/styles.css';
 
 import Renderer from './Renderer';
 
