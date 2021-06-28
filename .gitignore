@@ -7,5 +7,4 @@
 /umd
 /src/schema
 npm-debug.log*
-*.lock
 *.log
